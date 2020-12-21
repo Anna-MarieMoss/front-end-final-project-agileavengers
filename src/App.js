@@ -1,15 +1,16 @@
 import React from 'react';
-//import {BrowserRouter as Router, Switch,Route,Link} from "react-router-dom";
+import {BrowserRouter as Router, Switch,Route,Link} from "react-router-dom";
 import './App.css';
-import DeleteButton from "./Components/DeleteButton";
-import FavoriteButton from "./Components/FavouriteButton";
-import MaterialUIPickers from "./Components/DateInput";
+import DeleteButton from "./Components/Buttons/DeleteButton";
+import FavoriteButton from "./Components/Buttons/FavouriteButton";
+import MaterialUIPickers from "./Components/Input/DateInput";
 import SimpleBottomNavigation from "./Components/NavBar"
-import SubmitButton from "./Components/SubmitButton"
+import SubmitButton from "./Components/Buttons/SubmitButton"
 
 function App() {
   return (
     <div className="App">
+
 
     <p>Hello World</p> 
     <DeleteButton deleteColor="#f39a9d"/>
