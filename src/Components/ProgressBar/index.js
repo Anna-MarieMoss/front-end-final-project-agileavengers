@@ -22,6 +22,7 @@ import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import NewReleasesIcon from '@material-ui/icons/NewReleases';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { progressPosition } from './progressFunction';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,6 +35,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProgressBar() {
   const classes = useStyles();
+
+  const currentWeek = progressPosition('Dec 21 2020'); //function imported, given start date. Function set up for 18 weeks.
+  console.log(currentWeek);
 
   return (
     <Timeline align='alternate'>
@@ -270,7 +274,7 @@ export default function ProgressBar() {
             <Typography variant='h6' component='h1'>
               Week 16
             </Typography>
-            <Typography>YYou're a full stack developer</Typography>
+            <Typography>You're a full stack developer</Typography>
           </Paper>
         </TimelineContent>
       </TimelineItem>
