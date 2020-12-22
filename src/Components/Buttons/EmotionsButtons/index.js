@@ -1,8 +1,9 @@
 import React from 'react';
+import './EmotionButton.css';
 
 function EmotionsButton({text, emotionNumber, handleClick}){
     return(
-        <button key={emotionNumber} style={{fontSize: '30px'}}onClick={()=> {handleClick(emotionNumber)}}>{text}</button>
+        <button className="emotionBar" key={emotionNumber} style={{fontSize: '50px'}}onClick={()=> {handleClick(emotionNumber)}}>{text}</button>
     )
 }
 
