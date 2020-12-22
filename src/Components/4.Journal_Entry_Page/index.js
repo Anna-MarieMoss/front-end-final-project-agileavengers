@@ -45,7 +45,7 @@ function JournalEntry() {
         <br></br>
       </div>
 
-      <div>
+      {/* <div>
         <br></br>
         <form action='#' id='myform' enctype='multipart/form-data'>
           <input
@@ -57,7 +57,8 @@ function JournalEntry() {
           />
 
           <br />
-          <input type='submit' value='Add media' />
+          
+        <input type='submit' value='Add media' />
         </form>
         <p>
           <img src='' id='img' alt='from phone' />
@@ -68,7 +69,7 @@ function JournalEntry() {
         <p>
           <video src='' id='video' controls></video>
         </p>
-      </div>
+      </div> */}
     </div>
   );
 }
