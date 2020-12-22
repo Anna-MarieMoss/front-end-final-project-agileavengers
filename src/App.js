@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch,Route,Link} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import './App.css';
 import Welcome from "./Components/2.Welcome_Page";
 import Emotions from "./Components/3.Emotions_Page";
@@ -8,7 +8,7 @@ import JournalView from "./Components/5.Journal_View_Page";
 import Timeline from "./Components/6.Timeline_Page";
 import Trophy from "./Components/7.Trophy_Page";
 import Stats from "./Components/8.Stats_Page";
-import Profile from "./Components/1b.Profile_Page";
+import Profile from "./Components/1b.Profile";
 
 function App() {
   return (
@@ -71,11 +71,9 @@ function App() {
           <Route path="/stats">
             <Stats />
           </Route>
-        
         </Switch>
       </div>
     </Router>
-
     </div>
   );
 }
