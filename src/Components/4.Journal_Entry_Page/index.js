@@ -44,6 +44,31 @@ function JournalEntry() {
         <button type='submit'>Submit</button>
         <br></br>
       </div>
+
+      <div>
+        <br></br>
+        <form action='#' id='myform' enctype='multipart/form-data'>
+          <input
+            type='file'
+            id='capture'
+            accept='image/*,video/*,audio/*'
+            capture
+            multiple
+          />
+
+          <br />
+          <input type='submit' value='Add media' />
+        </form>
+        <p>
+          <img src='' id='img' alt='from phone' />
+        </p>
+        <p>
+          <audio src='' id='audio' controls></audio>
+        </p>
+        <p>
+          <video src='' id='video' controls></video>
+        </p>
+      </div>
     </div>
   );
 }
