@@ -1,0 +1,30 @@
+.container {
+  padding: 10%;
+  border: 5px solid rgb(15, 95, 95);
+  background-color: rgb(32, 202, 202);
+  width: 50%;
+  padding: 0 20px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  /* align-self: center; */
+  margin: auto;
+}
+
+.align-right {
+  justify-self: right;
+}
+
+button {
+  color: snow;
+  border: 3px solid snow;
+  background-color: rgb(15, 95, 95);
+  width: auto;
+  height: auto;
+  padding: 0 5%;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin: auto;
+}
