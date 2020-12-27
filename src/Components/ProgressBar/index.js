@@ -22,7 +22,8 @@ import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import NewReleasesIcon from '@material-ui/icons/NewReleases';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import { progressPosition } from './progressFunction';
+import { themeSwitch, dotSwitch } from './theme';
+import { useThemeContext } from './themeContext';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,13 +35,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ProgressBar() {
+  const {
+    week1,
+    week2,
+    week3,
+    week4,
+    week5,
+    week6,
+    week7,
+    week8,
+    week9,
+    week10,
+    week11,
+    week12,
+    week16,
+  } = useThemeContext();
   const classes = useStyles();
 
-  const currentWeek = progressPosition('Dec 21 2020'); //function imported, given start date. Function set up for 18 weeks.
-  console.log(currentWeek);
-
   return (
-    <Timeline align='alternate'>
+    <Timeline align='alternate' data-testid='progressbar-display'>
       <TimelineItem>
         <TimelineOppositeContent>
           <Typography variant='body2' color='textSecondary'>
@@ -48,13 +61,17 @@ export default function ProgressBar() {
           </Typography>
         </TimelineOppositeContent>
         <TimelineSeparator>
-          <TimelineDot>
+          <TimelineDot style={dotSwitch[week1 ? 'dark' : 'light']}>
             <GitHubIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
+          <Paper
+            elevation={3}
+            className={classes.paper}
+            style={themeSwitch[week1 ? 'dark' : 'light']}
+          >
             <Typography variant='h6' component='h1'>
               Week 1
             </Typography>
@@ -69,13 +86,17 @@ export default function ProgressBar() {
           </Typography>
         </TimelineOppositeContent>
         <TimelineSeparator>
-          <TimelineDot color='primary'>
+          <TimelineDot style={dotSwitch[week2 ? 'dark' : 'light']}>
             <FunctionsIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
+          <Paper
+            elevation={3}
+            className={classes.paper}
+            style={themeSwitch[week2 ? 'dark' : 'light']}
+          >
             <Typography variant='h6' component='h1'>
               Week 2
             </Typography>
@@ -85,13 +106,17 @@ export default function ProgressBar() {
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot color='primary' variant='outlined'>
+          <TimelineDot style={dotSwitch[week3 ? 'dark' : 'light']}>
             <CodeIcon />
           </TimelineDot>
-          <TimelineConnector className={classes.secondaryTail} />
+          <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
+          <Paper
+            elevation={3}
+            className={classes.paper}
+            style={themeSwitch[week3 ? 'dark' : 'light']}
+          >
             <Typography variant='h6' component='h1'>
               Week 3
             </Typography>
@@ -101,13 +126,17 @@ export default function ProgressBar() {
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot color='secondary'>
+          <TimelineDot style={dotSwitch[week4 ? 'dark' : 'light']}>
             <StorageIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
+          <Paper
+            elevation={3}
+            className={classes.paper}
+            style={themeSwitch[week4 ? 'dark' : 'light']}
+          >
             <Typography variant='h6' component='h1'>
               Week 4
             </Typography>
@@ -122,13 +151,17 @@ export default function ProgressBar() {
           </Typography>
         </TimelineOppositeContent>
         <TimelineSeparator>
-          <TimelineDot>
+          <TimelineDot style={dotSwitch[week5 ? 'dark' : 'light']}>
             <DevicesIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
+          <Paper
+            elevation={3}
+            className={classes.paper}
+            style={themeSwitch[week5 ? 'dark' : 'light']}
+          >
             <Typography variant='h6' component='h1'>
               Week 5
             </Typography>
@@ -138,13 +171,17 @@ export default function ProgressBar() {
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot color='primary'>
+          <TimelineDot style={dotSwitch[week6 ? 'dark' : 'light']}>
             <BuildIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
+          <Paper
+            elevation={3}
+            className={classes.paper}
+            style={themeSwitch[week6 ? 'dark' : 'light']}
+          >
             <Typography variant='h6' component='h1'>
               Week 6
             </Typography>
@@ -154,13 +191,17 @@ export default function ProgressBar() {
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot color='primary' variant='outlined'>
+          <TimelineDot style={dotSwitch[week7 ? 'dark' : 'light']}>
             <LockIcon />
           </TimelineDot>
-          <TimelineConnector className={classes.secondaryTail} />
+          <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
+          <Paper
+            elevation={3}
+            className={classes.paper}
+            style={themeSwitch[week7 ? 'dark' : 'light']}
+          >
             <Typography variant='h6' component='h1'>
               Week 7
             </Typography>
@@ -175,13 +216,17 @@ export default function ProgressBar() {
           </Typography>
         </TimelineOppositeContent>
         <TimelineSeparator>
-          <TimelineDot color='secondary'>
+          <TimelineDot style={dotSwitch[week8 ? 'dark' : 'light']}>
             <AccountTreeIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
+          <Paper
+            elevation={3}
+            className={classes.paper}
+            style={themeSwitch[week8 ? 'dark' : 'light']}
+          >
             <Typography variant='h6' component='h1'>
               Week 8
             </Typography>
@@ -196,13 +241,17 @@ export default function ProgressBar() {
           </Typography>
         </TimelineOppositeContent>
         <TimelineSeparator>
-          <TimelineDot>
+          <TimelineDot style={dotSwitch[week9 ? 'dark' : 'light']}>
             <DeveloperBoardIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
+          <Paper
+            elevation={3}
+            className={classes.paper}
+            style={themeSwitch[week9 ? 'dark' : 'light']}
+          >
             <Typography variant='h6' component='h1'>
               Week 9
             </Typography>
@@ -212,13 +261,17 @@ export default function ProgressBar() {
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot color='primary'>
+          <TimelineDot style={dotSwitch[week10 ? 'dark' : 'light']}>
             <RouterIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
+          <Paper
+            elevation={3}
+            className={classes.paper}
+            style={themeSwitch[week10 ? 'dark' : 'light']}
+          >
             <Typography variant='h6' component='h1'>
               Week 10
             </Typography>
@@ -228,13 +281,17 @@ export default function ProgressBar() {
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot color='primary' variant='outlined'>
+          <TimelineDot style={dotSwitch[week11 ? 'dark' : 'light']}>
             <GroupIcon />
           </TimelineDot>
-          <TimelineConnector className={classes.secondaryTail} />
+          <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
+          <Paper
+            elevation={3}
+            className={classes.paper}
+            style={themeSwitch[week11 ? 'dark' : 'light']}
+          >
             <Typography variant='h6' component='h1'>
               Week 11
             </Typography>
@@ -244,13 +301,17 @@ export default function ProgressBar() {
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot color='secondary'>
+          <TimelineDot style={dotSwitch[week12 ? 'dark' : 'light']}>
             <EmojiEmotionsIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
+          <Paper
+            elevation={3}
+            className={classes.paper}
+            style={themeSwitch[week12 ? 'dark' : 'light']}
+          >
             <Typography variant='h6' component='h1'>
               Week 12
             </Typography>
@@ -261,16 +322,20 @@ export default function ProgressBar() {
       <TimelineItem>
         <TimelineOppositeContent>
           <Typography variant='body2' color='textSecondary'>
-            Coding Newbie
+            Coding SOMETHING
           </Typography>
         </TimelineOppositeContent>
         <TimelineSeparator>
-          <TimelineDot>
+          <TimelineDot style={dotSwitch[week16 ? 'dark' : 'light']}>
             <NewReleasesIcon />
           </TimelineDot>
         </TimelineSeparator>
         <TimelineContent>
-          <Paper elevation={3} className={classes.paper}>
+          <Paper
+            elevation={3}
+            className={classes.paper}
+            style={themeSwitch[week16 ? 'dark' : 'light']}
+          >
             <Typography variant='h6' component='h1'>
               Week 16
             </Typography>
