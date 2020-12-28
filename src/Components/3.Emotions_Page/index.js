@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import EmotionsButton from "../Buttons/EmotionsButtons";
 import quoteData from "./quotesData.js";
+import "./EmotionsPage.css";
 
 //Temp userId
 const userId = 1;
@@ -48,7 +49,7 @@ function Emotions() {
     <div>
       <h1>Hello Alice</h1>
       <h1>How are you feeling today?</h1>
-      <div >
+      <div className="emotionsBar">
       {emotionsArray.map(
         (emotion) => 
           <EmotionsButton text={emotion.emotion} handleClick={handleEmotion} emotionNumber={emotion.number} />
