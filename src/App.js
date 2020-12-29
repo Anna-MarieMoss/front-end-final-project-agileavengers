@@ -9,6 +9,7 @@ import Timeline from './Components/6.Timeline_Page';
 import Trophy from './Components/7.Trophy_Page';
 import Stats from './Components/8.Stats_Page';
 import Profile from './Components/1b.Profile_Page';
+import NavBar from './Components/NavBar/index';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Router>
         <div>
           <nav>
+          <NavBar />
             <ul>
               <li>
                 <Link to='/welcome'>Welcome</Link>
