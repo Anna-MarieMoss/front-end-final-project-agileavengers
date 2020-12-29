@@ -83,7 +83,7 @@ function JournalEntry() {
               id='img'
               name='img'
               accept='image/*'
-              onChange={(event) => setImg(event.target.value)}
+              onChange={(event) => setImg(event.target.files[0])}
             />
             <input className='align-right' type='submit' value='+' />
             {/* </form> */}
