@@ -15,6 +15,13 @@ import FaceRoundedIcon from '@material-ui/icons/FaceRounded';
 
 // Do we want to use badges to tell them if theyve unlocked nay trophies or timeline events?
 // Would be pretty cool
+// Bottom Naviagation acts differently on android and ios
+// Badeges such as how many email on the icon?
+
+// Whe want to be able to use a Nav Bar to navigate through our App
+// IOS the NavBar is at the Bottom of the Page
+// Android NavBar is at the Top of the Page
+
 
 const useStyles = makeStyles({
   root: {
