@@ -20,19 +20,19 @@ function Profile() {
   const [email, setEmail] = useState("");
   const [myersBriggs, setMyersBriggs] = useState("")
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [submit, setSubmit] = useState(false)
+  const [submit, setSubmit] = useState(null)
   console.log(name);
   console.log(selectedDate)
 
   function handleSubmit(){
     setSubmit(true);
+    console.log('submit hit')
   }
   useEffect(() => {
-   if (submit === true){
-
+   if (submit){
+     console.log(submit)
     async function postprofile() {
       const res = await fetch(
-    
         // neeed to actual API address
         `http://localhost:3000/users`,
         {
@@ -44,7 +44,7 @@ function Profile() {
             password: "password",
             personality: myersBriggs,
             start_date: selectedDate,
-            points: 0
+            points: 0,
           })
         })
       const data = await res.json();
@@ -52,11 +52,8 @@ function Profile() {
       //hopefully returned a unique post numb
     }
     postprofile();
-    setSubmit(false);
+    setSubmit(null);
   }}, [submit]);
-
-
- 
 
   return (
     <div>
