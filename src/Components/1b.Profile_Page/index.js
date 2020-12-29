@@ -30,7 +30,7 @@ function Profile() {
   }
   useEffect(() => {
    if (submit){
-     console.log(submit)
+    console.log(submit)
     async function postprofile() {
       const res = await fetch(
         // neeed to actual API address
@@ -49,7 +49,6 @@ function Profile() {
         })
       const data = await res.json();
       console.log(data);
-      //hopefully returned a unique post numb
     }
     postprofile();
     setSubmit(null);
