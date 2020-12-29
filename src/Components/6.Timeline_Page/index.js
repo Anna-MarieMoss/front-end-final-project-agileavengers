@@ -7,7 +7,7 @@ import { useAppContext } from '../../AppContext';
 
 function Timeline() {
   const { currentWeek } = useAppContext();
-  const [congratsMessage, setcongratsMessage] = useState('working');
+  const [congratsMessage, setcongratsMessage] = useState('Isabel');
   // console.log(`in timeline ${currentWeek}, ${congratsMessage}`);
 
   useEffect(() => {
@@ -20,10 +20,10 @@ function Timeline() {
         return false;
       });
       console.log(res);
-      setcongratsMessage(res.message);
+      setcongratsMessage(res[0].message);
       console.log(`this is your congrats message pls work ${congratsMessage}`);
     }
-  }, []);
+  }, [currentWeek, congratsMessage]);
 
   return (
     <div>
