@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import React from 'react';
 
 import ProgressBar from './index';
-import { progressPosition } from './progressFunction';
+import { progressPosition } from '../../progressFunction';
 
 //test to show progress bar rending on page
 

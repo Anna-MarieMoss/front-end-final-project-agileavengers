@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { progressPosition } from './progressFunction';
 import { themeSwitch } from './theme';
+import { useAppContext } from '../../AppContext';
 
 const ThemeContext = createContext(themeSwitch.light);
 
@@ -18,10 +18,9 @@ export function ThemeProvider({ children }) {
   const [week11, setweek11] = useState(false);
   const [week12, setweek12] = useState(false);
   const [week16, setweek16] = useState(false);
+  const { currentWeek } = useAppContext();
 
   useEffect(() => {
-    const currentWeek = progressPosition('Oct 22 2020'); //function imported, given start date. Function set up for 18 weeks. TO be changed to start date per bootcamper.
-    console.log(currentWeek);
     if (
       currentWeek === 'week13' ||
       currentWeek === 'week14' ||
@@ -117,7 +116,7 @@ export function ThemeProvider({ children }) {
       setweek12(true);
       setweek16(true);
     }
-  }, []);
+  }, [currentWeek]);
 
   return (
     <ThemeContext.Provider
