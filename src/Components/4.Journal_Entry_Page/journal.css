@@ -2,18 +2,19 @@
   padding: 10%;
   border: 5px solid rgb(15, 95, 95);
   background-color: rgb(32, 202, 202);
-  width: 50%;
+  width: 80%;
   padding: 0 20px;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   /* align-self: center; */
   margin: auto;
+  font-size: 1em;
 }
 
-.align-right {
+/* .align-right {
   justify-self: right;
-}
+} */
 
 button {
   color: snow;
@@ -27,4 +28,8 @@ button {
   flex-direction: column;
   align-self: center;
   margin: auto;
+}
+
+fieldset {
+  border-color: transparent;
 }

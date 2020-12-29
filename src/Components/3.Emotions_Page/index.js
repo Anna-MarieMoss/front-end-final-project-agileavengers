@@ -3,6 +3,7 @@ import EmotionsButton from "../Buttons/EmotionsButtons";
 import quoteData from "./quotesData.js";
 import "./EmotionsPage.css";
 
+
 //Temp userId
 const userId = 1;
 
@@ -44,12 +45,13 @@ function Emotions() {
   postEmotion();
 }}, [chosenEmotion]);
   
-
   return (
     <div>
       <h1>Hello Alice</h1>
       <h1>How are you feeling today?</h1>
+
       <div className="emotionsBar">
+
       {emotionsArray.map(
         (emotion) => 
           <EmotionsButton text={emotion.emotion} handleClick={handleEmotion} emotionNumber={emotion.number} />
