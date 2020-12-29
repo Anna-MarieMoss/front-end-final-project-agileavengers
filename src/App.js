@@ -17,7 +17,7 @@ function App() {
       <Router>
         <div>
           <nav>
-          <NavBar />
+            <NavBar />
             <ul>
               <li>
                 <Link to='/welcome'>Welcome</Link>
