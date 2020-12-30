@@ -88,6 +88,7 @@ export default function Upload() {
     // uploadVideo(previewVidSource);
     // uploadAudio(previewAudioSource);
     postJournalEntry(
+      userId,
       text,
       previewImgSource,
       previewVidSource,
@@ -122,6 +123,7 @@ export default function Upload() {
     previewVidSource,
     previewAudioSource
   ) {
+    console.log('post function called');
     try {
       await fetch(`http://localhost:3000/posts`, {
         method: 'POST',
@@ -134,6 +136,7 @@ export default function Upload() {
         }),
         headers: { 'content-type': 'application/JSON' },
       });
+      console.log('post request sent');
     } catch (error) {
       console.error(error);
     }
