@@ -45,7 +45,7 @@ function Profile() {
             method: 'POST',
             headers: { 'content-type': 'application/JSON' },
             body: JSON.stringify({
-              name: user.name,
+              name: name,
               email: user.email,
               password: 'password',
               personality: myersBriggs,
@@ -74,6 +74,16 @@ function Profile() {
         <H2 text={`Hi ${user.name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`} />
         <form className={classes.root} noValidate autoComplete='off'>
           <div>
+          <TextField
+              id='outlined-search'
+              label='Name'
+              type='text'
+              variant='outlined'
+              onChange={(event) => {
+                const { value } = event.target;
+                setName(value);
+              }}
+            />
             <TextField
               id='outlined-search'
               label='Myers-Briggs'
