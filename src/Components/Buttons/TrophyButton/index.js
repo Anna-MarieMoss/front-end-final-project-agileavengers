@@ -11,6 +11,7 @@ function TrophyButton({ image, id, color }) {
   }
   return (
     <button
+      style={{ backgroundColor: 'white', border: '0px' }}
       onClick={() => {
         handleTrophy(color);
       }}
