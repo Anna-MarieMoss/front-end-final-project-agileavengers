@@ -22,7 +22,7 @@ function JournalEntry() {
       async function postJournalEntry() {
         const res = await fetch(
           // neeed to actual API address
-          `http://localhost:3000/posts`,
+          `http://localhost:5000/posts`,
           {
             method: 'POST',
             headers: { 'content-type': 'application/JSON' },

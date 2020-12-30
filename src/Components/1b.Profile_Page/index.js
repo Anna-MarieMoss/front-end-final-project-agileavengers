@@ -40,7 +40,7 @@ function Profile() {
       async function postprofile() {
         const res = await fetch(
           // neeed to actual API address
-          `http://localhost:3000/users`,
+          `http://localhost:5000/users`,
           {
             method: 'POST',
             headers: { 'content-type': 'application/JSON' },
