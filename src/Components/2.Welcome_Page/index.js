@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppContext } from '../../AppContext';
 import H1 from '../DisplayText/H1Text/index';
+import SoCLogo from '../Pictures/SocLogo/index';
 
 function Welcome() {
   const { user, isAuthenticated, isLoading } = useAppContext();
@@ -13,6 +14,7 @@ function Welcome() {
     isAuthenticated && (
     <div>
     <H1 text={`Hi ${user.given_name} Welcome to your SoC Journal`} />
+    <SoCLogo style={{width: '100px'}}/>
       <p>
         Your personal space to record your once in a lifetime School of Code
         experience!

@@ -7,7 +7,7 @@ function LogIn() {
   return (
     <div>
       <H1 text={`Welcome to your SoC Journal`} />
-      <SoCLogo />
+      <SoCLogo style={{width: '200px', margin: '20px'}}/>
       <br/>
       <LoginButton />
     </div>
