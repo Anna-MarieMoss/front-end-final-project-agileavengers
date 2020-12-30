@@ -1,4 +1,4 @@
-const CACHE_NAME = 'version-2';
+const CACHE_NAME = 'version-1';
 const urlsToCache = ['index.html', 'offline.html' ] //offline.html - page shows when offline
 // should add all the apges to cache here - may have to do this for every page on the app
 
