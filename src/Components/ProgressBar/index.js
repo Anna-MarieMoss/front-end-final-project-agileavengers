@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProgressBar() {
+export default function ProgressBar({pic, week}) {
   const {
     week1,
     week2,
@@ -62,7 +62,7 @@ export default function ProgressBar() {
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week1 ? 'dark' : 'light']}>
-            <GitHubIcon />
+             <GitHubIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -242,7 +242,7 @@ export default function ProgressBar() {
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week9 ? 'dark' : 'light']}>
-            <DeveloperBoardIcon />
+            <DeveloperBoardIcon/>
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -262,7 +262,7 @@ export default function ProgressBar() {
       <TimelineItem>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week10 ? 'dark' : 'light']}>
-            <RouterIcon />
+           <RouterIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>

@@ -5,7 +5,7 @@ import DatePicker from '../Input/DateInput/index.js';
 import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
 import SubmitButton from '../Buttons/SubmitButton/index';
-import { useAuth0 } from '@auth0/auth0-react';
+import { useAppContext } from '../../AppContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,11 +23,11 @@ function Profile() {
   const [myersBriggs, setMyersBriggs] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [submit, setSubmit] = useState(null);
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { currentWeek, user, isAuthenticated, isLoading } = useAppContext();
 
-  console.log(user.name);
-  console.log(user.email);
-  console.log(user.picture);
+
+  console.log(user);
+
 
   function handleSubmit() {
     setSubmit(true);
@@ -45,7 +45,7 @@ function Profile() {
             method: 'POST',
             headers: { 'content-type': 'application/JSON' },
             body: JSON.stringify({
-              name: name,
+              name: user.name,
               email: user.email,
               password: 'password',
               personality: myersBriggs,
@@ -71,7 +71,7 @@ function Profile() {
       <div>
         <H1 text={'Profile'}></H1>
         <img className="profile-pic" src={user.picture} alt={user.name} />
-        <H2 text={`Hi ${user.name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`} />
+        <H2 text={`Hi ${user.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`} />
         <form className={classes.root} noValidate autoComplete='off'>
           <div>
           <TextField

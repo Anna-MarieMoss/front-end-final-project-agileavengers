@@ -7,7 +7,7 @@ const AppContext = createContext(null);
 export function AppProvider({ children }) {
   const [currentWeek, setCurrentWeek] = useState('week1');
   let startDate = 'Oct 22 2020';
-  const { user } = useAuth0();
+  const { user, isAuthenticated, isLoading } = useAuth0();
 
   useEffect(() => {
     let week = progressPosition(startDate);
@@ -19,6 +19,8 @@ export function AppProvider({ children }) {
       value={{
         currentWeek: currentWeek,
         user: user,
+        isAuthenticated: isAuthenticated,
+        isLoading: isLoading,
       }}
     >
       {children}

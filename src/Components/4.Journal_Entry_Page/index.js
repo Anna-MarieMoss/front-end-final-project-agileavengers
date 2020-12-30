@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useAppContext } from '../../AppContext';
+import H1 from '../DisplayText/H1Text';
 import './journal.css';
 
 //this will need to link to user iD
 const userId = 1;
 
 function JournalEntry() {
+  const { currentWeek, user, isAuthenticated, isLoading } = useAppContext();
   const [text, setText] = useState('');
   const [img, setImg] = useState('');
   const [vid, setVid] = useState('');
@@ -45,10 +48,14 @@ function JournalEntry() {
   // , img, audio, vid]);
 
   //
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
 
   return (
+    isAuthenticated && (
     <div className='wrapper'>
-      <h1>How was your day today?</h1>
+    <H1 text={`${user.given_name} how was your day today?`}/>
       <h1>What did you learn?</h1>
       <div className='container'>
         {/* <br></br> */}
@@ -141,7 +148,8 @@ function JournalEntry() {
         </p>
       </div> */}
     </div>
-  );
+  )
+  )
 }
 
 export default JournalEntry;
