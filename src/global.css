@@ -9,6 +9,9 @@ button {
   background-color: var(--green);
   color: white;
   cursor: pointer;
+  padding: 10px;
+  margin: 10px;
+  font-size: 30px;
 }
 
 button:hover {

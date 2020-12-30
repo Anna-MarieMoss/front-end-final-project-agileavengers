@@ -54,8 +54,8 @@ if (isLoading) {
   return (
     isAuthenticated && (
     <div>
-      <H1 text={`Hi ${user.given_name}`}></H1>
-      <H2 text={'How are you feeling today?'}></H2>
+      <H1 text={`Hi ${user.given_name}`} />
+      <H2 text={'How are you feeling today?'} />
 
       <div className="emotionsBar">
 

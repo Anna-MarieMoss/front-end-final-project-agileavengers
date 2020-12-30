@@ -5,7 +5,7 @@ import H2 from '../DisplayText/H2Text/index';
 import H1 from '../DisplayText/H1Text/index';
 import congratsData from './congratsData';
 import { useAppContext } from '../../AppContext';
-import LogoutButton from '../Buttons/LogOutButton/index';
+
 
 function Timeline() {
   const { currentWeek, user, isAuthenticated, isLoading } = useAppContext();
@@ -31,9 +31,8 @@ function Timeline() {
   return (
     isAuthenticated && (
     <div>
-      <H1 text={'Your Timeline'}></H1>
-      <LogoutButton />
-      <H2 text={congratsMessage}></H2>
+      <H1 text={'Your Timeline'}/>
+      <H2 text={congratsMessage}/>
       <ThemeProvider>
         <ProgressBar pic={user.picture} week={currentWeek}/>
       </ThemeProvider>

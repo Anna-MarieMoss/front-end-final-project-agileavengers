@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAppContext } from '../../AppContext';
+import H1 from '../DisplayText/H1Text/index';
 
 function Stats() {
   const { currentWeek, user, isAuthenticated, isLoading } = useAppContext();
@@ -11,7 +12,7 @@ function Stats() {
   return (
     isAuthenticated && (
     <div>
-      <h1>Your Stats</h1>
+    <H1 text={`${user.given_name}'s Stats`} />
       <p> (Add in mood graph here!)</p>
       <p> (Add in number of posts here!?!)</p>
     </div>

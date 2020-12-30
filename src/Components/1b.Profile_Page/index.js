@@ -5,6 +5,7 @@ import DatePicker from '../Input/DateInput/index.js';
 import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
 import SubmitButton from '../Buttons/SubmitButton/index';
+import LogoutButton from '../Buttons/LogOutButton/index';
 import { useAppContext } from '../../AppContext';
 
 const useStyles = makeStyles((theme) => ({
@@ -69,7 +70,8 @@ function Profile() {
   return (
     isAuthenticated && (
       <div>
-        <H1 text={'Profile'}></H1>
+      <LogoutButton/>
+        <H1 text={'Profile'} />
         <img className="profile-pic" src={user.picture} alt={user.name} />
         <H2 text={`Hi ${user.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`} />
         <form className={classes.root} noValidate autoComplete='off'>

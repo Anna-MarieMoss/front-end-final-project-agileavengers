@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAppContext } from '../../AppContext';
 import H1 from '../DisplayText/H1Text';
+import H2 from '../DisplayText/H2Text';
 import './journal.css';
 
 //this will need to link to user iD
@@ -56,7 +57,7 @@ function JournalEntry() {
     isAuthenticated && (
     <div className='wrapper'>
     <H1 text={`${user.given_name} how was your day today?`}/>
-      <h1>What did you learn?</h1>
+     <H2 text={`What did you learn today?`}/> 
       <div className='container'>
         {/* <br></br> */}
         <div className='preview'>

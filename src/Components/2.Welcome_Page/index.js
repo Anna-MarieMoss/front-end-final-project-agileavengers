@@ -12,7 +12,7 @@ function Welcome() {
   return (
     isAuthenticated && (
     <div>
-    <H1 text={`Hi ${user.given_name} Welcome to your SoC Journal`}></H1>
+    <H1 text={`Hi ${user.given_name} Welcome to your SoC Journal`} />
       <p>
         Your personal space to record your once in a lifetime School of Code
         experience!
