@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import DatePicker from '../Input/DateInput/index.js';
 import H1 from '../DisplayText/H1Text';
+import H2 from '../DisplayText/H2Text';
 import SubmitButton from '../Buttons/SubmitButton/index';
 import { useAuth0 } from '@auth0/auth0-react';
 
@@ -24,9 +25,9 @@ function Profile() {
   const [submit, setSubmit] = useState(null);
   const { user, isAuthenticated, isLoading } = useAuth0();
 
-  // console.log(user.name);
-  // console.log(user.email);
-  // console.log(user.picture);
+  console.log(user.name);
+  console.log(user.email);
+  console.log(user.picture);
 
   function handleSubmit() {
     setSubmit(true);
@@ -44,8 +45,8 @@ function Profile() {
             method: 'POST',
             headers: { 'content-type': 'application/JSON' },
             body: JSON.stringify({
-              name: name,
-              email: email,
+              name: user.name,
+              email: user.email,
               password: 'password',
               personality: myersBriggs,
               start_date: selectedDate,
@@ -69,30 +70,10 @@ function Profile() {
     isAuthenticated && (
       <div>
         <H1 text={'Profile'}></H1>
-        <p>(Add profile img from Auth0 here)</p>
-        <p>(Upload photo link here)</p>
+        <img className="profile-pic" src={user.picture} alt={user.name} />
+        <H2 text={`Hi ${user.name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`} />
         <form className={classes.root} noValidate autoComplete='off'>
           <div>
-            <TextField
-              id='outlined-search'
-              label='Name'
-              type='text'
-              variant='outlined'
-              onChange={(event) => {
-                const { value } = event.target;
-                setName(value);
-              }}
-            />
-            <TextField
-              id='outlined-search'
-              label='Email'
-              type='email'
-              variant='outlined'
-              onChange={(event) => {
-                const { value } = event.target;
-                setEmail(value);
-              }}
-            />
             <TextField
               id='outlined-search'
               label='Myers-Briggs'
@@ -113,3 +94,26 @@ function Profile() {
 }
 
 export default Profile;
+
+// name and email for profile login 
+
+/* <TextField
+id='outlined-search'
+label='Name'
+type='text'
+variant='outlined'
+onChange={(event) => {
+  const { value } = event.target;
+  setName(value);
+}}
+/>
+<TextField
+id='outlined-search'
+label='Email'
+type='email'
+variant='outlined'
+onChange={(event) => {
+  const { value } = event.target;
+  setEmail(value);
+}}
+/> */

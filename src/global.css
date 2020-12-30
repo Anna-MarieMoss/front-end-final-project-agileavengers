@@ -41,6 +41,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.profile-pic {
+  border-radius: 50%;
+}
+
 * {
   font-family: var(--fontFamily);
   box-sizing: border-box;
