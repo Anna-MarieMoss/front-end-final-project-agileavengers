@@ -1,0 +1,47 @@
+:root {
+  --green: #31986a;
+  --blue: #4a90e2;
+  --blueAlpha: #4a91e27c;
+  --fontFamily: Roboto, Arial, sans-serif;
+}
+
+button {
+  background-color: var(--green);
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--blue);
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.centered {
+  justify-content: center;
+  align-items: center;
+}
+
+.h1 {
+  font-size: 1.5rem;
+  border-bottom: 2px solid var(--blue);
+}
+
+body {
+  margin: 1em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  font-family: var(--fontFamily);
+  box-sizing: border-box;
+}

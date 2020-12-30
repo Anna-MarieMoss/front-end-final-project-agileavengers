@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import './App.css';
+import './global.css';
 import Welcome from './Components/2.Welcome_Page';
 import Emotions from './Components/3.Emotions_Page';
 import JournalEntry from './Components/4.Journal_Entry_Page';
@@ -10,6 +11,7 @@ import Trophy from './Components/7.Trophy_Page';
 import Stats from './Components/8.Stats_Page';
 import Profile from './Components/1b.Profile_Page';
 import NavBar from './Components/NavBar/index';
+import LogIn from './Components/1.Login_Page/index';
 
 function App() {
   return (
@@ -18,6 +20,9 @@ function App() {
         <div>
           <nav>
             <ul>
+              <li>
+                <Link to='/'>Log In</Link>
+              </li>
               <li>
                 <Link to='/welcome'>Welcome</Link>
               </li>
@@ -72,6 +77,9 @@ function App() {
             </Route>
             <Route path='/stats'>
               <Stats />
+            </Route>
+            <Route path='/'>
+              <LogIn />
             </Route>
           </Switch>
         </div>
