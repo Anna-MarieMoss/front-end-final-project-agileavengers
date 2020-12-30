@@ -2,14 +2,14 @@ import React, {useEffect, useState} from 'react';
 import EmotionsButton from "../Buttons/EmotionsButtons";
 import quoteData from "./quotesData.js";
 import "./EmotionsPage.css";
-
+import { useAppContext } from '../../AppContext';
 
 //Temp userId
 const userId = 1;
 
 function Emotions() {
   // need user_id from ContextProvider
-
+  const { user } = useAppContext();
   //need to figure out how to close the ability to click for the day/only enable one click per day
   const emotionsArray = [{emotion: "😢", number: 1},{emotion: "😒", number: 2},{emotion: "😬", number: 3},{emotion: "😀", number: 4},{emotion: "😍", number: 5} ]
   const [chosenEmotion, setChosenEmotion] = useState(null);
@@ -47,7 +47,7 @@ function Emotions() {
   
   return (
     <div>
-      <h1>Hello Alice</h1>
+      <h1>{`Hi ${user.name}`}</h1>
       <h1>How are you feeling today?</h1>
 
       <div className="emotionsBar">
