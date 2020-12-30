@@ -1,5 +1,8 @@
-import React, { createElement, useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import './journal.css';
+
+//this will need to link to user iD 
+const userId = 1;
 
 function JournalEntry() {
   const [text, setText] = useState('');
@@ -11,6 +14,41 @@ function JournalEntry() {
     event.preventDefault();
     alert('A new post has been added to your journal.');
   };
+
+  
+  //Draft post request
+
+  useEffect(() => {
+    if (text){
+ 
+   async function postJournalEntry() {
+     const res = await fetch(
+   
+       // neeed to actual API address
+       `http://localhost:3000/posts`,
+       {
+         method: "POST",
+         headers: { "content-type": "application/JSON"},
+         body: JSON.stringify({
+           user_id: userId, 
+           post: text,
+           // ask back end to add columns to tables
+          //  image: img,
+          //  audio: audio,
+          //  video: vid
+         })
+       })
+     const data = await res.json();
+     console.log(data);
+     
+   }
+   postJournalEntry();
+ }}, [text]);
+  // , img, audio, vid]);
+
+ //
+
+
 
   return (
     <div className='wrapper'>
@@ -45,7 +83,7 @@ function JournalEntry() {
               id='img'
               name='img'
               accept='image/*'
-              onChange={(event) => setImg(event.target.value)}
+              onChange={(event) => setImg(event.target.files[0])}
             />
             <input className='align-right' type='submit' value='+' />
             {/* </form> */}
