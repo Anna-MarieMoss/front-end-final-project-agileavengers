@@ -16,7 +16,7 @@
   justify-self: right;
 } */
 
-button {
+.journalButton {
   color: snow;
   border: 3px solid snow;
   background-color: rgb(15, 95, 95);

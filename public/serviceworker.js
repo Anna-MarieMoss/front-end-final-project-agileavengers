@@ -1,5 +1,6 @@
 const CACHE_NAME = 'version-1';
 const urlsToCache = ['index.html', 'offline.html' ] //offline.html - page shows when offline
+// should add all the apges to cache here - may have to do this for every page on the app
 
 const self = this;
 
@@ -22,7 +23,7 @@ self.addEventListener('fetch', (event) => {
             .then(() => {
                 return fetch(event.request)
                     .catch(() => caches.match('offline.html')) //if an error occurs i.e. fetch request not fullfilled use cache HTML
-            })
+            }) // if want to respond with app pages change 'offline.html' to event.request - but need to add these pages to urls to cache
     )
 });
 
@@ -31,7 +32,7 @@ self.addEventListener('fetch', (event) => {
 self.addEventListener('activate', (event) => {
     const cacheWhiteList = [];
     cacheWhiteList.push(CACHE_NAME);
-
+// remove unwanted caches
     event.waitUntil(
         caches.keys().then((cacheNames) => Promise.all(
             cacheNames.map((cacheName) => {
@@ -42,3 +43,4 @@ self.addEventListener('activate', (event) => {
         ))
     )
 });
+

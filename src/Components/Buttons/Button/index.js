@@ -1,11 +1,7 @@
 import React from 'react';
 
-function Button({ handleClick, color , text}) {
-  return (
-    <button style={{ backgroundColor: color }} onClick={handleClick}>
-      {text}
-    </button>
-  );
+function Button({ handleClick, text }) {
+  return <button onClick={handleClick}>{text}</button>;
 }
 
 export default Button;

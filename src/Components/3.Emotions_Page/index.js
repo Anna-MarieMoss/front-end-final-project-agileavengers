@@ -29,7 +29,7 @@ function Emotions() {
     const res = await fetch(
   
       // neeed to actual API address
-      `http://localhost:3000/moods`,
+      `http://localhost:5000/moods`,
       {
         method: "POST",
         headers: { "content-type": "application/JSON"},
