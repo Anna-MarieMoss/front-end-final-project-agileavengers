@@ -10,6 +10,7 @@ import Trophy from './Components/7.Trophy_Page';
 import Stats from './Components/8.Stats_Page';
 import Profile from './Components/1b.Profile_Page';
 import NavBar from './Components/NavBar/index';
+import Upload from './Components/4.Journal_Entry_Page/cloudinaryUpload';
 
 function App() {
   return (
@@ -43,6 +44,9 @@ function App() {
               <li>
                 <Link to='/stats'>Statistics</Link>
               </li>
+              <li>
+                <Link to='/upload'>Upload</Link>
+              </li>
             </ul>
           </nav>
 
@@ -73,6 +77,9 @@ function App() {
             </Route>
             <Route path='/stats'>
               <Stats />
+            </Route>
+            <Route path='/upload'>
+              <Upload />
             </Route>
           </Switch>
         </div>
