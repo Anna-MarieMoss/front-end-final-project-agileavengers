@@ -17,7 +17,6 @@ function App() {
       <Router>
         <div>
           <nav>
-            
             <ul>
               <li>
                 <Link to='/welcome'>Welcome</Link>
