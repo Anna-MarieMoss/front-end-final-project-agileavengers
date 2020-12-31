@@ -8,6 +8,9 @@ import SubmitButton from '../Buttons/SubmitButton/index';
 import LogoutButton from '../Buttons/LogOutButton/index';
 import { useAppContext } from '../../AppContext';
 
+//Backend URL  
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
@@ -24,7 +27,7 @@ function Profile() {
   const [myersBriggs, setMyersBriggs] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [submit, setSubmit] = useState(null);
-  const { currentWeek, user, isAuthenticated, isLoading } = useAppContext();
+  const {  user, isAuthenticated, isLoading } = useAppContext();
 
 
   console.log(user);
@@ -40,8 +43,7 @@ function Profile() {
       console.log(submit);
       async function postprofile() {
         const res = await fetch(
-          // neeed to actual API address
-          `http://localhost:5000/users`,
+          `${BACKEND_URL}/users`,
           {
             method: 'POST',
             headers: { 'content-type': 'application/JSON' },

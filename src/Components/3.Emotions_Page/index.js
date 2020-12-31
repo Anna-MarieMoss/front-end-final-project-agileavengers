@@ -6,12 +6,16 @@ import { useAppContext } from '../../AppContext';
 import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
 
+//Backend URL  
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 //Temp userId
 const userId = 1;
 
 function Emotions() {
+  console.log(BACKEND_URL)
   // need user_id from ContextProvider
-  const { currentWeek, user, isAuthenticated, isLoading } = useAppContext();
+  const { user, isAuthenticated, isLoading } = useAppContext();
   //need to figure out how to close the ability to click for the day/only enable one click per day
   const emotionsArray = [{emotion: "😢", number: 1},{emotion: "😒", number: 2},{emotion: "😬", number: 3},{emotion: "😀", number: 4},{emotion: "😍", number: 5} ]
   const [chosenEmotion, setChosenEmotion] = useState(null);
@@ -31,7 +35,7 @@ function Emotions() {
     const res = await fetch(
   
       // neeed to actual API address
-      `http://localhost:5000/moods`,
+      `${BACKEND_URL}/moods`,
       {
         method: "POST",
         headers: { "content-type": "application/JSON"},

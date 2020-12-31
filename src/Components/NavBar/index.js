@@ -2,16 +2,17 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import EmojiEventsRoundedIcon from '@material-ui/icons/EmojiEventsRounded';
-import MultilineChartRoundedIcon from '@material-ui/icons/MultilineChartRounded';
 import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
-import DehazeRoundedIcon from '@material-ui/icons/DehazeRounded';
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
-import MoreVertRoundedIcon from '@material-ui/icons/MoreVertRounded';
-import MoreHorizRoundedIcon from '@material-ui/icons/MoreHorizRounded';
 import FaceRoundedIcon from '@material-ui/icons/FaceRounded';
+// import FavoriteIcon from '@material-ui/icons/Favorite';
+// import MultilineChartRoundedIcon from '@material-ui/icons/MultilineChartRounded';
+// import DehazeRoundedIcon from '@material-ui/icons/DehazeRounded';
+// import MoreVertRoundedIcon from '@material-ui/icons/MoreVertRounded';
+// import MoreHorizRoundedIcon from '@material-ui/icons/MoreHorizRounded';
+
 
 // Do we want to use badges to tell them if theyve unlocked nay trophies or timeline events?
 // Would be pretty cool

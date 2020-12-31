@@ -3,7 +3,7 @@ import { useAppContext } from '../../AppContext';
 import H1 from '../DisplayText/H1Text/index';
 
 function JournalView() {
-  const { currentWeek, user, isAuthenticated, isLoading } = useAppContext();
+  const {  user, isAuthenticated, isLoading } = useAppContext();
 
   if (isLoading) {
     return <div>Loading ...</div>;

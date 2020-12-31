@@ -7,8 +7,11 @@ import './journal.css';
 //this will need to link to user iD
 const userId = 1;
 
+//Backend URL  
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 function JournalEntry() {
-  const { currentWeek, user, isAuthenticated, isLoading } = useAppContext();
+  const { user, isAuthenticated, isLoading } = useAppContext();
   const [text, setText] = useState('');
   const [img, setImg] = useState('');
   const [vid, setVid] = useState('');
@@ -26,7 +29,7 @@ function JournalEntry() {
       async function postJournalEntry() {
         const res = await fetch(
           // neeed to actual API address
-          `http://localhost:5000/posts`,
+          `${BACKEND_URL}/posts`,
           {
             method: 'POST',
             headers: { 'content-type': 'application/JSON' },
