@@ -1,9 +1,9 @@
 import React from 'react';
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 
-function DeleteButton({deleteColor}) {
+function DeleteButton({deleteColor, handleDelete}) {
   return (
-    <DeleteRoundedIcon fontSize="large" variant="contained" style={{color: deleteColor}}>
+    <DeleteRoundedIcon fontSize="medium" variant="contained" style={{color: deleteColor}} onclick={handleDelete}>
     </DeleteRoundedIcon>
   );
 }

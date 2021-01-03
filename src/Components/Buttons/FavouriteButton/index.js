@@ -1,8 +1,9 @@
+import React from 'react';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
-function FavoriteButton({favoriteColor}) {
+function FavoriteButton({favoriteColor, handleFavorite}) {
     return (
-      <FavoriteIcon fontSize="large" variant="contained" style={{color: favoriteColor}}>
+      <FavoriteIcon fontSize="medium" variant="contained" style={{color: favoriteColor}} onClick={handleFavorite}>
       </FavoriteIcon>
     );
   }

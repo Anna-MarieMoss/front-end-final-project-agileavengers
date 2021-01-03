@@ -8,9 +8,15 @@ function JournalView() {
   const { user, isAuthenticated, isLoading } = useAppContext();
   
   // do we need a custom hook to get out journal and emotion data and store as a state
+  // Need to set ket as the unique post key to add favourite, delete functions and be able to view
+ 
+  function handleDelete(postId){
+    // delete request to the database
+  }
 
-  //temp Emotion Array Num - need to get this from the return from the DB Query
-  let emotionNum = 3;
+  function handleFavorite(postId){
+    // patch request to the database
+  }
 
   // need to make post appear when it is clicked
   function handleJournalClick(){
@@ -28,7 +34,14 @@ function JournalView() {
       <div className='journal-containers'>
       {dummyJournal.map(
         (journalEntry, index) => 
-          <JournalContainer text={journalEntry.text} handleClick={handleJournalClick} emotionNumber={journalEntry.mood} journalDate={journalEntry.date} key={index} test={'E'}/>
+          <JournalContainer 
+            text={journalEntry.text} 
+            handleClick={handleJournalClick} 
+            emotionNumber={journalEntry.mood} 
+            journalDate={journalEntry.date} 
+            key={index} favorite={journalEntry.favorite} 
+            handleFavorite={handleFavorite} 
+            handleDelete={handleDelete} />
       )}
       </div>
     </div>
