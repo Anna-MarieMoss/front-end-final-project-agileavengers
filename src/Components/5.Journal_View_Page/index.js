@@ -1,8 +1,10 @@
 import React from 'react';
 import { useAppContext } from '../../AppContext';
+import JournalAccordion from '../Acordian';
 import H1 from '../DisplayText/H1Text/index';
 import JournalContainer from '../JournalContainer/index'
 import dummyJournal from './DummyJournal.js'
+
 
 function JournalView() {
   const { user, isAuthenticated, isLoading } = useAppContext();
@@ -21,6 +23,7 @@ function JournalView() {
   // need to make post appear when it is clicked
   function handleJournalClick(){
     console.log('need to make full post appear')
+    // onClick - could make a card display -can have different media types - could use lots of useState()..... boolean
   }
   
   if (isLoading) {
@@ -39,7 +42,20 @@ function JournalView() {
             handleClick={handleJournalClick} 
             emotionNumber={journalEntry.mood} 
             journalDate={journalEntry.date} 
-            key={index} favorite={journalEntry.favorite} 
+            index={index} favorite={journalEntry.favorite} 
+            handleFavorite={handleFavorite} 
+            handleDelete={handleDelete} />
+      )}
+      </div>
+      <div>
+      {dummyJournal.map(
+        (journalEntry, index) => 
+          <JournalAccordion
+            text={journalEntry.text} 
+            handleClick={handleJournalClick} 
+            emotionNumber={journalEntry.mood} 
+            journalDate={journalEntry.date} 
+            index={index} favorite={journalEntry.favorite} 
             handleFavorite={handleFavorite} 
             handleDelete={handleDelete} />
       )}

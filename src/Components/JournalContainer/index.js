@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function JournalContainer({text, emotionNumber, handleClick, journalDate, key, handleDelete, handleFavorite, favorite}) {
+export default function JournalContainer({text, emotionNumber, handleClick, journalDate, index, handleDelete, handleFavorite, favorite}) {
   const classes = useStyles();
   const {emotionsArray} = useAppContext();
   //const [postFavorite, setPostFavorite] = useState(false)
@@ -46,10 +46,10 @@ export default function JournalContainer({text, emotionNumber, handleClick, jour
             <Typography noWrap>{text}</Typography>
           </Grid>
           <Grid item className='journal-actions'>
-            <FavoriteButton handleFavorite={handleFavorite} key={key} favoriteColor={favorite? '#DC143C' : 'black'}/>
+            <FavoriteButton handleFavorite={handleFavorite} key={index} favoriteColor={favorite? '#DC143C' : 'black'}/>
             <br/>
             <br/>
-            <DeleteButton handleDelete={handleDelete} key={key}/>
+            <DeleteButton handleDelete={handleDelete} key={index}/>
           </Grid>
         </Grid>
       </Paper>  
