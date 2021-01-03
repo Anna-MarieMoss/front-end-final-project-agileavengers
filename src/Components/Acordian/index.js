@@ -9,21 +9,30 @@ import DeleteButton from "../Buttons/DeleteButton/index.js";
 import FavoriteButton from "../Buttons/FavouriteButton/index.js";
 import { useAppContext } from '../../AppContext';
 import Avatar from '@material-ui/core/Avatar';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '90%',
+    width: '100%',
+    flexGrow: 1,
+    overflow: 'hidden',
+    padding: theme.spacing(0, 3),
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
     flexBasis: '33.33%',
     flexShrink: 0,
-    maxWidth: 400,
+
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
+  },
+  paper: {
     maxWidth: 400,
+    margin: `${theme.spacing(1)}px auto`,
+    padding: theme.spacing(2),
   },
 }));
 
@@ -47,17 +56,38 @@ export default function JournalAccordion({text, emotionNumber, handleClick, jour
     <div className={classes.root}>
       <Accordion expanded={expanded === `panel${index}`} onChange={handleChange(`panel${index}`)}>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
           aria-controls={`panel${index}bh-content`}
           id={`panel${index}bh-header`}
         >
-          <Avatar className='journal-mood'>{emotion[0].emotion}</Avatar>
-          <Typography className={classes.heading}>{journalDate}</Typography>
+            <div className={classes.root} >
+                <Paper className={classes.paper}>
+                    <Grid container wrap="nowrap" spacing={2}>
+                    <Grid item onClick={handleClick}>
+                        <Avatar className='journal-mood'>{emotion[0].emotion}</Avatar>
+                    </Grid>
+                    <Grid item xs zeroMinWidth onClick={handleClick}>
+                        <p className='journal-date'>{journalDate}</p>
+                        <Typography noWrap>{text}</Typography>
+                    </Grid>
+                
+                    </Grid>
+                </Paper>  
+            </div>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-          {text}
-          </Typography>
+        <Grid container wrap="nowrap" spacing={2}>
+            <Grid item>
+                <Typography>
+                {text}
+                </Typography>
+            </Grid>
+            <Grid item className='journal-actions'>
+                <FavoriteButton handleFavorite={handleFavorite} key={index} favoriteColor={favorite? '#DC143C' : 'black'}/>
+                <br/>
+                <br/>
+                <DeleteButton handleDelete={handleDelete} key={index}/>
+            </Grid>
+        </Grid>
         </AccordionDetails>
       </Accordion>
     </div>
