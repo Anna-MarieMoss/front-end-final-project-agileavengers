@@ -22,10 +22,10 @@ button:hover {
   display: flex;
   flex-direction: row;
 }
-
-/* .nav-bar {
+/* 
+.nav-bar {
   display: flex;
-  align-items: flex-end;
+  position: sticky;
 } */
 
 .flex-col {
@@ -44,7 +44,7 @@ button:hover {
 }
 
 body {
-  margin: 1em;
+  /* margin: 1em; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

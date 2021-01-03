@@ -15,9 +15,8 @@ const userId = 1;
 function Emotions() {
   console.log(BACKEND_URL)
   // need user_id from ContextProvider
-  const { user, isAuthenticated, isLoading } = useAppContext();
+  const {emotionsArray, user, isAuthenticated, isLoading } = useAppContext();
   //need to figure out how to close the ability to click for the day/only enable one click per day
-  const emotionsArray = [{emotion: "😢", number: 1},{emotion: "😒", number: 2},{emotion: "😬", number: 3},{emotion: "😀", number: 4},{emotion: "😍", number: 5} ]
   const [chosenEmotion, setChosenEmotion] = useState(null);
   
   function handleEmotion(emotionNum){

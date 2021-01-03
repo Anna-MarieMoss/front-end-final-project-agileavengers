@@ -31,6 +31,7 @@ const useStyles = makeStyles({
   root: {
     width: '100%',
     margin: '0px',
+    backgroundColor: '#31986a',
   },
 });
 
@@ -47,6 +48,7 @@ function App() {
 
   const navClose = () => {
     setAnchorEl(null);
+
   };
 
   if (isLoading) {
@@ -65,6 +67,7 @@ function App() {
       }}
       showLabels={false}
       className={classes.root}
+      
     >
     <BottomNavigationAction component={Link} to='/profile' label="Profile" value='profile' icon={<FaceRoundedIcon />} />
       <BottomNavigationAction component={Link} to='/journalview' label="Journal" value='journal' icon={<EditRoundedIcon />} />
@@ -78,11 +81,11 @@ function App() {
         open={Boolean(anchorEl)}
         onClose={navClose}
       >
-      <MenuItem component={Link} to='/welcome' onClick={navClose}>Welcome</MenuItem>
-        <MenuItem component={Link} to='/emotions' onClick={navClose}>Emotions</MenuItem>
-        <MenuItem component={Link} to='/journalentry' onClick={navClose}>Journal Entry</MenuItem>
-        <MenuItem component={Link} to='/stats' onClick={navClose}>Stats</MenuItem>
-        <MenuItem component={Link} to='/logout' onClick={navClose}>Logout</MenuItem>
+      <MenuItem className='menu-item' component={Link} to='/welcome' onClick={navClose}>Welcome</MenuItem>
+        <MenuItem className='menu-item' component={Link} to='/emotions' onClick={navClose}>Emotions</MenuItem>
+        <MenuItem className='menu-item' component={Link} to='/journalentry' onClick={navClose}>Journal Entry</MenuItem>
+        <MenuItem className='menu-item' component={Link} to='/stats' onClick={navClose}>Stats</MenuItem>
+        <MenuItem className='menu-item' component={Link} to='/logout' onClick={navClose}>Logout</MenuItem>
       </Menu>
     </BottomNavigation>
     
