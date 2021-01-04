@@ -1,13 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useAppContext } from '../../AppContext';
 import JournalAccordion from '../Acordian';
 import H1 from '../DisplayText/H1Text/index';
 import JournalContainer from '../JournalContainer/index'
-import dummyJournal from './DummyJournal.js'
+import dummyJournal from './DummyJournal.js';
+import testVid from './test.mp4';
 
 
 function JournalView() {
   const { user, isAuthenticated, isLoading } = useAppContext();
+  
+  //need to get this data from the fetch request from backend - holding useStates atm
+  const [imgSource, setPreviewImgSource] = useState(null);
+  const [vidSource, setPreviewVidSource] = useState(null);
+  const [audioSource, setPreviewAudioSource] = useState(null);
   
   // do we need a custom hook to get out journal and emotion data and store as a state
   // Need to set ket as the unique post key to add favourite, delete functions and be able to view
@@ -34,19 +40,6 @@ function JournalView() {
     <div>
       <H1 text={`${user.given_name}'s journey so far....`} />
       <p>(Add in filters for date range, emotions etc)</p>
-      <div className='journal-containers'>
-      {dummyJournal.map(
-        (journalEntry, index) => 
-          <JournalContainer 
-            text={journalEntry.text} 
-            handleClick={handleJournalClick} 
-            emotionNumber={journalEntry.mood} 
-            journalDate={journalEntry.date} 
-            index={index} favorite={journalEntry.favorite} 
-            handleFavorite={handleFavorite} 
-            handleDelete={handleDelete} />
-      )}
-      </div>
       <div>
       {dummyJournal.map(
         (journalEntry, index) => 
@@ -57,7 +50,27 @@ function JournalView() {
             journalDate={journalEntry.date} 
             index={index} favorite={journalEntry.favorite} 
             handleFavorite={handleFavorite} 
-            handleDelete={handleDelete} />
+            handleDelete={handleDelete} 
+            audioSource={journalEntry.audio}
+            imgSource={journalEntry.image}
+            vidSource={journalEntry.video}
+            />
+      )}
+      </div>
+      <div className='journal-containers'>
+      {dummyJournal.map(
+        (journalEntry, index) => 
+          <JournalContainer 
+            text={journalEntry.text} 
+            handleClick={handleJournalClick} 
+            emotionNumber={journalEntry.mood} 
+            journalDate={journalEntry.date} 
+            index={index} favorite={journalEntry.favorite} 
+            handleFavorite={handleFavorite} 
+            handleDelete={handleDelete} 
+            audioSource={journalEntry.audio}
+            imgSource={journalEntry.image}
+            vidSource={journalEntry.video}/>
       )}
       </div>
     </div>
