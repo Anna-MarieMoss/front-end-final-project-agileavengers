@@ -2,8 +2,8 @@ import React from 'react';
 import { useAppContext } from '../../AppContext';
 
 // App Components
-import DeleteButton from "../Buttons/DeleteButton/index.js";
-import FavoriteButton from "../Buttons/FavouriteButton/index.js";
+import DeleteButton from '../Buttons/DeleteButton/index.js';
+import FavoriteButton from '../Buttons/FavouriteButton/index.js';
 
 // Material UI Components
 import { makeStyles } from '@material-ui/core/styles';
@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     flexBasis: '33.33%',
     flexShrink: 0,
-
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
@@ -39,19 +38,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function JournalAccordion({text, emotionNumber, handleClick, journalDate, index, handleDelete, handleFavorite, favorite}) {
+export default function JournalAccordion({
+  text,
+  emotionNumber,
+  handleClick,
+  journalDate,
+  index,
+  handleDelete,
+  handleFavorite,
+  favorite,
+}) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const {emotionsArray} = useAppContext();
+  const { emotionsArray } = useAppContext();
   //const [postFavorite, setPostFavorite] = useState(false)
 
-   // Matching the Emoji to Mood Number
-  const emotion = emotionsArray.filter(em => {
-      if (em.number === emotionNumber){
-          return true
-      }
-      return false
-  })
+  // Matching the Emoji to Mood Number
+  const emotion = emotionsArray.filter((em) => {
+    if (em.number === emotionNumber) {
+      return true;
+    }
+    return false;
+  });
 
   // Material UI expand the Acordian Function
   const handleChange = (panel) => (event, isExpanded) => {
@@ -63,36 +71,46 @@ export default function JournalAccordion({text, emotionNumber, handleClick, jour
 
   return (
     <div className={classes.root}>
-      <Accordion expanded={expanded === `panel${index}`} onChange={handleChange(`panel${index}`)}>
+      <Accordion
+        expanded={expanded === `panel${index}`}
+        onChange={handleChange(`panel${index}`)}
+      >
         <AccordionSummary
           aria-controls={`panel${index}bh-content`}
           id={`panel${index}bh-header`}
         >
-            <div className={classes.root} >
-                <Paper elevation={1} className={classes.paper}>
-                    <Grid container wrap="nowrap" spacing={2}>
-                    <Grid item onClick={handleClick}>
-                        <Avatar className='journal-mood'>{emotion[0].emotion}</Avatar>
-                    </Grid>
-                    <Grid item xs zeroMinWidth onClick={handleClick}>
-                        <p className='journal-date'>{journalDate}</p>
-                        <Typography noWrap>{text}</Typography>
-                    </Grid>
-                    <Grid item className='journal-actions'>
-                        <FavoriteButton handleFavorite={handleFavorite} key={index} favoriteColor={favorite? '#DC143C' : 'black'}/>
-                        <br/>
-                        <br/>
-                        <DeleteButton handleDelete={handleDelete} key={index}/>
-                    </Grid>
-                    </Grid>
-                </Paper>  
-            </div>
+          <div className={classes.root}>
+            <Paper elevation={1} className={classes.paper}>
+              <Grid container wrap='nowrap' spacing={2}>
+                <Grid item onClick={handleClick}>
+                  <Avatar
+                    style={{ backgroundColor: 'white', fontSize: '2em' }}
+                    className='journal-mood'
+                  >
+                    {emotion[0].emotion}
+                  </Avatar>
+                </Grid>
+                <Grid item xs zeroMinWidth onClick={handleClick}>
+                  <p className='journal-date'>{journalDate}</p>
+                  <Typography noWrap>{text}</Typography>
+                </Grid>
+                <Grid item className='journal-actions'>
+                  <FavoriteButton
+                    handleFavorite={handleFavorite}
+                    key={index}
+                    favoriteColor={favorite ? '#DC143C' : 'black'}
+                  />
+                  <br />
+                  <br />
+                  <DeleteButton handleDelete={handleDelete} key={index} />
+                </Grid>
+              </Grid>
+            </Paper>
+          </div>
         </AccordionSummary>
-          <AccordionDetails>
-              <Typography>
-              {text}
-              </Typography>
-          </AccordionDetails>
+        <AccordionDetails>
+          <Typography>{text}</Typography>
+        </AccordionDetails>
       </Accordion>
     </div>
   );
