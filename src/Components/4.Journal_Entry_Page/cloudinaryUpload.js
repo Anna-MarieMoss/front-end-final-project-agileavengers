@@ -6,30 +6,21 @@ import './journal.css';
 const userId = 1;
 
 export default function Upload() {
-  const [fileInputState, setFileInputState] = useState('');
-  // Our original code to hold states for each input...
+  // Code to hold the states of each input...
   const [text, setText] = useState('');
   const [imgUpload, setImgUpload] = useState('');
   const [vidUpload, setVidUpload] = useState('');
   const [audioUpload, setAudioUpload] = useState('');
 
-  const [previewSource, setPreviewSource] = useState();
-  // states to hold the URL strings of the file data...
+  // These states hold the super long DataURL strings of the file...
   const [previewImgSource, setPreviewImgSource] = useState();
   const [previewVidSource, setPreviewVidSource] = useState();
   const [previewAudioSource, setPreviewAudioSource] = useState();
 
-  //   const [selectedState, setSelectedState] = useState('');
-
-  const handleFileInputChange = (e) => {
-    // Storing input value into a variable...
-    const file = e.target.files[0];
-    // Preview function to show the text(?) / img /vid /audio that has been selected for upload.
-    previewFile(file);
-  };
-
   const handleImageInputChange = (e) => {
+    // Storing input value into a variable...
     const imgFile = e.target.files[0];
+    // Preview function to show the img /vid /audio file that has been selected for upload.
     previewImage(imgFile);
   };
 
@@ -43,21 +34,13 @@ export default function Upload() {
     previewAudio(audioFile);
   };
 
-  const previewFile = (file) => {
-    //show the user what they have selected by creating a reader...
-    const reader = new FileReader(); // this is a built in javascript api
-    reader.readAsDataURL(file); // converts img into a URL / string
-    reader.onloadend = () => {
-      setPreviewSource(reader.result);
-    };
-  };
-
   const previewImage = (imgFile) => {
-    //show the user what they have selected by creating a reader...
-    const reader = new FileReader(); // this is a built in javascript api
-    reader.readAsDataURL(imgFile); // converts img into a URL / string
+    //This section show the user what file they have selected by creating a reader...
+    const reader = new FileReader(); // (nb. this is a built in javascript api)
+    reader.readAsDataURL(imgFile); // then converts img into a DataURL / string
     reader.onloadend = () => {
       setPreviewImgSource(reader.result);
+      // The previewImgSource state will now be able to display the uploaded file when used at the bottom of the return code.
     };
   };
 
@@ -79,15 +62,10 @@ export default function Upload() {
     };
   };
 
-  // function to submit the uploaded file's stringified data to the server...
+  // function to submit the text and uploaded file's to the server...
   const handleSubmitFile = (e) => {
     console.log('submitting');
     e.preventDefault();
-    // if (!previewSource) return; // if a user hasn't selected a file just return.
-    uploadImage(previewSource);
-    // uploadImg(previewImgSource);
-    // uploadVideo(previewVidSource);
-    // uploadAudio(previewAudioSource);
     postJournalEntry(
       userId,
       text,
@@ -95,41 +73,8 @@ export default function Upload() {
       previewVidSource,
       previewAudioSource
     );
-
-    ////////
-    //if (previewSource) {
-    // uploadImage(previewSource);
-    // } else if (previewImgSource) {
-    //   uploadImg(previewImgSource);
-    // } else if (previewVidSource) {
-    //   uploadVideo(previewVidSource);
-    // } else if (previewAudioSource) {
-    //   uploadAudio(previewAudioSource);
-    //} else return;
-  };
-  //////
-  // };
-
-  const uploadImage = (base64EncodedImage) => {
-    console.log(base64EncodedImage);
   };
 
-  //const uploadImg = (base64EncodedImage) => {
-  // console.log(base64EncodedImage);
-  //};
-
-  // const uploadVideo = (base64EncodedImage) => {
-  //   console.log(base64EncodedImage);
-  // };
-
-  // const uploadAudio = (base64EncodedImage) => {
-  //   console.log(base64EncodedImage);
-  // };
-
-  ///////////////////////////////////////
-  // Posting journal entry and media to the db - need to sort out corrs console.error();
-  //   useEffect(() => {
-  //     if (text) {
   async function postJournalEntry(
     userId,
     text,
@@ -173,14 +118,6 @@ export default function Upload() {
           className='form-input'
         />
         <br></br>
-        <input
-          type='file'
-          name='image'
-          onChange={handleFileInputChange}
-          value={fileInputState}
-          className='form-input'
-        />
-        <br></br>
         <label for='img'>Select image:</label>
         <input
           type='file'
@@ -214,10 +151,8 @@ export default function Upload() {
           Submit
         </button>
       </form>
-      {previewSource && (
-        <img src={previewSource} alt='chosen' style={{ width: '70%' }} />
-      )}
       <br></br>
+      {/* Media Upload previews for image, video and audio player */}
       {previewImgSource && (
         <img src={previewImgSource} alt='chosenImg' style={{ width: '70%' }} />
       )}
