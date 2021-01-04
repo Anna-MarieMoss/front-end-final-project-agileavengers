@@ -40,7 +40,7 @@ export default function NavBar() {
       onChange={(event, newValue) => {
         setValue(newValue);
       }}
-      showLabels
+      showLabels={false}
       className={classes.root}
     >
       

@@ -5,7 +5,6 @@ import DatePicker from '../Input/DateInput/index.js';
 import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
 import SubmitButton from '../Buttons/SubmitButton/index';
-import LogoutButton from '../Buttons/LogOutButton/index';
 import { useAppContext } from '../../AppContext';
 
 //Backend URL  
@@ -28,10 +27,6 @@ function Profile() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [submit, setSubmit] = useState(null);
   const {  user, isAuthenticated, isLoading } = useAppContext();
-
-
-  console.log(user);
-
 
   function handleSubmit() {
     setSubmit(true);
@@ -72,7 +67,6 @@ function Profile() {
   return (
     isAuthenticated && (
       <div>
-      <LogoutButton/>
         <H1 text={'Profile'} />
         <img className="profile-pic" src={user.picture} alt={user.name} />
         <H2 text={`Hi ${user.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`} />

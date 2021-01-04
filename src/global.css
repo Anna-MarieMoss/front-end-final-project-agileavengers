@@ -22,6 +22,11 @@ button:hover {
   display: flex;
   flex-direction: row;
 }
+/* 
+.nav-bar {
+  display: flex;
+  position: sticky;
+} */
 
 .flex-col {
   display: flex;
@@ -39,7 +44,7 @@ button:hover {
 }
 
 body {
-  margin: 1em;
+  /* margin: 1em; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

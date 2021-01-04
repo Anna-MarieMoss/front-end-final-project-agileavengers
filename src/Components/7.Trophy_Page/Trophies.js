@@ -9,8 +9,8 @@ export const Trophies = [
         id='JavascriptTrophy'
         viewBox='0 0 24 24'
         xmlns='http://www.w3.org/2000/svg'
-        width='7em'
-        height='7em'
+        width='4em'
+        height='4em'
         fill='grey'
       >
         <title>JavaScript icon</title>

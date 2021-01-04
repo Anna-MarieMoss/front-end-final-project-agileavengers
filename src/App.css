@@ -1,3 +1,28 @@
 .App {
   text-align: center;
 }
+
+/* .MuiBottomNavigationAction-root {
+  --green: #31986a;
+} */
+
+.MuiBottomNavigationAction-wrapper {
+  display: 'inline-flex';
+  align-items: 'center';
+  justify-content: 'center';
+  width: '100%';
+  flex-direction: 'column';
+  color: white;
+}
+
+/* #app-menu:hover {
+  background-color: #31986a;
+} */
+
+/* .Mui-selected {
+  background-color: #4a90e2;
+} */
+
+/* .menu-item:hover {
+  background-color: #4a90e2;
+} */

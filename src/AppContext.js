@@ -8,6 +8,7 @@ export function AppProvider({ children }) {
   const [currentWeek, setCurrentWeek] = useState('week1');
   let startDate = 'Oct 22 2020';
   const { user, isAuthenticated, isLoading } = useAuth0();
+  const emotionsArray = [{emotion: "😢", number: 1},{emotion: "😒", number: 2},{emotion: "😬", number: 3},{emotion: "😀", number: 4},{emotion: "😍", number: 5} ]
 
   useEffect(() => {
     let week = progressPosition(startDate);
@@ -21,6 +22,7 @@ export function AppProvider({ children }) {
         user: user,
         isAuthenticated: isAuthenticated,
         isLoading: isLoading,
+        emotionsArray: emotionsArray,
       }}
     >
       {children}
