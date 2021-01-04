@@ -58,6 +58,9 @@ export default function JournalAccordion({text, emotionNumber, handleClick, jour
     setExpanded(isExpanded ? panel : false);
   };
 
+  // Ask Anna-Marie about React Audio Player/Video Player
+  // Make the Expanded Post a Card
+
   return (
     <div className={classes.root}>
       <Accordion expanded={expanded === `panel${index}`} onChange={handleChange(`panel${index}`)}>
