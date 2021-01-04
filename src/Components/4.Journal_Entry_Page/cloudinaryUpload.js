@@ -81,35 +81,50 @@ export default function Upload() {
 
   // function to submit the uploaded file's stringified data to the server...
   const handleSubmitFile = (e) => {
+    console.log('submitting');
     e.preventDefault();
     // if (!previewSource) return; // if a user hasn't selected a file just return.
-    // uploadImg(previewSource);
-    // uploadImage(previewImgSource);
+    uploadImage(previewSource);
+    // uploadImg(previewImgSource);
     // uploadVideo(previewVidSource);
     // uploadAudio(previewAudioSource);
     postJournalEntry(
+      userId,
       text,
       previewImgSource,
       previewVidSource,
       previewAudioSource
     );
+
+    ////////
+    //if (previewSource) {
+    // uploadImage(previewSource);
+    // } else if (previewImgSource) {
+    //   uploadImg(previewImgSource);
+    // } else if (previewVidSource) {
+    //   uploadVideo(previewVidSource);
+    // } else if (previewAudioSource) {
+    //   uploadAudio(previewAudioSource);
+    //} else return;
+  };
+  //////
+  // };
+
+  const uploadImage = (base64EncodedImage) => {
+    console.log(base64EncodedImage);
   };
 
-  //   const uploadImg = (base64EncodedImage) => {
-  //     console.log(base64EncodedImage);
-  //   };
+  //const uploadImg = (base64EncodedImage) => {
+  // console.log(base64EncodedImage);
+  //};
 
-  //   const uploadImage = (base64EncodedImage) => {
-  //     console.log(base64EncodedImage);
-  //   };
+  // const uploadVideo = (base64EncodedImage) => {
+  //   console.log(base64EncodedImage);
+  // };
 
-  //   const uploadVideo = (base64EncodedImage) => {
-  //     console.log(base64EncodedImage);
-  //   };
-
-  //   const uploadAudio = (base64EncodedImage) => {
-  //     console.log(base64EncodedImage);
-  //   };
+  // const uploadAudio = (base64EncodedImage) => {
+  //   console.log(base64EncodedImage);
+  // };
 
   ///////////////////////////////////////
   // Posting journal entry and media to the db - need to sort out corrs console.error();
@@ -123,17 +138,22 @@ export default function Upload() {
     previewAudioSource
   ) {
     try {
-      await fetch(`http://localhost:3000/posts`, {
+      const res = await fetch(`http://localhost:5000/posts`, {
         method: 'POST',
         body: JSON.stringify({
           user_id: userId,
-          post: text,
+          text: text,
           image: previewImgSource,
           video: previewVidSource,
           audio: previewAudioSource,
         }),
         headers: { 'content-type': 'application/JSON' },
       });
+
+      console.log(res);
+
+      const data = await res.json();
+      console.log(data);
     } catch (error) {
       console.error(error);
     }
