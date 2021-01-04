@@ -6,6 +6,7 @@ import { useAppContext } from '../../AppContext';
 
 function Logout() {
     const {  user, isAuthenticated, isLoading } = useAppContext();
+
     if (isLoading) {
         return <div>Loading ...</div>;
       }

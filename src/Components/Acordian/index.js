@@ -1,20 +1,23 @@
 import React from 'react';
+import { useAppContext } from '../../AppContext';
+
+// App Components
+import DeleteButton from "../Buttons/DeleteButton/index.js";
+import FavoriteButton from "../Buttons/FavouriteButton/index.js";
+
+// Material UI Components
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import DeleteButton from "../Buttons/DeleteButton/index.js";
-import FavoriteButton from "../Buttons/FavouriteButton/index.js";
-import { useAppContext } from '../../AppContext';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: 320,
     flexGrow: 1,
     overflow: 'hidden',
     padding: theme.spacing(0, 3),
@@ -41,6 +44,8 @@ export default function JournalAccordion({text, emotionNumber, handleClick, jour
   const [expanded, setExpanded] = React.useState(false);
   const {emotionsArray} = useAppContext();
   //const [postFavorite, setPostFavorite] = useState(false)
+
+   // Matching the Emoji to Mood Number
   const emotion = emotionsArray.filter(em => {
       if (em.number === emotionNumber){
           return true
@@ -48,6 +53,7 @@ export default function JournalAccordion({text, emotionNumber, handleClick, jour
       return false
   })
 
+  // Material UI expand the Acordian Function
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -60,7 +66,7 @@ export default function JournalAccordion({text, emotionNumber, handleClick, jour
           id={`panel${index}bh-header`}
         >
             <div className={classes.root} >
-                <Paper className={classes.paper}>
+                <Paper elevation={1} className={classes.paper}>
                     <Grid container wrap="nowrap" spacing={2}>
                     <Grid item onClick={handleClick}>
                         <Avatar className='journal-mood'>{emotion[0].emotion}</Avatar>
@@ -69,26 +75,21 @@ export default function JournalAccordion({text, emotionNumber, handleClick, jour
                         <p className='journal-date'>{journalDate}</p>
                         <Typography noWrap>{text}</Typography>
                     </Grid>
-                
+                    <Grid item className='journal-actions'>
+                        <FavoriteButton handleFavorite={handleFavorite} key={index} favoriteColor={favorite? '#DC143C' : 'black'}/>
+                        <br/>
+                        <br/>
+                        <DeleteButton handleDelete={handleDelete} key={index}/>
+                    </Grid>
                     </Grid>
                 </Paper>  
             </div>
         </AccordionSummary>
-        <AccordionDetails>
-        <Grid container wrap="nowrap" spacing={2}>
-            <Grid item>
-                <Typography>
-                {text}
-                </Typography>
-            </Grid>
-            <Grid item className='journal-actions'>
-                <FavoriteButton handleFavorite={handleFavorite} key={index} favoriteColor={favorite? '#DC143C' : 'black'}/>
-                <br/>
-                <br/>
-                <DeleteButton handleDelete={handleDelete} key={index}/>
-            </Grid>
-        </Grid>
-        </AccordionDetails>
+          <AccordionDetails>
+              <Typography>
+              {text}
+              </Typography>
+          </AccordionDetails>
       </Accordion>
     </div>
   );

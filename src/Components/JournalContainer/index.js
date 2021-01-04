@@ -1,14 +1,17 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { useAppContext } from '../../AppContext';
+import './JournalContainer.css'
+
+// App Components
+import DeleteButton from "../Buttons/DeleteButton/index.js";
+import FavoriteButton from "../Buttons/FavouriteButton/index.js";
+
+// Material UI
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-import { isWithinInterval } from 'date-fns';
-import './JournalContainer.css'
-import DeleteButton from "../Buttons/DeleteButton/index.js";
-import FavoriteButton from "../Buttons/FavouriteButton/index.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +30,8 @@ export default function JournalContainer({text, emotionNumber, handleClick, jour
   const classes = useStyles();
   const {emotionsArray} = useAppContext();
   //const [postFavorite, setPostFavorite] = useState(false)
+
+  // Matching the Emoji to Mood Number
   const emotion = emotionsArray.filter(em => {
       if (em.number === emotionNumber){
           return true
