@@ -5,7 +5,10 @@ import DatePicker from '../Input/DateInput/index.js';
 import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
 import SubmitButton from '../Buttons/SubmitButton/index';
-import { useAuth0 } from '@auth0/auth0-react';
+import { useAppContext } from '../../AppContext';
+
+//Backend URL  
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,11 +26,7 @@ function Profile() {
   const [myersBriggs, setMyersBriggs] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [submit, setSubmit] = useState(null);
-  const { user, isAuthenticated, isLoading } = useAuth0();
-
-  console.log(user.name);
-  console.log(user.email);
-  console.log(user.picture);
+  const {  user, isAuthenticated, isLoading } = useAppContext();
 
   function handleSubmit() {
     setSubmit(true);
@@ -39,13 +38,12 @@ function Profile() {
       console.log(submit);
       async function postprofile() {
         const res = await fetch(
-          // neeed to actual API address
-          `http://localhost:5000/users`,
+          `${BACKEND_URL}/users`,
           {
             method: 'POST',
             headers: { 'content-type': 'application/JSON' },
             body: JSON.stringify({
-              name: name,
+              name: user.name,
               email: user.email,
               password: 'password',
               personality: myersBriggs,
@@ -69,9 +67,9 @@ function Profile() {
   return (
     isAuthenticated && (
       <div>
-        <H1 text={'Profile'}></H1>
+        <H1 text={'Profile'} />
         <img className="profile-pic" src={user.picture} alt={user.name} />
-        <H2 text={`Hi ${user.name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`} />
+        <H2 text={`Hi ${user.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`} />
         <form className={classes.root} noValidate autoComplete='off'>
           <div>
           <TextField

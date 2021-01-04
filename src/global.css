@@ -9,6 +9,9 @@ button {
   background-color: var(--green);
   color: white;
   cursor: pointer;
+  padding: 10px;
+  margin: 10px;
+  font-size: 30px;
 }
 
 button:hover {
@@ -19,6 +22,11 @@ button:hover {
   display: flex;
   flex-direction: row;
 }
+/* 
+.nav-bar {
+  display: flex;
+  position: sticky;
+} */
 
 .flex-col {
   display: flex;
@@ -36,7 +44,7 @@ button:hover {
 }
 
 body {
-  margin: 1em;
+  /* margin: 1em; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

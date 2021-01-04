@@ -1,12 +1,14 @@
 import React from 'react';
 import LoginButton from '../Buttons/LogInButton/index';
-import LogInButton from '../Buttons/LogInButton/index';
+import H1 from '../DisplayText/H1Text/index';
+import SoCLogo from '../Pictures/SocLogo/index'
 
 function LogIn() {
   return (
     <div>
-      <h1>Welcome to your SoC Journal</h1>
-      <p>INCLUDE SOC LOGO</p>
+      <H1 text={`Welcome to your SoC Journal`} />
+      <SoCLogo style={{width: '200px', margin: '20px'}}/>
+      <br/>
       <LoginButton />
     </div>
   );

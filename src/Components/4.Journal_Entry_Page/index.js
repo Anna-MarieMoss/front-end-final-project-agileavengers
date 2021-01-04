@@ -1,11 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactAudioPlayer from 'react-audio-player';
+import { useAppContext } from '../../AppContext';
+import H1 from '../DisplayText/H1Text';
+import H2 from '../DisplayText/H2Text';
 import './journal.css';
 
 //this will need to link to user iD
 const userId = 1;
 
+//Backend URL
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 export default function JournalEntry() {
+  // Use Context
+  const { user, isAuthenticated, isLoading } = useAppContext();
+
   // Code to hold the states of each input...
   const [text, setText] = useState('');
   const [imgUpload, setImgUpload] = useState('');
@@ -16,24 +25,20 @@ export default function JournalEntry() {
   const [previewImgSource, setPreviewImgSource] = useState();
   const [previewVidSource, setPreviewVidSource] = useState();
   const [previewAudioSource, setPreviewAudioSource] = useState();
-
   const handleImageInputChange = (e) => {
     // Storing input value into a variable...
     const imgFile = e.target.files[0];
     // Preview function to show the img /vid /audio file that has been selected for upload.
     previewImage(imgFile);
   };
-
   const handleVideoInputChange = (e) => {
     const videoFile = e.target.files[0];
     previewVideo(videoFile);
   };
-
   const handleAudioInputChange = (e) => {
     const audioFile = e.target.files[0];
     previewAudio(audioFile);
   };
-
   const previewImage = (imgFile) => {
     //This section show the user what file they have selected by creating a reader...
     const reader = new FileReader(); // (nb. this is a built in javascript api)
@@ -43,7 +48,6 @@ export default function JournalEntry() {
       // The previewImgSource state will now be able to display the uploaded file when used at the bottom of the return code.
     };
   };
-
   const previewVideo = (videoFile) => {
     //show the user what they have selected by creating a reader...
     const reader = new FileReader(); // this is a built in javascript api
@@ -52,7 +56,6 @@ export default function JournalEntry() {
       setPreviewVidSource(reader.result);
     };
   };
-
   const previewAudio = (audioFile) => {
     //show the user what they have selected by creating a reader...
     const reader = new FileReader(); // this is a built in javascript api
@@ -61,7 +64,6 @@ export default function JournalEntry() {
       setPreviewAudioSource(reader.result);
     };
   };
-
   // function to submit the text and uploaded file's to the server...
   const handleSubmitFile = (e) => {
     console.log('submitting');
@@ -74,7 +76,6 @@ export default function JournalEntry() {
       previewAudioSource
     );
   };
-
   async function postJournalEntry(
     userId,
     text,
@@ -83,7 +84,7 @@ export default function JournalEntry() {
     previewAudioSource
   ) {
     try {
-      const res = await fetch(`http://localhost:5000/posts`, {
+      const res = await fetch(`${BACKEND_URL}/posts`, {
         method: 'POST',
         body: JSON.stringify({
           user_id: userId,
@@ -94,93 +95,96 @@ export default function JournalEntry() {
         }),
         headers: { 'content-type': 'application/JSON' },
       });
-
       console.log(res);
-
       const data = await res.json();
       console.log(data);
     } catch (error) {
       console.error(error);
     }
   }
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
 
   return (
-    <div className='wrapper'>
-      <h1>How was your day today?</h1>
-      <h1>What did you learn?</h1>
-      <div className='container'>
-        <form onSubmit={handleSubmitFile}>
-          <h2>Create post:</h2>
-          <h2>{text}</h2>
-          <input
-            type='text'
-            name='text'
-            onChange={(event) => setText(event.target.value)}
-            value={text}
-            className='form-input'
-          />
+    isAuthenticated && (
+      <div className='wrapper'>
+        <H1 text={`${user.given_name} how was your day today?`} />
+        <H2 text={`What did you learn today?`} />
+        <div className='container'>
+          <form onSubmit={handleSubmitFile}>
+            <h2>Create post:</h2>
+            <h2>{text}</h2>
+            <input
+              type='text'
+              name='text'
+              onChange={(event) => setText(event.target.value)}
+              value={text}
+              className='form-input'
+            />
+            <br></br>
+            <label for='img'>Select image:</label>
+            <input
+              type='file'
+              name='image'
+              accept='image/*'
+              onChange={handleImageInputChange}
+              value={imgUpload}
+              className='form-input'
+            />
+            <br></br>
+            <label for='video'>Select video:</label>
+            <input
+              type='file'
+              name='video'
+              accept='video/*'
+              onChange={handleVideoInputChange}
+              value={vidUpload}
+              className='form-input'
+            />
+            <br></br>
+            <label for='audio'>Select audio:</label>
+            <input
+              type='file'
+              name='audio'
+              accept='audio/*'
+              onChange={handleAudioInputChange}
+              value={audioUpload}
+              className='form-input'
+            />
+            <button className='btn' type='submit'>
+              Submit
+            </button>
+          </form>
           <br></br>
-          <label for='img'>Select image:</label>
-          <input
-            type='file'
-            name='image'
-            accept='image/*'
-            onChange={handleImageInputChange}
-            value={imgUpload}
-            className='form-input'
-          />
+          {/* Media Upload previews for image, video and audio player */}
+          {previewImgSource && (
+            <img
+              src={previewImgSource}
+              alt='chosenImg'
+              style={{ width: '70%' }}
+            />
+          )}
           <br></br>
-          <label for='video'>Select video:</label>
-          <input
-            type='file'
-            name='video'
-            accept='video/*'
-            onChange={handleVideoInputChange}
-            value={vidUpload}
-            className='form-input'
-          />
-          <br></br>
-          <label for='audio'>Select audio:</label>
-          <input
-            type='file'
-            name='audio'
-            accept='audio/*'
-            onChange={handleAudioInputChange}
-            value={audioUpload}
-            className='form-input'
-          />
-          <button className='btn' type='submit'>
-            Submit
-          </button>
-        </form>
-        <br></br>
-        {/* Media Upload previews for image, video and audio player */}
-        {previewImgSource && (
-          <img
-            src={previewImgSource}
-            alt='chosenImg'
-            style={{ width: '70%' }}
-          />
-        )}
-        <br></br>
-        {previewVidSource && (
-          <video
-            src={previewVidSource}
-            alt='chosenVideo'
-            style={{ width: '70%' }}
-            controls
-          />
-        )}
-        {previewAudioSource && (
-          <ReactAudioPlayer
-            src={previewAudioSource}
-            alt='chosenAudio'
-            style={{ width: '70%' }}
-            autoplay
-            controls
-          />
-        )}
+          {previewVidSource && (
+            <video
+              src={previewVidSource}
+              alt='chosenVideo'
+              style={{ width: '70%' }}
+              controls
+            />
+          )}
+          {previewAudioSource && (
+            <ReactAudioPlayer
+              src={previewAudioSource}
+              alt='chosenAudio'
+              style={{ width: '70%' }}
+              autoplay
+              controls
+            />
+          )}
+        </div>
       </div>
-    </div>
+    )
   );
 }
