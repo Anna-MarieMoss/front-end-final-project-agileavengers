@@ -10,7 +10,10 @@ ReactDOM.render(
     <Auth0Provider
       domain='dev-ip1x4wr7.eu.auth0.com'
       clientId='uimBAQwNVmsnUWbQ0LAR8sC2ynf4YOSE'
-      redirectUri={'http://localhost:3000/welcome'}
+      redirectUri={'http://localhost:3000/profile'}
+      audience="https://dev-ip1x4wr7.eu.auth0.com/api/v2/"
+      scope="read:current_user update:current_user_metadata"
+      useRefreshTokens={true}
     >
       <AppProvider>
         <App />

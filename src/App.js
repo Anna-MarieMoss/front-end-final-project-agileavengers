@@ -55,14 +55,14 @@ function App() {
   };
 
   // Wait While Authentication is loading
-  if (isLoading) {
-    return <div>Loading ...</div>;
-  }
+  // if (isLoading) {
+  //   return <div>Loading ...</div>;
+  // }
 
   // If Authenticated render the App
   // BUG - Login Page only loads if User is Logged in and Authenticated
   return (
-    !isAuthenticated && (
+    
       <div className='App'>
         <Router>
           <div className='nav-bar'>
@@ -118,7 +118,7 @@ function App() {
                 <MenuItem
                   className='menu-item'
                   component={Link}
-                  to='/welcome'
+                  to='/'
                   onClick={navClose}
                 >
                   Welcome
@@ -159,9 +159,6 @@ function App() {
             </BottomNavigation>
 
             <Switch>
-              <Route path='/welcome'>
-                <Welcome />
-              </Route>
               <Route path='/profile'>
                 <Profile />
               </Route>
@@ -187,13 +184,13 @@ function App() {
                 <Logout />
               </Route>
               <Route path='/'>
-                <LogIn />
+               <Welcome />
               </Route>
             </Switch>
           </div>
         </Router>
       </div>
-    )
+    
   );
 }
 

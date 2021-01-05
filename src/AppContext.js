@@ -6,8 +6,14 @@ const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
   const [currentWeek, setCurrentWeek] = useState('week1');
+  
+  // Need to get start date from our database
   let startDate = 'Oct 22 2020';
-  const { user, isAuthenticated, isLoading } = useAuth0();
+
+  // Auth0 - data
+  const { user, isAuthenticated, isLoading , getAccessTokenSilently} = useAuth0();
+  // const [userMetadata, setUserMetadata] = useState(null);
+  
   const emotionsArray = [
     { emotion: '😢', number: 1 },
     { emotion: '😒', number: 2 },
@@ -29,6 +35,7 @@ export function AppProvider({ children }) {
         isAuthenticated: isAuthenticated,
         isLoading: isLoading,
         emotionsArray: emotionsArray,
+        getAccessTokenSilently: getAccessTokenSilently,
       }}
     >
       {children}
