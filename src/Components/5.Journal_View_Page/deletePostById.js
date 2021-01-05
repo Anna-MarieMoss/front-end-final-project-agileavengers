@@ -8,8 +8,8 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 function DeletebyJournalId() {
   const [deleteJournalId, setDeleteJournalId] = useState(null);
 
-  function handleDelete(post_id) {
-    setDeleteJournalId(post_id);
+  function handleDelete(postId) {
+    setDeleteJournalId(postId);
   }
 
   useEffect(() => {
