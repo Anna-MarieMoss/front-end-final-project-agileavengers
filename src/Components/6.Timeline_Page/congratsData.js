@@ -15,12 +15,11 @@ const congratsData = [
   {
     week: 'week4',
     message:
-      'Just in case no one told you today: Good morning! You are doing great. I believe in you. Nice butt.',
+      'Youre a quarter of the way through 🎊 Check out everything youve learned so far',
   },
   {
     week: 'week5',
-    message:
-      "Breathe. Don't let a bad day make you feel like you have a bad life.",
+    message: 'Youve done over 175 hours of code !',
   },
   {
     week: 'week6',
@@ -33,7 +32,7 @@ const congratsData = [
   },
   {
     week: 'week8',
-    message: 'Start where you are. Use what you have. Do what you can.',
+    message: 'Youre half of the way through!',
   },
   {
     week: 'week8',

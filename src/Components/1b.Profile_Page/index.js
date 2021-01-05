@@ -7,7 +7,7 @@ import H2 from '../DisplayText/H2Text';
 import SubmitButton from '../Buttons/SubmitButton/index';
 import { useAppContext } from '../../AppContext';
 
-//Backend URL  
+//Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +26,7 @@ function Profile() {
   const [myersBriggs, setMyersBriggs] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [submit, setSubmit] = useState(null);
-  const {  user, isAuthenticated, isLoading } = useAppContext();
+  const { user, isAuthenticated, isLoading } = useAppContext();
 
   function handleSubmit() {
     setSubmit(true);
@@ -37,21 +37,18 @@ function Profile() {
     if (submit) {
       console.log(submit);
       async function postprofile() {
-        const res = await fetch(
-          `${BACKEND_URL}/users`,
-          {
-            method: 'POST',
-            headers: { 'content-type': 'application/JSON' },
-            body: JSON.stringify({
-              name: user.name,
-              email: user.email,
-              password: 'password',
-              personality: myersBriggs,
-              start_date: selectedDate,
-              points: 0,
-            }),
-          }
-        );
+        const res = await fetch(`${BACKEND_URL}/users`, {
+          method: 'POST',
+          headers: { 'content-type': 'application/JSON' },
+          body: JSON.stringify({
+            name: user.name,
+            email: user.email,
+            password: 'password',
+            personality: myersBriggs,
+            start_date: selectedDate,
+            points: 0,
+          }),
+        });
         const data = await res.json();
         console.log(data);
       }
@@ -68,11 +65,13 @@ function Profile() {
     isAuthenticated && (
       <div>
         <H1 text={'Profile'} />
-        <img className="profile-pic" src={user.picture} alt={user.name} />
-        <H2 text={`Hi ${user.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`} />
+        <img className='profile-pic' src={user.picture} alt={user.name} />
+        <H2
+          text={`Hi ${user.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
+        />
         <form className={classes.root} noValidate autoComplete='off'>
           <div>
-          <TextField
+            <TextField
               id='outlined-search'
               label='Name'
               type='text'
@@ -103,7 +102,7 @@ function Profile() {
 
 export default Profile;
 
-// name and email for profile login 
+// name and email for profile login
 
 /* <TextField
 id='outlined-search'
