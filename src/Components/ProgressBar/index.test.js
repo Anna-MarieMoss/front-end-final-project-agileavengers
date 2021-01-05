@@ -24,13 +24,10 @@ test(`the progressPosition function returns week1 when todays date is given`, ()
 
 //NOT WORKING YET
 // test(`the progressPosition function returns week2 when a date 2 weeks from todays date is given`, () => {
-//   const date = new Date();
-//   const twoWeeksTime = date.setDate(date.getDate() + 14);
+//   const twoWeeksTime = new Date(Date.now() + 12096e5);
 //   console.log(twoWeeksTime);
 //   const actual = progressPosition(twoWeeksTime);
 //   const expected = 'week2';
 
 //   expect(actual).toBe(expected);
 // });
-
-//test shows correctly as grey or coloured

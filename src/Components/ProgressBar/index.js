@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProgressBar({pic, week}) {
+export default function ProgressBar({ pic, week }) {
   const {
     week1,
     week2,
@@ -62,7 +62,7 @@ export default function ProgressBar({pic, week}) {
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week1 ? 'dark' : 'light']}>
-             <GitHubIcon />
+            <GitHubIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -145,11 +145,6 @@ export default function ProgressBar({pic, week}) {
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
-        <TimelineOppositeContent>
-          <Typography variant='body2' color='textSecondary'>
-            Coding SOMETHING
-          </Typography>
-        </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week5 ? 'dark' : 'light']}>
             <DevicesIcon />
@@ -190,9 +185,14 @@ export default function ProgressBar({pic, week}) {
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
+        <TimelineOppositeContent>
+          <Typography variant='body2' color='textSecondary'>
+            Coding SOMETHING
+          </Typography>
+        </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week7 ? 'dark' : 'light']}>
-            <LockIcon />
+            <FunctionsIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -205,16 +205,11 @@ export default function ProgressBar({pic, week}) {
             <Typography variant='h6' component='h1'>
               Week 7
             </Typography>
-            <Typography>Authentication</Typography>
+            <Typography>You mastered authentication</Typography>
           </Paper>
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
-        <TimelineOppositeContent>
-          <Typography variant='body2' color='textSecondary'>
-            Coding SOMETHING
-          </Typography>
-        </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week8 ? 'dark' : 'light']}>
             <AccountTreeIcon />
@@ -235,14 +230,9 @@ export default function ProgressBar({pic, week}) {
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
-        <TimelineOppositeContent>
-          <Typography variant='body2' color='textSecondary'>
-            Coding SOMETHING
-          </Typography>
-        </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week9 ? 'dark' : 'light']}>
-            <DeveloperBoardIcon/>
+            <DeveloperBoardIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -262,7 +252,7 @@ export default function ProgressBar({pic, week}) {
       <TimelineItem>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week10 ? 'dark' : 'light']}>
-           <RouterIcon />
+            <RouterIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
