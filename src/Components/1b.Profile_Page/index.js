@@ -20,19 +20,60 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Profile() {
+//Auth0
+const { user, isAuthenticated, isLoading, getAccessTokenSilently } = useAppContext();
+
+const [userMetadata, setUserMetadata] = useState(null);
+
+// Material UI
   const classes = useStyles();
+
+// Our States
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [myersBriggs, setMyersBriggs] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [submit, setSubmit] = useState(null);
-  const { user, isAuthenticated, isLoading } = useAppContext();
+  
 
   function handleSubmit() {
     setSubmit(true);
     console.log('submit hit');
   }
 
+  // Auth0 Custome Hook - setting Metadata
+  useEffect(() => {
+    console.log("hello Start")
+    const getUserMetadata = async () => {
+      const domain = 'dev-ip1x4wr7.eu.auth0.com';
+  
+      try {
+        const accessToken = await getAccessTokenSilently({
+          audience: `https://${domain}/api/v2/`,
+          scope: "read:current_user",
+        });
+        console.log(accessToken);
+  
+        const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user.sub}`;
+        
+  
+        const metadataResponse = await fetch(userDetailsByIdUrl, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+  
+        const { user_metadata } = await metadataResponse.json();
+        setUserMetadata(user_metadata);
+      } catch (e) {
+        console.log(e.message);
+      }
+    };
+  
+    getUserMetadata();
+  }, []);
+
+  // Creating User in OUR DB
   useEffect(() => {
     if (submit) {
       console.log(submit);
@@ -57,17 +98,15 @@ function Profile() {
     }
   }, [submit]);
 
-  if (isLoading) {
-    return <div>Loading ...</div>;
-  }
+  
 
   return (
-    isAuthenticated && (
+    
       <div>
         <H1 text={'Profile'} />
-        <img className='profile-pic' src={user.picture} alt={user.name} />
+        <img className='profile-pic' src={user?.picture} alt={user?.name} />
         <H2
-          text={`Hi ${user.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
+          text={`Hi ${user?.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
         />
         <form className={classes.root} noValidate autoComplete='off'>
           <div>
@@ -95,12 +134,20 @@ function Profile() {
             <SubmitButton handleClick={handleSubmit} />
           </div>
         </form>
+        <h3>User Metadata</h3>
+        {userMetadata ? (
+          <pre>{JSON.stringify(userMetadata, null, 2)}</pre>
+        ) : (
+          "No user metadata defined"
+        )} 
       </div>
-    )
+ 
   );
 }
 
 export default Profile;
+
+
 
 // name and email for profile login
 
