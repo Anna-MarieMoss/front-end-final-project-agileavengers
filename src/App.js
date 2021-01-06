@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { useAppContext } from './AppContext';
 import './App.css';
 import './global.css';
-
 // App Component Pages
 import Welcome from './Components/2.Welcome_Page';
 import Emotions from './Components/3.Emotions_Page';
@@ -15,7 +14,6 @@ import Stats from './Components/8.Stats_Page';
 import Profile from './Components/1b.Profile_Page';
 import LogIn from './Components/1.Login_Page/index';
 import Logout from './Components/9.Logout_Page/index';
-
 // Material UI Imports
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
@@ -27,9 +25,7 @@ import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
 import FaceRoundedIcon from '@material-ui/icons/FaceRounded';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-
 // Need to figure out how to get the login page to work when the user isnt authenticated as at the moment they can only see it when they are authenticated which is a bug!!
-
 const useStyles = makeStyles({
   root: {
     width: '100%',
@@ -37,28 +33,23 @@ const useStyles = makeStyles({
     backgroundColor: '#31986a',
   },
 });
-
 function App() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { isAuthenticated, isLoading } = useAppContext();
-
   //Handles the Expanded Navigation
   const navClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
   //Handles the Selected Expanded Navigation
   const navClose = () => {
     setAnchorEl(null);
   };
-
   // Wait While Authentication is loading
   // if (isLoading) {
   //   return <div>Loading ...</div>;
   // }
-
   // If Authenticated render the App
   // BUG - Login Page only loads if User is Logged in and Authenticated
   return (
@@ -156,7 +147,6 @@ function App() {
               </MenuItem>
             </Menu>
           </BottomNavigation>
-
           <Switch>
             <Route path='/profile'>
               <Profile />
@@ -191,5 +181,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
