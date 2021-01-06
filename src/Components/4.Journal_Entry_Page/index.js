@@ -5,6 +5,7 @@ import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
 import './journal.css';
 import { useHistory } from 'react-router';
+import Button from '../Buttons/Button/index';
 
 //this will need to link to user iD
 const userId = 1;
@@ -14,7 +15,13 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 export default function JournalEntry() {
   // Use Context
-  const { user, isAuthenticated, isLoading, accessToken, userData } = useAppContext();
+  const {
+    user,
+    isAuthenticated,
+    isLoading,
+    accessToken,
+    userData,
+  } = useAppContext();
 
   // History from React Router
   const history = useHistory();
@@ -80,9 +87,6 @@ export default function JournalEntry() {
       previewVidSource,
       previewAudioSource
     );
-    // once submted redirect to Journal View Page
-    history.push('/journalview');
-
   };
 
   async function postJournalEntry(
@@ -113,6 +117,8 @@ export default function JournalEntry() {
     } catch (error) {
       console.error(error);
     }
+    // once submted redirect to Journal View Page
+    history.push('/journalview');
   }
   if (isLoading) {
     return <div>Loading ...</div>;
@@ -196,6 +202,12 @@ export default function JournalEntry() {
             />
           )}
         </div>
+        <Button
+          handleClick={() => {
+            history.push('/journalview');
+          }}
+          text='Skip'
+        />
       </div>
     )
   );

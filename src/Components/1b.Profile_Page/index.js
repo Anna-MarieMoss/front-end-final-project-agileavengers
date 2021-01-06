@@ -29,12 +29,13 @@ function Profile() {
   const [myersBriggs, setMyersBriggs] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
   const [submit, setSubmit] = useState(null);
-  console.log(accessToken);
+
   useEffect(() => {
     if (user?.given_name) {
       setName(user.given_name);
     } else return;
   }, [user]);
+
   function handleSubmit() {
     setSubmit(true);
     // once submted redirect to Journal View Page
@@ -79,6 +80,7 @@ function Profile() {
           text={`Hi, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
         />
       )}
+
       <form className={classes.root} noValidate autoComplete='off'>
         <div>
           {!user?.given_name && (
