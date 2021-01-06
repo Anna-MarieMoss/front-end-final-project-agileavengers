@@ -45,9 +45,17 @@ const quotesData = [
     quote: 'Try to not be too positional with your opinions, being more generative helps keep an open mind'
   },
   {
-    quote: 'Remember the School of Code is an accelerated learning environment'
-  }
-
+    quote: 'Remember the School of Code is an accelerated learning environment, don’t forget to take breaks!'
+  },
+  {
+    quote: 'If you don’t agree with the team decision, remember you have a choice between your ego and the team dynamic.' 
+  },
+  {
+    quote: 'School of Code is about team learning and growing together. If we’re wrong, it’s as a team and we can all work together to put it right.'
+  },
+  {
+    quote: 'The team expects you to speak up if something’s wrong, it’s how we do things.' 
+  },
 ];
 
 export default quotesData;
