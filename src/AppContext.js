@@ -60,11 +60,12 @@ export function AppProvider({ children }) {
           },
         });
         const data = await res.json();
-        setuserData(data[0]); //expect to get start date
+        console.log('this is data', data);
+        setuserData(data.payload[0]); //expect to get start date
       }
       getProfile();
     }
-  }, [user]);
+  }, [accessToken]);
 
   // Get the current week based on the start date from our DB
   useEffect(() => {

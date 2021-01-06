@@ -31,23 +31,27 @@ function Profile() {
   const classes = useStyles();
 
   // Our States
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState(null);
   const [myersBriggs, setMyersBriggs] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
   const [submit, setSubmit] = useState(null);
 
+  console.log(accessToken);
+
+  useEffect(() => {
+    if (user?.given_name) {
+      setName(user.given_name);
+    } else return;
+  }, [user]);
+
   function handleSubmit() {
     setSubmit(true);
-    console.log('submit hit');
-     // once submted redirect to Journal View Page
-     history.push('/emotions');
+    // once submted redirect to Journal View Page
   }
 
   // Creating User in OUR DB
   useEffect(() => {
     if (submit) {
-      console.log(submit);
       async function createProfile() {
         const res = await fetch(`${BACKEND_URL}/users`, {
           method: 'POST',
@@ -56,7 +60,7 @@ function Profile() {
             Authorization: `Bearer ${accessToken}`,
           },
           body: JSON.stringify({
-            name: user.name,
+            name: name,
             email: user.email,
             password: 'password',
             personality: myersBriggs,
@@ -69,6 +73,7 @@ function Profile() {
       }
       createProfile();
       setSubmit(null);
+      history.push('/emotions');
     }
   }, [submit]);
 
@@ -76,21 +81,30 @@ function Profile() {
     <div>
       <H1 text={'Profile'} />
       <img className='profile-pic' src={user?.picture} alt={user?.name} />
-      <H2
-        text={`Hi ${user?.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
-      />
+      {user?.given_name ? (
+        <H2
+          text={`Hi ${user?.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
+        />
+      ) : (
+        <H2
+          text={`Hi, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
+        />
+      )}
+
       <form className={classes.root} noValidate autoComplete='off'>
         <div>
-          <TextField
-            id='outlined-search'
-            label='Name'
-            type='text'
-            variant='outlined'
-            onChange={(event) => {
-              const { value } = event.target;
-              setName(value);
-            }}
-          />
+          {!user?.given_name && (
+            <TextField
+              id='outlined-search'
+              label='Name'
+              type='text'
+              variant='outlined'
+              onChange={(event) => {
+                const { value } = event.target;
+                setName(value);
+              }}
+            />
+          )}
           <TextField
             id='outlined-search'
             label='Myers-Briggs'
@@ -102,8 +116,7 @@ function Profile() {
             }}
           />
           <DatePicker values={selectedDate} handleDate={setSelectedDate} />
-          {selectedDate && (<SubmitButton handleClick={handleSubmit} />)}
-          
+          {selectedDate && <SubmitButton handleClick={handleSubmit} />}
         </div>
       </form>
     </div>

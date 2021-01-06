@@ -22,6 +22,7 @@ function Emotions() {
     isAuthenticated,
     isLoading,
     accessToken,
+    userData,
   } = useAppContext();
   //need to figure out how to close the ability to click for the day/only enable one click per day
   const [chosenEmotion, setChosenEmotion] = useState(null);
@@ -31,7 +32,6 @@ function Emotions() {
     console.log('running');
     setChosenEmotion(emotionNum);
     console.log(`your chosen emotion is ${chosenEmotion}`);
-    history.push('/journalentry');
   }
 
   // We need to connect to the Database via a valid URL & Need to get the userID & name from the context provider
@@ -59,6 +59,7 @@ function Emotions() {
         //hopefully returned a unique post numb
       }
       postEmotion();
+      history.push('/journalentry');
     }
   }, [chosenEmotion]);
 
@@ -69,7 +70,7 @@ function Emotions() {
   return (
     isAuthenticated && (
       <div>
-        <H1 text={`Hi ${user.given_name}`} />
+        <H1 text={`Hi ${userData.name}`} />
         <H2 text={'How are you feeling today?'} />
 
         <div className='emotionsBar'>
