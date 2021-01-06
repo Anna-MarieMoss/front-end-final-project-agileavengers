@@ -7,10 +7,8 @@ import H2 from '../DisplayText/H2Text';
 import SubmitButton from '../Buttons/SubmitButton/index';
 import { useAppContext } from '../../AppContext';
 import { useHistory } from 'react-router';
-
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
@@ -19,24 +17,18 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
 function Profile() {
   //Auth0
   const { user, isAuthenticated, isLoading, accessToken } = useAppContext();
-
   // History from React Router
   const history = useHistory();
-
   // Material UI
   const classes = useStyles();
-
   // Our States
   const [name, setName] = useState(null);
   const [myersBriggs, setMyersBriggs] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
   const [submit, setSubmit] = useState(null);
-
-  console.log(accessToken);
 
   useEffect(() => {
     if (user?.given_name) {
@@ -48,7 +40,6 @@ function Profile() {
     setSubmit(true);
     // once submted redirect to Journal View Page
   }
-
   // Creating User in OUR DB
   useEffect(() => {
     if (submit) {
@@ -76,7 +67,6 @@ function Profile() {
       history.push('/emotions');
     }
   }, [submit]);
-
   return (
     <div>
       <H1 text={'Profile'} />
@@ -122,11 +112,8 @@ function Profile() {
     </div>
   );
 }
-
 export default Profile;
-
 // name and email for profile login
-
 /* <TextField
 id='outlined-search'
 label='Name'

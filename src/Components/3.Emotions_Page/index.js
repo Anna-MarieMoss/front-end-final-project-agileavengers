@@ -16,6 +16,7 @@ const userId = 1;
 function Emotions() {
   console.log(BACKEND_URL);
   // need user_id from ContextProvider
+
   const {
     emotionsArray,
     user,
@@ -48,6 +49,7 @@ function Emotions() {
               'content-type': 'application/JSON',
               Authorization: `Bearer ${accessToken}`,
             },
+
             body: JSON.stringify({
               user_id: userId,
               mood: chosenEmotion,

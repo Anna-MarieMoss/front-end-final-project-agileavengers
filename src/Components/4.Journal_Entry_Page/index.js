@@ -36,6 +36,7 @@ export default function JournalEntry() {
   const [previewImgSource, setPreviewImgSource] = useState();
   const [previewVidSource, setPreviewVidSource] = useState();
   const [previewAudioSource, setPreviewAudioSource] = useState();
+
   const handleImageInputChange = (e) => {
     // Storing input value into a variable...
     const imgFile = e.target.files[0];

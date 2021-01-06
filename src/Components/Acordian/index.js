@@ -62,7 +62,6 @@ export default function JournalAccordion({
   //const [postFavorite, setPostFavorite] = useState(false)
   //
 
-
   // Matching the Emoji to Mood Number
   const emotion = emotionsArray.filter((em) => {
     if (em.number === emotionNumber) {
@@ -91,10 +90,7 @@ export default function JournalAccordion({
         >
           <div className={classes.root}>
             <Paper elevation={1} className={classes.paper}>
-              <Grid 
-                container 
-                wrap='nowrap' 
-              >
+              <Grid container wrap='nowrap'>
                 <Grid item onClick={handleClick}>
                   <Avatar
                     style={{ backgroundColor: 'white', fontSize: '2em' }}
@@ -113,16 +109,11 @@ export default function JournalAccordion({
         </AccordionSummary>
 
         <AccordionDetails>
-        
-        <Card className={classes.root}>
-          <Grid 
-            item 
-            container 
-            wrap="nowrap" 
-          >
-            <div className={classes.details}>
-              <CardContent className={classes.content}>
-                <Grid item container wrap="nowrap">
+          <Card className={classes.root}>
+            <Grid item container wrap='nowrap'>
+              <div className={classes.details}>
+                <CardContent className={classes.content}>
+                  <Grid item container wrap='nowrap'>
                     <Typography>{text}</Typography>
                     <FavoriteButton
                       handleFavorite={handleFavorite}
@@ -131,56 +122,58 @@ export default function JournalAccordion({
                     />
                     <br />
                     <br />
-                    <DeleteButton handleDelete={handleDelete} key={index} />
-                </Grid>
-              </CardContent>
-                  
-                  <div classname='journal-image'>
-                      {imgSource && (
-                        <img
-                          classname='journal-image'
-                          src={imgSource}
-                          alt='chosenImg'
-                          style={{ width: '80%' }}
-                        />
-                      )}
-                    </div>
+                    <DeleteButton
+                      handleDelete={() => handleDelete(index)}
+                      key={index}
+                    />
+                  </Grid>
+                </CardContent>
 
-                    <div classname='journal-video'>
-                      {vidSource && (
-                      <video
-                        src={vidSource}
-                        alt='chosenVideo'
-                        style={{ width: '80%' }}
-                        controls
-                      />
-                      )}
-                    </div>
+                <div classname='journal-image'>
+                  {imgSource && (
+                    <img
+                      classname='journal-image'
+                      src={imgSource}
+                      alt='chosenImg'
+                      style={{ width: '80%' }}
+                    />
+                  )}
+                </div>
 
-                    <div classname='journal-audio'>
-                      {audioSource && (
-                      <ReactAudioPlayer
-                        src={audioSource}
-                        alt='chosenAudio'
-                        style={{ width: '80%' }}
-                        autoplay
-                        controls
-                      />
-                      )}</div>
-  
-                
-              
-            </div>
-          </Grid>
-        </Card>
-      </AccordionDetails>
+                <div classname='journal-video'>
+                  {vidSource && (
+                    <video
+                      src={vidSource}
+                      alt='chosenVideo'
+                      style={{ width: '80%' }}
+                      controls
+                    />
+                  )}
+                </div>
+
+                <div classname='journal-audio'>
+                  {audioSource && (
+                    <ReactAudioPlayer
+                      src={audioSource}
+                      alt='chosenAudio'
+                      style={{ width: '80%' }}
+                      autoplay
+                      controls
+                    />
+                  )}
+                </div>
+              </div>
+            </Grid>
+          </Card>
+        </AccordionDetails>
       </Accordion>
     </div>
   );
 }
 
 //<CardMedia
-{/* <div classname='journal-image'>
+{
+  /* <div classname='journal-image'>
 {imgSource && (
   <img
     classname='journal-image'
@@ -212,4 +205,5 @@ export default function JournalAccordion({
   controls
 />
 )}</div>
-/> */}
+/> */
+}
