@@ -60,7 +60,6 @@ export function AppProvider({ children }) {
           },
         });
         const data = await res.json();
-        console.log('this is data', data);
         setuserData(data.payload[0]); //expect to get start date
       }
       getProfile();
