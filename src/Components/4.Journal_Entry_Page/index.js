@@ -4,6 +4,7 @@ import { useAppContext } from '../../AppContext';
 import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
 import './journal.css';
+import { useHistory } from 'react-router';
 
 //this will need to link to user iD
 const userId = 1;
@@ -13,7 +14,10 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 export default function JournalEntry() {
   // Use Context
-  const { user, isAuthenticated, isLoading } = useAppContext();
+  const { user, isAuthenticated, isLoading, accessToken, userData } = useAppContext();
+
+  // History from React Router
+  const history = useHistory();
 
   // Code to hold the states of each input...
   const [text, setText] = useState('');
@@ -25,6 +29,7 @@ export default function JournalEntry() {
   const [previewImgSource, setPreviewImgSource] = useState();
   const [previewVidSource, setPreviewVidSource] = useState();
   const [previewAudioSource, setPreviewAudioSource] = useState();
+
   const handleImageInputChange = (e) => {
     // Storing input value into a variable...
     const imgFile = e.target.files[0];
@@ -75,7 +80,11 @@ export default function JournalEntry() {
       previewVidSource,
       previewAudioSource
     );
+    // once submted redirect to Journal View Page
+    history.push('/journalview');
+
   };
+
   async function postJournalEntry(
     userId,
     text,
@@ -93,7 +102,10 @@ export default function JournalEntry() {
           video: previewVidSource,
           audio: previewAudioSource,
         }),
-        headers: { 'content-type': 'application/JSON' },
+        headers: {
+          'content-type': 'application/JSON',
+          Authorization: `Bearer ${accessToken}`,
+        },
       });
       console.log(res);
       const data = await res.json();
