@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppContext } from '../../AppContext';
 import H1 from '../DisplayText/H1Text/index';
+import Graph from '../Graphs/index'
 
 
 function Stats() {
@@ -14,7 +15,8 @@ function Stats() {
     isAuthenticated && (
     <div>
     <H1 text={`${user.given_name}'s Stats`} />
-      <p> (Add in mood graph here!)</p>
+      <p> (Mood chart )</p>
+      <Graph/>.
       <p> (Add in number of posts here!?!)</p>
     </div>
   )

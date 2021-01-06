@@ -62,7 +62,7 @@ function App() {
   // If Authenticated render the App
   // BUG - Login Page only loads if User is Logged in and Authenticated
   return (
-    !isAuthenticated && (
+    
       <div className='App'>
         <Router>
           <div className='nav-bar'>
@@ -194,7 +194,7 @@ function App() {
         </Router>
       </div>
     )
-  );
+  ;
 }
 
 export default App;

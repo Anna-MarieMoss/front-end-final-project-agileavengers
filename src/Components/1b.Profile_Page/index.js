@@ -60,12 +60,12 @@ function Profile() {
     }
   }, [submit]);
 
-  if (isLoading) {
-    return <div>Loading ...</div>;
-  }
+  // if (isLoading) {
+  //   return <div>Loading ...</div>;
+  // }
 
   return (
-    isAuthenticated && (
+
       <div>
         <H1 text={'Profile'} />
         <img className="profile-pic" src={user.picture} alt={user.name} />
@@ -98,7 +98,7 @@ function Profile() {
         </form>
       </div>
     )
-  );
+  
 }
 
 export default Profile;
