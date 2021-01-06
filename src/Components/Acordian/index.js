@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAppContext } from '../../AppContext';
+import ReactAudioPlayer from 'react-audio-player';
 
 // App Components
 import DeleteButton from '../Buttons/DeleteButton/index.js';
@@ -14,10 +15,14 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 320,
+    width: 400,
     flexGrow: 1,
     overflow: 'hidden',
     padding: theme.spacing(0, 3),
@@ -47,11 +52,15 @@ export default function JournalAccordion({
   handleDelete,
   handleFavorite,
   favorite,
+  audioSource,
+  imgSource,
+  vidSource,
 }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const { emotionsArray } = useAppContext();
   //const [postFavorite, setPostFavorite] = useState(false)
+  //
 
   // Matching the Emoji to Mood Number
   const emotion = emotionsArray.filter((em) => {
@@ -81,7 +90,7 @@ export default function JournalAccordion({
         >
           <div className={classes.root}>
             <Paper elevation={1} className={classes.paper}>
-              <Grid container wrap='nowrap' spacing={2}>
+              <Grid container wrap='nowrap'>
                 <Grid item onClick={handleClick}>
                   <Avatar
                     style={{ backgroundColor: 'white', fontSize: '2em' }}
@@ -94,24 +103,107 @@ export default function JournalAccordion({
                   <p className='journal-date'>{journalDate}</p>
                   <Typography noWrap>{text}</Typography>
                 </Grid>
-                <Grid item className='journal-actions'>
-                  <FavoriteButton
-                    handleFavorite={handleFavorite}
-                    key={index}
-                    favoriteColor={favorite ? '#DC143C' : 'black'}
-                  />
-                  <br />
-                  <br />
-                  <DeleteButton handleDelete={handleDelete} key={index} />
-                </Grid>
               </Grid>
             </Paper>
           </div>
         </AccordionSummary>
+
         <AccordionDetails>
-          <Typography>{text}</Typography>
+          <Card className={classes.root}>
+            <Grid item container wrap='nowrap'>
+              <div className={classes.details}>
+                <CardContent className={classes.content}>
+                  <Grid item container wrap='nowrap'>
+                    <Typography>{text}</Typography>
+                    <FavoriteButton
+                      handleFavorite={handleFavorite}
+                      key={index}
+                      favoriteColor={favorite ? '#DC143C' : 'black'}
+                    />
+                    <br />
+                    <br />
+                    <DeleteButton
+                      handleDelete={() => handleDelete(index)}
+                      key={index}
+                    />
+                  </Grid>
+                </CardContent>
+
+                <div classname='journal-image'>
+                  {imgSource && (
+                    <img
+                      classname='journal-image'
+                      src={imgSource}
+                      alt='chosenImg'
+                      style={{ width: '80%' }}
+                    />
+                  )}
+                </div>
+
+                <div classname='journal-video'>
+                  {vidSource && (
+                    <video
+                      src={vidSource}
+                      alt='chosenVideo'
+                      style={{ width: '80%' }}
+                      controls
+                    />
+                  )}
+                </div>
+
+                <div classname='journal-audio'>
+                  {audioSource && (
+                    <ReactAudioPlayer
+                      src={audioSource}
+                      alt='chosenAudio'
+                      style={{ width: '80%' }}
+                      autoplay
+                      controls
+                    />
+                  )}
+                </div>
+              </div>
+            </Grid>
+          </Card>
         </AccordionDetails>
       </Accordion>
     </div>
   );
+}
+
+//<CardMedia
+{
+  /* <div classname='journal-image'>
+{imgSource && (
+  <img
+    classname='journal-image'
+    src={imgSource}
+    alt='chosenImg'
+    style={{ width: '70%' }}
+  />
+)}
+</div>
+
+<div classname='journal-video'>
+{vidSource && (
+<video
+  src={vidSource}
+  alt='chosenVideo'
+  style={{ width: '70%' }}
+  controls
+/>
+)}
+</div>
+
+<div classname='journal-audio'>
+{audioSource && (
+<ReactAudioPlayer
+  src={audioSource}
+  alt='chosenAudio'
+  style={{ width: '70%' }}
+  autoplay
+  controls
+/>
+)}</div>
+/> */
 }
