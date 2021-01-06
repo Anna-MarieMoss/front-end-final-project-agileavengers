@@ -5,6 +5,7 @@ import './EmotionsPage.css';
 import { useAppContext } from '../../AppContext';
 import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
+import { useHistory } from 'react-router';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -15,14 +16,23 @@ const userId = 1;
 function Emotions() {
   console.log(BACKEND_URL);
   // need user_id from ContextProvider
-  const { emotionsArray, user, isAuthenticated, isLoading } = useAppContext();
+
+  const {
+    emotionsArray,
+    user,
+    isAuthenticated,
+    isLoading,
+    accessToken,
+  } = useAppContext();
   //need to figure out how to close the ability to click for the day/only enable one click per day
   const [chosenEmotion, setChosenEmotion] = useState(null);
+  const history = useHistory();
 
   function handleEmotion(emotionNum) {
     console.log('running');
     setChosenEmotion(emotionNum);
     console.log(`your chosen emotion is ${chosenEmotion}`);
+    history.push('/journalentry');
   }
 
   // We need to connect to the Database via a valid URL & Need to get the userID & name from the context provider
@@ -35,7 +45,11 @@ function Emotions() {
           `${BACKEND_URL}/moods`,
           {
             method: 'POST',
-            headers: { 'content-type': 'application/JSON' },
+            headers: {
+              'content-type': 'application/JSON',
+              Authorization: `Bearer ${accessToken}`,
+            },
+
             body: JSON.stringify({
               user_id: userId,
               mood: chosenEmotion,

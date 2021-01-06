@@ -62,135 +62,133 @@ function App() {
   // If Authenticated render the App
   // BUG - Login Page only loads if User is Logged in and Authenticated
   return (
-    
-      <div className='App'>
-        <Router>
-          <div className='nav-bar'>
-            <BottomNavigation
-              value={value}
-              onChange={(event, newValue) => {
-                setValue(newValue);
-              }}
-              showLabels={false}
-              className={classes.root}
+    <div className='App'>
+      <Router>
+        <div className='nav-bar'>
+          <BottomNavigation
+            value={value}
+            onChange={(event, newValue) => {
+              setValue(newValue);
+            }}
+            showLabels={false}
+            className={classes.root}
+          >
+            <BottomNavigationAction
+              component={Link}
+              to='/profile'
+              label='Profile'
+              value='profile'
+              icon={<FaceRoundedIcon />}
+            />
+            <BottomNavigationAction
+              component={Link}
+              to='/journalview'
+              label='Journal'
+              value='journal'
+              icon={<EditRoundedIcon />}
+            />
+            <BottomNavigationAction
+              component={Link}
+              to='/timeline'
+              label='TimeLine'
+              value='timeline'
+              icon={<ScheduleRoundedIcon />}
+            />
+            <BottomNavigationAction
+              component={Link}
+              to='/trophy'
+              label='Trophies'
+              value='trophies'
+              icon={<EmojiEventsRoundedIcon />}
+            />
+            <BottomNavigationAction
+              icon={<MenuRoundedIcon />}
+              aria-controls='simple-menu'
+              aria-haspopup='true'
+              onClick={navClick}
+            />
+            <Menu
+              id='app-menu'
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={navClose}
             >
-              <BottomNavigationAction
+              <MenuItem
+                className='menu-item'
                 component={Link}
-                to='/profile'
-                label='Profile'
-                value='profile'
-                icon={<FaceRoundedIcon />}
-              />
-              <BottomNavigationAction
-                component={Link}
-                to='/journalview'
-                label='Journal'
-                value='journal'
-                icon={<EditRoundedIcon />}
-              />
-              <BottomNavigationAction
-                component={Link}
-                to='/timeline'
-                label='TimeLine'
-                value='timeline'
-                icon={<ScheduleRoundedIcon />}
-              />
-              <BottomNavigationAction
-                component={Link}
-                to='/trophy'
-                label='Trophies'
-                value='trophies'
-                icon={<EmojiEventsRoundedIcon />}
-              />
-              <BottomNavigationAction
-                icon={<MenuRoundedIcon />}
-                aria-controls='simple-menu'
-                aria-haspopup='true'
-                onClick={navClick}
-              />
-              <Menu
-                id='app-menu'
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={navClose}
+                to='/'
+                onClick={navClose}
               >
-                <MenuItem
-                  className='menu-item'
-                  component={Link}
-                  to='/'
-                  onClick={navClose}
-                >
-                  Welcome
-                </MenuItem>
-                <MenuItem
-                  className='menu-item'
-                  component={Link}
-                  to='/emotions'
-                  onClick={navClose}
-                >
-                  Emotions
-                </MenuItem>
-                <MenuItem
-                  className='menu-item'
-                  component={Link}
-                  to='/journalentry'
-                  onClick={navClose}
-                >
-                  Journal Entry
-                </MenuItem>
-                <MenuItem
-                  className='menu-item'
-                  component={Link}
-                  to='/stats'
-                  onClick={navClose}
-                >
-                  Stats
-                </MenuItem>
-                <MenuItem
-                  className='menu-item'
-                  component={Link}
-                  to='/logout'
-                  onClick={navClose}
-                >
-                  Logout
-                </MenuItem>
-              </Menu>
-            </BottomNavigation>
+                Welcome
+              </MenuItem>
+              <MenuItem
+                className='menu-item'
+                component={Link}
+                to='/emotions'
+                onClick={navClose}
+              >
+                Emotions
+              </MenuItem>
+              <MenuItem
+                className='menu-item'
+                component={Link}
+                to='/journalentry'
+                onClick={navClose}
+              >
+                Journal Entry
+              </MenuItem>
+              <MenuItem
+                className='menu-item'
+                component={Link}
+                to='/stats'
+                onClick={navClose}
+              >
+                Stats
+              </MenuItem>
+              <MenuItem
+                className='menu-item'
+                component={Link}
+                to='/logout'
+                onClick={navClose}
+              >
+                Logout
+              </MenuItem>
+            </Menu>
+          </BottomNavigation>
 
-            <Switch>
-              <Route path='/profile'>
-                <Profile />
-              </Route>
-              <Route path='/emotions'>
-                <Emotions />
-              </Route>
-              <Route path='/journalentry'>
-                <JournalEntry />
-              </Route>
-              <Route path='/journalview'>
-                <JournalView />
-              </Route>
-              <Route path='/timeline'>
-                <Timeline />
-              </Route>
-              <Route path='/trophy'>
-                <Trophy />
-              </Route>
-              <Route path='/stats'>
-                <Stats />
-              </Route>
-              <Route path='/logout'>
-                <Logout />
-              </Route>
-              <Route path='/'>
-               <Welcome />
-              </Route>
-            </Switch>
-          </div>
-        </Router>
-      </div>
-    
+          <Switch>
+            <Route path='/profile'>
+              <Profile />
+            </Route>
+            <Route path='/emotions'>
+              <Emotions />
+            </Route>
+            <Route path='/journalentry'>
+              <JournalEntry />
+            </Route>
+            <Route path='/journalview'>
+              <JournalView />
+            </Route>
+            <Route path='/timeline'>
+              <Timeline />
+            </Route>
+            <Route path='/trophy'>
+              <Trophy />
+            </Route>
+            <Route path='/stats'>
+              <Stats />
+            </Route>
+            <Route path='/logout'>
+              <Logout />
+            </Route>
+            <Route path='/'>
+              <Welcome />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </div>
   );
 }
 

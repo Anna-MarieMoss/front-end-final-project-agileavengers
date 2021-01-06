@@ -1,12 +1,11 @@
+
 import { PostAddOutlined } from '@material-ui/icons';
 import React, { useState, useEffect } from 'react';
+
 import { useAppContext } from '../../AppContext';
 import JournalAccordion from '../Acordian';
 import H1 from '../DisplayText/H1Text/index';
 import JournalContainer from '../JournalContainer/index';
-// import dummyJournal from './DummyJournal.js';
-// import JournalRecord from './getPosts';
-// import testVid from './test.mp4';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -14,7 +13,7 @@ const user_id = 1;
 
 // get all post
 function JournalView() {
-  const { user, isAuthenticated, isLoading } = useAppContext();
+  const { user, isAuthenticated, isLoading, accessToken } = useAppContext();
   const [journalDisplay, setJournalDisplay] = useState([]);
 
   useEffect(() => {
@@ -30,6 +29,8 @@ function JournalView() {
       getJournalById();
     }
   }, [setJournalDisplay]);
+
+
 
   // do we need a custom hook to get out journal and emotion data and store as a state
   // Need to set ket as the unique post key to add favourite, delete functions and be able to view
@@ -65,10 +66,6 @@ function JournalView() {
   return (
     isAuthenticated && (
       <div>
-        <div>
-          <h2>TEST OF GET JOURNAL REQUEST</h2>
-          <p>{/* <JournalRecord /> */}</p>
-        </div>
 
         <H1 text={`${user.given_name}'s journey so far....`} />
         <p>(Add in filters for date range, emotions etc)</p>
