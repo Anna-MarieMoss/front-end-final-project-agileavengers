@@ -13,7 +13,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 export default function JournalEntry() {
   // Use Context
-  const { user, isAuthenticated, isLoading } = useAppContext();
+  const { user, isAuthenticated, isLoading, accessToken } = useAppContext();
 
   // Code to hold the states of each input...
   const [text, setText] = useState('');
@@ -93,7 +93,10 @@ export default function JournalEntry() {
           video: previewVidSource,
           audio: previewAudioSource,
         }),
-        headers: { 'content-type': 'application/JSON' },
+        headers: {
+          'content-type': 'application/JSON',
+          Authorization: `Bearer ${accessToken}`,
+        },
       });
       console.log(res);
       const data = await res.json();
