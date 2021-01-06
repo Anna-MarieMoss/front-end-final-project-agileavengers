@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { progressPosition } from './progressFunction';
 import { useAuth0 } from '@auth0/auth0-react';
+
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -17,6 +18,7 @@ export function AppProvider({ children }) {
     isLoading,
     getAccessTokenSilently,
   } = useAuth0();
+
   const [accessToken, setaccessToken] = useState(null);
 
   const emotionsArray = [
@@ -51,7 +53,7 @@ export function AppProvider({ children }) {
   useEffect(() => {
     if (user) {
       async function getProfile() {
-        const res = await fetch(`${BACKEND_URL}/users:${user.email}`, {
+        const res = await fetch(`${BACKEND_URL}/users/${user.email}`, {
           headers: {
             'content-type': 'application/JSON',
             Authorization: `Bearer ${accessToken}`,
@@ -79,6 +81,7 @@ export function AppProvider({ children }) {
         isLoading: isLoading,
         emotionsArray: emotionsArray,
         accessToken: accessToken,
+        userData: userData,
       }}
     >
       {children}

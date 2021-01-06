@@ -6,6 +6,7 @@ import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
 import SubmitButton from '../Buttons/SubmitButton/index';
 import { useAppContext } from '../../AppContext';
+import { useHistory } from 'react-router';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -23,6 +24,9 @@ function Profile() {
   //Auth0
   const { user, isAuthenticated, isLoading, accessToken } = useAppContext();
 
+  // History from React Router
+  const history = useHistory();
+
   // Material UI
   const classes = useStyles();
 
@@ -30,19 +34,21 @@ function Profile() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [myersBriggs, setMyersBriggs] = useState('');
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(null);
   const [submit, setSubmit] = useState(null);
 
   function handleSubmit() {
     setSubmit(true);
     console.log('submit hit');
+     // once submted redirect to Journal View Page
+     history.push('/emotions');
   }
 
   // Creating User in OUR DB
   useEffect(() => {
     if (submit) {
       console.log(submit);
-      async function postprofile() {
+      async function createProfile() {
         const res = await fetch(`${BACKEND_URL}/users`, {
           method: 'POST',
           headers: {
@@ -61,7 +67,7 @@ function Profile() {
         const data = await res.json();
         console.log(data);
       }
-      postprofile();
+      createProfile();
       setSubmit(null);
     }
   }, [submit]);
@@ -96,7 +102,8 @@ function Profile() {
             }}
           />
           <DatePicker values={selectedDate} handleDate={setSelectedDate} />
-          <SubmitButton handleClick={handleSubmit} />
+          {selectedDate && (<SubmitButton handleClick={handleSubmit} />)}
+          
         </div>
       </form>
     </div>
