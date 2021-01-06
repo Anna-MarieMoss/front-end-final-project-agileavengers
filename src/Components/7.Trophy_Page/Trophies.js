@@ -220,5 +220,3 @@ export const Trophies = [
     color: '#FF9900',
   },
 ];
-
-[];
