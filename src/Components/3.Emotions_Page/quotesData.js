@@ -29,6 +29,7 @@ const quotesData = [
     quote:
       'You measure the size of the accomplishment by the obstacles you had to overcome to reach your goals.',
   },
+
 ];
 
 export default quotesData;
