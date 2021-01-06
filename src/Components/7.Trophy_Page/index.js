@@ -8,7 +8,7 @@ import H1 from '../DisplayText/H1Text/index';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function Trophy() {
-  const { user, isAuthenticated, isLoading } = useAppContext();
+  const { user, isAuthenticated, isLoading, accessToken } = useAppContext();
 
   // let user_Id = 1; //we need to get this from the app context
 

@@ -21,14 +21,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Profile() {
   //Auth0
-  const {
-    user,
-    isAuthenticated,
-    isLoading,
-    getAccessTokenSilently,
-  } = useAppContext();
-
-  const [userMetadata, setUserMetadata] = useState(null);
+  const { user, isAuthenticated, isLoading, accessToken } = useAppContext();
 
   // Material UI
   const classes = useStyles();
@@ -45,73 +38,28 @@ function Profile() {
     console.log('submit hit');
   }
 
-  // Auth0 Custome Hook - setting Metadata
-  useEffect(() => {
-    console.log('hello Start');
-    const getUserMetadata = async () => {
-      const domain = 'dev-ip1x4wr7.eu.auth0.com';
-
-      try {
-        const accessToken = await getAccessTokenSilently({
-          audience: `https://${domain}/api/v2/`,
-          scope: 'read:current_user',
-        });
-        console.log(accessToken);
-
-        const userDetailsByIdUrl = `https://${domain}/api/v2/users/${user?.sub}`;
-
-        const metadataResponse = await fetch(userDetailsByIdUrl, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-        console.log('metadataResponse: ', metadataResponse);
-        console.log('user: ', user);
-        const { user_metadata } = await metadataResponse.json();
-        setUserMetadata(user_metadata);
-      } catch (e) {
-        console.log(e.message);
-      }
-    };
-
-    getUserMetadata();
-  }, []);
-
   // Creating User in OUR DB
   useEffect(() => {
     if (submit) {
-      // console.log(accessToken);
-
       console.log(submit);
       async function postprofile() {
-        const domain = 'dev-ip1x4wr7.eu.auth0.com';
-
-        try {
-          const accessToken = await getAccessTokenSilently({
-            audience: `https://${domain}/api/v2/`,
-            scope: 'read:current_user',
-          });
-
-          const res = await fetch(`${BACKEND_URL}/users`, {
-            method: 'POST',
-            headers: {
-              'content-type': 'application/JSON',
-              Authorization: `Bearer ${accessToken}`,
-            },
-            body: JSON.stringify({
-              name: user.name,
-              email: user.email,
-              password: 'password',
-              personality: myersBriggs,
-              start_date: selectedDate,
-              points: 0,
-            }),
-          });
-          const data = await res.json();
-          console.log(data);
-        } catch (e) {
-          console.log(e.message);
-        }
+        const res = await fetch(`${BACKEND_URL}/users`, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/JSON',
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify({
+            name: user.name,
+            email: user.email,
+            password: 'password',
+            personality: myersBriggs,
+            start_date: selectedDate,
+            points: 0,
+          }),
+        });
+        const data = await res.json();
+        console.log(data);
       }
       postprofile();
       setSubmit(null);
@@ -151,12 +99,6 @@ function Profile() {
           <SubmitButton handleClick={handleSubmit} />
         </div>
       </form>
-      <h3>User Metadata</h3>
-      {userMetadata ? (
-        <pre>{JSON.stringify(userMetadata, null, 2)}</pre>
-      ) : (
-        'No user metadata defined'
-      )}
     </div>
   );
 }
