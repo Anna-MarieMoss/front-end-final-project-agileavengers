@@ -29,8 +29,7 @@ const useStyles = makeStyles({
   root: {
     width: '100%',
     margin: '0px',
-    backgroundColor: '#00bcd4',
-    color: "#fafafa",
+    backgroundColor: '#31986a',
   },
 });
 function App() {
