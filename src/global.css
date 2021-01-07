@@ -1,7 +1,7 @@
 :root {
-  --green: #31986a;
-  --blue: #4a90e2;
-  --blueAlpha: #4a91e27c;
+  --green: #00bcd4;
+  --blue: #9c27b0;
+  --blueAlpha: #00bbff;
   --fontFamily: Roboto, Arial, sans-serif;
 }
 
@@ -9,9 +9,10 @@ button {
   background-color: var(--green);
   color: white;
   cursor: pointer;
-  padding: 10px;
-  margin: 10px;
-  font-size: 30px;
+  padding: 8px;
+  margin: 8px;
+  font-size: 20px;
+  border-radius: 30px;
 }
 
 button:hover {
@@ -44,7 +45,7 @@ button:hover {
 }
 
 body {
-  /* margin: 1em; */
+  /* margin: 0.5em; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

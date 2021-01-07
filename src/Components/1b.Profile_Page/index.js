@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 function Profile() {
   //Auth0
-  const { user, isAuthenticated, isLoading, accessToken } = useAppContext();
+  const { user, isAuthenticated, isLoading, accessToken, userData } = useAppContext();
   // History from React Router
   const history = useHistory();
   // Material UI
@@ -29,6 +29,7 @@ function Profile() {
   const [myersBriggs, setMyersBriggs] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
   const [submit, setSubmit] = useState(null);
+  const [isRegistered, setItRegistered] = useState(false);
 
   useEffect(() => {
     if (user?.given_name) {

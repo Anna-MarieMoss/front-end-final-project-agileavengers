@@ -1,6 +1,6 @@
 import React from 'react';
 import LogoutButton from '../Buttons/LogOutButton/index';
-import H1 from '../DisplayText/H1Text/index';
+import H2 from '../DisplayText/H2Text/index';
 import SoCLogo from '../Pictures/SocLogo/index'
 import { useAppContext } from '../../AppContext';
 
@@ -14,7 +14,7 @@ function Logout() {
   return (
     
     <div>
-      <H1 text={`Great Stuff ${user.given_name}! Don't forget to log back in tomorrow to update your journey`} />
+      <H2 text={`Great Stuff ${user?.given_name}! Don't forget to log back in tomorrow to update your journey`} />
       <SoCLogo style={{width: '200px', margin: '20px'}}/>
       <br/>
       <LogoutButton />
