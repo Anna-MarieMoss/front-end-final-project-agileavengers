@@ -49,33 +49,33 @@ export function AppProvider({ children }) {
       };
       getAccessToken();
     }
-  }, [user,getAccessTokenSilently ]);
+  }, [user, getAccessTokenSilently]);
 
   // Auth0  - setting logincount
-  useEffect(() => {
-    if (user) {
-      const domain = 'dev-ip1x4wr7.eu.auth0.com';
+  // useEffect(() => {
+  //   if (user) {
+  //     const domain = 'dev-ip1x4wr7.eu.auth0.com';
 
-      fetch(`https://${domain}/api/v2/users/${user?.sub}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setlogInCount(data?.logins_count);
-          console.log('log in count data', data?.logins_count);
-        })
-        .catch((e) => {
-          console.error(e);
-        });
-    }
-  }, [user, accessToken]);
+  //     fetch(`https://${domain}/api/v2/users/${user?.sub}`, {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken}`,
+  //       },
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         setlogInCount(data?.logins_count);
+  //         console.log('log in count data', data?.logins_count);
+  //       })
+  //       .catch((e) => {
+  //         console.error(e);
+  //       });
+  //   }
+  // }, [user, accessToken]);
 
   //Get user profile based on email (Auth0 response)
   useEffect(() => {
     if (user) {
-      console.log('Im getting user data')
+      console.log('Im getting user data');
       async function getProfile() {
         const res = await fetch(`${BACKEND_URL}/users/${user.email}`, {
           headers: {

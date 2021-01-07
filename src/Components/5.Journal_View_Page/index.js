@@ -8,15 +8,18 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 // get all post
 function JournalView() {
-  const {  isAuthenticated, isLoading, accessToken, userData } = useAppContext();
+  const { isAuthenticated, isLoading, accessToken, userData } = useAppContext();
   const [journalDisplay, setJournalDisplay] = useState([]);
   const [journalDelete, setJournalDelete] = useState(false);
   const [journalDeleteId, setJournalDeleteId] = useState(null);
+  let userId = userData?.id;
+
+  console.log('user data id', userData.id);
 
   useEffect(() => {
     if (userData) {
       async function getJournalById() {
-        const res = await fetch(`${BACKEND_URL}/moodsandposts/${userData.id}`);
+        const res = await fetch(`${BACKEND_URL}/moodsandposts/${userId}`);
         // if Access Token Middleware is added to moods and posts BE -need to add header with AT
         const data = await res.json();
         const { payload } = data;
@@ -26,17 +29,16 @@ function JournalView() {
     }
   }, []);
 
-console.log('this is journalDispaly', journalDisplay);
+  console.log('this is journalDispaly', journalDisplay);
 
   // do we need a custom hook to get out journal and emotion data and store as a state
   // Need to set ket as the unique post key to add favourite, delete functions and be able to view
 
-
- function handleDelete(postId) {
-    console.log('handling delete with postId:', postId)
+  function handleDelete(postId) {
+    console.log('handling delete with postId:', postId);
     setJournalDeleteId(postId);
     setJournalDelete(true);
-  };
+  }
 
   useEffect(() => {
     if (!journalDelete) {
@@ -44,14 +46,18 @@ console.log('this is journalDispaly', journalDisplay);
     }
     const abortController = new AbortController();
     fetch(`${BACKEND_URL}/posts/${journalDeleteId}`, {
-      method: "DELETE",
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/JSON',
+        Authorization: `Bearer ${accessToken}`,
+      },
       signal: abortController.signal,
     })
       .then((response) => response.json())
       .then(() => setJournalDelete(false))
       .catch((e) => {
         console.error(e);
-        setJournalDelete(false)
+        setJournalDelete(false);
       })
       .then(() => {
         document.location.reload();
