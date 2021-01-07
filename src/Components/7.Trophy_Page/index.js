@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppContext } from '../../AppContext';
 import { Trophies } from './Trophies.js'; //need to add additional trophies to this file
 import TrophyButton from '../Buttons/TrophyButton/index';
@@ -9,8 +9,9 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function Trophy() {
   const { user, isAuthenticated, isLoading, accessToken } = useAppContext();
+  const [award, setAward] = useState()
 
-  // let user_Id = 1; //we need to get this from the app context
+  let user_Id = 1; //we need to get this from the app context
 
   // useEffect(() => {
   //   async function getTrophies() {
@@ -20,6 +21,27 @@ function Trophy() {
   //   }
   //   getTrophies();
   // }, []);
+
+
+  // get trophy fetch 
+  useEffect(() => {
+    if (user_Id) {
+    async function getAllTrophies() {
+      const res = await fetch(`${BACKEND_URL}/trophies/${user_Id}`);
+      const data = await res.json();
+      // console.log( `data is  ${JSON.stringify(data)}`);
+
+      console.log(`data payload is `, data.payload);
+      // console.log(`data is ${JSON.stringify(data.payload[0].mood)}`)
+      
+      setAward(data.payload);
+      console.log(`award state is`, award);
+      //chartConfig.data.datasets[0].data = graphData.map((x) => x.mood);
+    }
+    getAllTrophies()
+   };
+  }, [award]);
+  //
 
   if (isLoading) {
     return <div>Loading ...</div>;
