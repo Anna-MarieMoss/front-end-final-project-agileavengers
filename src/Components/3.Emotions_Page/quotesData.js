@@ -29,6 +29,33 @@ const quotesData = [
     quote:
       'You measure the size of the accomplishment by the obstacles you had to overcome to reach your goals.',
   },
+  {
+    quote: 'School of Code is your opportunity to challenge yourself.'
+  },
+  {
+    quote: 'It is up to you to begin your cycle on the hero’s journey - push past the resistance!'
+  },
+  {
+    quote: 'Set backs are part of the process. If you’re not facing them, you’re in your comfort zone!'
+  },
+  {
+    quote: 'Aikido Masters say "It’s not about never being off balance, it’s about the speed at which you recover."'
+  },
+  {
+    quote: 'Try to not be too positional with your opinions, being more generative helps keep an open mind'
+  },
+  {
+    quote: 'Remember the School of Code is an accelerated learning environment, don’t forget to take breaks!'
+  },
+  {
+    quote: 'If you don’t agree with the team decision, remember you have a choice between your ego and the team dynamic.' 
+  },
+  {
+    quote: 'School of Code is about team learning and growing together. If we’re wrong, it’s as a team and we can all work together to put it right.'
+  },
+  {
+    quote: 'The team expects you to speak up if something’s wrong, it’s how we do things.' 
+  },
 ];
 
 export default quotesData;

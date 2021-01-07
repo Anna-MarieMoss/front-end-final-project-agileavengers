@@ -13,7 +13,6 @@ import FaceRoundedIcon from '@material-ui/icons/FaceRounded';
 // import MoreVertRoundedIcon from '@material-ui/icons/MoreVertRounded';
 // import MoreHorizRoundedIcon from '@material-ui/icons/MoreHorizRounded';
 
-
 // Do we want to use badges to tell them if theyve unlocked nay trophies or timeline events?
 // Would be pretty cool
 // Bottom Naviagation acts differently on android and ios
@@ -22,7 +21,6 @@ import FaceRoundedIcon from '@material-ui/icons/FaceRounded';
 // Whe want to be able to use a Nav Bar to navigate through our App
 // IOS the NavBar is at the Bottom of the Page
 // Android NavBar is at the Top of the Page
-
 
 const useStyles = makeStyles({
   root: {
@@ -43,12 +41,14 @@ export default function NavBar() {
       showLabels={false}
       className={classes.root}
     >
-      
-      <BottomNavigationAction label="Profile" icon={<FaceRoundedIcon />} />
-      <BottomNavigationAction label="Journal" icon={<EditRoundedIcon />} />
-      <BottomNavigationAction label="TimeLine" icon={<ScheduleRoundedIcon />} />
-      <BottomNavigationAction label="Trophies" icon={<EmojiEventsRoundedIcon />} />
-      <BottomNavigationAction icon={<MenuRoundedIcon  />} />
+      <BottomNavigationAction label='Profile' icon={<FaceRoundedIcon />} />
+      <BottomNavigationAction label='Journal' icon={<EditRoundedIcon />} />
+      <BottomNavigationAction label='TimeLine' icon={<ScheduleRoundedIcon />} />
+      <BottomNavigationAction
+        label='Trophies'
+        icon={<EmojiEventsRoundedIcon />}
+      />
+      <BottomNavigationAction icon={<MenuRoundedIcon />} />
     </BottomNavigation>
   );
 }
