@@ -68,7 +68,7 @@ export function AppProvider({ children }) {
 
   // Get the current week based on the start date from our DB
   useEffect(() => {
-    let week = progressPosition(userData.start_date);
+    let week = progressPosition(userData?.start_date);
     setCurrentWeek(week);
   }, [userData]);
 

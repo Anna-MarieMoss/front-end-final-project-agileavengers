@@ -72,7 +72,7 @@ function Emotions() {
   return (
     isAuthenticated && (
       <div>
-        <H1 text={`Hi ${userData.name}`} />
+        <H1 text={`Hi ${userData?.name}`} />
         <H2 text={'How are you feeling today?'} />
 
         <div className='emotionsBar'>

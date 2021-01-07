@@ -1,4 +1,3 @@
-
 import { PostAddOutlined } from '@material-ui/icons';
 import React, { useState, useEffect } from 'react';
 
@@ -6,6 +5,7 @@ import { useAppContext } from '../../AppContext';
 import JournalAccordion from '../Acordian';
 import H1 from '../DisplayText/H1Text/index';
 import JournalContainer from '../JournalContainer/index';
+import dummyJournal from './DummyJournal';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -15,6 +15,8 @@ const user_id = 1;
 function JournalView() {
   const { user, isAuthenticated, isLoading, accessToken } = useAppContext();
   const [journalDisplay, setJournalDisplay] = useState([]);
+  const [sortConstraint, setSortConstraint] = useState('Newest to oldest');
+  const [showFavorites, setShowFavorites] = useState(false);
 
   useEffect(() => {
     if (user_id) {
@@ -22,15 +24,28 @@ function JournalView() {
         const res = await fetch(`${BACKEND_URL}/moodsandposts/${user_id}`);
         const data = await res.json();
         const { payload } = data;
+        for (let post of payload) {
+          post.date = post.date.slice(0, 10);
+        }
+
         setJournalDisplay(payload);
+
         console.log(data); // all of the records in the moodsandpost table from db
         console.log(data.payload[0]); // to check one record from the table.  Need to use a map method in the return to display all records
       }
       getJournalById();
     }
-  }, [setJournalDisplay]);
+  }, []);
 
+  function filterByFavorite() {
+    setShowFavorites(!showFavorites);
+  }
 
+  function changeSortBy(event) {
+    console.log('sort by before :', sortConstraint);
+    setSortConstraint(event.target.value);
+    console.log('first journal entry displayed :', journalDisplay[0]);
+  }
 
   // do we need a custom hook to get out journal and emotion data and store as a state
   // Need to set ket as the unique post key to add favourite, delete functions and be able to view
@@ -63,28 +78,52 @@ function JournalView() {
   if (isLoading) {
     return <div>Loading ...</div>;
   }
+
   return (
     isAuthenticated && (
       <div>
-
         <H1 text={`${user.given_name}'s journey so far....`} />
-        <p>(Add in filters for date range, emotions etc)</p>
+        <button onClick={filterByFavorite}>
+          {showFavorites ? 'Show All' : 'Show Favorites'}
+        </button>
+        <select onChange={changeSortBy}>
+          <option>Sort By</option>
+          <option value='Newest to oldest'>Newest to oldest</option>
+          <option value='Oldest to newest'>Oldest to newest</option>
+          <option value='Mood high to low'>Mood high to low</option>
+          <option value='Mood low to high'>Mood low to high</option>
+        </select>
         <div>
-          {journalDisplay.map((journalEntry, index) => (
-            <JournalAccordion
-              text={journalEntry.text}
-              handleClick={handleJournalClick}
-              emotionNumber={journalEntry.mood}
-              journalDate={journalEntry.date}
-              index={index}
-              favorite={journalEntry.favorite}
-              handleFavorite={handleFavorite}
-              handleDelete={handleDelete}
-              audioSource={journalEntry.audio}
-              imgSource={journalEntry.image}
-              vidSource={journalEntry.video}
-            />
-          ))}
+          {journalDisplay
+            .filter((x) => !showFavorites || x.favorite === true)
+            .sort((a, b) => {
+              if (sortConstraint === 'Mood high to low') {
+                return b.mood - a.mood;
+              } else if (sortConstraint === 'Mood low to high') {
+                return a.mood - b.mood;
+              } else if (sortConstraint === 'Newest to oldest') {
+                return new Date(b.date) - new Date(a.date);
+              } else if (sortConstraint === 'Oldest to newest') {
+                return new Date(a.date) - new Date(b.date);
+              } else {
+                return new Date(b.date) - new Date(a.date);
+              }
+            })
+            .map((journalEntry, index) => (
+              <JournalAccordion
+                text={journalEntry.text}
+                handleClick={handleJournalClick}
+                emotionNumber={journalEntry.mood}
+                journalDate={journalEntry.date}
+                index={index}
+                favorite={journalEntry.favorite}
+                handleFavorite={handleFavorite}
+                handleDelete={handleDelete}
+                audioSource={journalEntry.audio}
+                imgSource={journalEntry.image}
+                vidSource={journalEntry.video}
+              />
+            ))}
         </div>
       </div>
     )
