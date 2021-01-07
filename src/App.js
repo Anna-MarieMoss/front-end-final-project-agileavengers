@@ -61,7 +61,6 @@ function App() {
             onChange={(event, newValue) => {
               setValue(newValue);
             }}
-            showLabels={false}
             className={classes.root}
           >
             <BottomNavigationAction

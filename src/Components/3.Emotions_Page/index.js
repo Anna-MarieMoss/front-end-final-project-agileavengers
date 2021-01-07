@@ -10,16 +10,12 @@ import { useHistory } from 'react-router';
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
-//Temp userId
-const userId = 1;
-
 function Emotions() {
   console.log(BACKEND_URL);
   // need user_id from ContextProvider
 
   const {
     emotionsArray,
-    user,
     isAuthenticated,
     isLoading,
     accessToken,
@@ -51,7 +47,7 @@ function Emotions() {
             },
 
             body: JSON.stringify({
-              user_id: userId,
+              user_id: userData.id,
               mood: chosenEmotion,
             }),
           }

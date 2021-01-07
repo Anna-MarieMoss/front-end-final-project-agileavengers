@@ -8,7 +8,7 @@ import { useHistory } from 'react-router';
 import Button from '../Buttons/Button/index';
 
 //this will need to link to user iD
-const userId = 1;
+
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -16,12 +16,13 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 export default function JournalEntry() {
   // Use Context
   const {
-    user,
     isAuthenticated,
     isLoading,
     accessToken,
     userData,
   } = useAppContext();
+
+  const userId = userData.id;
 
   // History from React Router
   const history = useHistory();
@@ -127,7 +128,7 @@ export default function JournalEntry() {
   return (
     isAuthenticated && (
       <div className='wrapper'>
-        <H1 text={`${user.given_name} how was your day today?`} />
+        <H1 text={`${userData?.name} how was your day today?`} />
         <H2 text={`What did you learn today?`} />
         <div className='container'>
           <form onSubmit={handleSubmitFile}>

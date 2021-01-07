@@ -48,7 +48,7 @@ export default function JournalAccordion({
   emotionNumber,
   handleClick,
   journalDate,
-  index,
+  journalEntryId,
   handleDelete,
   handleFavorite,
   favorite,
@@ -59,8 +59,12 @@ export default function JournalAccordion({
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const { emotionsArray } = useAppContext();
+
   //const [postFavorite, setPostFavorite] = useState(false)
   //
+
+
+  
 
   // Matching the Emoji to Mood Number
   const emotion = emotionsArray.filter((em) => {
@@ -81,12 +85,12 @@ export default function JournalAccordion({
   return (
     <div className={classes.root}>
       <Accordion
-        expanded={expanded === `panel${index}`}
-        onChange={handleChange(`panel${index}`)}
+        expanded={expanded === `panel${journalEntryId}`}
+        onChange={handleChange(`panel${journalEntryId}`)}
       >
         <AccordionSummary
-          aria-controls={`panel${index}bh-content`}
-          id={`panel${index}bh-header`}
+          aria-controls={`panel${journalEntryId}bh-content`}
+          id={`panel${journalEntryId}bh-header`}
         >
           <div className={classes.root}>
             <Paper elevation={1} className={classes.paper}>
@@ -117,14 +121,13 @@ export default function JournalAccordion({
                     <Typography>{text}</Typography>
                     <FavoriteButton
                       handleFavorite={handleFavorite}
-                      key={index}
                       favoriteColor={favorite ? '#DC143C' : 'black'}
                     />
                     <br />
                     <br />
                     <DeleteButton
-                      handleDelete={() => handleDelete(index)}
-                      key={index}
+                      handleDelete={handleDelete}
+                      journalEntryId={journalEntryId}
                     />
                   </Grid>
                 </CardContent>

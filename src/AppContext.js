@@ -49,7 +49,7 @@ export function AppProvider({ children }) {
       };
       getAccessToken();
     }
-  }, [getAccessTokenSilently, user]);
+  }, [user,getAccessTokenSilently ]);
 
   // Auth0  - setting logincount
   useEffect(() => {
@@ -75,6 +75,7 @@ export function AppProvider({ children }) {
   //Get user profile based on email (Auth0 response)
   useEffect(() => {
     if (user) {
+      console.log('Im getting user data')
       async function getProfile() {
         const res = await fetch(`${BACKEND_URL}/users/${user.email}`, {
           headers: {
@@ -98,13 +99,14 @@ export function AppProvider({ children }) {
   return (
     <AppContext.Provider
       value={{
-        currentWeek: currentWeek,
+        currentWeek: 'week2',
         user: user,
         isAuthenticated: isAuthenticated,
         isLoading: isLoading,
         emotionsArray: emotionsArray,
         accessToken: accessToken,
         userData: userData,
+        logInCount: logInCount,
       }}
     >
       {children}
