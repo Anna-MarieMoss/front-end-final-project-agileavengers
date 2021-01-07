@@ -10,6 +10,7 @@ const AppContext = createContext(null);
 export function AppProvider({ children }) {
   const [currentWeek, setCurrentWeek] = useState('week1');
   const [userData, setuserData] = useState({});
+  const [logInCount, setlogInCount] = useState(0);
 
   // Auth0 - data
   const {
@@ -29,25 +30,47 @@ export function AppProvider({ children }) {
     { emotion: '😍', number: 5 },
   ];
 
-  // Auth0 Custome Hook - setting Metadata
+  // Auth0 get token
   useEffect(() => {
-    const getAccessToken = async () => {
+    if (user) {
+      const getAccessToken = async () => {
+        const domain = 'dev-ip1x4wr7.eu.auth0.com';
+
+        try {
+          const accessToken = await getAccessTokenSilently({
+            audience: `https://${domain}/api/v2/`,
+            scope: 'read:current_user',
+          });
+
+          setaccessToken(accessToken);
+        } catch (e) {
+          console.log(e.message);
+        }
+      };
+      getAccessToken();
+    }
+  }, [getAccessTokenSilently, user]);
+
+  // Auth0  - setting logincount
+  useEffect(() => {
+    if (user) {
       const domain = 'dev-ip1x4wr7.eu.auth0.com';
 
-      try {
-        const accessToken = await getAccessTokenSilently({
-          audience: `https://${domain}/api/v2/`,
-          scope: 'read:current_user',
+      fetch(`https://${domain}/api/v2/users/${user?.sub}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setlogInCount(data?.logins_count);
+          console.log('log in count data', data?.logins_count);
+        })
+        .catch((e) => {
+          console.error(e);
         });
-
-        setaccessToken(accessToken);
-      } catch (e) {
-        console.log(e.message);
-      }
-    };
-
-    getAccessToken();
-  }, []);
+    }
+  }, [user, accessToken]);
 
   //Get user profile based on email (Auth0 response)
   useEffect(() => {
@@ -68,7 +91,7 @@ export function AppProvider({ children }) {
 
   // Get the current week based on the start date from our DB
   useEffect(() => {
-    let week = progressPosition(userData.start_date);
+    let week = progressPosition(userData?.start_date);
     setCurrentWeek(week);
   }, [userData]);
 
