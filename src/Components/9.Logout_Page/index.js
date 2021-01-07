@@ -1,6 +1,6 @@
 import React from 'react';
 import LogoutButton from '../Buttons/LogOutButton/index';
-import H1 from '../DisplayText/H1Text/index';
+import H2 from '../DisplayText/H2Text/index';
 import SoCLogo from '../Pictures/SocLogo/index'
 import { useAppContext } from '../../AppContext';
 

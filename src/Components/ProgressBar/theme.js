@@ -11,7 +11,7 @@ export const themeSwitch = {
 
 export const dotSwitch = {
   light: {
-    backgroundColor: 'var(--green)',
+    backgroundColor: '#00bcd4',
     color: 'black',
   },
   dark: {

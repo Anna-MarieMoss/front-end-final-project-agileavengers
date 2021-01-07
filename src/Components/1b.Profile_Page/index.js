@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 function Profile() {
   //Auth0
   const { user, isAuthenticated, isLoading, accessToken , userData} = useAppContext();
-  
+
   // History from React Router
   const history = useHistory();
  
@@ -32,7 +32,9 @@ function Profile() {
   const [myersBriggs, setMyersBriggs] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
   const [submit, setSubmit] = useState(null);
+
   // const [registered, setRegistered] = useState(true);
+
 
 //   useEffect(() => {
 //   if (logInCount < 2){
