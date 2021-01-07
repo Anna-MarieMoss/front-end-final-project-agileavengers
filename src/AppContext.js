@@ -10,6 +10,7 @@ const AppContext = createContext(null);
 export function AppProvider({ children }) {
   const [currentWeek, setCurrentWeek] = useState('week1');
   const [userData, setuserData] = useState({});
+  const [logInCount, setlogInCount] = useState(0);
 
   // Auth0 - data
   const {
@@ -29,29 +30,52 @@ export function AppProvider({ children }) {
     { emotion: '😍', number: 5 },
   ];
 
-  // Auth0 Custome Hook - setting Metadata
+  // Auth0 get token
   useEffect(() => {
-    const getAccessToken = async () => {
-      const domain = 'dev-ip1x4wr7.eu.auth0.com';
+    if (user) {
+      const getAccessToken = async () => {
+        const domain = 'dev-ip1x4wr7.eu.auth0.com';
 
-      try {
-        const accessToken = await getAccessTokenSilently({
-          audience: `https://${domain}/api/v2/`,
-          scope: 'read:current_user',
-        });
+        try {
+          const accessToken = await getAccessTokenSilently({
+            audience: `https://${domain}/api/v2/`,
+            scope: 'read:current_user',
+          });
 
-        setaccessToken(accessToken);
-      } catch (e) {
-        console.log(e.message);
-      }
-    };
+          setaccessToken(accessToken);
+        } catch (e) {
+          console.log(e.message);
+        }
+      };
+      getAccessToken();
+    }
+  }, [user, getAccessTokenSilently]);
 
-    getAccessToken();
-  }, []);
+  // Auth0  - setting logincount
+  // useEffect(() => {
+  //   if (user) {
+  //     const domain = 'dev-ip1x4wr7.eu.auth0.com';
+
+  //     fetch(`https://${domain}/api/v2/users/${user?.sub}`, {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken}`,
+  //       },
+  //     })
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         setlogInCount(data?.logins_count);
+  //         console.log('log in count data', data?.logins_count);
+  //       })
+  //       .catch((e) => {
+  //         console.error(e);
+  //       });
+  //   }
+  // }, [user, accessToken]);
 
   //Get user profile based on email (Auth0 response)
   useEffect(() => {
     if (user) {
+      console.log('Im getting user data');
       async function getProfile() {
         const res = await fetch(`${BACKEND_URL}/users/${user.email}`, {
           headers: {
@@ -68,20 +92,21 @@ export function AppProvider({ children }) {
 
   // Get the current week based on the start date from our DB
   useEffect(() => {
-    let week = progressPosition(userData.start_date);
+    let week = progressPosition(userData?.start_date);
     setCurrentWeek(week);
   }, [userData]);
 
   return (
     <AppContext.Provider
       value={{
-        currentWeek: currentWeek,
+        currentWeek: 'week2',
         user: user,
         isAuthenticated: isAuthenticated,
         isLoading: isLoading,
         emotionsArray: emotionsArray,
         accessToken: accessToken,
         userData: userData,
+        logInCount: logInCount,
       }}
     >
       {children}

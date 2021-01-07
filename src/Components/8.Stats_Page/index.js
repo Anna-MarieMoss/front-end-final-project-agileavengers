@@ -5,7 +5,7 @@ import Graph from '../Graphs/index';
 import {Typography} from '@material-ui/core';
 
 function Stats() {
-  const { user, isAuthenticated, isLoading, userData } = useAppContext();
+  const { isAuthenticated, isLoading, userData } = useAppContext();
 
   // if (isLoading) {
   //   return <div>Loading ...</div>;
@@ -13,7 +13,7 @@ function Stats() {
 
   return (
     <div>
-      <H2 text={`${userData.name}'s Stats`} />
+      <H2 text={`${userData?.name}'s Stats`} />
       <Typography variant="h6">Display your mood throughout the bootcamp</Typography>
       <Graph />
     </div>

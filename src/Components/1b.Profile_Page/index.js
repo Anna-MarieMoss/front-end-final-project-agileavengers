@@ -19,18 +19,29 @@ const useStyles = makeStyles((theme) => ({
 }));
 function Profile() {
   //Auth0
-  const { user, isAuthenticated, isLoading, accessToken, userData } = useAppContext();
+  const { user, isAuthenticated, isLoading, accessToken , userData} = useAppContext();
+
   // History from React Router
   const history = useHistory();
+ 
   // Material UI
   const classes = useStyles();
+  
   // Our States
   const [name, setName] = useState(null);
   const [myersBriggs, setMyersBriggs] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
   const [submit, setSubmit] = useState(null);
-  const [isRegistered, setItRegistered] = useState(false);
 
+  // const [registered, setRegistered] = useState(true);
+
+
+//   useEffect(() => {
+//   if (logInCount < 2){
+//     setRegistered(false);
+//   }}, [user]
+//   )
+// console.log('profile page', logInCount)
   useEffect(() => {
     if (user?.given_name) {
       setName(user.given_name);
@@ -68,10 +79,13 @@ function Profile() {
       history.push('/emotions');
     }
   }, [submit]);
+
   return (
     <div>
       <H1 text={'Profile'} />
       <img className='profile-pic' src={user?.picture} alt={user?.name} />
+      <form className={classes.root} noValidate autoComplete='off'>
+
       {user?.given_name ? (
         <H2
           text={`Hi ${user?.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
@@ -81,10 +95,9 @@ function Profile() {
           text={`Hi, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
         />
       )}
-
-      <form className={classes.root} noValidate autoComplete='off'>
+      
         <div>
-          {!user?.given_name && (
+        {!user?.given_name && (
             <TextField
               id='outlined-search'
               label='Name'
@@ -95,7 +108,8 @@ function Profile() {
                 setName(value);
               }}
             />
-          )}
+        )}
+
           <TextField
             id='outlined-search'
             label='Myers-Briggs'
@@ -111,9 +125,12 @@ function Profile() {
         </div>
       </form>
     </div>
+
+    
   );
 }
 export default Profile;
+
 // name and email for profile login
 /* <TextField
 id='outlined-search'
@@ -134,4 +151,4 @@ onChange={(event) => {
   const { value } = event.target;
   setEmail(value);
 }}
-/> */
+/> */ 

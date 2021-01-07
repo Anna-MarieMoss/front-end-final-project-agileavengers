@@ -16,7 +16,6 @@ ReactDOM.render(
       audience='https://dev-ip1x4wr7.eu.auth0.com/api/v2/'
       scope='read:current_user update:current_user_metadata create:current_user_metadata'
       useRefreshTokens={true}
-
     >
     <ThemeProvider theme={theme}>
       <AppProvider>
