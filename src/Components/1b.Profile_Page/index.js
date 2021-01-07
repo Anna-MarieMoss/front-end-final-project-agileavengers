@@ -40,8 +40,8 @@ function Profile() {
   function handleSubmit() {
     setSubmit(true);
     console.log('submit hit');
-     // once submted redirect to Journal View Page
-     history.push('/emotions');
+    // once submted redirect to Journal View Page
+    history.push('/emotions');
   }
 
   // Creating User in OUR DB
@@ -102,8 +102,7 @@ function Profile() {
             }}
           />
           <DatePicker values={selectedDate} handleDate={setSelectedDate} />
-          {selectedDate && (<SubmitButton handleClick={handleSubmit} />)}
-          
+          {selectedDate && <SubmitButton handleClick={handleSubmit} />}
         </div>
       </form>
     </div>
