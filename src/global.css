@@ -1,22 +1,22 @@
 :root {
-  --green: #31986a;
+  /* --green: #31986a;
   --blue: #4a90e2;
-  --blueAlpha: #4a91e27c;
+  --blueAlpha: #4a91e27c; */
   --fontFamily: Roboto, Arial, sans-serif;
 }
 
 button {
-  background-color: var(--green);
-  color: white;
+  /* background-color: var(--green);
+  color: white; */
   cursor: pointer;
   padding: 10px;
   margin: 10px;
   font-size: 30px;
 }
-
+/* 
 button:hover {
   background-color: var(--blue);
-}
+} */
 
 .flex-row {
   display: flex;

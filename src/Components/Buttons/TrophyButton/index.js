@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 // import toaster from 'toasted-notes';
+import '../../.././App.css';
 import 'toasted-notes/src/styles.css';
+import ThemeContext from '../../.././App.js';
 //// 2ND TYPE OF ALERTS WITH COLOURS!
 import {
   ToastContainer,
@@ -16,6 +18,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function TrophyButton({ image, id, color }) {
+  const value = useContext(ThemeContext);
   // trying new toast alerts
   // const notify = () => {
   //   toast('Wow so easy !');
@@ -73,7 +76,8 @@ function TrophyButton({ image, id, color }) {
         pauseOnHover
       />
       <button
-        style={{ backgroundColor: 'white', border: '0px' }}
+        id={value}
+        style={{ border: '0px' }}
         // onClick={() => {
         //   handleTrophy(color);
         // }}

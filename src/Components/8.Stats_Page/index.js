@@ -12,7 +12,7 @@ function Stats() {
 
   return (
     <div>
-      <H1 text={`${userData.name}'s Stats`} />
+      <H1 text={`${user?.name}'s Stats`} />
       <p> (Mood chart )</p>
       <Graph />.<p> (Add in number of posts here!?!)</p>
     </div>

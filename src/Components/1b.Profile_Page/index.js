@@ -42,7 +42,6 @@ function Profile() {
     console.log('submit hit');
     // once submted redirect to Journal View Page
     history.push('/emotions');
-
   }
   // Creating User in OUR DB
   useEffect(() => {
@@ -85,7 +84,7 @@ function Profile() {
         />
       )}
 
-      <form className={classes.root} noValidate autoComplete='off'>
+      <form /*className={classes.root}*/ noValidate autoComplete='off'>
         <div>
           {!user?.given_name && (
             <TextField

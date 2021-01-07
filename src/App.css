@@ -6,13 +6,25 @@
   --green: #31986a;
 } */
 
+#darkTheme {
+  background-color: #303030;
+  color: #fafafa;
+  height: 100%;
+}
+
+#lightTheme {
+  background-color: #fafafa;
+  color: #303030;
+  height: 100%;
+}
+
 .MuiBottomNavigationAction-wrapper {
   display: 'inline-flex';
   align-items: 'center';
   justify-content: 'center';
   width: '100%';
   flex-direction: 'column';
-  color: white;
+  /* color: white; */
 }
 
 /* #app-menu:hover {
