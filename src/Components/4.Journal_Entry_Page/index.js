@@ -9,11 +9,7 @@ import { Button } from '@material-ui/core';
 import ToastAlert from '../ToastAlerts/toastAlerts';
 import toaster from 'toasted-notes';
 import 'toasted-notes/src/styles.css';
-<<<<<<< HEAD
-=======
-import { Button } from '@material-ui/core';
 
->>>>>>> b366f43729117375c15e2bf27748aae3d97deaf8
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
