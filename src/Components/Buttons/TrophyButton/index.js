@@ -18,14 +18,8 @@ import 'react-toastify/dist/ReactToastify.css';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function TrophyButton({ image, id, color }) {
-<<<<<<< HEAD
   const theme = useContext(ThemeContext);
   const [click, setClick] = useState(0);
-=======
-const theme = useContext(ThemeContext);
-const [click, setClick] = useState(0)
-
->>>>>>> b366f43729117375c15e2bf27748aae3d97deaf8
   // trying new toast alerts
   // const notify = () => {
   //   toast('Wow so easy !');
@@ -118,7 +112,7 @@ const [click, setClick] = useState(0)
       />
       <button
         id={theme}
-        className = 'trophyButton'
+        className='trophyButton'
         style={{ border: '0px', padding: '0px' }}
         // onClick={() => {
         //   handleTrophy(color);

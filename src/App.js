@@ -149,14 +149,14 @@ function App() {
                       <BrightnessIcon4 />
                     </ToggleButton>
                   </MenuItem>
-                  <MenuItem
+                  {/* <MenuItem
                     className='menu-item'
                     component={Link}
                     to='/'
                     onClick={navClose}
                   >
                     Welcome
-                  </MenuItem>
+                  </MenuItem> */}
                   <MenuItem
                     className='menu-item'
                     component={Link}
