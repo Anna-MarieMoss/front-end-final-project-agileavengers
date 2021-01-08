@@ -35,36 +35,31 @@ function Profile() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [submit, setSubmit] = useState(null);
 
-  const [newLogIn, setnewLogIn] = useState(false);
-
-  // Auth0  - setting logincount
-  useEffect(() => {
-    if (user) {
-      const domain = 'dev-ip1x4wr7.eu.auth0.com';
-
-      fetch(`https://${domain}/api/v2/users/${user?.sub}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
+// Auth0  - setting logincount
+useEffect(() => {
+  if (user) {
+    const domain = 'dev-ip1x4wr7.eu.auth0.com';
+    fetch(`https://${domain}/api/v2/users/${user?.sub}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data?.logins_count > 1) {
+          history.push('/emotions');
+        }
       })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data?.logins_count < 1) {
-            setnewLogIn(true);
-            history.push('/emotions');
-          }
-        })
-        .catch((e) => {
-          console.error(e);
-        });
-    }
-  }, [user, accessToken]);
-
-  useEffect(() => {
-    if (user?.given_name) {
-      setName(user.given_name);
-    } else return;
-  }, [user]);
+      .then(() => {
+        if (user?.given_name) {
+          setName(user.given_name);
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }
+}, [user, accessToken, history]);
 
   function handleSubmit() {
     setSubmit(true);

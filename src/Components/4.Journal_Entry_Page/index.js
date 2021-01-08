@@ -89,9 +89,6 @@ export default function JournalEntry() {
       previewVidSource,
       previewAudioSource
     );
-
-    // once submted redirect to Journal View Page
-    history.push('/journalview');
   };
 
   async function postJournalEntry(
