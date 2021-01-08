@@ -14,7 +14,7 @@ function Logout() {
   return (
     
     <div>
-      <H1 text={`Great Stuff ${userData?.name}! Don't forget to log back in tomorrow to update your journey`} />
+      <H2 text={`Great Stuff ${userData?.name}! Don't forget to log back in tomorrow to update your journey`} />
       <SoCLogo style={{width: '200px', margin: '20px'}}/>
       <br/>
       <LogoutButton />
