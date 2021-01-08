@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Chartjs from 'chart.js';
+import { Button } from '@material-ui/core';
 import { useAppContext } from '../../AppContext';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 //Temp userId
-const userId = 1;
+//const userId = 1;
 
 const Graph = () => {
   const { isAuthenticated, isLoading, accessToken, userData } = useAppContext();
@@ -14,7 +15,7 @@ const Graph = () => {
   const [chartInstance, setChartInstance] = useState(null);
   const [graphData, setGraphData] = useState([0, 0, 0, 0, 0]);
   const [showGraph, setShowGraph] = useState(false);
-let userId = userData?.id;
+  let userId = userData?.id;
   //graph
 
   const randomInt = () => Math.floor(Math.random() * (5 - 1 + 1)) + 1;
@@ -54,10 +55,12 @@ let userId = userData?.id;
 
   useEffect(() => {
     async function getMood() {
-      const res = await fetch(`${BACKEND_URL}/moods/${userId}`, {headers: {
-        'content-type': 'application/JSON',
-        Authorization: `Bearer ${accessToken}`,
-      }});
+      const res = await fetch(`${BACKEND_URL}/moods/${userId}`, {
+        headers: {
+          'content-type': 'application/JSON',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
       const data = await res.json();
       // console.log( `data is  ${JSON.stringify(data)}`);
 
@@ -133,8 +136,12 @@ let userId = userData?.id;
   //
   return (
     <div>
-      <button onClick={onButtonClick}>Switch View</button>
-      <button onClick={handleMood}>Get Mood Data</button>
+      <Button onClick={onButtonClick} variant='outlined' color='primary'>
+        Switch View
+      </Button>
+      <Button onClick={handleMood} variant='outlined' color='primary'>
+        Get Mood Data
+      </Button>
       <canvas
         ref={chartContainer}
         style={{ width: '100em', height: '100em' }}

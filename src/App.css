@@ -6,9 +6,26 @@
   --green: #31986a;
 } */
 
-/* .MuiBottomNavigationAction-wrapper {
-  color: white;
-} */
+#darkTheme {
+  background-color: #303030;
+  color: #fafafa;
+  margin-bottom: 0 !important;
+}
+
+#lightTheme {
+  background-color: #fafafa;
+  color: #303030;
+  margin-bottom: 0 !important;
+}
+
+.MuiBottomNavigationAction-wrapper {
+  display: 'inline-flex';
+  align-items: 'center';
+  justify-content: 'center';
+  width: '100%';
+  flex-direction: 'column';
+  /* color: white; */
+}
 
 /* #app-menu:hover {
   background-color: #31986a;

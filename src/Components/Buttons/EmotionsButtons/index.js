@@ -1,12 +1,23 @@
-import React from 'react';
-
+import React, { useContext } from 'react';
+import { ThemeContext } from '../../../ThemeContext';
 import css from './EmotionButton.module.css';
 
-function EmotionsButton({text, emotionNumber, handleClick}){
-    return(
-        <button className={css.emotionButtons} style={{fontSize: '50px'}} onClick={()=> {handleClick(emotionNumber)}}>{text}</button>
+function EmotionsButton({ text, emotionNumber, handleClick }) {
+  const theme = useContext(ThemeContext);
 
-    )
+  return (
+    <button
+      id={theme}
+      className={css.emotionButtons}
+      key={emotionNumber}
+      style={{ fontSize: '50px', paddingBottom: '-80px' }}
+      onClick={() => {
+        handleClick(emotionNumber);
+      }}
+    >
+      {text}
+    </button>
+  );
 }
 
 export default EmotionsButton;

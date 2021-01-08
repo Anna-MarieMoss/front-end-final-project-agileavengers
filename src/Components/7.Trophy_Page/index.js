@@ -1,13 +1,20 @@
+<<<<<<< HEAD
+import React, { useEffect, useContext } from 'react';
+=======
 import React, { useEffect, useState } from 'react';
+>>>>>>> devBranch
 import { useAppContext } from '../../AppContext';
 import { Trophies } from './Trophies.js'; //need to add additional trophies to this file
 import TrophyButton from '../Buttons/TrophyButton/index';
 import H1 from '../DisplayText/H1Text/index';
+import { ThemeContext } from '../../ThemeContext';
+import '../../App.css';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function Trophy() {
+  const theme = useContext(ThemeContext);
   const { userData, isAuthenticated, isLoading, accessToken } = useAppContext();
   const [award, setAward] = useState()
 
@@ -46,7 +53,7 @@ console.log(`updated state is`, award )
   }
   return (
     isAuthenticated && (
-      <div>
+      <div id={theme}>
         <H1 text={`${userData?.name}'s Trophy Cabinet`} />
         <p> (Add in a grid of the skill buttons with logo imgs)</p>
         {Trophies.map((trophy) => (

@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
-import { makeStyles } from '@material-ui/core/styles';
+//import { makeStyles } from '@material-ui/core/styles';
 import DatePicker from '../Input/DateInput/index.js';
 import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
 import SubmitButton from '../Buttons/SubmitButton/index';
 import { useAppContext } from '../../AppContext';
 import { useHistory } from 'react-router';
-
+import './Profile.css';
+import { ThemeContext } from '../../ThemeContext';
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& .MuiTextField-root': {
-      margin: theme.spacing(1),
-      width: '25ch',
-    },
-  },
-}));
-
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     '& .MuiTextField-root': {
+//       margin: theme.spacing(1),
+//       width: '25ch',
+//     },
+//   },
+// }));
 function Profile() {
+  const theme = useContext(ThemeContext);
   //Auth0
   const { user, isAuthenticated, isLoading, accessToken } = useAppContext();
 
@@ -28,8 +28,7 @@ function Profile() {
   const history = useHistory();
 
   // Material UI
-  const classes = useStyles();
-
+  //const classes = useStyles();
   // Our States
   const [name, setName] = useState(null);
   const [myersBriggs, setMyersBriggs] = useState('');
@@ -101,21 +100,21 @@ function Profile() {
   }, [submit]);
 
   return (
-    <div>
+    <div id={theme} className={'profile'}>
       <H1 text={'Profile'} />
       <img className='profile-pic' src={user?.picture} alt={user?.name} />
-      <form className={classes.root} noValidate autoComplete='off'>
-        {user?.given_name ? (
-          <H2
-            text={`Hi ${user?.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
-          />
-        ) : (
-          <H2
-            text={`Hi, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
-          />
-        )}
+      {user?.given_name ? (
+        <H2
+          text={`Hi ${user?.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
+        />
+      ) : (
+        <H2
+          text={`Hi, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
+        />
+      )}
 
-        <div>
+      <form /*className={classes.root}*/ noValidate autoComplete='off'>
+        <div id={theme} className={'profile'}>
           {!user?.given_name && (
             <TextField
               id='outlined-search'

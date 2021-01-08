@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import H1 from '../DisplayText/H1Text/index';
 import SoCLogo from '../Pictures/SocLogo/index';
 import LoginButton from '../Buttons/LogInButton/index';
+<<<<<<< HEAD
+import './WelcomePage.css';
+import { ThemeContext } from '../../ThemeContext';
+=======
 
 
+>>>>>>> devBranch
 function Welcome() {
-
+  const theme = useContext(ThemeContext);
   return (
-    <div>
-    <H1 text={`Hi welcome to your SoC Journal`} />
-    <SoCLogo style={{width: '100px'}}/>
+    <div id={theme} className={'welcome'}>
+      <H1 text={`Hi welcome to your SoC Journal`} />
+      <SoCLogo style={{ width: '100px' }} />
       <p>
         Your personal space to record your once in a lifetime School of Code
         experience!
@@ -20,7 +25,7 @@ function Welcome() {
       </p>
       <LoginButton />
     </div>
-  )
+  );
 }
 
 export default Welcome;
