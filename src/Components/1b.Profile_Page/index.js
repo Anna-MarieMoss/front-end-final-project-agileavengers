@@ -17,29 +17,46 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
 function Profile() {
   //Auth0
-  const { user, isAuthenticated, isLoading, accessToken , userData} = useAppContext();
-  
+  const { user, isAuthenticated, isLoading, accessToken } = useAppContext();
+
   // History from React Router
   const history = useHistory();
- 
+
   // Material UI
   const classes = useStyles();
-  
+
   // Our States
   const [name, setName] = useState(null);
   const [myersBriggs, setMyersBriggs] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
   const [submit, setSubmit] = useState(null);
-  // const [registered, setRegistered] = useState(true);
+  const [newLogIn, setnewLogIn] = useState(false);
 
-//   useEffect(() => {
-//   if (logInCount < 2){
-//     setRegistered(false);
-//   }}, [user]
-//   )
-// console.log('profile page', logInCount)
+  // Auth0  - setting logincount
+  useEffect(() => {
+    if (user) {
+      const domain = 'dev-ip1x4wr7.eu.auth0.com';
+
+      fetch(`https://${domain}/api/v2/users/${user?.sub}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data?.logins_count < 1) {
+            setnewLogIn(true);
+          }
+        })
+        .catch((e) => {
+          console.error(e);
+        });
+    }
+  }, [user, accessToken]);
+
   useEffect(() => {
     if (user?.given_name) {
       setName(user.given_name);
@@ -83,19 +100,18 @@ function Profile() {
       <H1 text={'Profile'} />
       <img className='profile-pic' src={user?.picture} alt={user?.name} />
       <form className={classes.root} noValidate autoComplete='off'>
+        {user?.given_name ? (
+          <H2
+            text={`Hi ${user?.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
+          />
+        ) : (
+          <H2
+            text={`Hi, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
+          />
+        )}
 
-      {user?.given_name ? (
-        <H2
-          text={`Hi ${user?.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
-        />
-      ) : (
-        <H2
-          text={`Hi, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
-        />
-      )}
-      
         <div>
-        {!user?.given_name && (
+          {!user?.given_name && (
             <TextField
               id='outlined-search'
               label='Name'
@@ -106,7 +122,7 @@ function Profile() {
                 setName(value);
               }}
             />
-        )}
+          )}
 
           <TextField
             id='outlined-search'
@@ -123,8 +139,6 @@ function Profile() {
         </div>
       </form>
     </div>
-
-    
   );
 }
 export default Profile;
@@ -149,4 +163,4 @@ onChange={(event) => {
   const { value } = event.target;
   setEmail(value);
 }}
-/> */ 
+/> */
