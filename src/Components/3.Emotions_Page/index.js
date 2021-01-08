@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import EmotionsButton from '../Buttons/EmotionsButtons';
 import quoteData from './quotesData.js';
 import './EmotionsPage.css';
@@ -6,7 +6,7 @@ import { useAppContext } from '../../AppContext';
 import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
 import { useHistory } from 'react-router';
-
+import { ThemeContext } from '../../ThemeContext';
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -14,6 +14,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const userId = 1;
 
 function Emotions() {
+  const theme = useContext(ThemeContext);
   console.log(BACKEND_URL);
   // need user_id from ContextProvider
 
@@ -70,7 +71,7 @@ function Emotions() {
 
   return (
     isAuthenticated && (
-      <div>
+      <div className={theme}>
         <H1 text={`Hi ${user?.given_name}`} />
         <H2 text={'How are you feeling today?'} />
 

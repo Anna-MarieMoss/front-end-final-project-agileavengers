@@ -1,15 +1,9 @@
 #darkTheme {
   background-color: #303030;
   color: #fafafa;
-  padding-bottom: -80px !important;
 }
 
 #lightTheme {
   background-color: #fafafa;
   color: #303030;
-  padding-bottom: -80px !important;
-}
-
-.emotionButtons {
-  border: 0px;
 }

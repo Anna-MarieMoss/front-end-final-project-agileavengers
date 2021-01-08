@@ -1,8 +1,9 @@
-import React, { useState, createContext } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { useAppContext } from './AppContext';
 import './App.css';
 import './global.css';
+import { ThemeContext } from './ThemeContext';
 // App Component Pages
 import Welcome from './Components/2.Welcome_Page';
 import Emotions from './Components/3.Emotions_Page';
@@ -40,8 +41,6 @@ const useStyles = makeStyles({
   },
 });
 
-const ThemeContext = createContext();
-
 function App() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -70,6 +69,8 @@ function App() {
   const handleThemeChange = () => {
     setDarkState(!darkState);
   };
+  //Chooses correct CSS id name based on the darkState
+  const checkDarkState = darkState ? 'darkTheme' : 'lightTheme';
   //Handles the Expanded Navigation
   const navClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -86,8 +87,8 @@ function App() {
   // BUG - Login Page only loads if User is Logged in and Authenticated
 
   return (
-    <div className='App' id={darkState ? 'darkTheme' : 'lightTheme'}>
-      <ThemeContext.Provider value={darkState ? 'darkTheme' : 'lightTheme'}>
+    <div className='App' id={checkDarkState}>
+      <ThemeContext.Provider value={checkDarkState}>
         <ThemeProvider theme={theme}>
           <Router>
             <div className='nav-bar'>

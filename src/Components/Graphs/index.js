@@ -79,12 +79,13 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Chartjs from 'chart.js';
+import { Button } from '@material-ui/core';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 //Temp userId
-const userId = 1;
+//const userId = 1;
 
 const Graph = () => {
   const chartContainer = useRef(null);
@@ -207,8 +208,12 @@ const Graph = () => {
   //
   return (
     <div>
-      <button onClick={onButtonClick}>Switch View</button>
-      <button onClick={handleMood}>Get Mood Data</button>
+      <Button onClick={onButtonClick} variant='outlined' color='primary'>
+        Switch View
+      </Button>
+      <Button onClick={handleMood} variant='outlined' color='primary'>
+        Get Mood Data
+      </Button>
       <canvas
         ref={chartContainer}
         style={{ width: '100em', height: '100em' }}

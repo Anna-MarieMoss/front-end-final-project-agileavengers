@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 // import toaster from 'toasted-notes';
-import '../../.././App.css';
+import './TrophyButton.css';
 import 'toasted-notes/src/styles.css';
-import ThemeContext from '../../.././App.js';
+import { ThemeContext } from '../../../ThemeContext';
 //// 2ND TYPE OF ALERTS WITH COLOURS!
 import {
   ToastContainer,
@@ -18,7 +18,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function TrophyButton({ image, id, color }) {
-  const value = useContext(ThemeContext);
+  const theme = useContext(ThemeContext);
   // trying new toast alerts
   // const notify = () => {
   //   toast('Wow so easy !');
@@ -63,7 +63,7 @@ function TrophyButton({ image, id, color }) {
   }
 
   return (
-    <div>
+    <div id={theme}>
       <ToastContainer
         // transition={Slide} // changes the transition to a slide rather than a bounce.  Alerts are rendering multiple times at the moment due to the page re redering all of the buttons.  Look into how you can stop this happening but keeep the cool styling tomorrow.
         autoClose={5000}
@@ -76,8 +76,8 @@ function TrophyButton({ image, id, color }) {
         pauseOnHover
       />
       <button
-        id={value}
-        style={{ border: '0px' }}
+        id={theme}
+        style={{ border: '0px', padding: '0px' }}
         // onClick={() => {
         //   handleTrophy(color);
         // }}

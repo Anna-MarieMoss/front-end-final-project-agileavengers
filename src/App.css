@@ -9,13 +9,13 @@
 #darkTheme {
   background-color: #303030;
   color: #fafafa;
-  height: 100%;
+  margin-bottom: 0 !important;
 }
 
 #lightTheme {
   background-color: #fafafa;
   color: #303030;
-  height: 100%;
+  margin-bottom: 0 !important;
 }
 
 .MuiBottomNavigationAction-wrapper {

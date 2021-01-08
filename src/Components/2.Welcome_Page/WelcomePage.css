@@ -1,0 +1,11 @@
+#darkTheme.welcome {
+  background-color: #303030;
+  color: #fafafa;
+  padding-bottom: 270px;
+}
+
+#lightTheme.welcome {
+  background-color: #fafafa;
+  color: #303030;
+  padding-bottom: 270px;
+}

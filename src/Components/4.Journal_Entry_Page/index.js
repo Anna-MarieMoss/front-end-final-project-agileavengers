@@ -10,8 +10,8 @@ import ToastAlert from '../ToastAlerts/toastAlerts';
 import toaster from 'toasted-notes';
 import 'toasted-notes/src/styles.css';
 
-import Button from '../Buttons/Button/index';
-
+// import Button from '../Buttons/Button/index';
+import { Button } from '@material-ui/core';
 
 //this will need to link to user iD
 const userId = 1;
@@ -34,9 +34,9 @@ export default function JournalEntry() {
 
   // Code to hold the states of each input...
   const [text, setText] = useState('');
-  const [imgUpload, setImgUpload] = useState('');
-  const [vidUpload, setVidUpload] = useState('');
-  const [audioUpload, setAudioUpload] = useState('');
+  const [imgUpload] = useState('');
+  const [vidUpload] = useState('');
+  const [audioUpload] = useState('');
 
   // These states hold the super long DataURL strings of the file...
   const [previewImgSource, setPreviewImgSource] = useState();
@@ -96,7 +96,6 @@ export default function JournalEntry() {
 
     // once submted redirect to Journal View Page
     history.push('/journalview');
-
   };
 
   async function postJournalEntry(
@@ -181,7 +180,7 @@ export default function JournalEntry() {
               value={audioUpload}
               className='form-input'
             />
-            <button
+            <Button
               className='btn'
               type='submit'
               onClick={() => {
@@ -192,9 +191,11 @@ export default function JournalEntry() {
                   }
                 );
               }}
+              variant='outlined'
+              color='secondary'
             >
               Submit
-            </button>
+            </Button>
           </form>
           <br></br>
           {/* Media Upload previews for image, video and audio player */}
@@ -229,7 +230,11 @@ export default function JournalEntry() {
             history.push('/journalview');
           }}
           text='Skip'
-        />
+          variant='outlined'
+          color='secondary'
+        >
+          Skip
+        </Button>
       </div>
     )
   );
