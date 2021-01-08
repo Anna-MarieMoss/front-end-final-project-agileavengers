@@ -22,6 +22,10 @@ function Emotions() {
     isLoading,
     accessToken,
     userData,
+<<<<<<< HEAD
+=======
+    user,
+>>>>>>> fe1de3732a92a004d70552a0bce41c2b2a727253
   } = useAppContext();
   //need to figure out how to close the ability to click for the day/only enable one click per day
   const [chosenEmotion, setChosenEmotion] = useState(null);
