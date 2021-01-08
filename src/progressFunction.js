@@ -6,7 +6,9 @@ export function progressPosition(startDate) {
     Math.round((formatStartDate.getTime() - currentDate.getTime()) / oneDay) *
     -1; //start date minus current date converted to milliseconds, the converted back in to a day
 
-  if (daysPast <= 7) {
+  if (daysPast < 0) {
+    return 'week0';
+  } else if (daysPast > 0 && daysPast <= 7) {
     return 'week1';
   } else if (daysPast > 7 && daysPast <= 14) {
     return 'week2';

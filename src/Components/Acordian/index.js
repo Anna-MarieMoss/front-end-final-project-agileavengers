@@ -128,6 +128,7 @@ export default function JournalAccordion({
                       handleFavorite={handleFavorite}
                       favoriteColor={favorite ? '#DC143C' : 'black'}
                       journalEntryId={journalEntryId}
+                      favorite={favorite}
                     />
                     <br />
                     <br />

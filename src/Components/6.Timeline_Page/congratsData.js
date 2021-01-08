@@ -1,5 +1,9 @@
 const congratsData = [
   {
+    week: 'week0',
+    message: 'week 0 message',
+  },
+  {
     week: 'week1',
     message: 'Congratulations youve started on your new journey',
   },

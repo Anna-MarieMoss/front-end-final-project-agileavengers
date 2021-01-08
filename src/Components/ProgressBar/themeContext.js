@@ -115,6 +115,20 @@ export function ThemeProvider({ children }) {
       setweek11(true);
       setweek12(true);
       setweek16(true);
+    } else if (currentWeek === 'week0') {
+      setweek1(true);
+      setweek2(true);
+      setweek3(true);
+      setweek4(true);
+      setweek5(true);
+      setweek6(true);
+      setweek7(true);
+      setweek8(true);
+      setweek9(true);
+      setweek10(true);
+      setweek11(true);
+      setweek12(true);
+      setweek16(true);
     }
   }, [currentWeek]);
 
