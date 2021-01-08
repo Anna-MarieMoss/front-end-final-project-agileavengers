@@ -6,14 +6,9 @@
   --green: #31986a;
 } */
 
-.MuiBottomNavigationAction-wrapper {
-  display: 'inline-flex';
-  align-items: 'center';
-  justify-content: 'center';
-  width: '100%';
-  flex-direction: 'column';
+/* .MuiBottomNavigationAction-wrapper {
   color: white;
-}
+} */
 
 /* #app-menu:hover {
   background-color: #31986a;

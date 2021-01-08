@@ -8,7 +8,7 @@ import H1 from '../DisplayText/H1Text/index';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function Trophy() {
-  const { user, isAuthenticated, isLoading, accessToken } = useAppContext();
+  const { userData, isAuthenticated, isLoading, accessToken } = useAppContext();
   const [award, setAward] = useState()
 
   let user_Id = 1; //we need to get this from the app context
@@ -47,7 +47,7 @@ console.log(`updated state is`, award )
   return (
     isAuthenticated && (
       <div>
-        <H1 text={`${user.given_name}'s Trophy Cabinet`} />
+        <H1 text={`${userData?.name}'s Trophy Cabinet`} />
         <p> (Add in a grid of the skill buttons with logo imgs)</p>
         {Trophies.map((trophy) => (
           <TrophyButton

@@ -34,7 +34,7 @@ function Timeline() {
       <H1 text={'Your Timeline'}/>
       <H2 text={congratsMessage}/>
       <ThemeProvider>
-        <ProgressBar pic={user.picture} week={currentWeek}/>
+        <ProgressBar week={currentWeek}/>
       </ThemeProvider>
     </div>
   ));
