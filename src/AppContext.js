@@ -52,10 +52,10 @@ export function AppProvider({ children }) {
 
   //Get user profile based on email (Auth0 response)
   useEffect(() => {
-    if (user.email && accessToken) {
+    if (user?.email && accessToken) {
       console.log('Im getting user data');
       async function getProfile() {
-        const res = await fetch(`${BACKEND_URL}/users/${user.email}`, {
+        const res = await fetch(`${BACKEND_URL}/users/${user?.email}`, {
           headers: {
             'content-type': 'application/JSON',
             Authorization: `Bearer ${accessToken}`,
