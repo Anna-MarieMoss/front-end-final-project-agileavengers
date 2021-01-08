@@ -6,7 +6,7 @@ import './Stats.css';
 import { Typography } from '@material-ui/core';
 
 function Stats() {
-  const { isAuthenticated, isLoading, userData } = useAppContext();
+  const { isAuthenticated, isLoading, userData, user } = useAppContext();
 
   // if (isLoading) {
   //   return <div>Loading ...</div>;
@@ -14,7 +14,7 @@ function Stats() {
 
   return (
     <div className={'stats'}>
-      <H2 text={`${userData?.name}'s Stats`} />
+      <H2 text={`${user?.given_name}'s Stats`} />
       <Typography variant='h6'>
         Display your mood throughout the bootcamp
       </Typography>

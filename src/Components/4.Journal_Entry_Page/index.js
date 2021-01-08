@@ -5,21 +5,10 @@ import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
 import './journal.css';
 import { useHistory } from 'react-router';
-
+import { Button } from '@material-ui/core';
 import ToastAlert from '../ToastAlerts/toastAlerts';
 import toaster from 'toasted-notes';
 import 'toasted-notes/src/styles.css';
-<<<<<<< HEAD
-
-// import Button from '../Buttons/Button/index';
-import { Button } from '@material-ui/core';
-
-//this will need to link to user iD
-const userId = 1;
-
-=======
-import Button from '../Buttons/Button/index';
->>>>>>> devBranch
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -30,6 +19,7 @@ export default function JournalEntry() {
     isLoading,
     accessToken,
     userData,
+    user,
   } = useAppContext();
 
   const userId = userData?.id;
@@ -141,7 +131,7 @@ export default function JournalEntry() {
   return (
     isAuthenticated && (
       <div className='wrapper'>
-        <H1 text={`${userData?.name} how was your day today?`} />
+        <H1 text={`${user?.given_name} how was your day today?`} />
         <H2 text={`What did you learn today?`} />
         <ToastAlert />
         <div className='container'>

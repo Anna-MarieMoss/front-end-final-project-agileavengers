@@ -8,7 +8,13 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 // get all post
 function JournalView() {
-  const { isAuthenticated, isLoading, accessToken, userData } = useAppContext();
+  const {
+    isAuthenticated,
+    isLoading,
+    accessToken,
+    userData,
+    user,
+  } = useAppContext();
   const [journalDisplay, setJournalDisplay] = useState([]);
   const [journalDelete, setJournalDelete] = useState(false);
   const [journalDeleteId, setJournalDeleteId] = useState(null);
@@ -99,7 +105,7 @@ function JournalView() {
   return (
     isAuthenticated && (
       <div>
-        <H1 text={`${userData?.name}'s journey so far....`} />
+        <H1 text={`${user?.given_name}'s journey so far....`} />
         <button onClick={filterByFavorite}>
           {showFavorites ? 'Show All' : 'Show Favorites'}
         </button>
