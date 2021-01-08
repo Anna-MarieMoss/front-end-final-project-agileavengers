@@ -5,7 +5,13 @@ import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
 import './journal.css';
 import { useHistory } from 'react-router';
+
+import ToastAlert from '../ToastAlerts/toastAlerts';
+import toaster from 'toasted-notes';
+import 'toasted-notes/src/styles.css';
+
 import Button from '../Buttons/Button/index';
+
 
 //this will need to link to user iD
 const userId = 1;
@@ -87,6 +93,10 @@ export default function JournalEntry() {
       previewVidSource,
       previewAudioSource
     );
+
+    // once submted redirect to Journal View Page
+    history.push('/journalview');
+
   };
 
   async function postJournalEntry(
@@ -129,6 +139,7 @@ export default function JournalEntry() {
       <div className='wrapper'>
         <H1 text={`${user.given_name} how was your day today?`} />
         <H2 text={`What did you learn today?`} />
+        <ToastAlert />
         <div className='container'>
           <form onSubmit={handleSubmitFile}>
             <h2>Create post:</h2>
@@ -170,7 +181,18 @@ export default function JournalEntry() {
               value={audioUpload}
               className='form-input'
             />
-            <button className='btn' type='submit'>
+            <button
+              className='btn'
+              type='submit'
+              onClick={() => {
+                toaster.notify(
+                  `Yay! You've successfully added to your journal!`,
+                  {
+                    duration: 2000,
+                  }
+                );
+              }}
+            >
               Submit
             </button>
           </form>

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import EmotionsButton from '../Buttons/EmotionsButtons';
-import quoteData from './quotesData.js';
-import './EmotionsPage.css';
-import { useAppContext } from '../../AppContext';
-import H1 from '../DisplayText/H1Text';
-import H2 from '../DisplayText/H2Text';
-import { useHistory } from 'react-router';
+import React, { useEffect, useState } from "react";
+import EmotionsButton from "../Buttons/EmotionsButtons";
+import quoteData from "./quotesData.js";
+import "./EmotionsPage.css";
+import { useAppContext } from "../../AppContext";
+import H1 from "../DisplayText/H1Text";
+import H2 from "../DisplayText/H2Text";
+import { useHistory } from "react-router";
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -30,7 +30,7 @@ function Emotions() {
   const history = useHistory();
 
   function handleEmotion(emotionNum) {
-    console.log('running');
+    console.log("running");
     setChosenEmotion(emotionNum);
     console.log(`your chosen emotion is ${chosenEmotion}`);
   }
@@ -44,9 +44,9 @@ function Emotions() {
           // neeed to actual API address
           `${BACKEND_URL}/moods`,
           {
-            method: 'POST',
+            method: "POST",
             headers: {
-              'content-type': 'application/JSON',
+              "content-type": "application/JSON",
               Authorization: `Bearer ${accessToken}`,
             },
 
@@ -61,7 +61,7 @@ function Emotions() {
         //hopefully returned a unique post numb
       }
       postEmotion();
-      history.push('/journalentry');
+      history.push("/journalentry");
     }
   }, [chosenEmotion]);
 
@@ -75,7 +75,8 @@ function Emotions() {
         <H1 text={`Hi ${userData?.name}`} />
         <H2 text={'How are you feeling today?'} />
 
-        <div className='emotionsBar'>
+
+        <div className="emotionsBar">
           {emotionsArray.map((emotion) => (
             <EmotionsButton
               text={emotion.emotion}

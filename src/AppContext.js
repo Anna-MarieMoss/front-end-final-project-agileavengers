@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { progressPosition } from './progressFunction';
-import { useAuth0 } from '@auth0/auth0-react';
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { progressPosition } from "./progressFunction";
+import { useAuth0 } from "@auth0/auth0-react";
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -8,7 +8,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
-  const [currentWeek, setCurrentWeek] = useState('week1');
+  const [currentWeek, setCurrentWeek] = useState("week1");
   const [userData, setuserData] = useState({});
 
   // Auth0 - data
@@ -22,22 +22,22 @@ export function AppProvider({ children }) {
   const [accessToken, setaccessToken] = useState(null);
 
   const emotionsArray = [
-    { emotion: '😢', number: 1 },
-    { emotion: '😒', number: 2 },
-    { emotion: '😬', number: 3 },
-    { emotion: '😀', number: 4 },
-    { emotion: '😍', number: 5 },
+    { emotion: "😢", number: 1 },
+    { emotion: "😒", number: 2 },
+    { emotion: "😬", number: 3 },
+    { emotion: "😀", number: 4 },
+    { emotion: "😍", number: 5 },
   ];
 
   // Auth0 Custome Hook - setting Metadata
   useEffect(() => {
     const getAccessToken = async () => {
-      const domain = 'dev-ip1x4wr7.eu.auth0.com';
+      const domain = "dev-ip1x4wr7.eu.auth0.com";
 
       try {
         const accessToken = await getAccessTokenSilently({
           audience: `https://${domain}/api/v2/`,
-          scope: 'read:current_user',
+          scope: "read:current_user",
         });
 
         setaccessToken(accessToken);
@@ -55,7 +55,7 @@ export function AppProvider({ children }) {
       async function getProfile() {
         const res = await fetch(`${BACKEND_URL}/users/${user.email}`, {
           headers: {
-            'content-type': 'application/JSON',
+            "content-type": "application/JSON",
             Authorization: `Bearer ${accessToken}`,
           },
         });
