@@ -4,6 +4,7 @@ import SoCLogo from '../Pictures/SocLogo/index';
 import LoginButton from '../Buttons/LogInButton/index';
 import './WelcomePage.css';
 import { ThemeContext } from '../../ThemeContext';
+
 function Welcome() {
   const theme = useContext(ThemeContext);
   return (

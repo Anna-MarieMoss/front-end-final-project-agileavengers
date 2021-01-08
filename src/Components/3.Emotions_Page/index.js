@@ -7,6 +7,10 @@ import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
 import { useHistory } from 'react-router';
 import { ThemeContext } from '../../ThemeContext';
+<<<<<<< HEAD
+=======
+
+>>>>>>> b366f43729117375c15e2bf27748aae3d97deaf8
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -21,7 +25,10 @@ function Emotions() {
     isLoading,
     accessToken,
     userData,
+<<<<<<< HEAD
     user,
+=======
+>>>>>>> b366f43729117375c15e2bf27748aae3d97deaf8
   } = useAppContext();
   //need to figure out how to close the ability to click for the day/only enable one click per day
   const [chosenEmotion, setChosenEmotion] = useState(null);
@@ -44,7 +51,6 @@ function Emotions() {
             'content-type': 'application/JSON',
             Authorization: `Bearer ${accessToken}`,
           },
-
           body: JSON.stringify({
             user_id: userData?.id,
             mood: chosenEmotion,
