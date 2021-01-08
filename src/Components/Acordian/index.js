@@ -41,6 +41,13 @@ const useStyles = makeStyles((theme) => ({
     margin: `${theme.spacing(1)}px auto`,
     padding: theme.spacing(2),
   },
+  date: {
+    maxWidth: 400,
+    margin: `${theme.spacing(1)}px auto`,
+    marginLeft: `0em`,
+    padding: theme.spacing(2),
+    paddingLeft: '0em',
+  },
 }));
 
 export default function JournalAccordion({
@@ -101,7 +108,7 @@ export default function JournalAccordion({
                   </Avatar>
                 </Grid>
                 <Grid item xs zeroMinWidth onClick={handleClick}>
-                  <p className='journal-date'>{journalDate}</p>
+                  <Typography className={classes.date} noWrap>{journalDate}</Typography>
                   <Typography noWrap>{text}</Typography>
                 </Grid>
               </Grid>

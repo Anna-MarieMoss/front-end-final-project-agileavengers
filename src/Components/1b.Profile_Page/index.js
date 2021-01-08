@@ -20,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
 
 function Profile() {
   //Auth0
-  const { user, isAuthenticated, isLoading, accessToken } = useAppContext();
+  const { user, isAuthenticated, isLoading, accessToken , userData} = useAppContext();
+
 
   // History from React Router
   const history = useHistory();
@@ -33,6 +34,7 @@ function Profile() {
   const [myersBriggs, setMyersBriggs] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
   const [submit, setSubmit] = useState(null);
+
   const [newLogIn, setnewLogIn] = useState(false);
 
   // Auth0  - setting logincount
@@ -56,6 +58,7 @@ function Profile() {
         });
     }
   }, [user, accessToken]);
+
 
   useEffect(() => {
     if (user?.given_name) {
@@ -143,24 +146,3 @@ function Profile() {
 }
 export default Profile;
 
-// name and email for profile login
-/* <TextField
-id='outlined-search'
-label='Name'
-type='text'
-variant='outlined'
-onChange={(event) => {
-  const { value } = event.target;
-  setName(value);
-}}
-/>
-<TextField
-id='outlined-search'
-label='Email'
-type='email'
-variant='outlined'
-onChange={(event) => {
-  const { value } = event.target;
-  setEmail(value);
-}}
-/> */
