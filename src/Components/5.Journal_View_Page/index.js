@@ -131,7 +131,7 @@ function JournalView() {
                 text={journalEntry.text}
                 emotionNumber={journalEntry.mood}
                 journalDate={journalEntry.date}
-                index={index}
+                journalEntryId={journalEntry.id}
                 favorite={journalEntry.favorite}
                 handleFavorite={handleFavorite}
                 handleDelete={handleDelete}
