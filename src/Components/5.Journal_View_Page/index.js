@@ -42,9 +42,7 @@ function JournalView() {
   }
 
   function changeSortBy(event) {
-    console.log('sort by before :', sortConstraint);
     setSortConstraint(event.target.value);
-    console.log('first journal entry displayed :', journalDisplay[0]);
   }
 
   // do we need a custom hook to get out journal and emotion data and store as a state
