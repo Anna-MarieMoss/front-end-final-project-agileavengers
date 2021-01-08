@@ -99,13 +99,13 @@ function App() {
                 showLabels={false}
                 className={classes.root}
               >
-                <BottomNavigationAction
+                {/* <BottomNavigationAction
                   component={Link}
                   to='/profile'
                   label='Profile'
                   value='profile'
                   icon={<FaceRoundedIcon />}
-                />
+                /> */}
                 <BottomNavigationAction
                   component={Link}
                   to='/journalview'
