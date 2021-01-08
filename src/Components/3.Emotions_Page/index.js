@@ -36,25 +36,20 @@ function Emotions() {
   useEffect(() => {
     if (chosenEmotion) {
       async function postEmotion() {
-        const res = await fetch(
-          // neeed to actual API address
-          `${BACKEND_URL}/moods`,
-          {
-            method: 'POST',
-            headers: {
-              'content-type': 'application/JSON',
-              Authorization: `Bearer ${accessToken}`,
-            },
+        const res = await fetch(`${BACKEND_URL}/moods`, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/JSON',
+            Authorization: `Bearer ${accessToken}`,
+          },
 
-            body: JSON.stringify({
-              user_id: userData.id,
-              mood: chosenEmotion,
-            }),
-          }
-        );
+          body: JSON.stringify({
+            user_id: userData?.id,
+            mood: chosenEmotion,
+          }),
+        });
         const data = await res.json();
         console.log(data);
-        //hopefully returned a unique post numb
       }
       postEmotion();
       history.push('/journalentry');
@@ -68,7 +63,7 @@ function Emotions() {
   return (
     isAuthenticated && (
       <div>
-        <H1 text={`Hi ${userData.name}`} />
+        <H1 text={`Hi ${userData?.name}`} />
         <H2 text={'How are you feeling today?'} />
 
         <div className='emotionsBar'>

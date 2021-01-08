@@ -12,6 +12,8 @@ function JournalView() {
   const [journalDisplay, setJournalDisplay] = useState([]);
   const [journalDelete, setJournalDelete] = useState(false);
   const [journalDeleteId, setJournalDeleteId] = useState(null);
+  const [sortConstraint, setSortConstraint] = useState('Newest to oldest');
+  const [showFavorites, setShowFavorites] = useState(false);
   let userId = userData?.id;
 
   useEffect(() => {
@@ -21,15 +23,25 @@ function JournalView() {
         // if Access Token Middleware is added to moods and posts BE -need to add header with AT
         const data = await res.json();
         const { payload } = data;
+        for (let post of payload) {
+          post.date = post.date.slice(0, 10);
+        }
+
         setJournalDisplay(payload);
       }
       getJournalById();
     }
   }, [userId]);
 
-  // do we need a custom hook to get out journal and emotion data and store as a state
-  // Need to set ket as the unique post key to add favourite, delete functions and be able to view
+  function filterByFavorite() {
+    setShowFavorites(!showFavorites);
+  }
 
+  function changeSortBy(event) {
+    setSortConstraint(event.target.value);
+  }
+
+  //Delete journal entry
   function handleDelete(postId) {
     console.log('handling delete with postId:', postId);
     setJournalDeleteId(postId);
@@ -61,6 +73,7 @@ function JournalView() {
     return () => abortController.abort();
   }, [journalDelete]);
 
+  //Patch favourite journal entry
   function handleFavorite(postId) {
     async function patchFave() {
       const res = await fetch(`${BACKEND_URL}/posts/${postId}`, {
@@ -87,23 +100,46 @@ function JournalView() {
     isAuthenticated && (
       <div>
         <H1 text={`${userData?.name}'s journey so far....`} />
-        <p>(Add in filters for date range, emotions etc)</p>
+        <button onClick={filterByFavorite}>
+          {showFavorites ? 'Show All' : 'Show Favorites'}
+        </button>
+        <select onChange={changeSortBy}>
+          <option>Sort By</option>
+          <option value='Newest to oldest'>Newest to oldest</option>
+          <option value='Oldest to newest'>Oldest to newest</option>
+          <option value='Mood high to low'>Mood high to low</option>
+          <option value='Mood low to high'>Mood low to high</option>
+        </select>
         <div>
-          {journalDisplay.map((journalEntry) => (
-            <JournalAccordion
-              text={journalEntry.text}
-              emotionNumber={journalEntry.mood}
-              journalDate={journalEntry.date}
-              journalEntryId={journalEntry.id}
-              favorite={journalEntry.favorite}
-              handleFavorite={handleFavorite}
-              handleDelete={handleDelete}
-              audioSource={journalEntry.audio}
-              imgSource={journalEntry.image}
-              vidSource={journalEntry.video}
-              key={journalEntry.id}
-            />
-          ))}
+          {journalDisplay
+            .filter((x) => !showFavorites || x.favorite === true)
+            .sort((a, b) => {
+              if (sortConstraint === 'Mood high to low') {
+                return b.mood - a.mood;
+              } else if (sortConstraint === 'Mood low to high') {
+                return a.mood - b.mood;
+              } else if (sortConstraint === 'Newest to oldest') {
+                return new Date(b.date) - new Date(a.date);
+              } else if (sortConstraint === 'Oldest to newest') {
+                return new Date(a.date) - new Date(b.date);
+              } else {
+                return new Date(b.date) - new Date(a.date);
+              }
+            })
+            .map((journalEntry, index) => (
+              <JournalAccordion
+                text={journalEntry.text}
+                emotionNumber={journalEntry.mood}
+                journalDate={journalEntry.date}
+                index={index}
+                favorite={journalEntry.favorite}
+                handleFavorite={handleFavorite}
+                handleDelete={handleDelete}
+                audioSource={journalEntry.audio}
+                imgSource={journalEntry.image}
+                vidSource={journalEntry.video}
+              />
+            ))}
         </div>
       </div>
     )

@@ -20,8 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Profile() {
   //Auth0
-  const { user, isAuthenticated, isLoading, accessToken , userData} = useAppContext();
-
+  const { user, isAuthenticated, isLoading, accessToken } = useAppContext();
 
   // History from React Router
   const history = useHistory();
@@ -59,7 +58,6 @@ function Profile() {
     }
   }, [user, accessToken]);
 
-
   useEffect(() => {
     if (user?.given_name) {
       setName(user.given_name);
@@ -69,6 +67,7 @@ function Profile() {
   function handleSubmit() {
     setSubmit(true);
     // once submted redirect to Journal View Page
+    history.push('/emotions');
   }
   // Creating User in OUR DB
   useEffect(() => {
@@ -145,4 +144,3 @@ function Profile() {
   );
 }
 export default Profile;
-
