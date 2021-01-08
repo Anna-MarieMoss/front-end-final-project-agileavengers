@@ -20,6 +20,7 @@ function JournalView() {
   const [journalDeleteId, setJournalDeleteId] = useState(null);
   const [sortConstraint, setSortConstraint] = useState('Newest to oldest');
   const [showFavorites, setShowFavorites] = useState(false);
+  const [reloadJournal, setreloadJournal] = useState(false);
   let userId = userData?.id;
 
   useEffect(() => {
@@ -34,10 +35,11 @@ function JournalView() {
         }
 
         setJournalDisplay(payload);
+        setreloadJournal(false);
       }
       getJournalById();
     }
-  }, [userId]);
+  }, [reloadJournal, userId]);
 
   function filterByFavorite() {
     setShowFavorites(!showFavorites);
@@ -80,7 +82,8 @@ function JournalView() {
   }, [journalDelete]);
 
   //Patch favourite journal entry
-  function handleFavorite(postId) {
+  function handleFavorite(postId, favorite) {
+    console.log(favorite);
     async function patchFave() {
       const res = await fetch(`${BACKEND_URL}/posts/${postId}`, {
         method: 'PATCH',
@@ -89,13 +92,14 @@ function JournalView() {
           Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify({
-          favorite: true,
+          favorite: favorite,
         }),
       });
       const data = await res.json();
       console.log(data);
     }
     patchFave();
+    setreloadJournal(true);
   }
 
   if (isLoading) {

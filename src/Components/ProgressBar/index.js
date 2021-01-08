@@ -16,7 +16,6 @@ import DevicesIcon from '@material-ui/icons/Devices';
 import BuildIcon from '@material-ui/icons/Build';
 import RouterIcon from '@material-ui/icons/Router';
 import DeveloperBoardIcon from '@material-ui/icons/DeveloperBoard';
-import LockIcon from '@material-ui/icons/Lock';
 import GroupIcon from '@material-ui/icons/Group';
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import NewReleasesIcon from '@material-ui/icons/NewReleases';
