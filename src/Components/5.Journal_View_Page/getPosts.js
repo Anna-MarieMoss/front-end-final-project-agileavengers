@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 import { useAppContext } from '../../AppContext';
+import dummyJournal from './DummyJournal';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
