@@ -53,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
 export default function JournalAccordion({
   text,
   emotionNumber,
-  handleClick,
   journalDate,
   journalEntryId,
   handleDelete,
@@ -99,7 +98,7 @@ export default function JournalAccordion({
           <div className={classes.root}>
             <Paper elevation={1} className={classes.paper}>
               <Grid container wrap='nowrap'>
-                <Grid item onClick={handleClick}>
+                <Grid item>
                   <Avatar
                     style={{ backgroundColor: 'white', fontSize: '2em' }}
                     className='journal-mood'
@@ -107,8 +106,10 @@ export default function JournalAccordion({
                     {emotion[0].emotion}
                   </Avatar>
                 </Grid>
-                <Grid item xs zeroMinWidth onClick={handleClick}>
-                  <Typography className={classes.date} noWrap>{journalDate}</Typography>
+                <Grid item xs zeroMinWidth>
+                  <Typography className={classes.date} noWrap>
+                    {journalDate}
+                  </Typography>
                   <Typography noWrap>{text}</Typography>
                 </Grid>
               </Grid>

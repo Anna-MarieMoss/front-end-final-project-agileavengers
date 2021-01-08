@@ -78,7 +78,7 @@ export function AppProvider({ children }) {
   return (
     <AppContext.Provider
       value={{
-        currentWeek: 'week2',
+        currentWeek: currentWeek,
         user: user,
         isAuthenticated: isAuthenticated,
         isLoading: isLoading,

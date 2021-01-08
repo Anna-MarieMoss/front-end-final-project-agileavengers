@@ -17,14 +17,11 @@ function JournalView() {
   useEffect(() => {
     if (userId) {
       async function getJournalById() {
-        console.log(userId, 'userId');
-        console.log(userData, 'userData in the journal page');
         const res = await fetch(`${BACKEND_URL}/moodsandposts/${userId}`);
         // if Access Token Middleware is added to moods and posts BE -need to add header with AT
         const data = await res.json();
         const { payload } = data;
         setJournalDisplay(payload);
-        console.log(payload);
       }
       getJournalById();
     }
@@ -82,12 +79,6 @@ function JournalView() {
     patchFave();
   }
 
-  // need to make post appear when it is clicked
-  function handleJournalClick() {
-    console.log('need to make full post appear');
-    // onClick - could make a card display -can have different media types - could use lots of useState()..... boolean
-  }
-
   if (isLoading) {
     return <div>Loading ...</div>;
   }
@@ -101,7 +92,6 @@ function JournalView() {
           {journalDisplay.map((journalEntry) => (
             <JournalAccordion
               text={journalEntry.text}
-              handleClick={handleJournalClick}
               emotionNumber={journalEntry.mood}
               journalDate={journalEntry.date}
               journalEntryId={journalEntry.id}
