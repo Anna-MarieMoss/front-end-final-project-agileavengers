@@ -41,14 +41,20 @@ const useStyles = makeStyles((theme) => ({
     margin: `${theme.spacing(1)}px auto`,
     padding: theme.spacing(2),
   },
+  date: {
+    maxWidth: 400,
+    margin: `${theme.spacing(1)}px auto`,
+    marginLeft: `0em`,
+    padding: theme.spacing(2),
+    paddingLeft: '0em',
+  },
 }));
 
 export default function JournalAccordion({
   text,
   emotionNumber,
-  handleClick,
   journalDate,
-  index,
+  journalEntryId,
   handleDelete,
   handleFavorite,
   favorite,
@@ -59,6 +65,7 @@ export default function JournalAccordion({
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const { emotionsArray } = useAppContext();
+
   //const [postFavorite, setPostFavorite] = useState(false)
   //
 
@@ -81,17 +88,17 @@ export default function JournalAccordion({
   return (
     <div className={classes.root}>
       <Accordion
-        expanded={expanded === `panel${index}`}
-        onChange={handleChange(`panel${index}`)}
+        expanded={expanded === `panel${journalEntryId}`}
+        onChange={handleChange(`panel${journalEntryId}`)}
       >
         <AccordionSummary
-          aria-controls={`panel${index}bh-content`}
-          id={`panel${index}bh-header`}
+          aria-controls={`panel${journalEntryId}bh-content`}
+          id={`panel${journalEntryId}bh-header`}
         >
           <div className={classes.root}>
             <Paper elevation={1} className={classes.paper}>
               <Grid container wrap='nowrap'>
-                <Grid item onClick={handleClick}>
+                <Grid item>
                   <Avatar
                     style={{ backgroundColor: 'white', fontSize: '2em' }}
                     className='journal-mood'
@@ -99,8 +106,10 @@ export default function JournalAccordion({
                     {emotion[0].emotion}
                   </Avatar>
                 </Grid>
-                <Grid item xs zeroMinWidth onClick={handleClick}>
-                  <p className='journal-date'>{journalDate}</p>
+                <Grid item xs zeroMinWidth>
+                  <Typography className={classes.date} noWrap>
+                    {journalDate}
+                  </Typography>
                   <Typography noWrap>{text}</Typography>
                 </Grid>
               </Grid>
@@ -117,14 +126,14 @@ export default function JournalAccordion({
                     <Typography>{text}</Typography>
                     <FavoriteButton
                       handleFavorite={handleFavorite}
-                      key={index}
                       favoriteColor={favorite ? '#DC143C' : 'black'}
+                      journalEntryId={journalEntryId}
                     />
                     <br />
                     <br />
                     <DeleteButton
-                      handleDelete={() => handleDelete(index)}
-                      key={index}
+                      handleDelete={handleDelete}
+                      journalEntryId={journalEntryId}
                     />
                   </Grid>
                 </CardContent>

@@ -1,27 +1,26 @@
-import { PostAddOutlined } from '@material-ui/icons';
 import React, { useState, useEffect } from 'react';
-
 import { useAppContext } from '../../AppContext';
 import JournalAccordion from '../Acordian';
 import H1 from '../DisplayText/H1Text/index';
-import JournalContainer from '../JournalContainer/index';
-import dummyJournal from './DummyJournal';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const user_id = 1;
 
 // get all post
 function JournalView() {
-  const { user, isAuthenticated, isLoading, accessToken } = useAppContext();
+  const { isAuthenticated, isLoading, accessToken, userData } = useAppContext();
   const [journalDisplay, setJournalDisplay] = useState([]);
+  const [journalDelete, setJournalDelete] = useState(false);
+  const [journalDeleteId, setJournalDeleteId] = useState(null);
   const [sortConstraint, setSortConstraint] = useState('Newest to oldest');
   const [showFavorites, setShowFavorites] = useState(false);
+  let userId = userData?.id;
 
   useEffect(() => {
-    if (user_id) {
+    if (userId) {
       async function getJournalById() {
-        const res = await fetch(`${BACKEND_URL}/moodsandposts/${user_id}`);
+        const res = await fetch(`${BACKEND_URL}/moodsandposts/${userId}`);
+        // if Access Token Middleware is added to moods and posts BE -need to add header with AT
         const data = await res.json();
         const { payload } = data;
         for (let post of payload) {
@@ -29,13 +28,10 @@ function JournalView() {
         }
 
         setJournalDisplay(payload);
-
-        console.log(data); // all of the records in the moodsandpost table from db
-        console.log(data.payload[0]); // to check one record from the table.  Need to use a map method in the return to display all records
       }
       getJournalById();
     }
-  }, []);
+  }, [userId]);
 
   function filterByFavorite() {
     setShowFavorites(!showFavorites);
@@ -45,32 +41,55 @@ function JournalView() {
     setSortConstraint(event.target.value);
   }
 
-  // do we need a custom hook to get out journal and emotion data and store as a state
-  // Need to set ket as the unique post key to add favourite, delete functions and be able to view
-
+  //Delete journal entry
   function handleDelete(postId) {
-    // delete request to the database
-    // useEffect(() => {
-    console.log('handling delete');
-    async function deleteJournalIdFromDB() {
-      const requestOptions = {
-        method: 'DELETE',
-      };
-      console.log(requestOptions);
-      fetch(`${BACKEND_URL}/posts/${postId}`, requestOptions);
+    console.log('handling delete with postId:', postId);
+    setJournalDeleteId(postId);
+    setJournalDelete(true);
+  }
+
+  useEffect(() => {
+    if (!journalDelete) {
+      return;
     }
-    deleteJournalIdFromDB();
-    // }, [postId]);
-  }
+    const abortController = new AbortController();
+    fetch(`${BACKEND_URL}/posts/${journalDeleteId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/JSON',
+        Authorization: `Bearer ${accessToken}`,
+      },
+      signal: abortController.signal,
+    })
+      .then((response) => response.json())
+      .then(() => setJournalDelete(false))
+      .catch((e) => {
+        console.error(e);
+        setJournalDelete(false);
+      })
+      .then(() => {
+        document.location.reload();
+      });
+    return () => abortController.abort();
+  }, [journalDelete]);
 
+  //Patch favourite journal entry
   function handleFavorite(postId) {
-    // patch request to the database
-  }
-
-  // need to make post appear when it is clicked
-  function handleJournalClick() {
-    console.log('need to make full post appear');
-    // onClick - could make a card display -can have different media types - could use lots of useState()..... boolean
+    async function patchFave() {
+      const res = await fetch(`${BACKEND_URL}/posts/${postId}`, {
+        method: 'PATCH',
+        headers: {
+          'content-type': 'application/JSON',
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          favorite: true,
+        }),
+      });
+      const data = await res.json();
+      console.log(data);
+    }
+    patchFave();
   }
 
   if (isLoading) {
@@ -80,7 +99,7 @@ function JournalView() {
   return (
     isAuthenticated && (
       <div>
-        <H1 text={`${user.given_name}'s journey so far....`} />
+        <H1 text={`${userData?.name}'s journey so far....`} />
         <button onClick={filterByFavorite}>
           {showFavorites ? 'Show All' : 'Show Favorites'}
         </button>
@@ -110,7 +129,6 @@ function JournalView() {
             .map((journalEntry, index) => (
               <JournalAccordion
                 text={journalEntry.text}
-                handleClick={handleJournalClick}
                 emotionNumber={journalEntry.mood}
                 journalDate={journalEntry.date}
                 index={index}
