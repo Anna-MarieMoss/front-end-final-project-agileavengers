@@ -29,20 +29,18 @@ function Trophy() {
     async function getAllTrophies() {
       const res = await fetch(`${BACKEND_URL}/trophies/${user_Id}`);
       const data = await res.json();
-      // console.log( `data is  ${JSON.stringify(data)}`);
-
+ 
       console.log(`data payload is `, data.payload);
-      // console.log(`data is ${JSON.stringify(data.payload[0].mood)}`)
       
       setAward(data.payload);
       console.log(`award state is`, award);
-      //chartConfig.data.datasets[0].data = graphData.map((x) => x.mood);
+      ;
     }
     getAllTrophies()
    };
-  }, [award]);
+  }, [setAward]);
   //
-
+console.log(`updated state is`, award )
   if (isLoading) {
     return <div>Loading ...</div>;
   }
@@ -56,6 +54,7 @@ function Trophy() {
             image={trophy.image}
             id={trophy.id}
             color={trophy.color}
+            
           />
         ))}
       </div>
