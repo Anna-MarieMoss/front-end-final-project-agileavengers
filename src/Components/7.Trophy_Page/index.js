@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import React, { useEffect, useContext } from 'react';
-=======
-import React, { useEffect, useState } from 'react';
->>>>>>> devBranch
+import React, { useEffect, useContext , useState} from 'react';
 import { useAppContext } from '../../AppContext';
 import { Trophies } from './Trophies.js'; //need to add additional trophies to this file
 import TrophyButton from '../Buttons/TrophyButton/index';

@@ -19,11 +19,9 @@ import 'react-toastify/dist/ReactToastify.css';
  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function TrophyButton({ image, id, color }) {
-<<<<<<< HEAD
-  const theme = useContext(ThemeContext);
-=======
-  const [click, setClick] = useState(0)
->>>>>>> devBranch
+const theme = useContext(ThemeContext);
+const [click, setClick] = useState(0)
+
   // trying new toast alerts
   // const notify = () => {
   //   toast('Wow so easy !');
@@ -108,7 +106,7 @@ function TrophyButton({ image, id, color }) {
   return (
     <div id={theme}>
       <ToastContainer
-         transition={Slide} // changes the transition to a slide rather than a bounce.  Alerts are rendering multiple times at the moment due to the page re redering all of the buttons.  Look into how you can stop this happening but keeep the cool styling tomorrow.
+        transition={Slide} // changes the transition to a slide rather than a bounce.  Alerts are rendering multiple times at the moment due to the page re redering all of the buttons.  Look into how you can stop this happening but keeep the cool styling tomorrow.
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
@@ -118,21 +116,17 @@ function TrophyButton({ image, id, color }) {
         draggable
         pauseOnHover
       />
-<<<<<<< HEAD
       <button
         id={theme}
+        className = 'trophyButton'
         style={{ border: '0px', padding: '0px' }}
-=======
-      <button className = 'trophyButton'
-        style={{ backgroundColor: 'white', border: '0px' }}
->>>>>>> devBranch
+
         // onClick={() => {
         //   handleTrophy(color);
         // }}
         onClick={() => {
           handleTrophy(color);
 
-          
           // toaster.notify(`Congratulations, you've mastered a new skill!`, {
           //   duration: 2000,
           // });
