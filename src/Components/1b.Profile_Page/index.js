@@ -7,8 +7,10 @@ import H2 from '../DisplayText/H2Text';
 import SubmitButton from '../Buttons/SubmitButton/index';
 import { useAppContext } from '../../AppContext';
 import { useHistory } from 'react-router';
+
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
@@ -50,6 +52,7 @@ function Profile() {
         .then((data) => {
           if (data?.logins_count < 1) {
             setnewLogIn(true);
+            history.push('/emotions');
           }
         })
         .catch((e) => {
