@@ -138,7 +138,7 @@ function TrophyButton({ name, path, id, color, awarded }) {
       <button
         id={theme}
         className='trophyButton'
-        style={{ backgroundColor: 'white', border: '0px' }}
+        style={{ border: '0px', strokeOpacity: '0' }}
         // onClick={() => {
         //   handleTrophy(color);
         // }}
