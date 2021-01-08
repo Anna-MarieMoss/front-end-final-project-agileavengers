@@ -14,22 +14,21 @@ function JournalView() {
   const [journalDeleteId, setJournalDeleteId] = useState(null);
   let userId = userData?.id;
 
-  console.log('user data id', userData.id);
-
   useEffect(() => {
-    if (userData) {
+    if (userId) {
       async function getJournalById() {
+        console.log(userId, 'userId');
+        console.log(userData, 'userData in the journal page');
         const res = await fetch(`${BACKEND_URL}/moodsandposts/${userId}`);
         // if Access Token Middleware is added to moods and posts BE -need to add header with AT
         const data = await res.json();
         const { payload } = data;
         setJournalDisplay(payload);
+        console.log(payload);
       }
       getJournalById();
     }
-  }, []);
-
-  console.log('this is journalDispaly', journalDisplay);
+  }, [userId]);
 
   // do we need a custom hook to get out journal and emotion data and store as a state
   // Need to set ket as the unique post key to add favourite, delete functions and be able to view
@@ -66,7 +65,21 @@ function JournalView() {
   }, [journalDelete]);
 
   function handleFavorite(postId) {
-    // patch request to the database
+    async function patchFave() {
+      const res = await fetch(`${BACKEND_URL}/posts/${postId}`, {
+        method: 'PATCH',
+        headers: {
+          'content-type': 'application/JSON',
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          favorite: true,
+        }),
+      });
+      const data = await res.json();
+      console.log(data);
+    }
+    patchFave();
   }
 
   // need to make post appear when it is clicked
@@ -78,6 +91,7 @@ function JournalView() {
   if (isLoading) {
     return <div>Loading ...</div>;
   }
+
   return (
     isAuthenticated && (
       <div>
@@ -97,6 +111,7 @@ function JournalView() {
               audioSource={journalEntry.audio}
               imgSource={journalEntry.image}
               vidSource={journalEntry.video}
+              key={journalEntry.id}
             />
           ))}
         </div>

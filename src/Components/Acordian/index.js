@@ -70,9 +70,6 @@ export default function JournalAccordion({
   //const [postFavorite, setPostFavorite] = useState(false)
   //
 
-
-  
-
   // Matching the Emoji to Mood Number
   const emotion = emotionsArray.filter((em) => {
     if (em.number === emotionNumber) {
@@ -129,6 +126,7 @@ export default function JournalAccordion({
                     <FavoriteButton
                       handleFavorite={handleFavorite}
                       favoriteColor={favorite ? '#DC143C' : 'black'}
+                      journalEntryId={journalEntryId}
                     />
                     <br />
                     <br />
