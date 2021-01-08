@@ -9,17 +9,8 @@ import { useHistory } from 'react-router';
 import ToastAlert from '../ToastAlerts/toastAlerts';
 import toaster from 'toasted-notes';
 import 'toasted-notes/src/styles.css';
-<<<<<<< HEAD
-
-// import Button from '../Buttons/Button/index';
 import { Button } from '@material-ui/core';
 
-//this will need to link to user iD
-const userId = 1;
-
-=======
-import Button from '../Buttons/Button/index';
->>>>>>> devBranch
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
