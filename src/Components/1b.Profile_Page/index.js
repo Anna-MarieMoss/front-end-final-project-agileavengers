@@ -23,8 +23,10 @@ function Profile() {
   const theme = useContext(ThemeContext);
   //Auth0
   const { user, isAuthenticated, isLoading, accessToken } = useAppContext();
+
   // History from React Router
   const history = useHistory();
+
   // Material UI
   //const classes = useStyles();
   // Our States
@@ -32,6 +34,31 @@ function Profile() {
   const [myersBriggs, setMyersBriggs] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
   const [submit, setSubmit] = useState(null);
+
+  const [newLogIn, setnewLogIn] = useState(false);
+
+  // Auth0  - setting logincount
+  useEffect(() => {
+    if (user) {
+      const domain = 'dev-ip1x4wr7.eu.auth0.com';
+
+      fetch(`https://${domain}/api/v2/users/${user?.sub}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data?.logins_count < 1) {
+            setnewLogIn(true);
+            history.push('/emotions');
+          }
+        })
+        .catch((e) => {
+          console.error(e);
+        });
+    }
+  }, [user, accessToken]);
 
   useEffect(() => {
     if (user?.given_name) {
@@ -41,8 +68,6 @@ function Profile() {
 
   function handleSubmit() {
     setSubmit(true);
-
-    console.log('submit hit');
     // once submted redirect to Journal View Page
     history.push('/emotions');
   }
@@ -73,6 +98,7 @@ function Profile() {
       history.push('/emotions');
     }
   }, [submit]);
+
   return (
     <div id={theme} className={'profile'}>
       <H1 text={'Profile'} />
@@ -101,6 +127,7 @@ function Profile() {
               }}
             />
           )}
+
           <TextField
             id='outlined-search'
             label='Myers-Briggs'
@@ -119,24 +146,3 @@ function Profile() {
   );
 }
 export default Profile;
-// name and email for profile login
-/* <TextField
-id='outlined-search'
-label='Name'
-type='text'
-variant='outlined'
-onChange={(event) => {
-  const { value } = event.target;
-  setName(value);
-}}
-/>
-<TextField
-id='outlined-search'
-label='Email'
-type='email'
-variant='outlined'
-onChange={(event) => {
-  const { value } = event.target;
-  setEmail(value);
-}}
-/> */

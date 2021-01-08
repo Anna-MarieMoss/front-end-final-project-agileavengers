@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import LogoutButton from '../Buttons/LogOutButton/index';
-import H1 from '../DisplayText/H1Text/index';
+import H2 from '../DisplayText/H2Text/index';
 import SoCLogo from '../Pictures/SocLogo/index';
 import { useAppContext } from '../../AppContext';
 import { ThemeContext } from '../../ThemeContext';
@@ -9,15 +9,15 @@ import './Logout.css';
 
 function Logout() {
   const theme = useContext(ThemeContext);
-  const { user, isAuthenticated, isLoading } = useAppContext();
+  const { userData, isAuthenticated, isLoading } = useAppContext();
   // if (isLoading) {
   //     return <div>Loading ...</div>;
   //   }
 
   return (
     <div id={theme} className={'logout'}>
-      <H1
-        text={`Great Stuff ${user.given_name}! Don't forget to log back in tomorrow to update your journey`}
+      <H2
+        text={`Great Stuff ${userData?.name}! Don't forget to log back in tomorrow to update your journey`}
       />
       <SoCLogo style={{ width: '200px', margin: '20px' }} />
       <br />

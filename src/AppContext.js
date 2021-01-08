@@ -29,31 +29,33 @@ export function AppProvider({ children }) {
     { emotion: '😍', number: 5 },
   ];
 
-  // Auth0 Custome Hook - setting Metadata
+  // Auth0 get token
   useEffect(() => {
-    const getAccessToken = async () => {
-      const domain = 'dev-ip1x4wr7.eu.auth0.com';
+    if (user) {
+      const getAccessToken = async () => {
+        const domain = 'dev-ip1x4wr7.eu.auth0.com';
 
-      try {
-        const accessToken = await getAccessTokenSilently({
-          audience: `https://${domain}/api/v2/`,
-          scope: 'read:current_user',
-        });
+        try {
+          const accessToken = await getAccessTokenSilently({
+            audience: `https://${domain}/api/v2/`,
+            scope: 'read:current_user',
+          });
 
-        setaccessToken(accessToken);
-      } catch (e) {
-        console.log(e.message);
-      }
-    };
-
-    getAccessToken();
-  }, []);
+          setaccessToken(accessToken);
+        } catch (e) {
+          console.log(e.message);
+        }
+      };
+      getAccessToken();
+    }
+  }, [user, getAccessTokenSilently]);
 
   //Get user profile based on email (Auth0 response)
   useEffect(() => {
-    if (user) {
+    if (user?.email && accessToken) {
+      console.log('Im getting user data');
       async function getProfile() {
-        const res = await fetch(`${BACKEND_URL}/users/${user.email}`, {
+        const res = await fetch(`${BACKEND_URL}/users/${user?.email}`, {
           headers: {
             'content-type': 'application/JSON',
             Authorization: `Bearer ${accessToken}`,
@@ -61,10 +63,11 @@ export function AppProvider({ children }) {
         });
         const data = await res.json();
         setuserData(data.payload[0]); //expect to get start date
+        console.log(data.payload[0], 'userdata from email fetch');
       }
       getProfile();
     }
-  }, [accessToken]);
+  }, [user, accessToken]);
 
   // Get the current week based on the start date from our DB
   useEffect(() => {

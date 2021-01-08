@@ -9,6 +9,7 @@ import { useHistory } from 'react-router';
 import ToastAlert from '../ToastAlerts/toastAlerts';
 import toaster from 'toasted-notes';
 import 'toasted-notes/src/styles.css';
+<<<<<<< HEAD
 
 // import Button from '../Buttons/Button/index';
 import { Button } from '@material-ui/core';
@@ -16,18 +17,22 @@ import { Button } from '@material-ui/core';
 //this will need to link to user iD
 const userId = 1;
 
+=======
+import Button from '../Buttons/Button/index';
+>>>>>>> devBranch
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 export default function JournalEntry() {
   // Use Context
   const {
-    user,
     isAuthenticated,
     isLoading,
     accessToken,
     userData,
   } = useAppContext();
+
+  const userId = userData?.id;
 
   // History from React Router
   const history = useHistory();
@@ -136,7 +141,7 @@ export default function JournalEntry() {
   return (
     isAuthenticated && (
       <div className='wrapper'>
-        <H1 text={`${user.given_name} how was your day today?`} />
+        <H1 text={`${userData?.name} how was your day today?`} />
         <H2 text={`What did you learn today?`} />
         <ToastAlert />
         <div className='container'>

@@ -13,7 +13,6 @@ import Timeline from './Components/6.Timeline_Page';
 import Trophy from './Components/7.Trophy_Page';
 import Stats from './Components/8.Stats_Page';
 import Profile from './Components/1b.Profile_Page';
-import LogIn from './Components/1.Login_Page/index';
 import Logout from './Components/9.Logout_Page/index';
 // Material UI Imports
 import {

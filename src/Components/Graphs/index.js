@@ -1,85 +1,7 @@
-// import React, from 'react';
-// import Paper from '@material-ui/core/Paper';
-// import {
-//   Chart,
-//   BarSeries,
-//   Title,
-//   ArgumentAxis,
-//   ValueAxis,
-// } from '@devexpress/dx-react-chart-material-ui';
-
-// import { Animation} from '@devexpress/dx-react-chart';
-
-// // const [mood, setMood] = useState([]);
-// function Graph () {
-// const data = [
-//   { day: 'monday', mood: 5 },
-//   { day: 'tuesday', mood: 2 },
-//   { day: 'wednesday', mood: 3 },
-//   { day: 'thursday', mood: 1 },
-//   { day: 'friday', mood: 3 }
-
-// ];
-
-// const wweklyData = [
-//     { week: 'one', mood: 5 },
-//     { day: 'two', mood: 2 },
-//     { day: 'three', mood: 3 },
-//     { day: 'four', mood: 1 },
-//     { day: 'five', mood: 3 }
-
-//   ];
-// //
-
-// async function moodChart(
-//   userId,
-//   mood,
-//   date
-// ) {
-//   try {
-//     const res = await fetch(`${BACKEND_URL}/moods`, {
-//       method: 'get',
-//       body: JSON.stringify({
-//         user_id: userId,
-//         mood: mood,
-//         date: date
-//       }),
-//       headers: { 'content-type': 'application/JSON' },
-//     });
-//     console.log(res);
-//     const data = await res.json();
-//     console.log(data);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-
-// //
-
-//     return (
-//       <Paper>
-//         <Chart
-
-//         >
-//           <ArgumentAxis />
-//           <ValueAxis max={7} />
-
-//           <BarSeries
-//             valueField="mood"
-//             argumentField="day"
-//           />
-//           <Title text="Mood chart" />
-//           <Animation />
-//         </Chart>
-//       </Paper>
-//     );
-//   }
-
-// export default Graph
-
 import React, { useEffect, useRef, useState } from 'react';
 import Chartjs from 'chart.js';
 import { Button } from '@material-ui/core';
+import { useAppContext } from '../../AppContext';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -88,11 +10,12 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 //const userId = 1;
 
 const Graph = () => {
+  const { isAuthenticated, isLoading, accessToken, userData } = useAppContext();
   const chartContainer = useRef(null);
   const [chartInstance, setChartInstance] = useState(null);
   const [graphData, setGraphData] = useState([0, 0, 0, 0, 0]);
   const [showGraph, setShowGraph] = useState(false);
-
+  let userId = userData?.id;
   //graph
 
   const randomInt = () => Math.floor(Math.random() * (5 - 1 + 1)) + 1;
@@ -132,7 +55,12 @@ const Graph = () => {
 
   useEffect(() => {
     async function getMood() {
-      const res = await fetch(`${BACKEND_URL}/moods/1`);
+      const res = await fetch(`${BACKEND_URL}/moods/${userId}`, {
+        headers: {
+          'content-type': 'application/JSON',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
       const data = await res.json();
       // console.log( `data is  ${JSON.stringify(data)}`);
 
@@ -223,3 +151,82 @@ const Graph = () => {
 };
 
 export default Graph;
+
+// import React, from 'react';
+// import Paper from '@material-ui/core/Paper';
+// import {
+//   Chart,
+//   BarSeries,
+//   Title,
+//   ArgumentAxis,
+//   ValueAxis,
+// } from '@devexpress/dx-react-chart-material-ui';
+
+// import { Animation} from '@devexpress/dx-react-chart';
+
+// // const [mood, setMood] = useState([]);
+// function Graph () {
+// const data = [
+//   { day: 'monday', mood: 5 },
+//   { day: 'tuesday', mood: 2 },
+//   { day: 'wednesday', mood: 3 },
+//   { day: 'thursday', mood: 1 },
+//   { day: 'friday', mood: 3 }
+
+// ];
+
+// const wweklyData = [
+//     { week: 'one', mood: 5 },
+//     { day: 'two', mood: 2 },
+//     { day: 'three', mood: 3 },
+//     { day: 'four', mood: 1 },
+//     { day: 'five', mood: 3 }
+
+//   ];
+// //
+
+// async function moodChart(
+//   userId,
+//   mood,
+//   date
+// ) {
+//   try {
+//     const res = await fetch(`${BACKEND_URL}/moods`, {
+//       method: 'get',
+//       body: JSON.stringify({
+//         user_id: userId,
+//         mood: mood,
+//         date: date
+//       }),
+//       headers: { 'content-type': 'application/JSON' },
+//     });
+//     console.log(res);
+//     const data = await res.json();
+//     console.log(data);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
+
+// //
+
+//     return (
+//       <Paper>
+//         <Chart
+
+//         >
+//           <ArgumentAxis />
+//           <ValueAxis max={7} />
+
+//           <BarSeries
+//             valueField="mood"
+//             argumentField="day"
+//           />
+//           <Title text="Mood chart" />
+//           <Animation />
+//         </Chart>
+//       </Paper>
+//     );
+//   }
+
+// export default Graph

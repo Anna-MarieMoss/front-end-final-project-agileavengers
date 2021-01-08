@@ -1,11 +1,12 @@
 import React from 'react';
 import { useAppContext } from '../../AppContext';
-import H1 from '../DisplayText/H1Text/index';
+import H2 from '../DisplayText/H2Text/index';
 import Graph from '../Graphs/index';
 import './Stats.css';
+import { Typography } from '@material-ui/core';
 
 function Stats() {
-  const { user, isAuthenticated, isLoading, userData } = useAppContext();
+  const { isAuthenticated, isLoading, userData } = useAppContext();
 
   // if (isLoading) {
   //   return <div>Loading ...</div>;
@@ -13,9 +14,11 @@ function Stats() {
 
   return (
     <div className={'stats'}>
-      <H1 text={`${user?.name}'s Stats`} />
-      <p> (Mood chart )</p>
-      <Graph />.<p> (Add in number of posts here!?!)</p>
+      <H2 text={`${userData?.name}'s Stats`} />
+      <Typography variant='h6'>
+        Display your mood throughout the bootcamp
+      </Typography>
+      <Graph />
     </div>
   );
 }

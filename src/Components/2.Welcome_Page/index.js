@@ -2,8 +2,13 @@ import React, { useContext } from 'react';
 import H1 from '../DisplayText/H1Text/index';
 import SoCLogo from '../Pictures/SocLogo/index';
 import LoginButton from '../Buttons/LogInButton/index';
+<<<<<<< HEAD
 import './WelcomePage.css';
 import { ThemeContext } from '../../ThemeContext';
+=======
+
+
+>>>>>>> devBranch
 function Welcome() {
   const theme = useContext(ThemeContext);
   return (
