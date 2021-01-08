@@ -9,13 +9,7 @@ import { useHistory } from 'react-router';
 import ToastAlert from '../ToastAlerts/toastAlerts';
 import toaster from 'toasted-notes';
 import 'toasted-notes/src/styles.css';
-
 import Button from '../Buttons/Button/index';
-
-
-//this will need to link to user iD
-
-
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -28,7 +22,7 @@ export default function JournalEntry() {
     userData,
   } = useAppContext();
 
-  const userId = userData.id;
+  const userId = userData?.id;
 
   // History from React Router
   const history = useHistory();

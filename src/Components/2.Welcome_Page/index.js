@@ -3,6 +3,7 @@ import H1 from '../DisplayText/H1Text/index';
 import SoCLogo from '../Pictures/SocLogo/index';
 import LoginButton from '../Buttons/LogInButton/index';
 
+
 function Welcome() {
 
   return (
