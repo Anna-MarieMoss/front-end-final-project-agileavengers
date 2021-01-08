@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useAppContext } from '../../AppContext';
-import { Trophies } from './Trophies.js'; //need to add additional trophies to this file
+// import { Trophies } from './Trophies.js'; //need to add additional trophies to this file
 import TrophyButton from '../Buttons/TrophyButton/index';
 import H1 from '../DisplayText/H1Text/index';
 import { ThemeContext } from '../../ThemeContext';
@@ -20,52 +20,48 @@ function Trophy() {
   } = useAppContext();
   const [award, setAward] = useState();
 
-  let user_Id = 1; //we need to get this from the app context
+  let user_Id = userData?.id; //we need to get this from the app context
 
-  // useEffect(() => {
-  //   async function getTrophies() {
-  //     const res = await fetch(`${BACKEND_URL}/trophies/${user_Id}`); //Need to check correct URL
-  //     const { payload } = await res.json();
-  //     console.log(payload); //this would return all trophies data
-  //   }
-  //   getTrophies();
-  // }, []);
-
-  // get trophy fetch
   useEffect(() => {
     if (user_Id) {
       async function getAllTrophies() {
-        const res = await fetch(`${BACKEND_URL}/trophies/${user_Id}`);
+        const res = await fetch(`${BACKEND_URL}/trophies/${user_Id}`, {
+          headers: {
+            'content-type': 'application/JSON',
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
         const data = await res.json();
-
+        // console.log( `data is  ${JSON.stringify(data)}`);
         console.log(`data payload is `, data.payload);
-
+        // console.log(`data is ${JSON.stringify(data.payload[0].mood)}`)
         setAward(data.payload);
         console.log(`award state is`, award);
+        //chartConfig.data.datasets[0].data = graphData.map((x) => x.mood);
       }
       getAllTrophies();
     }
   }, [setAward]);
-  //
-  console.log(`updated state is`, award);
+
   if (isLoading) {
     return <div>Loading ...</div>;
   }
   return (
     isAuthenticated && (
       <div id={theme}>
-        <H1 text={`${user?.given_name}'s Trophy Cabinet`} />
+        <H1 text={`${userData?.name}'s Trophy Cabinet`} />
         <p> (Add in a grid of the skill buttons with logo imgs)</p>
-        {Trophies.map((trophy) => (
+        {award?.map((trophy) => (
           <TrophyButton
-            image={trophy.image}
+            path={trophy.path}
             id={trophy.id}
+            name={trophy.name}
             color={trophy.color}
+            awarded={trophy.awarded}
           />
         ))}
       </div>
     )
   );
 }
-
 export default Trophy;
