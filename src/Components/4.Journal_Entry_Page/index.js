@@ -139,10 +139,10 @@ export default function JournalEntry() {
   return (
     isAuthenticated && (
       <div className='wrapper'>
+      <div className='container'>
         <H1 text={`${userData?.name} how was your day today?`} />
         <H2 text={`What did you learn today?`} />
        <br></br>
-        <div className='container'>
         <div id='Emma-New-Form'>
           <TextField
                 id="outlined-multiline-static"
@@ -259,17 +259,18 @@ export default function JournalEntry() {
               controls
             />
           )}
-        </div>
-        <Button
+          <Button
           handleClick={() => {
             history.push('/journalview');
           }}
           text='Skip'
           variant='outlined'
           color='secondary'
+          className='btn'
         >
           Skip
         </Button>
+        </div>
       </div>
     )
   );

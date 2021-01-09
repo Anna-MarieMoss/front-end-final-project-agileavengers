@@ -82,9 +82,6 @@ export default function JournalAccordion({
     setExpanded(isExpanded ? panel : false);
   };
 
-  // Ask Anna-Marie about React Audio Player/Video Player
-  // Make the Expanded Post a Card
-
   return (
     <div className={classes.root}>
       <Accordion

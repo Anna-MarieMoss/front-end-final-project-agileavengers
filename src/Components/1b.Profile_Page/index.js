@@ -134,7 +134,7 @@ useEffect(() => {
             }}
           />
           <DatePicker values={selectedDate} handleDate={setSelectedDate} />
-          {selectedDate && <SubmitButton handleClick={handleSubmit} />}
+          {selectedDate && <SubmitButton className='btn' handleClick={handleSubmit} />}
         </div>
       </form>
     </div>

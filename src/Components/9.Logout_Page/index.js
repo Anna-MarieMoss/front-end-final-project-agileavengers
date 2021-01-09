@@ -21,7 +21,7 @@ function Logout() {
       />
       <SoCLogo style={{ width: '200px', margin: '20px' }} />
       <br />
-      <LogoutButton />
+      <LogoutButton className='btn'/>
     </div>
   );
 }

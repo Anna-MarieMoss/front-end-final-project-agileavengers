@@ -64,6 +64,7 @@ function Emotions() {
   return (
     isAuthenticated && (
       <div className={theme}>
+      <div className='container'>
         <H1 text={`Hi ${userData?.name}`} />
         <H2 text={'How are you feeling today?'} />
 
@@ -77,6 +78,7 @@ function Emotions() {
           ))}
         </div>
         <p>{quoteData[Math.floor(Math.random() * quoteData.length)].quote}</p>
+      </div>
       </div>
     )
   );

@@ -70,10 +70,12 @@ function App() {
   };
   //Chooses correct CSS id name based on the darkState
   const checkDarkState = darkState ? 'darkTheme' : 'lightTheme';
+  
   //Handles the Expanded Navigation
   const navClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  
   //Handles the Selected Expanded Navigation
   const navClose = () => {
     setAnchorEl(null);
