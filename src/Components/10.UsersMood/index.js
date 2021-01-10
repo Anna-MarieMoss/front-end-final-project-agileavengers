@@ -15,7 +15,7 @@ import {
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function UsersMood() {
-  const { isAuthenticated, isLoading, accessToken, userData, user } = useAppContext();
+  const { isAuthenticated, isLoading, accessToken, } = useAppContext();
   const [selectedDate, setSelectedDate] = useState('');
   const [usersMoodResponse, setUsersMoodResponse] = useState([]);
   const [chartInstance, setChartInstance] = useState(null);
@@ -113,7 +113,6 @@ useEffect(() => {
             });
             const data = await res.json();
             // console.log( `data is  ${JSON.stringify(data)}`);
-      
             console.log(`data payload is `, data.payload);
             // console.log(`data is ${JSON.stringify(data.payload[0].mood)}`)
             setUsersMoodResponse(data.payload);
