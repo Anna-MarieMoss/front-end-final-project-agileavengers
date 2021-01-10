@@ -2,7 +2,6 @@ import React, {useState, useEffect, useRef} from 'react';
 import { useAppContext } from '../../AppContext';
 import Chartjs from 'chart.js';
 import H2 from '../DisplayText/H2Text/index';
-import Graph from '../Graphs/index';
 import { Typography } from '@material-ui/core';
 import 'date-fns';
 import Grid from '@material-ui/core/Grid';
