@@ -31,11 +31,13 @@ function Timeline() {
   return (
     isAuthenticated && (
     <div>
+    <div className='container'>
       <H1 text={'Your Timeline'}/>
       <H2 text={congratsMessage}/>
       <ThemeProvider>
         <ProgressBar week={currentWeek}/>
       </ThemeProvider>
+    </div>
     </div>
   ));
 }

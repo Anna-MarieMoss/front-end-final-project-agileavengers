@@ -55,7 +55,7 @@ const Graph = () => {
 
   useEffect(() => {
     async function getMood() {
-      const res = await fetch(`${BACKEND_URL}/moods/${userId}`, {
+      const res = await fetch(`${BACKEND_URL}/posts/${userId}`, {
         headers: {
           'content-type': 'application/JSON',
           Authorization: `Bearer ${accessToken}`,
@@ -136,10 +136,10 @@ const Graph = () => {
   //
   return (
     <div>
-      <Button onClick={onButtonClick} variant='outlined' color='primary'>
+      <Button onClick={onButtonClick} className='btn' variant='outlined' color='primary'>
         Switch View
       </Button>
-      <Button onClick={handleMood} variant='outlined' color='primary'>
+      <Button onClick={handleMood} className='btn' variant='outlined' color='primary'>
         Get Mood Data
       </Button>
       <canvas

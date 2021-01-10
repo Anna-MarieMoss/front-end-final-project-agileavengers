@@ -3,34 +3,18 @@
 }
 .container {
   padding: 10%;
-  border: 5px solid rgb(15, 95, 95);
-  background-color: rgb(32, 202, 202);
-  width: 80%;
+  width: 85%;
   padding: 0 20px;
-  border-radius: 20px;
+  /* border-radius: 20px; */
   display: flex;
   flex-direction: column;
-  /* align-self: center; */
+  align-self: center;
   margin: 10%;
   font-size: 1em;
 }
 
-/* .align-right {
-  justify-self: right;
-} */
-
-.journalButton {
-  color: snow;
-  border: 3px solid snow;
-  background-color: rgb(15, 95, 95);
-  width: auto;
-  height: auto;
-  padding: 0 5%;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-  margin: auto;
+.file-entry {
+  margin: 1em;
 }
 
 fieldset {

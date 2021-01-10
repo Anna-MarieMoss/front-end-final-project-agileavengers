@@ -16,7 +16,6 @@ function Trophy() {
     isAuthenticated,
     isLoading,
     accessToken,
-    user,
   } = useAppContext();
   const [award, setAward] = useState();
 
@@ -49,8 +48,9 @@ function Trophy() {
   return (
     isAuthenticated && (
       <div id={theme}>
+      <div className='container'>
         <H1 text={`${userData?.name}'s Trophy Cabinet`} />
-        <p> (Add in a grid of the skill buttons with logo imgs)</p>
+        <div classname='trophy-display'>
         {award?.map((trophy) => (
           <TrophyButton
             path={trophy.path}
@@ -60,6 +60,8 @@ function Trophy() {
             awarded={trophy.awarded}
           />
         ))}
+        </div>
+        </div>
       </div>
     )
   );

@@ -5,22 +5,26 @@ import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
 import './journal.css';
 import { useHistory } from 'react-router';
+import TrophyButton from '../Buttons/TrophyButton/index';
+
+// MaterialUI Components
 import { Button } from '@material-ui/core';
-import ToastAlert from '../ToastAlerts/toastAlerts';
+import TextField from '@material-ui/core/TextField';
+
+//Alerts
 import toaster from 'toasted-notes';
 import 'toasted-notes/src/styles.css';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
-export default function JournalEntry() {
+export default function JournalEntry(chosenEmotion) {
   // Use Context
   const {
     isAuthenticated,
     isLoading,
     accessToken,
     userData,
-    user,
   } = useAppContext();
 
   const userId = userData?.id;
@@ -87,16 +91,18 @@ export default function JournalEntry() {
       text,
       previewImgSource,
       previewVidSource,
-      previewAudioSource
+      previewAudioSource,
     );
   };
+
+console.log('this is my chosen emotion:', chosenEmotion.emotion);
 
   async function postJournalEntry(
     userId,
     text,
     previewImgSource,
     previewVidSource,
-    previewAudioSource
+    previewAudioSource,
   ) {
     try {
       const res = await fetch(`${BACKEND_URL}/posts`, {
@@ -107,6 +113,7 @@ export default function JournalEntry() {
           image: previewImgSource,
           video: previewVidSource,
           audio: previewAudioSource,
+          mood: chosenEmotion.emotion,
         }),
         headers: {
           'content-type': 'application/JSON',
@@ -119,9 +126,16 @@ export default function JournalEntry() {
     } catch (error) {
       console.error(error);
     }
+    toaster.notify(
+      `Yay! You've successfully added to your journal!`,
+      {
+        duration: 2000,
+      }
+    )
     // once submted redirect to Journal View Page
     history.push('/journalview');
   }
+
   if (isLoading) {
     return <div>Loading ...</div>;
   }
@@ -129,74 +143,98 @@ export default function JournalEntry() {
   return (
     isAuthenticated && (
       <div className='wrapper'>
-        <H1 text={`${user?.given_name} how was your day today?`} />
+      <div className='container'>
+        <H1 text={`${userData?.name} how was your day today?`} />
         <H2 text={`What did you learn today?`} />
-        <ToastAlert />
-        <div className='container'>
-          <form onSubmit={handleSubmitFile}>
-            <h2>Create post:</h2>
-            <h2>{text}</h2>
+       <br></br>
+        <div id='Emma-New-Form'>
+          <TextField
+                id="outlined-multiline-static"
+                label="Journal Entry"
+                fullWidth='true'
+                multiline
+                rows={4}
+                defaultValue="Default Value"
+                variant="outlined"
+                color="primary"
+                onChange={(event) => {
+                      const { value } = event.target;
+                      setText(value);}}
+                value={text}
+                className='form-input'
+                placeholder='How are you doing today?'
+          />
+          <div className='file-entry'>
             <input
-              type='text'
-              name='text'
-              onChange={(event) => setText(event.target.value)}
-              value={text}
-              className='form-input'
-            />
-            <br></br>
-            <label for='img'>Select image:</label>
-            <input
-              type='file'
               name='image'
-              accept='image/*'
+              accept="image/*"
+              //className={classes.input}
+              style={{ display: 'none' }}
+              id="image"
+              multiple
+              type="file"
               onChange={handleImageInputChange}
               value={imgUpload}
-              className='form-input'
             />
-            <br></br>
-            <label for='video'>Select video:</label>
+            <label htmlFor={'image'} >
+              <Button variant="raised" component="span" >
+                Image Upload
+              </Button>
+            </label> 
+          </div>
+
+          <div className='file-entry'>
             <input
+              id='video'
               type='file'
               name='video'
               accept='video/*'
               onChange={handleVideoInputChange}
               value={vidUpload}
-              className='form-input'
+              style={{ display: 'none', }}
             />
-            <br></br>
-            <label for='audio'>Select audio:</label>
+            <label htmlFor={'video'} >
+              <Button variant="raised" component="span" >
+                Video Upload
+              </Button>
+            </label>
+          </div>
+
+          <div className='file-entry'>
             <input
+              id='audio'
               type='file'
-              name='audio'
+              //name='audio'
               accept='audio/*'
               onChange={handleAudioInputChange}
               value={audioUpload}
-              className='form-input'
+              style={{ display: 'none', }}
             />
-            <Button
-              className='btn'
-              type='submit'
-              onClick={() => {
-                toaster.notify(
-                  `Yay! You've successfully added to your journal!`,
-                  {
-                    duration: 2000,
-                  }
-                );
-              }}
-              variant='outlined'
-              color='secondary'
-            >
-              Submit
-            </Button>
-          </form>
+            <label htmlFor={'audio'} >
+              <Button variant="raised" component="span" >
+                Audio Upload
+              </Button>
+            </label>
+          </div>
+          <Button
+            className='btn'
+            onClick={handleSubmitFile}
+            variant='outlined'
+            color='secondary'
+          >
+            Submit
+          </Button>
+          </div>
           <br></br>
-          {/* Media Upload previews for image, video and audio player */}
           {previewImgSource && (
             <img
               src={previewImgSource}
               alt='chosenImg'
-              style={{ width: '70%' }}
+              style={{ width: '70%', 
+                      display: 'block', 
+                      marginLeft: 'auto',
+                      marginRight: 'auto',
+                    }}
             />
           )}
           <br></br>
@@ -204,7 +242,11 @@ export default function JournalEntry() {
             <video
               src={previewVidSource}
               alt='chosenVideo'
-              style={{ width: '70%' }}
+              style={{ width: '70%', 
+                      display: 'block', 
+                      marginLeft: 'auto',
+                      marginRight: 'auto',
+                    }}
               controls
             />
           )}
@@ -212,22 +254,27 @@ export default function JournalEntry() {
             <ReactAudioPlayer
               src={previewAudioSource}
               alt='chosenAudio'
-              style={{ width: '70%' }}
+              style={{ width: '70%', 
+                      display: 'block', 
+                      marginLeft: 'auto',
+                      marginRight: 'auto',
+                    }}
               autoplay
               controls
             />
           )}
-        </div>
-        <Button
+          <Button
           handleClick={() => {
             history.push('/journalview');
           }}
           text='Skip'
           variant='outlined'
           color='secondary'
+          className='btn'
         >
           Skip
         </Button>
+        </div>
       </div>
     )
   );

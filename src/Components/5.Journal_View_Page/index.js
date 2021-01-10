@@ -3,8 +3,29 @@ import { useAppContext } from '../../AppContext';
 import JournalAccordion from '../Acordian';
 import H1 from '../DisplayText/H1Text/index';
 
+// Material UI
+import { makeStyles } from '@material-ui/core/styles';
+import { Button } from '@material-ui/core';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
+
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
+//Material UI Styles
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 // get all post
 function JournalView() {
@@ -21,12 +42,19 @@ function JournalView() {
   const [sortConstraint, setSortConstraint] = useState('Newest to oldest');
   const [showFavorites, setShowFavorites] = useState(false);
   const [reloadJournal, setreloadJournal] = useState(false);
+
   let userId = userData?.id;
 
+  //Material UI
+  const classes = useStyles();
+  
   useEffect(() => {
     if (userId) {
       async function getJournalById() {
-        const res = await fetch(`${BACKEND_URL}/moodsandposts/${userId}`);
+        const res = await fetch(`${BACKEND_URL}/posts/${userId}`, {headers: {
+          'content-type': 'application/JSON',
+          Authorization: `Bearer ${accessToken}`,
+        },});
         // if Access Token Middleware is added to moods and posts BE -need to add header with AT
         const data = await res.json();
         const { payload } = data;
@@ -108,19 +136,27 @@ function JournalView() {
 
   return (
     isAuthenticated && (
-      <div>
-        <H1 text={`${user?.given_name}'s journey so far....`} />
-        <button onClick={filterByFavorite}>
-          {showFavorites ? 'Show All' : 'Show Favorites'}
-        </button>
-        <select onChange={changeSortBy}>
-          <option>Sort By</option>
-          <option value='Newest to oldest'>Newest to oldest</option>
-          <option value='Oldest to newest'>Oldest to newest</option>
-          <option value='Mood high to low'>Mood high to low</option>
-          <option value='Mood low to high'>Mood low to high</option>
-        </select>
-        <div>
+      <div className='container'>
+        <H1 text={`${userData?.name}'s journey so far....`} />
+        <Button onClick={filterByFavorite}>
+          {showFavorites ? 'Show All ✏️' : 'Show Favorites ❤️'}
+        </Button>
+        <br></br>
+        <FormControl className={classes.formControl}>
+        <InputLabel id="sort-by">Sort By...</InputLabel>
+        <Select
+          labelId="sort-by"
+          id="sort-by-select"
+          value={sortConstraint}
+          onChange={changeSortBy}
+        >
+          <MenuItem value={'Newest to oldest'}>Newest to Oldest</MenuItem>
+          <MenuItem value={'Oldest to newest'}>Oldest to Newest</MenuItem>
+          <MenuItem value={'Mood high to low'}>Mood: 😍 to 😢</MenuItem>
+          <MenuItem value={'Mood low to high'}>Mood: 😢 to 😍</MenuItem>
+        </Select>
+      </FormControl>
+        <div className='jouranal-cards'>
           {journalDisplay
             .filter((x) => !showFavorites || x.favorite === true)
             .sort((a, b) => {

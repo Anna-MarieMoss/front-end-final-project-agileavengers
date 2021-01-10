@@ -8,9 +8,6 @@ import {
   ToastContainer,
   toast,
   Slide,
-  Zoom,
-  Flip,
-  Bounce,
 } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAppContext } from '../../../AppContext';
@@ -21,7 +18,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 function TrophyButton({ name, path, id, color, awarded }) {
   const theme = useContext(ThemeContext);
   const [click, setClick] = useState(0);
-  const [trophyColor, setTrophyColor] = useState(awarded ? color : '#384D54');
+  //const [trophyColor, setTrophyColor] = useState(awarded ? color : '#384D54');
   const [trophyAwarded, setTrophyAwarded] = useState(awarded);
   const { user, isAuthenticated, isLoading, accessToken } = useAppContext();
   async function patchTrophy() {
@@ -137,7 +134,7 @@ function TrophyButton({ name, path, id, color, awarded }) {
       />
       <button
         id={theme}
-        className='trophyButton'
+        className='trophy-button'
         style={{ border: '0px', strokeOpacity: '0' }}
         // onClick={() => {
         //   handleTrophy(color);
@@ -168,8 +165,8 @@ function TrophyButton({ name, path, id, color, awarded }) {
           id={id}
           viewBox='0 0 24 24'
           xmlns='http://www.w3.org/2000/svg'
-          width='3em'
-          height='3em'
+          width='4em'
+          height='4em'
           fill={trophyAwarded ? color : '#384D54'}
         >
           <title>{name}</title>

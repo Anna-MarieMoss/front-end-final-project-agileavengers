@@ -3,7 +3,7 @@ import {Typography} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
-  h4: {
+  h5: {
     marginRight: '0.7em',
     marginLeft: '0.7em',
   },
@@ -11,7 +11,7 @@ const useStyles = makeStyles({
 
 function H2({ text }) {
   const classes = useStyles();
-  return <Typography variant="h4" className={classes.h4}>{text}</Typography>;
+  return <Typography variant="h5" className={classes.h5}>{text}</Typography>;
 }
 
 export default H2;

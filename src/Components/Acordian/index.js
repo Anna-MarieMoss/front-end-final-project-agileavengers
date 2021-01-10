@@ -82,9 +82,6 @@ export default function JournalAccordion({
     setExpanded(isExpanded ? panel : false);
   };
 
-  // Ask Anna-Marie about React Audio Player/Video Player
-  // Make the Expanded Post a Card
-
   return (
     <div className={classes.root}>
       <Accordion
@@ -99,12 +96,14 @@ export default function JournalAccordion({
             <Paper elevation={1} className={classes.paper}>
               <Grid container wrap='nowrap'>
                 <Grid item>
+                {emotionNumber && (
                   <Avatar
                     style={{ backgroundColor: 'white', fontSize: '2em' }}
                     className='journal-mood'
                   >
                     {emotion[0].emotion}
                   </Avatar>
+                )}
                 </Grid>
                 <Grid item xs zeroMinWidth>
                   <Typography className={classes.date} noWrap>
