@@ -59,14 +59,14 @@ export default function JournalAccordion({
   //const [postFavorite, setPostFavorite] = useState(false)
   //
 
-  //Figuring out week
-  useEffect(() =>{  
-    if (journalDate){
-    let week = journalEntryWeek(userData?.start_date, journalDate)
-    setJournalWeek(week);
-  }
-}, [])
-  console.log(journalWeek)
+  //Figuring out week - ASK Isabel
+//   useEffect(() =>{  
+//     if (journalDate){
+//     let week = journalEntryWeek(userData?.start_date, journalDate)
+//     setJournalWeek(week);
+//   }
+// }, [])
+//   console.log(journalWeek)
 
   // Matching the Emoji to Mood Number
   const emotion = emotionsArray.filter((em) => {

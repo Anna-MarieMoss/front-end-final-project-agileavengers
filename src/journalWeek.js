@@ -1,5 +1,6 @@
+// Need to ask Isabel about this!!!!
+
 export function journalEntryWeek(startDate, journalDate) {
-    
     let oneDay = 1000 * 60 * 60 * 24; //1 day in ms (to calculate the days back below)
     let formatStartDate = new Date(startDate); //formating of start date correct, may not be needed depedning on how saved
     let formatJournalDate = new Date(journalDate)

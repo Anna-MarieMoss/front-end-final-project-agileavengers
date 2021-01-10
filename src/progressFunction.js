@@ -1,12 +1,10 @@
-export function progressPosition(startDate, journalDate) {
+export function progressPosition(startDate) {
   let currentDate = new Date(); //finding current date to compare to
   let oneDay = 1000 * 60 * 60 * 24; //1 day in ms (to calculate the days back below)
   let formatStartDate = new Date(startDate); //formating of start date correct, may not be needed depedning on how saved
   let daysPast =
     Math.round((formatStartDate.getTime() - currentDate.getTime()) / oneDay) *
     -1; //start date minus current date converted to milliseconds, the converted back in to a day
-  let journalWeek = Math.round((formatStartDate.getTime() - journalDate.getTime()) / oneDay) *
-  -1;
 
   if (daysPast < 0) {
     return 'week0';
