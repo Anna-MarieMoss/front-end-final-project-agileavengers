@@ -5,12 +5,10 @@ import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
 import './journal.css';
 import { useHistory } from 'react-router';
-import TrophyButton from '../Buttons/TrophyButton/index';
 
 // MaterialUI Components
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import TextFieldsRoundedIcon from '@material-ui/icons/TextFieldsRounded';
 import AudiotrackRoundedIcon from '@material-ui/icons/AudiotrackRounded';
 import VideocamRoundedIcon from '@material-ui/icons/VideocamRounded';
 import PhotoRoundedIcon from '@material-ui/icons/PhotoRounded';
