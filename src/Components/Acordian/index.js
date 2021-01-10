@@ -48,6 +48,14 @@ const useStyles = makeStyles((theme) => ({
     width: '25%',
     padding: theme.spacing(1),
   },
+  journaltext: {
+    width: '100%',
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignContent: 'center',
+    padding: theme.spacing(1),
+  },
+  
 }));
 
 export default function JournalAccordion({
@@ -131,20 +139,20 @@ let summaryText = getSummaryText()
                   <Typography className={classes.date} >
                     {journalDate}
                   </Typography>
-                  <Typography className={classes.summary}  >{`${summaryText}...`}</Typography>
+                  {expanded ? "": <Typography className={classes.summary}  >{`${summaryText}...`}</Typography>}
                 </Grid>
                 <Grid className={classes.icons}>
                   {text && (
-                    <TextFieldsRoundedIcon />
+                    <TextFieldsRoundedIcon fontSize='small'/>
                   )}
                   {imgSource && (
-                    <PhotoRoundedIcon />
+                    <PhotoRoundedIcon fontSize='small'/>
                   )}
                   {vidSource && (
-                    <VideocamRoundedIcon />
+                    <VideocamRoundedIcon fontSize='small'/>
                   )}
                   {audioSource && (
-                    <AudiotrackRoundedIcon />
+                    <AudiotrackRoundedIcon fontSize='small'/>
                   )}
                 </Grid>
               </Grid>
@@ -156,23 +164,10 @@ let summaryText = getSummaryText()
             <Grid item container wrap='nowrap'>
               <div className={classes.details}>
                 <CardContent className={classes.content}>
-                  <Grid item container wrap='nowrap'>
-                    <Typography>{text}</Typography>
-                    <FavoriteButton
-                      handleFavorite={handleFavorite}
-                      favoriteColor={favorite ? '#DC143C' : 'black'}
-                      journalEntryId={journalEntryId}
-                      favorite={favorite}
-                    />
-                    <br />
-                    <br />
-                    <DeleteButton
-                      handleDelete={handleDelete}
-                      journalEntryId={journalEntryId}
-                    />
+                  <Grid className={'journaltext'} item container wrap='nowrap'>
+                    <Typography align='center' display={'inline'}>{text}</Typography>
                   </Grid>
                 </CardContent>
-
                 <div classname='journal-image'>
                   {imgSource && (
                     <img
@@ -208,6 +203,18 @@ let summaryText = getSummaryText()
                 </div>
               </div>
             </Grid>
+            <Grid>
+                    <FavoriteButton
+                      handleFavorite={handleFavorite}
+                      favoriteColor={favorite ? '#DC143C' : 'black'}
+                      journalEntryId={journalEntryId}
+                      favorite={favorite}
+                    />
+                    <DeleteButton
+                      handleDelete={handleDelete}
+                      journalEntryId={journalEntryId}
+                    />
+                  </Grid>
           </Card>
         </AccordionDetails>
       </Accordion>
