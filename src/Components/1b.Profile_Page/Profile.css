@@ -1,11 +1,11 @@
 #darkTheme.profile {
   background-color: #303030;
   color: #fafafa;
-  padding-bottom: 120px;
+  /* padding-bottom: 120px; */
 }
 
 #lightTheme.profile {
   background-color: #fafafa;
   color: #303030;
-  padding-bottom: 120px;
+  /* padding-bottom: 120px; */
 }

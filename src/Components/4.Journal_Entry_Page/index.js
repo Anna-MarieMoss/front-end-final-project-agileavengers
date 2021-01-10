@@ -5,6 +5,7 @@ import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
 import './journal.css';
 import { useHistory } from 'react-router';
+import TrophyButton from '../Buttons/TrophyButton/index';
 
 // MaterialUI Components
 import { Button } from '@material-ui/core';
@@ -17,7 +18,7 @@ import 'toasted-notes/src/styles.css';
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
-export default function JournalEntry() {
+export default function JournalEntry(chosenEmotion) {
   // Use Context
   const {
     isAuthenticated,
@@ -90,16 +91,18 @@ export default function JournalEntry() {
       text,
       previewImgSource,
       previewVidSource,
-      previewAudioSource
+      previewAudioSource,
     );
   };
+
+console.log('this is my chosen emotion:', chosenEmotion.emotion);
 
   async function postJournalEntry(
     userId,
     text,
     previewImgSource,
     previewVidSource,
-    previewAudioSource
+    previewAudioSource,
   ) {
     try {
       const res = await fetch(`${BACKEND_URL}/posts`, {
@@ -110,6 +113,7 @@ export default function JournalEntry() {
           image: previewImgSource,
           video: previewVidSource,
           audio: previewAudioSource,
+          mood: chosenEmotion.emotion,
         }),
         headers: {
           'content-type': 'application/JSON',

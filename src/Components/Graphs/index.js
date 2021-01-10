@@ -55,7 +55,7 @@ const Graph = () => {
 
   useEffect(() => {
     async function getMood() {
-      const res = await fetch(`${BACKEND_URL}/moods/${userId}`, {
+      const res = await fetch(`${BACKEND_URL}/posts/${userId}`, {
         headers: {
           'content-type': 'application/JSON',
           Authorization: `Bearer ${accessToken}`,

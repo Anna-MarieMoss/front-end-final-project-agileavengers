@@ -50,7 +50,10 @@ function JournalView() {
   useEffect(() => {
     if (userId) {
       async function getJournalById() {
-        const res = await fetch(`${BACKEND_URL}/moodsandposts/${userId}`);
+        const res = await fetch(`${BACKEND_URL}/posts/${userId}`, {headers: {
+          'content-type': 'application/JSON',
+          Authorization: `Bearer ${accessToken}`,
+        },});
         // if Access Token Middleware is added to moods and posts BE -need to add header with AT
         const data = await res.json();
         const { payload } = data;
