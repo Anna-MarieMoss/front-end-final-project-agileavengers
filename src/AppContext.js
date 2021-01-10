@@ -64,16 +64,13 @@ export function AppProvider({ children }) {
         const data = await res.json();
         setuserData(data.payload[0]); //expect to get start date
         console.log(data.payload[0], 'userdata from email fetch');
+        let week = progressPosition(data.payload[0].start_date);
+        setCurrentWeek(week);
       }
+
       getProfile();
     }
   }, [user, accessToken]);
-
-  // Get the current week based on the start date from our DB
-  useEffect(() => {
-    let week = progressPosition(userData?.start_date);
-    setCurrentWeek(week);
-  }, [userData]);
 
   return (
     <AppContext.Provider
