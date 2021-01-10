@@ -31,11 +31,22 @@ const useStyles = makeStyles((theme) => ({
     margin: 0,
   },
   date: {
-    maxWidth: '100%',
-    margin: `${theme.spacing(1)}px auto`,
+    maxWidth: '95%',
+    // margin: `${theme.spacing(1)}px auto`,
     // marginLeft: `0em`,
-    padding: theme.spacing(2),
-    // paddingLeft: '0em',
+    //padding: theme.spacing(1),
+    paddingLeft: '0.5em',
+    paddingRight: '0.5em',
+    align: 'left',
+    //padding: '1em',
+  },
+  summary: {
+    width: '95%',
+    padding: theme.spacing(1),
+  }, 
+  icons: {
+    width: '25%',
+    padding: theme.spacing(1),
   },
 }));
 
@@ -55,6 +66,7 @@ export default function JournalAccordion({
   const [expanded, setExpanded] = React.useState(false);
   const { emotionsArray, userData } = useAppContext();
   const [journalWeek, setJournalWeek] = useState("week1")
+  //const [summaryText, setSummaryText] = useState("");
 
   //const [postFavorite, setPostFavorite] = useState(false)
   //
@@ -75,6 +87,18 @@ export default function JournalAccordion({
     }
     return false;
   });
+function getSummaryText(){
+  if (text){
+    if (text.length < 20){
+      return text;
+    }else{
+      return text.slice(0, 20)
+    }
+  }
+  return "";
+}
+let summaryText = getSummaryText()
+
 
   // Material UI expand the Acordian Function
   const handleChange = (panel) => (event, isExpanded) => {
@@ -92,9 +116,8 @@ export default function JournalAccordion({
           id={`panel${journalEntryId}bh-header`}
         >
           <div className={classes.root}>
-           
               <Grid container wrap='nowrap'>
-                <Grid item>
+                <Grid item >
                 {emotionNumber && (
                   <Avatar
                     style={{ backgroundColor: 'white', fontSize: '2em', strokeOpacity: '0' }}
@@ -103,13 +126,14 @@ export default function JournalAccordion({
                     {emotion[0].emotion}
                   </Avatar>
                 )}
-                {/* </Grid>
-                <Grid item xs zeroMinWidth> */}
-                  <Typography className={classes.date} noWrap>
+                </Grid>
+                <Grid item xs zeroMinWidth >
+                  <Typography className={classes.date} >
                     {journalDate}
                   </Typography>
+                  <Typography className={classes.summary}  >{`${summaryText}...`}</Typography>
                 </Grid>
-                <Grid item xs zeroMinWidth>
+                <Grid className={classes.icons}>
                   {text && (
                     <TextFieldsRoundedIcon />
                   )}
