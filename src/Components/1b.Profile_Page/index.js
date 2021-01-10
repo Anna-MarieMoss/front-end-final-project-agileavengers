@@ -20,6 +20,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 //   },
 // }));
 function Profile() {
+  //Dark / Light Theme
   const theme = useContext(ThemeContext);
   //Auth0
   const { user, isAuthenticated, isLoading, accessToken } = useAppContext();
@@ -94,6 +95,13 @@ function Profile() {
     }
   }, [submit]);
 
+  //set Mui Dark Theme
+  function muiTheme(theme) {
+    if (theme === 'lightTheme') {
+      return 'primary';
+    } else return 'secondary';
+  }
+
   return (
     <div id={theme} className={'profile'}>
       <H1 text={'Profile'} />
@@ -116,6 +124,7 @@ function Profile() {
               label='Name'
               type='text'
               variant='outlined'
+              color={muiTheme(theme)}
               onChange={(event) => {
                 const { value } = event.target;
                 setName(value);
@@ -128,13 +137,16 @@ function Profile() {
             label='Myers-Briggs'
             type='text'
             variant='outlined'
+            color={muiTheme(theme)}
             onChange={(event) => {
               const { value } = event.target;
               setMyersBriggs(value);
             }}
           />
           <DatePicker values={selectedDate} handleDate={setSelectedDate} />
-          {selectedDate && <SubmitButton className='btn' handleClick={handleSubmit} />}
+          {selectedDate && (
+            <SubmitButton className='btn' handleClick={handleSubmit} />
+          )}
         </div>
       </form>
     </div>

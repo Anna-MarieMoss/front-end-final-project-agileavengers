@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 import { useAppContext } from '../../AppContext';
 import H1 from '../DisplayText/H1Text';
@@ -6,6 +6,7 @@ import H2 from '../DisplayText/H2Text';
 import './journal.css';
 import { useHistory } from 'react-router';
 import TrophyButton from '../Buttons/TrophyButton/index';
+import { ThemeContext } from '../../ThemeContext';
 
 // MaterialUI Components
 import { Button } from '@material-ui/core';
@@ -19,13 +20,11 @@ import 'toasted-notes/src/styles.css';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 export default function JournalEntry(chosenEmotion) {
+  //Dark / Light Theme
+  const theme = useContext(ThemeContext);
+
   // Use Context
-  const {
-    isAuthenticated,
-    isLoading,
-    accessToken,
-    userData,
-  } = useAppContext();
+  const { isAuthenticated, isLoading, accessToken, userData } = useAppContext();
 
   const userId = userData?.id;
 
@@ -91,18 +90,18 @@ export default function JournalEntry(chosenEmotion) {
       text,
       previewImgSource,
       previewVidSource,
-      previewAudioSource,
+      previewAudioSource
     );
   };
 
-console.log('this is my chosen emotion:', chosenEmotion.emotion);
+  console.log('this is my chosen emotion:', chosenEmotion.emotion);
 
   async function postJournalEntry(
     userId,
     text,
     previewImgSource,
     previewVidSource,
-    previewAudioSource,
+    previewAudioSource
   ) {
     try {
       const res = await fetch(`${BACKEND_URL}/posts`, {
@@ -126,115 +125,119 @@ console.log('this is my chosen emotion:', chosenEmotion.emotion);
     } catch (error) {
       console.error(error);
     }
-    toaster.notify(
-      `Yay! You've successfully added to your journal!`,
-      {
-        duration: 2000,
-      }
-    )
+    toaster.notify(`Yay! You've successfully added to your journal!`, {
+      duration: 2000,
+    });
     // once submted redirect to Journal View Page
     history.push('/journalview');
   }
 
+  //set Mui Dark Theme
+  function muiTheme(theme) {
+    if (theme === 'lightTheme') {
+      return 'primary';
+    } else return 'secondary';
+  }
+
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return <div id={theme}>Loading ...</div>;
   }
 
   return (
     isAuthenticated && (
-      <div className='wrapper'>
-      <div className='container'>
-        <H1 text={`${userData?.name} how was your day today?`} />
-        <H2 text={`What did you learn today?`} />
-       <br></br>
-        <div id='Emma-New-Form'>
-          <TextField
-                id="outlined-multiline-static"
-                label="Journal Entry"
-                fullWidth='true'
-                multiline
-                rows={4}
-                defaultValue="Default Value"
-                variant="outlined"
-                color="primary"
-                onChange={(event) => {
-                      const { value } = event.target;
-                      setText(value);}}
-                value={text}
-                className='form-input'
-                placeholder='How are you doing today?'
-          />
-          <div className='file-entry'>
-            <input
-              name='image'
-              accept="image/*"
-              //className={classes.input}
-              style={{ display: 'none' }}
-              id="image"
-              multiple
-              type="file"
-              onChange={handleImageInputChange}
-              value={imgUpload}
+      <div className='wrapper' id={theme}>
+        <div className='container' id={theme}>
+          <H1 text={`${userData?.name} how was your day today?`} />
+          <H2 text={`What did you learn today?`} />
+          <br></br>
+          <div id='Emma-New-Form'>
+            <TextField
+              id='outlined-multiline-static'
+              label='Journal Entry'
+              fullWidth='true'
+              multiline
+              rows={4}
+              defaultValue='Default Value'
+              variant='outlined'
+              color={muiTheme(theme)}
+              onChange={(event) => {
+                const { value } = event.target;
+                setText(value);
+              }}
+              value={text}
+              className='form-input'
+              placeholder='How are you doing today?'
             />
-            <label htmlFor={'image'} >
-              <Button variant="raised" component="span" >
-                Image Upload
-              </Button>
-            </label> 
-          </div>
-
-          <div className='file-entry'>
-            <input
-              id='video'
-              type='file'
-              name='video'
-              accept='video/*'
-              onChange={handleVideoInputChange}
-              value={vidUpload}
-              style={{ display: 'none', }}
-            />
-            <label htmlFor={'video'} >
-              <Button variant="raised" component="span" >
-                Video Upload
-              </Button>
-            </label>
-          </div>
-
-          <div className='file-entry'>
-            <input
-              id='audio'
-              type='file'
-              //name='audio'
-              accept='audio/*'
-              onChange={handleAudioInputChange}
-              value={audioUpload}
-              style={{ display: 'none', }}
-            />
-            <label htmlFor={'audio'} >
-              <Button variant="raised" component="span" >
-                Audio Upload
-              </Button>
-            </label>
-          </div>
-          <Button
-            className='btn'
-            onClick={handleSubmitFile}
-            variant='outlined'
-            color='secondary'
-          >
-            Submit
-          </Button>
+            <div className='file-entry'>
+              <input
+                name='image'
+                accept='image/*'
+                //className={classes.input}
+                style={{ display: 'none' }}
+                id='image'
+                multiple
+                type='file'
+                onChange={handleImageInputChange}
+                value={imgUpload}
+              />
+              <label htmlFor={'image'}>
+                <Button variant='raised' component='span'>
+                  Image Upload
+                </Button>
+              </label>
+            </div>
+            <div className='file-entry'>
+              <input
+                id='video'
+                type='file'
+                name='video'
+                accept='video/*'
+                onChange={handleVideoInputChange}
+                value={vidUpload}
+                style={{ display: 'none' }}
+              />
+              <label htmlFor={'video'}>
+                <Button variant='raised' component='span'>
+                  Video Upload
+                </Button>
+              </label>
+            </div>
+            <div className='file-entry'>
+              <input
+                id='audio'
+                type='file'
+                //name='audio'
+                accept='audio/*'
+                onChange={handleAudioInputChange}
+                value={audioUpload}
+                style={{ display: 'none' }}
+              />
+              <label htmlFor={'audio'}>
+                <Button variant='raised' component='span'>
+                  Audio Upload
+                </Button>
+              </label>
+            </div>
+            <Button
+              className='btn'
+              onClick={handleSubmitFile}
+              variant='outlined'
+              color={muiTheme(theme)}
+            >
+              Submit
+            </Button>
           </div>
           <br></br>
           {previewImgSource && (
             <img
               src={previewImgSource}
               alt='chosenImg'
-              style={{ width: '70%', 
-                      display: 'block', 
-                      marginLeft: 'auto',
-                      marginRight: 'auto',
-                    }}
+              style={{
+                width: '70%',
+                display: 'block',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+              }}
             />
           )}
           <br></br>
@@ -242,11 +245,12 @@ console.log('this is my chosen emotion:', chosenEmotion.emotion);
             <video
               src={previewVidSource}
               alt='chosenVideo'
-              style={{ width: '70%', 
-                      display: 'block', 
-                      marginLeft: 'auto',
-                      marginRight: 'auto',
-                    }}
+              style={{
+                width: '70%',
+                display: 'block',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+              }}
               controls
             />
           )}
@@ -254,26 +258,26 @@ console.log('this is my chosen emotion:', chosenEmotion.emotion);
             <ReactAudioPlayer
               src={previewAudioSource}
               alt='chosenAudio'
-              style={{ width: '70%', 
-                      display: 'block', 
-                      marginLeft: 'auto',
-                      marginRight: 'auto',
-                    }}
+              style={{
+                width: '70%',
+                display: 'block',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+              }}
               autoplay
               controls
             />
           )}
           <Button
-          handleClick={() => {
-            history.push('/journalview');
-          }}
-          text='Skip'
-          variant='outlined'
-          color='secondary'
-          className='btn'
-        >
-          Skip
-        </Button>
+            onClick={() => {
+              history.push('/journalview');
+            }}
+            variant='outlined'
+            className='btn'
+            color={muiTheme(theme)}
+          >
+            Skip
+          </Button>
         </div>
       </div>
     )

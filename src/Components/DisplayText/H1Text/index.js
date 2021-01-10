@@ -1,6 +1,7 @@
-import React from 'react';
-import {Typography} from '@material-ui/core';
+import React, { useContext } from 'react';
+import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { ThemeContext } from '../../../ThemeContext';
 
 const useStyles = makeStyles({
   h4: {
@@ -11,7 +12,19 @@ const useStyles = makeStyles({
 
 function H1({ text }) {
   const classes = useStyles();
-  return <Typography variant="h4" className={classes.h4}>{text}</Typography>;
+  const theme = useContext(ThemeContext);
+  //set Mui Dark Theme
+  function muiTheme(theme) {
+    if (theme === 'lightTheme') {
+      return 'primary';
+    } else return 'secondary';
+  }
+
+  return (
+    <Typography variant='h4' className={classes.h4} color={muiTheme(theme)}>
+      {text}
+    </Typography>
+  );
 }
 
 export default H1;

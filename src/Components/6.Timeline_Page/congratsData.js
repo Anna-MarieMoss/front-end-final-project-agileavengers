@@ -5,7 +5,7 @@ const congratsData = [
   },
   {
     week: 'week1',
-    message: 'Congratulations youve started on your new journey',
+    message: `Congratulations you've started on your new journey`,
   },
   {
     week: 'week2',
@@ -18,12 +18,11 @@ const congratsData = [
   },
   {
     week: 'week4',
-    message:
-      'Youre a quarter of the way through 🎊 Check out everything youve learned so far',
+    message: `You're a quarter of the way through 🎊 Check out everything you've learned so far`,
   },
   {
     week: 'week5',
-    message: 'Youve done over 175 hours of code !',
+    message: `You've done over 175 hours of code !`,
   },
   {
     week: 'week6',
@@ -36,12 +35,11 @@ const congratsData = [
   },
   {
     week: 'week8',
-    message: 'Youre half of the way through!',
+    message: `You're half of the way through!`,
   },
   {
     week: 'week8',
-    message:
-      'Don’t wait for your feelings to change to take the action. Take the action and your feelings will change.',
+    message: `Don't wait for your feelings to change to take the action. Take the action and your feelings will change.`,
   },
   {
     week: 'week9',

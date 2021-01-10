@@ -14,14 +14,16 @@ function Logout() {
   //     return <div>Loading ...</div>;
   //   }
 
+  const name = user ? user.given_name : '';
+
   return (
     <div id={theme} className={'logout'}>
       <H2
-        text={`Great Stuff ${user?.given_name}! Don't forget to log back in tomorrow to update your journey`}
+        text={`Great Stuff ${name}! Don't forget to log back in tomorrow to update your journey`}
       />
       <SoCLogo style={{ width: '200px', margin: '20px' }} />
       <br />
-      <LogoutButton className='btn'/>
+      <LogoutButton className='btn' />
     </div>
   );
 }
