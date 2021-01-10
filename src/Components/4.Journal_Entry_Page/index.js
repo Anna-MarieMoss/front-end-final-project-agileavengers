@@ -10,6 +10,10 @@ import TrophyButton from '../Buttons/TrophyButton/index';
 // MaterialUI Components
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
+import TextFieldsRoundedIcon from '@material-ui/icons/TextFieldsRounded';
+import AudiotrackRoundedIcon from '@material-ui/icons/AudiotrackRounded';
+import VideocamRoundedIcon from '@material-ui/icons/VideocamRounded';
+import PhotoRoundedIcon from '@material-ui/icons/PhotoRounded';
 
 //Alerts
 import toaster from 'toasted-notes';
@@ -177,8 +181,8 @@ console.log('this is my chosen emotion:', chosenEmotion.emotion);
               value={imgUpload}
             />
             <label htmlFor={'image'} >
-              <Button variant="raised" component="span" >
-                Image Upload
+              <Button variant="raised" component="span" style={{textTransform: 'capitalize'}} >
+                {<PhotoRoundedIcon/>}  Image Upload
               </Button>
             </label> 
           </div>
@@ -194,8 +198,8 @@ console.log('this is my chosen emotion:', chosenEmotion.emotion);
               style={{ display: 'none', }}
             />
             <label htmlFor={'video'} >
-              <Button variant="raised" component="span" >
-                Video Upload
+              <Button variant="raised" component="span" style={{textTransform: 'capitalize'}}>
+                {<VideocamRoundedIcon />}  Video Upload
               </Button>
             </label>
           </div>
@@ -211,8 +215,8 @@ console.log('this is my chosen emotion:', chosenEmotion.emotion);
               style={{ display: 'none', }}
             />
             <label htmlFor={'audio'} >
-              <Button variant="raised" component="span" >
-                Audio Upload
+              <Button variant="raised" component="span" style={{textTransform: 'capitalize'}} >
+              {<AudiotrackRoundedIcon />}  Audio Upload 
               </Button>
             </label>
           </div>

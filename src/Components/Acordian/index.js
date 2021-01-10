@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { useAppContext } from '../../AppContext';
 import ReactAudioPlayer from 'react-audio-player';
+import { journalEntryWeek } from '../../journalWeek';
 
 // App Components
 import DeleteButton from '../Buttons/DeleteButton/index.js';
@@ -14,39 +15,27 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import IconButton from '@material-ui/core/IconButton';
+import TextFieldsRoundedIcon from '@material-ui/icons/TextFieldsRounded';
+import AudiotrackRoundedIcon from '@material-ui/icons/AudiotrackRounded';
+import VideocamRoundedIcon from '@material-ui/icons/VideocamRounded';
+import PhotoRoundedIcon from '@material-ui/icons/PhotoRounded';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 400,
-    flexGrow: 1,
-    overflow: 'hidden',
-    padding: theme.spacing(0, 3),
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    flexBasis: '33.33%',
-    flexShrink: 0,
-  },
-  secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
-  },
-  paper: {
-    maxWidth: 400,
-    margin: `${theme.spacing(1)}px auto`,
-    padding: theme.spacing(2),
+    width: '100%',
+    // flexGrow: 1,
+    // overflow: 'hidden',
+    // padding: theme.spacing(0, 3),
+    margin: 0,
   },
   date: {
-    maxWidth: 400,
+    maxWidth: '100%',
     margin: `${theme.spacing(1)}px auto`,
-    marginLeft: `0em`,
+    // marginLeft: `0em`,
     padding: theme.spacing(2),
-    paddingLeft: '0em',
+    // paddingLeft: '0em',
   },
 }));
 
@@ -64,10 +53,20 @@ export default function JournalAccordion({
 }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const { emotionsArray } = useAppContext();
+  const { emotionsArray, userData } = useAppContext();
+  const [journalWeek, setJournalWeek] = useState("week1")
 
   //const [postFavorite, setPostFavorite] = useState(false)
   //
+
+  //Figuring out week
+  useEffect(() =>{  
+    if (journalDate){
+    let week = journalEntryWeek(userData?.start_date, journalDate)
+    setJournalWeek(week);
+  }
+}, [])
+  console.log(journalWeek)
 
   // Matching the Emoji to Mood Number
   const emotion = emotionsArray.filter((em) => {
@@ -93,26 +92,38 @@ export default function JournalAccordion({
           id={`panel${journalEntryId}bh-header`}
         >
           <div className={classes.root}>
-            <Paper elevation={1} className={classes.paper}>
+           
               <Grid container wrap='nowrap'>
                 <Grid item>
                 {emotionNumber && (
                   <Avatar
-                    style={{ backgroundColor: 'white', fontSize: '2em' }}
+                    style={{ backgroundColor: 'white', fontSize: '2em', strokeOpacity: '0' }}
                     className='journal-mood'
                   >
                     {emotion[0].emotion}
                   </Avatar>
                 )}
-                </Grid>
-                <Grid item xs zeroMinWidth>
+                {/* </Grid>
+                <Grid item xs zeroMinWidth> */}
                   <Typography className={classes.date} noWrap>
                     {journalDate}
                   </Typography>
-                  <Typography noWrap>{text}</Typography>
+                </Grid>
+                <Grid item xs zeroMinWidth>
+                  {text && (
+                    <TextFieldsRoundedIcon />
+                  )}
+                  {imgSource && (
+                    <PhotoRoundedIcon />
+                  )}
+                  {vidSource && (
+                    <VideocamRoundedIcon />
+                  )}
+                  {audioSource && (
+                    <AudiotrackRoundedIcon />
+                  )}
                 </Grid>
               </Grid>
-            </Paper>
           </div>
         </AccordionSummary>
 
@@ -144,7 +155,7 @@ export default function JournalAccordion({
                       classname='journal-image'
                       src={imgSource}
                       alt='chosenImg'
-                      style={{ width: '80%' }}
+                      style={{ width: '100%' }}
                     />
                   )}
                 </div>
@@ -154,7 +165,7 @@ export default function JournalAccordion({
                     <video
                       src={vidSource}
                       alt='chosenVideo'
-                      style={{ width: '80%' }}
+                      style={{ width: '100%' }}
                       controls
                     />
                   )}
@@ -165,7 +176,7 @@ export default function JournalAccordion({
                     <ReactAudioPlayer
                       src={audioSource}
                       alt='chosenAudio'
-                      style={{ width: '80%' }}
+                      style={{ width: '100%' }}
                       autoplay
                       controls
                     />

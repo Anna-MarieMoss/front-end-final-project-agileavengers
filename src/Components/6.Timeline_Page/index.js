@@ -8,7 +8,7 @@ import { useAppContext } from '../../AppContext';
 
 
 function Timeline() {
-  const { currentWeek, user, isAuthenticated, isLoading } = useAppContext();
+  const { currentWeek,  isAuthenticated, isLoading } = useAppContext();
   const [congratsMessage, setcongratsMessage] = useState(null);
   // console.log(`in timeline ${currentWeek}, ${congratsMessage}`);
 

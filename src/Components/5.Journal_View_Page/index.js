@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useAppContext } from '../../AppContext';
 import JournalAccordion from '../Acordian';
 import H1 from '../DisplayText/H1Text/index';
+import { progressPosition } from '../../progressFunction';
 
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
@@ -34,7 +34,6 @@ function JournalView() {
     isLoading,
     accessToken,
     userData,
-    user,
   } = useAppContext();
   const [journalDisplay, setJournalDisplay] = useState([]);
   const [journalDelete, setJournalDelete] = useState(false);
@@ -63,12 +62,12 @@ function JournalView() {
         }
 
         setJournalDisplay(payload);
-        setreloadJournal(false);
+        //setreloadJournal(false);
       }
       getJournalById();
     }
-  }, [reloadJournal, userId]);
-
+  }, []);
+//reloadJournal, userId
   function filterByFavorite() {
     setShowFavorites(!showFavorites);
   }
@@ -138,8 +137,8 @@ function JournalView() {
     isAuthenticated && (
       <div className='container'>
         <H1 text={`${userData?.name}'s journey so far....`} />
-        <Button onClick={filterByFavorite}>
-          {showFavorites ? 'Show All ✏️' : 'Show Favorites ❤️'}
+        <Button onClick={filterByFavorite} style={{textTransform: 'capitalize'}}>
+          {showFavorites ? <Typography variant={'h6'}>Show All ✏️</Typography> : <Typography variant={'h6'}>Show Favorites ❤️</Typography>}
         </Button>
         <br></br>
         <FormControl className={classes.formControl}>

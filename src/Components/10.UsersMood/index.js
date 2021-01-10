@@ -2,7 +2,6 @@ import React, {useState, useEffect, useRef} from 'react';
 import { useAppContext } from '../../AppContext';
 import Chartjs from 'chart.js';
 import H2 from '../DisplayText/H2Text/index';
-import { Typography } from '@material-ui/core';
 import 'date-fns';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
@@ -15,14 +14,15 @@ import {
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function UsersMood() {
-  const { isAuthenticated, isLoading, accessToken, } = useAppContext();
+  const { isAuthenticated, isLoading, accessToken, userData, user } = useAppContext();
   const [selectedDate, setSelectedDate] = useState('');
   const [usersMoodResponse, setUsersMoodResponse] = useState([]);
   const [chartInstance, setChartInstance] = useState(null);
   const [graphData, setGraphData] = useState([]);
   const chartContainer = useRef(null);
-  console.log(selectedDate);
-  
+
+  console.log('this is graphData: ', graphData);
+
   let chartConfig = {
     type: 'pie',
     data: 
@@ -83,12 +83,14 @@ function UsersMood() {
             }
             return acc;
         }, [])
+        console.log('this is res:', res )
         let graphRes = res.reduce((acc, cur) => {
             if (acc[cur]){
                 return {...acc, [cur]: acc[cur] + 1}
               }
               return {...acc, [cur]: 1}
-        } ,{});
+        } ,{1: 0, 2: 0, 3: 0, 4: 0, 5: 0});
+      
         setGraphData(Object.values(graphRes))
         }
         getUsersMoodByDate();
