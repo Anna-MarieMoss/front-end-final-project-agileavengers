@@ -34,7 +34,7 @@ function Timeline() {
   return (
     isAuthenticated && (
       <div id={theme}>
-        <div className='container'>
+        <div>
           <H1 text={'Your Timeline'} />
           <H2 text={congratsMessage} />
           <ThemeProvider>
