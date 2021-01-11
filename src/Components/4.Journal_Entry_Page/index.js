@@ -6,6 +6,7 @@ import './journal.css';
 import { useHistory } from 'react-router';
 import TrophyButton from '../Buttons/TrophyButton/index';
 import { ThemeContext } from '../../ThemeContext';
+import NavBar from '../NavBar/NavBar';
 
 // MaterialUI Components
 import { Button } from '@material-ui/core';
@@ -145,8 +146,52 @@ export default function JournalEntry(chosenEmotion) {
     return <div id={theme}>Loading ...</div>;
   }
 
+  function handleClick(chosenEmotion) {
+    async function postMoodEntry() {
+      var assignedText;
+      if (chosenEmotion.emotion === 5) {
+        assignedText = 'You succeed!';
+      }
+      if (chosenEmotion.emotion === 4) {
+        assignedText = 'You had a great day.';
+      }
+      if (chosenEmotion.emotion === 3) {
+        assignedText = 'Today was frustrating.';
+      }
+      if (chosenEmotion.emotion === 2) {
+        assignedText = 'Coding makes me sad!';
+      }
+      if (chosenEmotion.emotion === 1) {
+        assignedText = 'Today was a difficult day!';
+      }
+      try {
+        const res = await fetch(`${BACKEND_URL}/posts`, {
+          method: 'POST',
+          body: JSON.stringify({
+            user_id: userId,
+            text: assignedText,
+            mood: chosenEmotion.emotion,
+          }),
+          headers: {
+            'content-type': 'application/JSON',
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        console.log(res);
+        const data = await res.json();
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    postMoodEntry();
+    // once submted redirect to Journal View Page
+    history.push('/journalview');
+  }
+
   return (
     isAuthenticated && (
+
       <div className='wrapper' id={theme}>
       <div className='container' id={theme}>
         <H1 text={`How Was Your Day?`} />
@@ -158,12 +203,13 @@ export default function JournalEntry(chosenEmotion) {
                 fullWidth='true'
                 multiline
                 rows={4}
-                defaultValue="Default Value"
-                variant="outlined"
+                defaultValue='Default Value'
+                variant='outlined'
                 color={muiTheme(theme)}
                 onChange={(event) => {
-                      const { value } = event.target;
-                      setText(value);}}
+                  const { value } = event.target;
+                  setText(value);
+                }}
                 value={text}
                 className='form-input'
                 placeholder='What did you learn today?'
@@ -261,16 +307,15 @@ export default function JournalEntry(chosenEmotion) {
             />
           )}
           <Button
-            onClick={() => {
-              history.push('/journalview');
-            }}
-            variant='outlined'
-            className='btn'
-            color={muiTheme(theme)}
-          >
-            Skip
-          </Button>
+              onClick={() => handleClick(chosenEmotion)}
+              variant='outlined'
+              className='btn'
+              color={muiTheme(theme)}
+            >
+              Skip
+            </Button>
         </div>
+        <NavBar />
       </div>
     )
   );

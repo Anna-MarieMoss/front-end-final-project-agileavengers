@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { progressPosition } from './progressFunction';
 import { useAuth0 } from '@auth0/auth0-react';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -73,6 +74,35 @@ export function AppProvider({ children }) {
     }
   }, [user, accessToken, submit]);
 
+  //THEMES
+  const [darkState, setDarkState] = useState(false);
+  const [muiDarkState, setMuiDarkState] = useState(false);
+  //Toggles the dark and light theme
+  const handleThemeChange = () => {
+    setDarkState(!darkState);
+    setMuiDarkState(!muiDarkState);
+  };
+  //Chooses correct CSS id name based on the darkState
+  const checkDarkState = darkState ? 'darkTheme' : 'lightTheme';
+
+  const theme = createMuiTheme({
+    palette: {
+      type: darkState ? 'dark' : 'light',
+      primary: {
+        light: '#ac5457',
+        main: '#f7797d',
+        dark: '#f89397',
+        // contrastText: '#fff',
+      },
+      secondary: {
+        light: '#8ab29a',
+        main: '#C6FFDD',
+        dark: '#d1ffe3',
+        // contrastText: '#000',
+      },
+    },
+  });
+
   return (
     <AppContext.Provider
       value={{
@@ -84,6 +114,10 @@ export function AppProvider({ children }) {
         accessToken: accessToken,
         userData: userData,
         setSubmit: setSubmit,
+        handleThemeChange: handleThemeChange,
+        darkState: darkState,
+        checkDarkState: checkDarkState,
+        theme: theme,
       }}
     >
       {children}

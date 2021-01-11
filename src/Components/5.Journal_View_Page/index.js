@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useAppContext } from '../../AppContext';
 import JournalAccordion from '../Acordian';
-import JournalCard from "../journalCard";
+import JournalCard from '../journalCard';
 import H1 from '../DisplayText/H1Text/index';
 import { progressPosition } from '../../progressFunction';
 import { ThemeContext } from '../../ThemeContext';
+import NavBar from '../NavBar/NavBar';
 
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
@@ -30,12 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 // get all post
 function JournalView() {
-  const {
-    isAuthenticated,
-    isLoading,
-    accessToken,
-    userData,
-  } = useAppContext();
+  const { isAuthenticated, isLoading, accessToken, userData } = useAppContext();
   const [journalDisplay, setJournalDisplay] = useState([]);
   const [journalDelete, setJournalDelete] = useState(false);
   const [journalDeleteId, setJournalDeleteId] = useState(null);
@@ -49,7 +45,7 @@ function JournalView() {
 
   //Material UI
   const classes = useStyles();
-  
+
   //Detectign Theme
   // function getTheme(){
   //   if(theme === 'darkTheme'){
@@ -80,7 +76,7 @@ function JournalView() {
       getJournalById();
     }
   }, [userData, reloadJournal]);
-//reloadJournal, userId
+  //reloadJournal, userId
   function filterByFavorite() {
     setShowFavorites(!showFavorites);
   }
@@ -162,45 +158,62 @@ function JournalView() {
             value={sortConstraint}
             onChange={changeSortBy}
           >
-            <MenuItem value={'Newest to oldest'}>Newest to Oldest</MenuItem>
-            <MenuItem value={'Oldest to newest'}>Oldest to Newest</MenuItem>
-            <MenuItem value={'Mood high to low'}>Mood: 😍 to 😢</MenuItem>
-            <MenuItem value={'Mood low to high'}>Mood: 😢 to 😍</MenuItem>
-          </Select>
-        </FormControl>
-        <div className='jouranal-cards'>
-          {journalDisplay
-            .filter((x) => !showFavorites || x.favorite === true)
-            .sort((a, b) => {
-              if (sortConstraint === 'Mood high to low') {
-                return b.mood - a.mood;
-              } else if (sortConstraint === 'Mood low to high') {
-                return a.mood - b.mood;
-              } else if (sortConstraint === 'Newest to oldest') {
-                return new Date(b.date) - new Date(a.date);
-              } else if (sortConstraint === 'Oldest to newest') {
-                return new Date(a.date) - new Date(b.date);
-              } else {
-                return new Date(b.date) - new Date(a.date);
-              }
-            })
-            .map((journalEntry, index) => (
-              <JournalCard
-                text={journalEntry.text}
-                emotionNumber={journalEntry.mood}
-                journalDate={journalEntry.date}
-                journalEntryId={journalEntry.id}
-                favorite={journalEntry.favorite}
-                handleFavorite={handleFavorite}
-                handleDelete={handleDelete}
-                audioSource={journalEntry.audio}
-                imgSource={journalEntry.image}
-                vidSource={journalEntry.video}
-                // avatarBackground={themeDark ? '#303030' : '#fafafa'}
-                key={index}
-              />
-            ))}
+            {showFavorites ? (
+              <Typography variant={'h6'}>Show All ✏️</Typography>
+            ) : (
+              <Typography variant={'h6'}>Show Favorites ❤️</Typography>
+            )}
+          </Button>
+          <br></br>
+          <FormControl className={classes.formControl}>
+            <InputLabel id='sort-by'>Sort By...</InputLabel>
+            <Select
+              labelId='sort-by'
+              id='sort-by-select'
+              value={sortConstraint}
+              onChange={changeSortBy}
+            >
+              <MenuItem value={'Newest to oldest'}>Newest to Oldest</MenuItem>
+              <MenuItem value={'Oldest to newest'}>Oldest to Newest</MenuItem>
+              <MenuItem value={'Mood high to low'}>Mood: 😍 to 😢</MenuItem>
+              <MenuItem value={'Mood low to high'}>Mood: 😢 to 😍</MenuItem>
+            </Select>
+          </FormControl>
+          <div className='jouranal-cards'>
+            {journalDisplay
+              .filter((x) => !showFavorites || x.favorite === true)
+              .sort((a, b) => {
+                if (sortConstraint === 'Mood high to low') {
+                  return b.mood - a.mood;
+                } else if (sortConstraint === 'Mood low to high') {
+                  return a.mood - b.mood;
+                } else if (sortConstraint === 'Newest to oldest') {
+                  return new Date(b.date) - new Date(a.date);
+                } else if (sortConstraint === 'Oldest to newest') {
+                  return new Date(a.date) - new Date(b.date);
+                } else {
+                  return new Date(b.date) - new Date(a.date);
+                }
+              })
+              .map((journalEntry, index) => (
+                <JournalCard
+                  text={journalEntry.text}
+                  emotionNumber={journalEntry.mood}
+                  journalDate={journalEntry.date}
+                  journalEntryId={journalEntry.id}
+                  favorite={journalEntry.favorite}
+                  handleFavorite={handleFavorite}
+                  handleDelete={handleDelete}
+                  audioSource={journalEntry.audio}
+                  imgSource={journalEntry.image}
+                  vidSource={journalEntry.video}
+                  // avatarBackground={themeDark ? '#303030' : '#fafafa'}
+                  key={index}
+                />
+              ))}
+          </div>
         </div>
+        <NavBar />
       </div>
     )
   );
