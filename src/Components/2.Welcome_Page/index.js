@@ -8,16 +8,17 @@ import { ThemeContext } from '../../ThemeContext';
 function Welcome() {
   const theme = useContext(ThemeContext);
   return (
-    <div id={theme} className={'welcome', 'container'}>
-      <H1 text={`Hi welcome to your SoC Journal`} />
+    <div id={theme} className={('welcome', 'container')}>
+      <H1 text={`Welcome to your SoC Journal`} />
       <SoCLogo style={{ width: '100px' }} />
       <p>
-        Your personal space to record your once in a lifetime School of Code
-        experience!
-      </p>
-      <p>
+        Your personal space to record your once in a lifetime experience at the
+        School of Code!
+        <br></br>
+        <br></br>
         There will be highs and low, tears and tantrums, but you’re going to
-        want to remember this experience and how you grew forever.
+        want to remember it forever. <br></br>
+        <br></br>Visit me often to record how much you've grown.
       </p>
       <LoginButton />
     </div>

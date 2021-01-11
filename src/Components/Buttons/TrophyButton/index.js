@@ -1,10 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
 // import toaster from 'toasted-notes';
 import './TrophyButton.css';
-import 'toasted-notes/src/styles.css';
 import { ThemeContext } from '../../../ThemeContext';
 //// 2ND TYPE OF ALERTS WITH COLOURS!
-import { ToastContainer, toast, Slide } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAppContext } from '../../../AppContext';
 
@@ -121,44 +120,11 @@ function TrophyButton({ name, path, id, color, awarded }) {
 
   return (
     <div id={theme}>
-      <ToastContainer
-        transition={Slide} // changes the transition to a slide rather than a bounce.  Alerts are rendering multiple times at the moment due to the page re redering all of the buttons.  Look into how you can stop this happening but keeep the cool styling tomorrow.
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
       <button
         id={theme}
         className='trophy-button'
         style={{ border: '0px', strokeOpacity: '0' }}
-        // onClick={() => {
-        //   handleTrophy(color);
-        // }}
         onClick={patchTrophy}
-        // toaster.notify(`Congratulations, you've mastered a new skill!`, {
-        //   duration: 2000,
-        // });
-        // toast('Wow so easy !');
-        // toast.success('Success notification!', {
-        //   position: toast.POSITION.TOP_LEFT,
-        // });
-        // toast.info(`Congratulations, you've mastered a new skill!`, {
-        //   position: toast.POSITION.TOP_RIGHT,
-        // });
-        // toast.warn('Warning notification!', {
-        //   position: toast.POSITION.BOTTOM_LEFT,
-        // });
-        // toast.error('Error notification!', {
-        //   position: toast.POSITION.BOTTOM_CENTER,
-        // });
-        // toast.dark('Dark notification!', {
-        //   position: toast.POSITION.BOTTOM_RIGHT,
-        // });
       >
         <svg
           role='img'
