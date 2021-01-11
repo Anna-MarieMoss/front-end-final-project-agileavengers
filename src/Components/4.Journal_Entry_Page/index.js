@@ -148,8 +148,8 @@ export default function JournalEntry(chosenEmotion) {
 
   return (
     isAuthenticated && (
-      <div className='wrapper'>
-      <div className='container'>
+      <div className='wrapper' id={theme}>
+      <div className='container' id={theme}>
         <H1 text={`${userData?.name} how was your day today?`} />
         <H2 text={`What did you learn today?`} />
        <br></br>

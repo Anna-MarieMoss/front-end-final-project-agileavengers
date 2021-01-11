@@ -160,7 +160,7 @@ export default function JournalCard({
 
       </CardActionArea>
       <CardActions>
-      <Grid className={classes.icons}>
+      {/* <Grid className={classes.icons}>
                   {text && (
                     <TextFieldsRoundedIcon fontSize='small'/>
                   )}
@@ -173,7 +173,7 @@ export default function JournalCard({
                   {audioSource && (
                     <AudiotrackRoundedIcon fontSize='small'/>
                   )}
-                </Grid>
+                </Grid> */}
                 <Grid>
                     <FavoriteButton
                       handleFavorite={handleFavorite}
