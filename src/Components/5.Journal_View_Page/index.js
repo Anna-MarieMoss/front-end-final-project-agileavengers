@@ -12,7 +12,6 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -47,14 +46,16 @@ function JournalView() {
 
   //Material UI
   const classes = useStyles();
-  
+
   useEffect(() => {
     if (userId) {
       async function getJournalById() {
-        const res = await fetch(`${BACKEND_URL}/posts/${userId}`, {headers: {
-          'content-type': 'application/JSON',
-          Authorization: `Bearer ${accessToken}`,
-        },});
+        const res = await fetch(`${BACKEND_URL}/posts/${userId}`, {
+          headers: {
+            'content-type': 'application/JSON',
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
         // if Access Token Middleware is added to moods and posts BE -need to add header with AT
         const data = await res.json();
         const { payload } = data;
@@ -104,7 +105,7 @@ function JournalView() {
         setJournalDelete(false);
       })
       .then(() => {
-        document.location.reload();
+        setreloadJournal(true);
       });
     return () => abortController.abort();
   }, [journalDelete]);
@@ -143,19 +144,19 @@ function JournalView() {
         </Button>
         <br></br>
         <FormControl className={classes.formControl}>
-        <InputLabel id="sort-by">Sort By...</InputLabel>
-        <Select
-          labelId="sort-by"
-          id="sort-by-select"
-          value={sortConstraint}
-          onChange={changeSortBy}
-        >
-          <MenuItem value={'Newest to oldest'}>Newest to Oldest</MenuItem>
-          <MenuItem value={'Oldest to newest'}>Oldest to Newest</MenuItem>
-          <MenuItem value={'Mood high to low'}>Mood: 😍 to 😢</MenuItem>
-          <MenuItem value={'Mood low to high'}>Mood: 😢 to 😍</MenuItem>
-        </Select>
-      </FormControl>
+          <InputLabel id='sort-by'>Sort By...</InputLabel>
+          <Select
+            labelId='sort-by'
+            id='sort-by-select'
+            value={sortConstraint}
+            onChange={changeSortBy}
+          >
+            <MenuItem value={'Newest to oldest'}>Newest to Oldest</MenuItem>
+            <MenuItem value={'Oldest to newest'}>Oldest to Newest</MenuItem>
+            <MenuItem value={'Mood high to low'}>Mood: 😍 to 😢</MenuItem>
+            <MenuItem value={'Mood low to high'}>Mood: 😢 to 😍</MenuItem>
+          </Select>
+        </FormControl>
         <div className='jouranal-cards'>
           {journalDisplay
             .filter((x) => !showFavorites || x.favorite === true)
@@ -184,6 +185,7 @@ function JournalView() {
                 audioSource={journalEntry.audio}
                 imgSource={journalEntry.image}
                 vidSource={journalEntry.video}
+                key={index}
               />
             ))}
         </div>
