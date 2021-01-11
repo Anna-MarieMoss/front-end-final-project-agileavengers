@@ -62,6 +62,12 @@ const useStyles = makeStyles((theme) => ({
   media: {
     margin: '1em',
   },
+  journalactions: {
+    width: '100%',
+  },
+  journalactionsicons: {
+    width: '50%',
+  },
 }))
 
 export default function JournalCard({
@@ -174,16 +180,16 @@ export default function JournalCard({
                     <AudiotrackRoundedIcon fontSize='small'/>
                   )}
                 </Grid> */}
-                <Grid>
+                <Grid className={classes.journalactions}>
                     <FavoriteButton
+                    className={classes.journalactions}
                       handleFavorite={handleFavorite}
                       favoriteColor={favorite ? '#DC143C' : 'black'}
                       journalEntryId={journalEntryId}
                       favorite={favorite}
                     />
-                    </Grid>
-                    <Grid>
                     <DeleteButton
+                      className={classes.journalactions}
                       handleDelete={handleDelete}
                       journalEntryId={journalEntryId}
                     />
