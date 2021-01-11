@@ -122,14 +122,10 @@ function TrophyButton({ name, path, id, color, awarded }) {
       <button
         id={theme}
         className='trophy-button'
-<<<<<<< HEAD
-        style={{ border: '0px', strokeOpacity: '0' }}
-=======
         style={{ border: '0px', strokeOpacity: '0', outline: 'none' }}
         // onClick={() => {
         //   handleTrophy(color);
         // }}
->>>>>>> 10d7be8413dae515622c47883eb397c17b1b0ef5
         onClick={patchTrophy}
       >
         <svg

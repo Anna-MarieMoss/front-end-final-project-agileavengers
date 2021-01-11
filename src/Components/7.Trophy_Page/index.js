@@ -73,7 +73,7 @@ function Trophy() {
               className='center'
             />
             <br></br>
-            Click below to claim your trophy as you master a new skill
+            Click below to claim your trophy, as you master each new skill.
           </Typography>
           <br></br>
           <br></br>
