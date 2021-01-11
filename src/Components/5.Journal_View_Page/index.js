@@ -148,8 +148,8 @@ function JournalView() {
 
   return (
     isAuthenticated && (
-      <div className='container'>
-        <H1 text={`${userData?.name}'s journey so far....`} />
+      <div >
+        <H1 text={`Your Timeline`} />
         <Button onClick={filterByFavorite} style={{textTransform: 'capitalize'}}>
           {showFavorites ? <Typography variant={'h6'}>Show All ✏️</Typography> : <Typography variant={'h6'}>Show Favorites ❤️</Typography>}
         </Button>

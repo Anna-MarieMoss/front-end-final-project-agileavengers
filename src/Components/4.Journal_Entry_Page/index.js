@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 import { useAppContext } from '../../AppContext';
 import H1 from '../DisplayText/H1Text';
-import H2 from '../DisplayText/H2Text';
 import './journal.css';
 import { useHistory } from 'react-router';
 import TrophyButton from '../Buttons/TrophyButton/index';
@@ -150,10 +149,9 @@ export default function JournalEntry(chosenEmotion) {
     isAuthenticated && (
       <div className='wrapper' id={theme}>
       <div className='container' id={theme}>
-        <H1 text={`${userData?.name} how was your day today?`} />
-        <H2 text={`What did you learn today?`} />
+        <H1 text={`How Was Your Day?`} />
        <br></br>
-        <div id='Emma-New-Form'>
+        <div id='journal-entry'>
           <TextField
                 id="outlined-multiline-static"
                 label="Journal Entry"
@@ -168,28 +166,24 @@ export default function JournalEntry(chosenEmotion) {
                       setText(value);}}
                 value={text}
                 className='form-input'
-                placeholder='How are you doing today?'
+                placeholder='What did you learn today?'
           />
           <div className='file-entry'>
             <input
               name='image'
               accept="image/*"
               //className={classes.input}
-              style={{ display: 'none' }}
+              style={{ display: 'none',  overFlow: 'hidden' }}
               id="image"
               multiple
               type="file"
               onChange={handleImageInputChange}
               value={imgUpload}
+             
             />
             <label htmlFor={'image'} >
-              <Button variant="raised" component="span" style={{textTransform: 'capitalize'}} >
-                {<PhotoRoundedIcon/>}  Image Upload
-              </Button>
+                <PhotoRoundedIcon fontSize='large' />
             </label> 
-          </div>
-
-          <div className='file-entry'>
             <input
               id='video'
               type='file'
@@ -197,30 +191,25 @@ export default function JournalEntry(chosenEmotion) {
               accept='video/*'
               onChange={handleVideoInputChange}
               value={vidUpload}
-              style={{ display: 'none', }}
+              style={{ display: 'none',  overFlow: 'hidden'}}
             />
             <label htmlFor={'video'} >
-              <Button variant="raised" component="span" style={{textTransform: 'capitalize'}}>
-                {<VideocamRoundedIcon />}  Video Upload
-              </Button>
+                <VideocamRoundedIcon fontSize='large' />
             </label>
-          </div>
-
-          <div className='file-entry'>
             <input
               id='audio'
               type='file'
               //name='audio'
               accept='audio/*'
+   
               onChange={handleAudioInputChange}
               value={audioUpload}
-              style={{ display: 'none', }}
+              style={{ display: 'none',  overFlow: 'hidden' }}
             />
             <label htmlFor={'audio'} >
-              <Button variant="raised" component="span" style={{textTransform: 'capitalize'}} >
-              {<AudiotrackRoundedIcon />}  Audio Upload 
-              </Button>
+              <AudiotrackRoundedIcon fontSize='large' />
             </label>
+          </div>
           </div>
           <Button
             className='btn'
@@ -230,8 +219,7 @@ export default function JournalEntry(chosenEmotion) {
           >
             Submit
           </Button>
-
-          </div>
+        
           <br></br>
           {previewImgSource && (
             <img

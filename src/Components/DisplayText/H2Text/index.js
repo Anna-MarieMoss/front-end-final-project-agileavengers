@@ -5,8 +5,7 @@ import { ThemeContext } from '../../../ThemeContext';
 
 const useStyles = makeStyles({
   h5: {
-    marginRight: '0.7em',
-    marginLeft: '0.7em',
+    margin: '0.7em',
   },
 });
 

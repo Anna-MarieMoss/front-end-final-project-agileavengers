@@ -58,15 +58,20 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignContent: 'center',
         padding: theme.spacing(1),
+        fontWeight: 400,
       },
   media: {
     margin: '1em',
   },
   journalactions: {
     width: '100%',
+    alignContent: 'space-between',
+    alignItems: 'stretch',
+    justify: 'space-between',
+    spacing: 3,
   },
-  journalactionsicons: {
-    width: '50%',
+  avatar: {
+    width: '100%',
   },
 }))
 
@@ -105,7 +110,7 @@ export default function JournalCard({
   let date = getLongDate();
 
   return (
-    <div className={classes.root}>
+    <div >
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia >
@@ -147,19 +152,20 @@ export default function JournalCard({
                   </CardMedia> 
         <CardContent>
         <Grid>
-          <Typography gutterBottom variant="h5" component="h4">
+          <Typography gutterBottom variant="h5" component="h4" >
             {date}
           </Typography>
           {emotionNumber && (
                   <Avatar
-                    style={{  fontSize: '2em', strokeOpacity: '0' , backgroundColor: 'white'}}
-                    className='journal-mood'
+                    style={{  fontSize: '3em', strokeOpacity: '0' , backgroundColor: 'white'}}
+                    class='journal-mood'
+                    className={classes.avatar}
                   >
                     {emotion[0].emotion}
                   </Avatar>
                 )}
           </Grid>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography variant="h6" component="h6" className='journaltext' >
             {text}
           </Typography>
         </CardContent>
@@ -182,14 +188,14 @@ export default function JournalCard({
                 </Grid> */}
                 <Grid className={classes.journalactions}>
                     <FavoriteButton
-                    className={classes.journalactions}
+                    className={classes.journalactionsicons}
                       handleFavorite={handleFavorite}
                       favoriteColor={favorite ? '#DC143C' : 'black'}
                       journalEntryId={journalEntryId}
                       favorite={favorite}
                     />
                     <DeleteButton
-                      className={classes.journalactions}
+                      className={classes.journalactionsicons}
                       handleDelete={handleDelete}
                       journalEntryId={journalEntryId}
                     />
