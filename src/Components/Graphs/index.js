@@ -14,8 +14,15 @@ const Graph = () => {
   const { isAuthenticated, isLoading, accessToken, userData } = useAppContext();
   const chartContainer = useRef(null);
   const [chartInstance, setChartInstance] = useState(null);
-  const [graphData, setGraphData] = useState([0, 0, 0, 0, 0]);
+  const [graphData, setGraphData] = useState([
+    { date: 0 },
+    { date: 0 },
+    { date: 0 },
+    { date: 0 },
+    { date: 0 },
+  ]);
   const [showGraph, setShowGraph] = useState(false);
+  const [getTenMoods, setGetTenMoods] = useState(true);
   let userId = userData?.id;
   //graph
 
@@ -29,10 +36,14 @@ const Graph = () => {
 
   const randomInt = () => Math.floor(Math.random() * (5 - 1 + 1)) + 1;
 
+  // forcefully get mood date by clicking button
+
   function handleMood() {
     setShowGraph(true);
     console.log(`graph should be showing`);
   }
+
+  // renders chart container, should re render when graphdata changes
 
   useEffect(() => {
     if (chartContainer && chartContainer.current) {
@@ -41,10 +52,18 @@ const Graph = () => {
     }
   }, [chartContainer, graphData]);
 
+  // re renders canvas?
+
   const updateDataset = (datasetIndex, newData) => {
     chartInstance.data.datasets[datasetIndex].data = newData;
     chartInstance.update();
   };
+
+  // generates random data
+
+  function getLastTenMoods(bool) {
+    setGetTenMoods(bool);
+  }
 
   const onButtonClick = () => {
     const data = [
@@ -73,31 +92,28 @@ const Graph = () => {
       const data = await res.json();
       // console.log( `data is  ${JSON.stringify(data)}`);
 
+      for (let post of data.payload) {
+        post.date = new Date(post.date).toDateString().slice(4);
+      }
+
+      // get date in nice format
+
       console.log(`data payload is `, data.payload);
       // console.log(`data is ${JSON.stringify(data.payload[0].mood)}`)
-      setGraphData(data.payload);
-      console.log(`graphData state is`, graphData);
+      setGraphData(getTenMoods ? data.payload.slice(0, 10) : data.payload);
+
       //chartConfig.data.datasets[0].data = graphData.map((x) => x.mood);
     }
 
     getMood();
-  }, [showGraph]);
+  }, [showGraph, userData, getTenMoods]);
+
+  console.log(`graphData is `, graphData);
 
   let chartConfig = {
     type: 'bar',
     data: {
-      labels: [
-        'Day One',
-        'Day Two',
-        'Day Three',
-        'Day Four',
-        'Day Five',
-        'Day One',
-        'Day Two',
-        'Day Three',
-        'Day Four',
-        'Day Five',
-      ],
+      labels: graphData.map((x) => x.date),
       datasets: [
         {
           label: 'Mood',
@@ -113,7 +129,17 @@ const Graph = () => {
             'rgba(255, 206, 86, 0.2)',
             'rgba(75, 192, 192, 0.2)',
             'rgba(153, 102, 255, 0.2)',
-          ],
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+          ].slice(0, graphData.length),
           borderColor: [
             'rgba(255, 99, 132, 1)',
             'rgba(54, 162, 235, 1)',
@@ -125,17 +151,63 @@ const Graph = () => {
             'rgba(255, 206, 86, 1)',
             'rgba(75, 192, 192, 1)',
             'rgba(153, 102, 255, 1)',
-          ],
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+          ].slice(0, graphData.length),
           borderWidth: 1,
         },
       ],
     },
     options: {
+      legend: {
+        display: false,
+      },
       scales: {
+        xAxes: [
+          {
+            scaleLabel: {
+              display: true,
+              labelString: 'Date',
+            },
+          },
+        ],
         yAxes: [
           {
+            scaleLabel: {
+              display: true,
+              labelString: 'Moods',
+            },
             ticks: {
-              beginAtZero: true,
+              min: 0,
+              max: 5,
+              callback: function (value, index, values) {
+                if (value === 0) {
+                  return value;
+                }
+                if (value === 1) {
+                  return '😢 ' + value;
+                }
+                if (value === 2) {
+                  return '😒 ' + value;
+                }
+                if (value === 3) {
+                  return '😬 ' + value;
+                }
+                if (value === 4) {
+                  return '😀 ' + value;
+                }
+                if (value === 5) {
+                  return '😍 ' + value;
+                }
+              },
             },
           },
         ],
@@ -146,20 +218,20 @@ const Graph = () => {
   return (
     <div>
       <Button
-        onClick={onButtonClick}
+        onClick={() => getLastTenMoods(true)}
         className='btn'
         variant='outlined'
         color={muiTheme(theme)}
       >
-        Switch View
+        Last 10 Moods
       </Button>
       <Button
-        onClick={handleMood}
+        onClick={() => getLastTenMoods(false)}
         className='btn'
         variant='outlined'
         color={muiTheme(theme)}
       >
-        Get Mood Data
+        All Time Moods
       </Button>
       <canvas
         ref={chartContainer}
