@@ -49,6 +49,7 @@ function Trophy() {
           <div className='trophy-display'>
             {award?.map((trophy) => (
               <TrophyButton
+                className='trophy-button'
                 path={trophy.path}
                 id={trophy.id}
                 name={trophy.name}

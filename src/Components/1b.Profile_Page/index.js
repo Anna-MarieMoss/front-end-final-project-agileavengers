@@ -141,7 +141,11 @@ function Profile() {
               setMyersBriggs(value);
             }}
           />
-          <DatePicker values={selectedDate} handleDate={setSelectedDate} />
+          <DatePicker
+            values={selectedDate}
+            handleDate={setSelectedDate}
+            label='Start Date'
+          />
           {selectedDate && (
             <SubmitButton className='btn' handleClick={() => handleSubmit()} />
           )}

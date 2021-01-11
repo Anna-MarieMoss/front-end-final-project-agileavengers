@@ -10,13 +10,20 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import { ThemeContext } from '../../ThemeContext';
+import DatePicker from '../Input/DateInput/index.js';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function UsersMood() {
-  const { isAuthenticated, isLoading, accessToken, userData, user } = useAppContext();
-  const [selectedDate, setSelectedDate] = useState('');
+  const {
+    isAuthenticated,
+    isLoading,
+    accessToken,
+    userData,
+    user,
+  } = useAppContext();
+  const [selectedDate, setSelectedDate] = useState(null);
   const [usersMoodResponse, setUsersMoodResponse] = useState([]);
   const [chartInstance, setChartInstance] = useState(null);
   const [graphData, setGraphData] = useState([]);
@@ -85,24 +92,27 @@ function UsersMood() {
     if (usersMoodResponse) {
       function getUsersMoodByDate() {
         let res = usersMoodResponse.reduce((acc, cur) => {
-            if(cur.date.slice(0,10) === selectedDate){
-                return [...acc, cur.mood]
+          if (cur.date.slice(0, 10) === selectedDate) {
+            return [...acc, cur.mood];
+          }
+          return acc;
+        }, []);
+        console.log('this is res:', res);
+        let graphRes = res.reduce(
+          (acc, cur) => {
+            if (acc[cur]) {
+              return { ...acc, [cur]: acc[cur] + 1 };
             }
-            return acc;
-        }, [])
-        console.log('this is res:', res )
-        let graphRes = res.reduce((acc, cur) => {
-            if (acc[cur]){
-                return {...acc, [cur]: acc[cur] + 1}
-              }
-              return {...acc, [cur]: 1}
-        } ,{1: 0, 2: 0, 3: 0, 4: 0, 5: 0});
-      
-        setGraphData(Object.values(graphRes))
-        }
-        getUsersMoodByDate();
-}
-}, [selectedDate, usersMoodResponse])
+            return { ...acc, [cur]: 1 };
+          },
+          { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }
+        );
+
+        setGraphData(Object.values(graphRes));
+      }
+      getUsersMoodByDate();
+    }
+  }, [selectedDate, usersMoodResponse]);
 
   useEffect(() => {
     if (chartContainer && chartContainer.current) {
@@ -133,30 +143,34 @@ function UsersMood() {
     }
   }, [selectedDate]);
 
+  //date format
+  function getLongDate() {
+    let newDate = new Date(selectedDate);
+    newDate = newDate.toString();
+    return newDate.slice(0, 15);
+  }
+  let date = getLongDate();
+
+  //select date
+  function headingText() {
+    if (selectedDate === null) {
+      return 'Your Moods';
+    } else return `Your Moods On ${date}`;
+  }
+
   return (
     <div className={'users-mood'}>
       <div className='container'>
-        <H2 text={`Bootcampers mood on the: ${selectedDate}`} />
+        <H2 text={headingText()} />
         {/* <Typography variant='h6'>
         {`Bootcampers mood on the: ${selectedDate}`}
       </Typography> */}
-        <MuiPickersUtilsProvider utils={DateFnsUtils} color={muiTheme(theme)}>
-          <Grid container justify='space-around' color={muiTheme(theme)}>
-            <KeyboardDatePicker
-              autoOk={true}
-              disableToolbar
-              variant='inline'
-              format='yyyy-mm-dd'
-              margin='normal'
-              value={selectedDate}
-              onChange={handleDate}
-              color={muiTheme(theme)}
-              KeyboardButtonProps={{
-                'aria-label': 'change date',
-              }}
-            />
-          </Grid>
-        </MuiPickersUtilsProvider>
+
+        <DatePicker
+          values={selectedDate}
+          handleDate={handleDate}
+          label='Select a Date'
+        />
         <div className='pie-legend'>
           <button
             style={{
@@ -166,6 +180,7 @@ function UsersMood() {
               border: 0,
               fontSize: '1.5em',
               margin: '0.3em',
+              outline: 'none',
             }}
           >
             😢
@@ -178,6 +193,7 @@ function UsersMood() {
               border: 0,
               fontSize: '1.5em',
               margin: '0.3em',
+              outline: 'none',
             }}
           >
             😒
@@ -190,6 +206,7 @@ function UsersMood() {
               border: 0,
               fontSize: '1.5em',
               margin: '0.3em',
+              outline: 'none',
             }}
           >
             😬
@@ -202,6 +219,7 @@ function UsersMood() {
               border: 0,
               fontSize: '1.5em',
               margin: '0.3em',
+              outline: 'none',
             }}
           >
             😀
@@ -214,6 +232,7 @@ function UsersMood() {
               border: 0,
               fontSize: '1.5em',
               margin: '0.3em',
+              outline: 'none',
             }}
           >
             😍
