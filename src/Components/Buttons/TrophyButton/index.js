@@ -105,7 +105,7 @@ function TrophyButton({ name, path, id, color, awarded }) {
       //  document.getElementsByClassName('trophyButton')
       setClick(click + 1);
       console.log(`click is`, click);
-      toast.info(`Congratulations, you've mastered a new skill!`, {
+      toast(`Congratulations, you've mastered a new skill!`, {
         position: toast.POSITION.TOP_RIGHT,
       });
       //console.log (`my state is`)

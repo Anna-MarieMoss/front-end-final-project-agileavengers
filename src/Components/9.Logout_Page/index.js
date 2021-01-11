@@ -17,7 +17,7 @@ function Logout() {
   const name = userData ? userData?.name : '';
 
   return (
-    <div id={theme} className={'logout'}>
+    <div id={theme} className={'logout', 'container'}>
       <H2
         text={`Great Stuff ${name}! Don't forget to log back in tomorrow to update your journey`}
       />

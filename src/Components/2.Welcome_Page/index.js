@@ -8,7 +8,7 @@ import { ThemeContext } from '../../ThemeContext';
 function Welcome() {
   const theme = useContext(ThemeContext);
   return (
-    <div id={theme} className={'welcome'}>
+    <div id={theme} className={'welcome', 'container'}>
       <H1 text={`Hi welcome to your SoC Journal`} />
       <SoCLogo style={{ width: '100px' }} />
       <p>

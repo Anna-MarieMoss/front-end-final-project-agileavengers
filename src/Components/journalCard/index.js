@@ -181,6 +181,8 @@ export default function JournalCard({
                       journalEntryId={journalEntryId}
                       favorite={favorite}
                     />
+                    </Grid>
+                    <Grid>
                     <DeleteButton
                       handleDelete={handleDelete}
                       journalEntryId={journalEntryId}
