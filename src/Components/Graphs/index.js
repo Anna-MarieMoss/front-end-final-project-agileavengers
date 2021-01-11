@@ -30,7 +30,7 @@ const Graph = () => {
   const randomInt = () => Math.floor(Math.random() * (5 - 1 + 1)) + 1;
 
   function handleMood() {
-    setShowGraph(true);
+    // setShowGraph(true);
     console.log(`graph should be showing`);
   }
 
@@ -77,6 +77,7 @@ const Graph = () => {
       // console.log(`data is ${JSON.stringify(data.payload[0].mood)}`)
       setGraphData(data.payload);
       console.log(`graphData state is`, graphData);
+      
       //chartConfig.data.datasets[0].data = graphData.map((x) => x.mood);
     }
 
@@ -86,18 +87,11 @@ const Graph = () => {
   let chartConfig = {
     type: 'bar',
     data: {
-      labels: [
-        'Day One',
-        'Day Two',
-        'Day Three',
-        'Day Four',
-        'Day Five',
-        'Day One',
-        'Day Two',
-        'Day Three',
-        'Day Four',
-        'Day Five',
-      ],
+      labels: 
+       
+        graphData.map((x) => x.date),
+        
+      
       datasets: [
         {
           label: 'Mood',
