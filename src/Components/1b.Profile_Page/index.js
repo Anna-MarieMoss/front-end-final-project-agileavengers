@@ -95,48 +95,44 @@ function Profile() {
   }
 
   return (
-    (<style type='text/css'>{`#navbarshow {display: none}`}</style>),
-    (
-      <div id={theme} className={'profile'}>
-        <H1 text={'Profile'} />
-        <img className='profile-pic' src={user?.picture} alt={user?.name} />
-        {user?.given_name ? (
-          <H2
-            text={`Hi ${user?.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
-          />
-        ) : (
-          <H2
-            text={`Hi, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
-          />
-        )}
-        <form /*className={classes.root}*/ noValidate autoComplete='off'>
-          <div id={theme} className={'profile'}>
-            {!user?.given_name && (
-              <TextField
-                id='outlined-search'
-                label='Name'
-                type='text'
-                variant='outlined'
-                color={muiTheme(theme)}
-                onChange={(event) => {
-                  const { value } = event.target;
-                  setName(value);
-                }}
-              />
-            )}
-
+    <div id={theme} className={'profile'}>
+      <H1 text={'Profile'} />
+      <img className='profile-pic' src={user?.picture} alt={user?.name} />
+      {user?.given_name ? (
+        <H2
+          text={`Hi ${user?.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
+        />
+      ) : (
+        <H2
+          text={`Hi, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
+        />
+      )}
+      <form /*className={classes.root}*/ noValidate autoComplete='off'>
+        <div id={theme} className={'profile'}>
+          {!user?.given_name && (
             <TextField
               id='outlined-search'
-              label='Myers-Briggs'
+              label='Name'
               type='text'
               variant='outlined'
               color={muiTheme(theme)}
               onChange={(event) => {
                 const { value } = event.target;
-                setMyersBriggs(value);
+                setName(value);
               }}
             />
-
+          )}
+          <TextField
+            id='outlined-search'
+            label='Myers-Briggs'
+            type='text'
+            variant='outlined'
+            color={muiTheme(theme)}
+            onChange={(event) => {
+              const { value } = event.target;
+              setMyersBriggs(value);
+            }}
+          />
           <DatePicker
             values={selectedDate}
             handleDate={setSelectedDate}
@@ -148,7 +144,6 @@ function Profile() {
         </div>
       </form>
     </div>
-
   );
 }
 export default Profile;
