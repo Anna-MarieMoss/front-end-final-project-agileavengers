@@ -144,12 +144,19 @@ function JournalView() {
 
   return (
     isAuthenticated && (
-      <div>
-        <div className='container'>
-          <H1 text={`${userData?.name}'s journey so far....`} />
-          <Button
-            onClick={filterByFavorite}
-            style={{ textTransform: 'capitalize' }}
+      <div >
+        <H1 text={`Your Timeline`} />
+        <Button onClick={filterByFavorite} style={{textTransform: 'capitalize'}}>
+          {showFavorites ? <Typography variant={'h6'}>Show All ✏️</Typography> : <Typography variant={'h6'}>Show Favorites ❤️</Typography>}
+        </Button>
+        <br></br>
+        <FormControl className={classes.formControl}>
+          <InputLabel id='sort-by'>Sort By...</InputLabel>
+          <Select
+            labelId='sort-by'
+            id='sort-by-select'
+            value={sortConstraint}
+            onChange={changeSortBy}
           >
             {showFavorites ? (
               <Typography variant={'h6'}>Show All ✏️</Typography>

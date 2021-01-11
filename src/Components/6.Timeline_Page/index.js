@@ -36,7 +36,7 @@ function Timeline() {
     isAuthenticated && (
       <div id={theme}>
         <div>
-          <H1 text={'Your Timeline'} />
+          <H1 text={'Your Journey'} />
           <H2 text={congratsMessage} />
           <ThemeProvider>
             <ProgressBar week={currentWeek} />

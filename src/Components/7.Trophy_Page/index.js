@@ -44,21 +44,20 @@ function Trophy() {
   }
   return (
     isAuthenticated && (
-      <div>
-        <div id={theme} className='trophy'>
-          <div className='container'>
-            <H1 text={`${userData?.name}'s Trophy Cabinet`} />
-            <div className='trophy-display'>
-              {award?.map((trophy) => (
-                <TrophyButton
-                  path={trophy.path}
-                  id={trophy.id}
-                  name={trophy.name}
-                  color={trophy.color}
-                  awarded={trophy.awarded}
-                />
-              ))}
-            </div>
+      <div id={theme} className='trophy'>
+        <div className='container'>
+          <H1 text={`${userData?.name}'s Trophy Cabinet`} />
+          <div className='trophy-display'>
+            {award?.map((trophy) => (
+              <TrophyButton
+                className='trophy-button'
+                path={trophy.path}
+                id={trophy.id}
+                name={trophy.name}
+                color={trophy.color}
+                awarded={trophy.awarded}
+              />
+            ))}
           </div>
         </div>
         <NavBar />

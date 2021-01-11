@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppContext } from '../../AppContext';
 import ReactAudioPlayer from 'react-audio-player';
 import { journalEntryWeek } from '../../journalWeek';
-
 
 // App Components
 import DeleteButton from '../Buttons/DeleteButton/index.js';
@@ -24,7 +23,6 @@ import AudiotrackRoundedIcon from '@material-ui/icons/AudiotrackRounded';
 import VideocamRoundedIcon from '@material-ui/icons/VideocamRounded';
 import PhotoRoundedIcon from '@material-ui/icons/PhotoRounded';
 
-
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -32,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
         // overflow: 'hidden',
         // padding: theme.spacing(0, 3),
         marginTop: '1em',
-
       },
       date: {
         maxWidth: '95%',
@@ -58,9 +55,20 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignContent: 'center',
         padding: theme.spacing(1),
+        fontWeight: 400,
       },
   media: {
     margin: '1em',
+  },
+  journalactions: {
+    width: '100%',
+    alignContent: 'space-between',
+    alignItems: 'stretch',
+    justify: 'space-between',
+    spacing: 3,
+  },
+  avatar: {
+    width: '100%',
   },
 }))
 
@@ -77,11 +85,10 @@ export default function JournalCard({
   vidSource,
   avatarBackground,
 }) {
-
   const classes = useStyles();
   const { emotionsArray, userData } = useAppContext();
-  const [journalWeek, setJournalWeek] = useState("week1")
-  
+  const [journalWeek, setJournalWeek] = useState('week1');
+
   // Matching the Emoji to Mood Number
   const emotion = emotionsArray.filter((em) => {
     if (em.number === emotionNumber) {
@@ -91,15 +98,15 @@ export default function JournalCard({
   });
 
   //Date Format
-  function getLongDate(){
-      let newDate = new Date(journalDate);
-      newDate = newDate.toString();
+  function getLongDate() {
+    let newDate = new Date(journalDate);
+    newDate = newDate.toString();
     return newDate.slice(0, 15);
   }
   let date = getLongDate();
 
   return (
-    <div className={classes.root}>
+    <div >
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia >
@@ -141,26 +148,26 @@ export default function JournalCard({
                   </CardMedia> 
         <CardContent>
         <Grid>
-          <Typography gutterBottom variant="h5" component="h4">
+          <Typography gutterBottom variant="h5" component="h4" >
             {date}
           </Typography>
           {emotionNumber && (
                   <Avatar
-                    style={{  fontSize: '2em', strokeOpacity: '0' , backgroundColor: 'white'}}
-                    className='journal-mood'
+                    style={{  fontSize: '3em', strokeOpacity: '0' , backgroundColor: 'white'}}
+                    class='journal-mood'
+                    className={classes.avatar}
                   >
                     {emotion[0].emotion}
                   </Avatar>
                 )}
           </Grid>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography variant="h6" component="h6" className='journaltext' >
             {text}
           </Typography>
         </CardContent>
-
-      </CardActionArea>
-      <CardActions>
-      {/* <Grid className={classes.icons}>
+        </CardActionArea>
+        <CardActions>
+          {/* <Grid className={classes.icons}>
                   {text && (
                     <TextFieldsRoundedIcon fontSize='small'/>
                   )}
@@ -174,16 +181,15 @@ export default function JournalCard({
                     <AudiotrackRoundedIcon fontSize='small'/>
                   )}
                 </Grid> */}
-                <Grid>
+                <Grid className={classes.journalactions}>
                     <FavoriteButton
+                    className={classes.journalactionsicons}
                       handleFavorite={handleFavorite}
-                      favoriteColor={favorite ? '#DC143C' : 'black'}
                       journalEntryId={journalEntryId}
                       favorite={favorite}
                     />
-                    </Grid>
-                    <Grid>
                     <DeleteButton
+                      className={classes.journalactionsicons}
                       handleDelete={handleDelete}
                       journalEntryId={journalEntryId}
                     />
