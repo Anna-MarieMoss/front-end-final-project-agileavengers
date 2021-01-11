@@ -4,11 +4,7 @@ import './TrophyButton.css';
 import 'toasted-notes/src/styles.css';
 import { ThemeContext } from '../../../ThemeContext';
 //// 2ND TYPE OF ALERTS WITH COLOURS!
-import {
-  ToastContainer,
-  toast,
-  Slide,
-} from 'react-toastify';
+import { ToastContainer, toast, Slide } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAppContext } from '../../../AppContext';
 
@@ -118,6 +114,10 @@ function TrophyButton({ name, path, id, color, awarded }) {
       //document.getElementById(id).setAttribute.disabled = true
     }
   }
+
+  //on Hover color change
+
+  function hoverColorChange() {}
 
   return (
     <div id={theme}>

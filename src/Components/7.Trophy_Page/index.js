@@ -5,18 +5,14 @@ import TrophyButton from '../Buttons/TrophyButton/index';
 import H1 from '../DisplayText/H1Text/index';
 import { ThemeContext } from '../../ThemeContext';
 import '../../App.css';
+import './trophies.css';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function Trophy() {
   const theme = useContext(ThemeContext);
-  const {
-    userData,
-    isAuthenticated,
-    isLoading,
-    accessToken,
-  } = useAppContext();
+  const { userData, isAuthenticated, isLoading, accessToken } = useAppContext();
   const [award, setAward] = useState();
 
   let user_Id = userData?.id; //we need to get this from the app context
@@ -47,20 +43,20 @@ function Trophy() {
   }
   return (
     isAuthenticated && (
-      <div id={theme}>
-      <div className='container'>
-        <H1 text={`${userData?.name}'s Trophy Cabinet`} />
-        <div classname='trophy-display'>
-        {award?.map((trophy) => (
-          <TrophyButton
-            path={trophy.path}
-            id={trophy.id}
-            name={trophy.name}
-            color={trophy.color}
-            awarded={trophy.awarded}
-          />
-        ))}
-        </div>
+      <div id={theme} className='trophy'>
+        <div className='container'>
+          <H1 text={`${userData?.name}'s Trophy Cabinet`} />
+          <div className='trophy-display'>
+            {award?.map((trophy) => (
+              <TrophyButton
+                path={trophy.path}
+                id={trophy.id}
+                name={trophy.name}
+                color={trophy.color}
+                awarded={trophy.awarded}
+              />
+            ))}
+          </div>
         </div>
       </div>
     )

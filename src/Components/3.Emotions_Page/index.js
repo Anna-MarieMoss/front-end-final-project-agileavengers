@@ -67,27 +67,28 @@ function Emotions() {
   return (
     isAuthenticated && (
       <div className={theme}>
-      <div className='container'>
-      {!chosenEmotion && (
-        <div>
-        <H1 text={`Hi ${userData?.name}`} />
-        <H2 text={'How are you feeling today?'} />
-        <div className='emotionsBar'>
-          {emotionsArray.map((emotion) => (
-            <EmotionsButton
-              text={emotion.emotion}
-              handleClick={handleEmotion}
-              emotionNumber={emotion.number}
-            />
-          ))}
+        <div className='container'>
+          {!chosenEmotion && (
+            <div>
+              <H1 text={`Hi ${userData?.name}`} />
+              <H2 text={'How are you feeling today?'} />
+              <div className='emotionsBar'>
+                {emotionsArray.map((emotion) => (
+                  <EmotionsButton
+                    text={emotion.emotion}
+                    handleClick={handleEmotion}
+                    emotionNumber={emotion.number}
+                    key={emotion.number}
+                  />
+                ))}
+              </div>
+              <p>
+                {quoteData[Math.floor(Math.random() * quoteData.length)].quote}
+              </p>
+            </div>
+          )}
+          {chosenEmotion && <JournalEntry emotion={chosenEmotion} />}
         </div>
-        <p>{quoteData[Math.floor(Math.random() * quoteData.length)].quote}</p>
-        </div>
-        )}
-        {chosenEmotion && (
-          <JournalEntry emotion={chosenEmotion} />
-        )}
-      </div>
       </div>
     )
   );

@@ -38,6 +38,7 @@ const useStyles = makeStyles({
   root: {
     width: '100%',
     margin: '0px',
+    background: 'linear-gradient(90deg, #f7797d, #FBD786, #C6FFDD)',
   },
 });
 
@@ -47,36 +48,38 @@ function App() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { isAuthenticated, isLoading } = useAppContext();
   const [darkState, setDarkState] = useState(false);
+  const [muiDarkState, setMuiDarkState] = useState(false);
 
   const theme = createMuiTheme({
     palette: {
       type: darkState ? 'dark' : 'light',
       primary: {
-        light: '#f6685e',
-        main: '#f44336',
-        dark: '#aa2e25',
-        contrastText: '#fff',
+        light: '#ac5457',
+        main: '#f7797d',
+        dark: '#f89397',
+        // contrastText: '#fff',
       },
       secondary: {
-        light: '#52b202',
-        main: '#76ff03',
-        dark: '#91ff35',
-        contrastText: '#000',
+        light: '#8ab29a',
+        main: '#C6FFDD',
+        dark: '#d1ffe3',
+        // contrastText: '#000',
       },
     },
   });
   //Toggles the dark and light theme
   const handleThemeChange = () => {
     setDarkState(!darkState);
+    setMuiDarkState(!muiDarkState);
   };
   //Chooses correct CSS id name based on the darkState
   const checkDarkState = darkState ? 'darkTheme' : 'lightTheme';
-  
+
   //Handles the Expanded Navigation
   const navClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  
+
   //Handles the Selected Expanded Navigation
   const navClose = () => {
     setAnchorEl(null);
@@ -99,7 +102,7 @@ function App() {
                 onChange={(event, newValue) => {
                   setValue(newValue);
                 }}
-                showLabels={false}
+                // showlabel={false}
                 className={classes.root}
               >
                 {/* <BottomNavigationAction

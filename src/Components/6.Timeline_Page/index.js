@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ProgressBar from '../ProgressBar/index';
 import { ThemeProvider } from '../ProgressBar/themeContext';
 import H2 from '../DisplayText/H2Text/index';
 import H1 from '../DisplayText/H1Text/index';
 import congratsData from './congratsData';
 import { useAppContext } from '../../AppContext';
-
+import { ThemeContext } from '../../ThemeContext';
 
 function Timeline() {
   const { currentWeek,  isAuthenticated, isLoading } = useAppContext();
@@ -24,22 +24,26 @@ function Timeline() {
     }
   }, [currentWeek, congratsMessage]);
 
+  //Dark / Light Theme
+  const theme = useContext(ThemeContext);
+
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return <div id={theme}>Loading ...</div>;
   }
 
   return (
     isAuthenticated && (
-    <div>
-    <div className='container'>
-      <H1 text={'Your Timeline'}/>
-      <H2 text={congratsMessage}/>
-      <ThemeProvider>
-        <ProgressBar week={currentWeek}/>
-      </ThemeProvider>
-    </div>
-    </div>
-  ));
+      <div id={theme}>
+        <div>
+          <H1 text={'Your Timeline'} />
+          <H2 text={congratsMessage} />
+          <ThemeProvider>
+            <ProgressBar week={currentWeek} />
+          </ThemeProvider>
+        </div>
+      </div>
+    )
+  );
 }
 
 export default Timeline;

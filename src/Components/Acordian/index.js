@@ -134,15 +134,15 @@ let date = getLongDate();
         >
           <div className={classes.root}>
               <Grid container wrap='nowrap'>
-                <Grid item >
-                {emotionNumber && (
-                  <Avatar
-                    style={{ backgroundColor: "white", fontSize: '2em', strokeOpacity: '0' }}
-                    className='journal-mood'
-                  >
-                    {emotion[0].emotion}
-                  </Avatar>
-                )}
+                <Grid item>
+                  {emotionNumber && (
+                    <Avatar
+                      style={{ backgroundColor: 'white', fontSize: '2em' }}
+                      className='journal-mood'
+                    >
+                      {emotion[0].emotion}
+                    </Avatar>
+                  )}
                 </Grid>
                 <Grid item xs zeroMinWidth >
                   <Typography className={classes.date} >
@@ -177,10 +177,10 @@ let date = getLongDate();
                     <Typography align='center' display={'inline'}>{text}</Typography>
                   </Grid>
                 </CardContent>
-                <div classname='journal-image'>
+                <div className='journal-image'>
                   {imgSource && (
                     <img
-                      classname='journal-image'
+                      className='journal-image'
                       src={imgSource}
                       alt='chosenImg'
                       style={{ width: '100%' }}
@@ -188,7 +188,7 @@ let date = getLongDate();
                   )}
                 </div>
 
-                <div classname='journal-video'>
+                <div className='journal-video'>
                   {vidSource && (
                     <video
                       src={vidSource}
@@ -199,7 +199,7 @@ let date = getLongDate();
                   )}
                 </div>
 
-                <div classname='journal-audio'>
+                <div className='journal-audio'>
                   {audioSource && (
                     <ReactAudioPlayer
                       src={audioSource}

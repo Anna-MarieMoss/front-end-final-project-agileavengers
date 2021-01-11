@@ -21,6 +21,7 @@
   margin: 10px;
   font-size: 30px;
   border-radius: 30px;
+  outline: none;
 }
 
 .file-entry {

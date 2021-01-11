@@ -9,6 +9,7 @@ import { useAppContext } from '../../AppContext';
 import { useHistory } from 'react-router';
 import './Profile.css';
 import { ThemeContext } from '../../ThemeContext';
+
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 // const useStyles = makeStyles((theme) => ({
@@ -20,9 +21,16 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 //   },
 // }));
 function Profile() {
+  //Dark / Light Theme
   const theme = useContext(ThemeContext);
   //Auth0
-  const { user, isAuthenticated, isLoading, accessToken } = useAppContext();
+  const {
+    user,
+    isAuthenticated,
+    isLoading,
+    accessToken,
+    setSubmit,
+  } = useAppContext();
 
   // History from React Router
   const history = useHistory();
@@ -33,7 +41,6 @@ function Profile() {
   const [name, setName] = useState(null);
   const [myersBriggs, setMyersBriggs] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
-  const [submit, setSubmit] = useState(null);
 
   // Auth0  - setting logincount
   useEffect(() => {
@@ -48,6 +55,7 @@ function Profile() {
         .then((data) => {
           if (data?.logins_count > 1) {
             history.push('/emotions');
+            setSubmit(true);
           }
         })
         .then(() => {
@@ -63,36 +71,35 @@ function Profile() {
 
   function handleSubmit() {
     setSubmit(true);
-    // once submted redirect to Journal View Page
+    async function createProfile() {
+      const res = await fetch(`${BACKEND_URL}/users`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/JSON',
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          name: name,
+          email: user.email,
+          password: 'password',
+          personality: myersBriggs,
+          start_date: selectedDate,
+          points: 0,
+        }),
+      });
+      const data = await res.json();
+      console.log(data);
+    }
+    createProfile();
     history.push('/emotions');
   }
-  // Creating User in OUR DB
-  useEffect(() => {
-    if (submit) {
-      async function createProfile() {
-        const res = await fetch(`${BACKEND_URL}/users`, {
-          method: 'POST',
-          headers: {
-            'content-type': 'application/JSON',
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify({
-            name: name,
-            email: user.email,
-            password: 'password',
-            personality: myersBriggs,
-            start_date: selectedDate,
-            points: 0,
-          }),
-        });
-        const data = await res.json();
-        console.log(data);
-      }
-      createProfile();
-      setSubmit(null);
-      history.push('/emotions');
-    }
-  }, [submit]);
+
+  //set Mui Dark Theme
+  function muiTheme(theme) {
+    if (theme === 'lightTheme') {
+      return 'primary';
+    } else return 'secondary';
+  }
 
   return (
     <div id={theme} className={'profile'}>
@@ -107,7 +114,6 @@ function Profile() {
           text={`Hi, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
         />
       )}
-
       <form /*className={classes.root}*/ noValidate autoComplete='off'>
         <div id={theme} className={'profile'}>
           {!user?.given_name && (
@@ -116,6 +122,7 @@ function Profile() {
               label='Name'
               type='text'
               variant='outlined'
+              color={muiTheme(theme)}
               onChange={(event) => {
                 const { value } = event.target;
                 setName(value);
@@ -128,13 +135,16 @@ function Profile() {
             label='Myers-Briggs'
             type='text'
             variant='outlined'
+            color={muiTheme(theme)}
             onChange={(event) => {
               const { value } = event.target;
               setMyersBriggs(value);
             }}
           />
           <DatePicker values={selectedDate} handleDate={setSelectedDate} />
-          {selectedDate && <SubmitButton className='btn' handleClick={handleSubmit} />}
+          {selectedDate && (
+            <SubmitButton className='btn' handleClick={() => handleSubmit()} />
+          )}
         </div>
       </form>
     </div>

@@ -1,11 +1,12 @@
 import 'date-fns';
-import React from 'react';
+import React, { useContext } from 'react';
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import { ThemeContext } from '../../../ThemeContext';
 
 export default function DatePicker({ handleDate, values }) {
   // The first commit of Material-UI
@@ -15,10 +16,19 @@ export default function DatePicker({ handleDate, values }) {
   //   setSelectedDate(date);
   // };
 
+  const theme = useContext(ThemeContext);
+  //set Mui Dark Theme
+  function muiTheme(theme) {
+    if (theme === 'lightTheme') {
+      return 'primary';
+    } else return 'secondary';
+  }
+
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <Grid container justify='space-around'>
+    <MuiPickersUtilsProvider utils={DateFnsUtils} color={muiTheme(theme)}>
+      <Grid container justify='space-around' color={muiTheme(theme)}>
         <KeyboardDatePicker
+          color={muiTheme(theme)}
           autoOk={true}
           disableToolbar
           variant='inline'
