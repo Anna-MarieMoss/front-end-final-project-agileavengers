@@ -11,6 +11,9 @@ import { ThemeContext } from '../../ThemeContext';
 // MaterialUI Components
 import { Button } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
+import AudiotrackRoundedIcon from '@material-ui/icons/AudiotrackRounded';
+import VideocamRoundedIcon from '@material-ui/icons/VideocamRounded';
+import PhotoRoundedIcon from '@material-ui/icons/PhotoRounded';
 
 //Alerts
 import toaster from 'toasted-notes';
@@ -145,87 +148,89 @@ export default function JournalEntry(chosenEmotion) {
 
   return (
     isAuthenticated && (
-      <div className='wrapper' id={theme}>
-        <div className='container' id={theme}>
-          <H1 text={`${userData?.name} how was your day today?`} />
-          <H2 text={`What did you learn today?`} />
-          <br></br>
-          <div id='Emma-New-Form'>
-            <TextField
-              id='outlined-multiline-static'
-              label='Journal Entry'
-              fullWidth='true'
-              multiline
-              rows={4}
-              defaultValue='Default Value'
-              variant='outlined'
-              color={muiTheme(theme)}
-              onChange={(event) => {
-                const { value } = event.target;
-                setText(value);
-              }}
-              value={text}
-              className='form-input'
-              placeholder='How are you doing today?'
+      <div className='wrapper'>
+      <div className='container'>
+        <H1 text={`${userData?.name} how was your day today?`} />
+        <H2 text={`What did you learn today?`} />
+       <br></br>
+        <div id='Emma-New-Form'>
+          <TextField
+                id="outlined-multiline-static"
+                label="Journal Entry"
+                fullWidth='true'
+                multiline
+                rows={4}
+                defaultValue="Default Value"
+                variant="outlined"
+                color={muiTheme(theme)}
+                onChange={(event) => {
+                      const { value } = event.target;
+                      setText(value);}}
+                value={text}
+                className='form-input'
+                placeholder='How are you doing today?'
+          />
+          <div className='file-entry'>
+            <input
+              name='image'
+              accept="image/*"
+              //className={classes.input}
+              style={{ display: 'none' }}
+              id="image"
+              multiple
+              type="file"
+              onChange={handleImageInputChange}
+              value={imgUpload}
             />
-            <div className='file-entry'>
-              <input
-                name='image'
-                accept='image/*'
-                //className={classes.input}
-                style={{ display: 'none' }}
-                id='image'
-                multiple
-                type='file'
-                onChange={handleImageInputChange}
-                value={imgUpload}
-              />
-              <label htmlFor={'image'}>
-                <Button variant='raised' component='span'>
-                  Image Upload
-                </Button>
-              </label>
-            </div>
-            <div className='file-entry'>
-              <input
-                id='video'
-                type='file'
-                name='video'
-                accept='video/*'
-                onChange={handleVideoInputChange}
-                value={vidUpload}
-                style={{ display: 'none' }}
-              />
-              <label htmlFor={'video'}>
-                <Button variant='raised' component='span'>
-                  Video Upload
-                </Button>
-              </label>
-            </div>
-            <div className='file-entry'>
-              <input
-                id='audio'
-                type='file'
-                //name='audio'
-                accept='audio/*'
-                onChange={handleAudioInputChange}
-                value={audioUpload}
-                style={{ display: 'none' }}
-              />
-              <label htmlFor={'audio'}>
-                <Button variant='raised' component='span'>
-                  Audio Upload
-                </Button>
-              </label>
-            </div>
-            <Button
-              className='btn'
-              onClick={handleSubmitFile}
-              variant='outlined'
-              color={muiTheme(theme)}
-            >
-              Submit
-            </Button>
+            <label htmlFor={'image'} >
+              <Button variant="raised" component="span" style={{textTransform: 'capitalize'}} >
+                {<PhotoRoundedIcon/>}  Image Upload
+              </Button>
+            </label> 
+          </div>
+
+          <div className='file-entry'>
+            <input
+              id='video'
+              type='file'
+              name='video'
+              accept='video/*'
+              onChange={handleVideoInputChange}
+              value={vidUpload}
+              style={{ display: 'none', }}
+            />
+            <label htmlFor={'video'} >
+              <Button variant="raised" component="span" style={{textTransform: 'capitalize'}}>
+                {<VideocamRoundedIcon />}  Video Upload
+              </Button>
+            </label>
+          </div>
+
+          <div className='file-entry'>
+            <input
+              id='audio'
+              type='file'
+              //name='audio'
+              accept='audio/*'
+              onChange={handleAudioInputChange}
+              value={audioUpload}
+              style={{ display: 'none', }}
+            />
+            <label htmlFor={'audio'} >
+              <Button variant="raised" component="span" style={{textTransform: 'capitalize'}} >
+              {<AudiotrackRoundedIcon />}  Audio Upload 
+              </Button>
+            </label>
+          </div>
+          <Button
+            className='btn'
+            onClick={handleSubmitFile}
+            variant='outlined'
+            color={muiTheme(theme)}
+          >
+            Submit
+          </Button>
+
           </div>
           <br></br>
           {previewImgSource && (

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { useAppContext } from '../../AppContext';
 import ReactAudioPlayer from 'react-audio-player';
+import { journalEntryWeek } from '../../journalWeek';
 
 // App Components
 import DeleteButton from '../Buttons/DeleteButton/index.js';
@@ -14,40 +15,47 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import IconButton from '@material-ui/core/IconButton';
+import TextFieldsRoundedIcon from '@material-ui/icons/TextFieldsRounded';
+import AudiotrackRoundedIcon from '@material-ui/icons/AudiotrackRounded';
+import VideocamRoundedIcon from '@material-ui/icons/VideocamRounded';
+import PhotoRoundedIcon from '@material-ui/icons/PhotoRounded';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: 400,
-    flexGrow: 1,
-    overflow: 'hidden',
-    padding: theme.spacing(0, 3),
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    flexBasis: '33.33%',
-    flexShrink: 0,
-  },
-  secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
-  },
-  paper: {
-    maxWidth: 400,
-    margin: `${theme.spacing(1)}px auto`,
-    padding: theme.spacing(2),
+    width: '100%',
+    // flexGrow: 1,
+    // overflow: 'hidden',
+    // padding: theme.spacing(0, 3),
+    marginTop: '1em',
   },
   date: {
-    maxWidth: 400,
-    margin: `${theme.spacing(1)}px auto`,
-    marginLeft: `0em`,
-    padding: theme.spacing(2),
-    paddingLeft: '0em',
+    maxWidth: '95%',
+    // margin: `${theme.spacing(1)}px auto`,
+    // marginLeft: `0em`,
+    //padding: theme.spacing(1),
+    paddingLeft: '0.5em',
+    paddingRight: '0.5em',
+    align: 'left',
+    //padding: '1em',
   },
+  summary: {
+    width: '95%',
+    padding: theme.spacing(1),
+  }, 
+  icons: {
+    width: '25%',
+    padding: theme.spacing(1),
+  },
+  journaltext: {
+    width: '100%',
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignContent: 'center',
+    padding: theme.spacing(1),
+  },
+  
 }));
 
 export default function JournalAccordion({
@@ -61,13 +69,25 @@ export default function JournalAccordion({
   audioSource,
   imgSource,
   vidSource,
+  avatarBackground,
 }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const { emotionsArray } = useAppContext();
+  const { emotionsArray, userData } = useAppContext();
+  const [journalWeek, setJournalWeek] = useState("week1")
+  //const [summaryText, setSummaryText] = useState("");
 
   //const [postFavorite, setPostFavorite] = useState(false)
   //
+
+  //Figuring out week - ASK Isabel
+//   useEffect(() =>{  
+//     if (journalDate){
+//     let week = journalEntryWeek(userData?.start_date, journalDate)
+//     setJournalWeek(week);
+//   }
+// }, [])
+//   console.log(journalWeek)
 
   // Matching the Emoji to Mood Number
   const emotion = emotionsArray.filter((em) => {
@@ -76,6 +96,26 @@ export default function JournalAccordion({
     }
     return false;
   });
+function getSummaryText(){
+  if (text){
+    if (text.length < 20){
+      return text;
+    }else{
+      return text.slice(0, 20)
+    }
+  }
+  return "";
+}
+let summaryText = getSummaryText()
+
+//Date Format
+function getLongDate(){
+  let newDate = new Date(journalDate);
+  newDate = newDate.toString();
+return newDate.slice(0, 15);
+}
+let date = getLongDate();
+
 
   // Material UI expand the Acordian Function
   const handleChange = (panel) => (event, isExpanded) => {
@@ -93,7 +133,6 @@ export default function JournalAccordion({
           id={`panel${journalEntryId}bh-header`}
         >
           <div className={classes.root}>
-            <Paper elevation={1} className={classes.paper}>
               <Grid container wrap='nowrap'>
                 <Grid item>
                   {emotionNumber && (
@@ -105,14 +144,27 @@ export default function JournalAccordion({
                     </Avatar>
                   )}
                 </Grid>
-                <Grid item xs zeroMinWidth>
-                  <Typography className={classes.date} noWrap>
-                    {journalDate}
+                <Grid item xs zeroMinWidth >
+                  <Typography className={classes.date} >
+                    {date}
                   </Typography>
-                  <Typography noWrap>{text}</Typography>
+                  {expanded ? "": <Typography className={classes.summary}  >{`${summaryText}...`}</Typography>}
+                </Grid>
+                <Grid className={classes.icons}>
+                  {text && (
+                    <TextFieldsRoundedIcon fontSize='small'/>
+                  )}
+                  {imgSource && (
+                    <PhotoRoundedIcon fontSize='small'/>
+                  )}
+                  {vidSource && (
+                    <VideocamRoundedIcon fontSize='small'/>
+                  )}
+                  {audioSource && (
+                    <AudiotrackRoundedIcon fontSize='small'/>
+                  )}
                 </Grid>
               </Grid>
-            </Paper>
           </div>
         </AccordionSummary>
 
@@ -121,30 +173,17 @@ export default function JournalAccordion({
             <Grid item container wrap='nowrap'>
               <div className={classes.details}>
                 <CardContent className={classes.content}>
-                  <Grid item container wrap='nowrap'>
-                    <Typography>{text}</Typography>
-                    <FavoriteButton
-                      handleFavorite={handleFavorite}
-                      favoriteColor={favorite ? '#DC143C' : 'black'}
-                      journalEntryId={journalEntryId}
-                      favorite={favorite}
-                    />
-                    <br />
-                    <br />
-                    <DeleteButton
-                      handleDelete={handleDelete}
-                      journalEntryId={journalEntryId}
-                    />
+                  <Grid className={'journaltext'} item container wrap='nowrap'>
+                    <Typography align='center' display={'inline'}>{text}</Typography>
                   </Grid>
                 </CardContent>
-
                 <div className='journal-image'>
                   {imgSource && (
                     <img
                       className='journal-image'
                       src={imgSource}
                       alt='chosenImg'
-                      style={{ width: '80%' }}
+                      style={{ width: '100%' }}
                     />
                   )}
                 </div>
@@ -154,7 +193,7 @@ export default function JournalAccordion({
                     <video
                       src={vidSource}
                       alt='chosenVideo'
-                      style={{ width: '80%' }}
+                      style={{ width: '100%' }}
                       controls
                     />
                   )}
@@ -165,7 +204,7 @@ export default function JournalAccordion({
                     <ReactAudioPlayer
                       src={audioSource}
                       alt='chosenAudio'
-                      style={{ width: '80%' }}
+                      style={{ width: '100%' }}
                       autoplay
                       controls
                     />
@@ -173,6 +212,18 @@ export default function JournalAccordion({
                 </div>
               </div>
             </Grid>
+            <Grid>
+                    <FavoriteButton
+                      handleFavorite={handleFavorite}
+                      favoriteColor={favorite ? '#DC143C' : 'black'}
+                      journalEntryId={journalEntryId}
+                      favorite={favorite}
+                    />
+                    <DeleteButton
+                      handleDelete={handleDelete}
+                      journalEntryId={journalEntryId}
+                    />
+                  </Grid>
           </Card>
         </AccordionDetails>
       </Accordion>

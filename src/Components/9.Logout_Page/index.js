@@ -14,7 +14,7 @@ function Logout() {
   //     return <div>Loading ...</div>;
   //   }
 
-  const name = userData ? userData.name : '';
+  const name = userData ? userData?.name : '';
 
   return (
     <div id={theme} className={'logout'}>
