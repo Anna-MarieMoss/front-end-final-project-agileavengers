@@ -14,7 +14,7 @@ const congratsData = [
   },
   {
     week: 'week3',
-    message: 'Choose to be optimistic. It feels better.',
+    message: 'week 3 well done',
   },
   {
     week: 'week4',

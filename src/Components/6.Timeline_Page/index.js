@@ -6,9 +6,10 @@ import H1 from '../DisplayText/H1Text/index';
 import congratsData from './congratsData';
 import { useAppContext } from '../../AppContext';
 import { ThemeContext } from '../../ThemeContext';
+import Nav from '../NavBar/NavBar';
 
 function Timeline() {
-  const { currentWeek,  isAuthenticated, isLoading } = useAppContext();
+  const { currentWeek, isAuthenticated, isLoading } = useAppContext();
   const [congratsMessage, setcongratsMessage] = useState(null);
   // console.log(`in timeline ${currentWeek}, ${congratsMessage}`);
 
@@ -41,6 +42,7 @@ function Timeline() {
             <ProgressBar week={currentWeek} />
           </ThemeProvider>
         </div>
+        <Nav />
       </div>
     )
   );
