@@ -38,7 +38,6 @@ const useStyles = makeStyles({
   root: {
     width: '100%',
     margin: '0px',
-    background: '#C6FFDD' /* fallback for old browsers */,
     background: 'linear-gradient(90deg, #f7797d, #FBD786, #C6FFDD)',
   },
 });
