@@ -8,7 +8,7 @@ import {
 } from '@material-ui/pickers';
 import { ThemeContext } from '../../../ThemeContext';
 
-export default function DatePicker({ handleDate, values }) {
+export default function DatePicker({ handleDate, values, label }) {
   // The first commit of Material-UI
   // const [selectedDate, setSelectedDate] = React.useState(new Date());
 
@@ -32,10 +32,10 @@ export default function DatePicker({ handleDate, values }) {
           autoOk={true}
           disableToolbar
           variant='inline'
-          format='MM/dd/yyyy'
+          format='dd/MM/yyyy'
           margin='normal'
           id='date-picker-inline'
-          label='Start Date'
+          label={label}
           value={values}
           onChange={handleDate}
           KeyboardButtonProps={{

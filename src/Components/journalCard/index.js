@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppContext } from '../../AppContext';
 import ReactAudioPlayer from 'react-audio-player';
 import { journalEntryWeek } from '../../journalWeek';
-
 
 // App Components
 import DeleteButton from '../Buttons/DeleteButton/index.js';
@@ -24,7 +23,6 @@ import AudiotrackRoundedIcon from '@material-ui/icons/AudiotrackRounded';
 import VideocamRoundedIcon from '@material-ui/icons/VideocamRounded';
 import PhotoRoundedIcon from '@material-ui/icons/PhotoRounded';
 
-
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
@@ -32,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
         // overflow: 'hidden',
         // padding: theme.spacing(0, 3),
         marginTop: '1em',
-
       },
       date: {
         maxWidth: '95%',
@@ -88,11 +85,10 @@ export default function JournalCard({
   vidSource,
   avatarBackground,
 }) {
-
   const classes = useStyles();
   const { emotionsArray, userData } = useAppContext();
-  const [journalWeek, setJournalWeek] = useState("week1")
-  
+  const [journalWeek, setJournalWeek] = useState('week1');
+
   // Matching the Emoji to Mood Number
   const emotion = emotionsArray.filter((em) => {
     if (em.number === emotionNumber) {
@@ -102,9 +98,9 @@ export default function JournalCard({
   });
 
   //Date Format
-  function getLongDate(){
-      let newDate = new Date(journalDate);
-      newDate = newDate.toString();
+  function getLongDate() {
+    let newDate = new Date(journalDate);
+    newDate = newDate.toString();
     return newDate.slice(0, 15);
   }
   let date = getLongDate();
@@ -169,10 +165,9 @@ export default function JournalCard({
             {text}
           </Typography>
         </CardContent>
-
-      </CardActionArea>
-      <CardActions>
-      {/* <Grid className={classes.icons}>
+        </CardActionArea>
+        <CardActions>
+          {/* <Grid className={classes.icons}>
                   {text && (
                     <TextFieldsRoundedIcon fontSize='small'/>
                   )}
@@ -190,7 +185,6 @@ export default function JournalCard({
                     <FavoriteButton
                     className={classes.journalactionsicons}
                       handleFavorite={handleFavorite}
-                      favoriteColor={favorite ? '#DC143C' : 'black'}
                       journalEntryId={journalEntryId}
                       favorite={favorite}
                     />

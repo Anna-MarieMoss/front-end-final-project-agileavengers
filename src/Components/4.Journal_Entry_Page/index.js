@@ -219,7 +219,6 @@ export default function JournalEntry(chosenEmotion) {
           >
             Submit
           </Button>
-        
           <br></br>
           {previewImgSource && (
             <img

@@ -17,6 +17,7 @@ function TrophyButton({ name, path, id, color, awarded }) {
   //const [trophyColor, setTrophyColor] = useState(awarded ? color : '#384D54');
   const [trophyAwarded, setTrophyAwarded] = useState(awarded);
   const { user, isAuthenticated, isLoading, accessToken } = useAppContext();
+
   async function patchTrophy() {
     const res = await fetch(`${BACKEND_URL}/trophies/${id}`, {
       method: 'PATCH',
@@ -28,6 +29,7 @@ function TrophyButton({ name, path, id, color, awarded }) {
     const data = await res.json();
     console.log(data);
     console.log('Patch Done');
+    console.log(name);
     limitClicks();
     setTrophyAwarded(!trophyAwarded);
     // const data = await res.json();
@@ -38,6 +40,7 @@ function TrophyButton({ name, path, id, color, awarded }) {
     // console.log(`award state is`, award);
     //chartConfig.data.datasets[0].data = graphData.map((x) => x.mood);
   }
+
   // trying new toast alerts
   // const notify = () => {
   //   toast('Wow so easy !');
@@ -115,10 +118,6 @@ function TrophyButton({ name, path, id, color, awarded }) {
     }
   }
 
-  //on Hover color change
-
-  function hoverColorChange() {}
-
   return (
     <div id={theme}>
       <ToastContainer
@@ -135,7 +134,7 @@ function TrophyButton({ name, path, id, color, awarded }) {
       <button
         id={theme}
         className='trophy-button'
-        style={{ border: '0px', strokeOpacity: '0' }}
+        style={{ border: '0px', strokeOpacity: '0', outline: 'none' }}
         // onClick={() => {
         //   handleTrophy(color);
         // }}
@@ -169,9 +168,9 @@ function TrophyButton({ name, path, id, color, awarded }) {
           height='4em'
           fill={trophyAwarded ? color : '#384D54'}
         >
-          <title>{name}</title>
           <path d={path} />
         </svg>
+        <h3>{name}</h3>
       </button>
     </div>
   );

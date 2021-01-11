@@ -15,6 +15,8 @@ import Stats from './Components/8.Stats_Page';
 import Profile from './Components/1b.Profile_Page';
 import Logout from './Components/9.Logout_Page/index';
 import UsersMood from './Components/10.UsersMood/index.js';
+// Importing firebase for push noitifications
+// import firebase from './firebase';
 // Material UI Imports
 import {
   createMuiTheme,
