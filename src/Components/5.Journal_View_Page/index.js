@@ -75,11 +75,11 @@ function JournalView() {
         }
 
         setJournalDisplay(payload);
-        //setreloadJournal(false);
+        setreloadJournal(false);
       }
       getJournalById();
     }
-  }, []);
+  }, [userData, reloadJournal]);
 //reloadJournal, userId
   function filterByFavorite() {
     setShowFavorites(!showFavorites);
