@@ -3,6 +3,9 @@ import Chartjs from 'chart.js';
 import { Button } from '@material-ui/core';
 import { useAppContext } from '../../AppContext';
 import { ThemeContext } from '../../ThemeContext';
+import { colors } from './colors';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -23,6 +26,9 @@ const Graph = () => {
   ]);
   const [showGraph, setShowGraph] = useState(false);
   const [getTenMoods, setGetTenMoods] = useState(true);
+  const [graphType, setGraphType] = useState('bar');
+  const [filterMood, setFilterMood] = useState('');
+  const [filteredData, setFilteredData] = useState([]);
   let userId = userData?.id;
   //graph
 
@@ -36,13 +42,6 @@ const Graph = () => {
 
   const randomInt = () => Math.floor(Math.random() * (5 - 1 + 1)) + 1;
 
-  // forcefully get mood date by clicking button
-
-  function handleMood() {
-    setShowGraph(true);
-    console.log(`graph should be showing`);
-  }
-
   // renders chart container, should re render when graphdata changes
 
   useEffect(() => {
@@ -50,7 +49,7 @@ const Graph = () => {
       const newChartInstance = new Chartjs(chartContainer.current, chartConfig);
       setChartInstance(newChartInstance);
     }
-  }, [chartContainer, graphData]);
+  }, [chartContainer, graphData, graphType, filterMood]);
 
   // re renders canvas?
 
@@ -63,6 +62,15 @@ const Graph = () => {
 
   function getLastTenMoods(bool) {
     setGetTenMoods(bool);
+  }
+
+  function toggleChartType() {
+    setGraphType(graphType === 'bar' ? 'line' : 'bar');
+    console.log('graph has changed');
+  }
+
+  function filterByMood(event) {
+    setFilterMood(event.target.value);
   }
 
   const onButtonClick = () => {
@@ -111,57 +119,15 @@ const Graph = () => {
   console.log(`graphData is `, graphData);
 
   let chartConfig = {
-    type: 'bar',
+    type: graphType,
     data: {
       labels: graphData.map((x) => x.date),
       datasets: [
         {
           label: 'Mood',
           data: graphData.map((x) => x.mood),
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-          ].slice(0, graphData.length),
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-          ].slice(0, graphData.length),
+          backgroundColor: colors.backgroundColor.slice(0, graphData.length),
+          borderColor: colors.borderColor.slice(0, graphData.length),
           borderWidth: 1,
         },
       ],
@@ -177,10 +143,14 @@ const Graph = () => {
               display: true,
               labelString: 'Date',
             },
+            ticks: {
+              fontSize: 10,
+            },
           },
         ],
         yAxes: [
           {
+            fontSize: 20,
             scaleLabel: {
               display: true,
               labelString: 'Moods',
@@ -188,6 +158,7 @@ const Graph = () => {
             ticks: {
               min: 0,
               max: 5,
+              fontSize: 15,
               callback: function (value, index, values) {
                 if (value === 0) {
                   return value;
@@ -233,6 +204,27 @@ const Graph = () => {
       >
         All Time Moods
       </Button>
+      <Button
+        onClick={toggleChartType}
+        className='btn'
+        variant='outlined'
+        color={muiTheme(theme)}
+      >
+        Toggle Chart Type
+      </Button>
+      <Select
+        labelId='sort-by'
+        id='sort-by-select'
+        value={filterMood}
+        onChange={filterByMood}
+      >
+        <MenuItem value={''}>Sort By</MenuItem>
+        <MenuItem value={1}>😢</MenuItem>
+        <MenuItem value={2}>😒</MenuItem>
+        <MenuItem value={3}>😬</MenuItem>
+        <MenuItem value={4}>😀</MenuItem>
+        <MenuItem value={5}>😍</MenuItem>
+      </Select>
       <canvas
         ref={chartContainer}
         style={{ width: '100em', height: '100em' }}
