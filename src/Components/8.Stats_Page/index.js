@@ -12,16 +12,18 @@ function Stats() {
   //   return <div>Loading ...</div>;
   // }
 
+  const name = userData ? userData.name : '';
+
   return (
     <div className={'stats'}>
-    <div className='container'>
-      <H2 text={`${userData?.name}'s Stats`} />
-      <Typography variant='h6'>
-        Display your mood throughout the bootcamp
-      </Typography>
-      <br></br>
-      <Graph />
-    </div>
+      <div className='container'>
+        <H2 text={`${name}'s Stats`} />
+        <Typography variant='h6'>
+          Display your mood throughout the bootcamp
+        </Typography>
+        <br></br>
+        <Graph />
+      </div>
     </div>
   );
 }

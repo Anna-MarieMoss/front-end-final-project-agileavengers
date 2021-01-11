@@ -5,6 +5,7 @@ import TrophyButton from '../Buttons/TrophyButton/index';
 import H1 from '../DisplayText/H1Text/index';
 import { ThemeContext } from '../../ThemeContext';
 import '../../App.css';
+import './trophies.css';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -42,7 +43,8 @@ function Trophy() {
   }
   return (
     isAuthenticated && (
-      <div id={theme}>
+      <div id={theme} className='trophy'>
+
         <div className='container'>
           <H1 text={`${userData?.name}'s Trophy Cabinet`} />
           <div classname='trophy-display'>

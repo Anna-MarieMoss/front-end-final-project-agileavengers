@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import Chartjs from 'chart.js';
 import { Button } from '@material-ui/core';
 import { useAppContext } from '../../AppContext';
+import { ThemeContext } from '../../ThemeContext';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -17,6 +18,14 @@ const Graph = () => {
   const [showGraph, setShowGraph] = useState(false);
   let userId = userData?.id;
   //graph
+
+  const theme = useContext(ThemeContext);
+  //set Mui Dark Theme
+  function muiTheme(theme) {
+    if (theme === 'lightTheme') {
+      return 'primary';
+    } else return 'secondary';
+  }
 
   const randomInt = () => Math.floor(Math.random() * (5 - 1 + 1)) + 1;
 
@@ -136,10 +145,20 @@ const Graph = () => {
   //
   return (
     <div>
-      <Button onClick={onButtonClick} className='btn' variant='outlined' color='primary'>
+      <Button
+        onClick={onButtonClick}
+        className='btn'
+        variant='outlined'
+        color={muiTheme(theme)}
+      >
         Switch View
       </Button>
-      <Button onClick={handleMood} className='btn' variant='outlined' color='primary'>
+      <Button
+        onClick={handleMood}
+        className='btn'
+        variant='outlined'
+        color={muiTheme(theme)}
+      >
         Get Mood Data
       </Button>
       <canvas
