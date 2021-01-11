@@ -10,6 +10,7 @@ const AppContext = createContext(null);
 export function AppProvider({ children }) {
   const [currentWeek, setCurrentWeek] = useState('week1');
   const [userData, setuserData] = useState({});
+  const [submit, setSubmit] = useState(false);
 
   // Auth0 - data
   const {
@@ -50,27 +51,27 @@ export function AppProvider({ children }) {
     }
   }, [user, getAccessTokenSilently]);
 
-  //Get user profile based on email (Auth0 response)
+  //Get user profile based on email (Auth0 response) - NEW VERSION
   useEffect(() => {
     if (user?.email && accessToken) {
-      console.log('Im getting user data');
-      async function getProfile() {
-        const res = await fetch(`${BACKEND_URL}/users/${user?.email}`, {
-          headers: {
-            'content-type': 'application/JSON',
-            Authorization: `Bearer ${accessToken}`,
-          },
+      fetch(`${BACKEND_URL}/users/${user?.email}`, {
+        headers: {
+          'content-type': 'application/JSON',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setuserData(data.payload[0]);
+          let week = progressPosition(data.payload[0].start_date);
+          setCurrentWeek(week);
+        })
+        .catch((e) => {
+          console.error(e);
         });
-        const data = await res.json();
-        setuserData(data.payload[0]); //expect to get start date
-        console.log(data.payload[0], 'userdata from email fetch');
-        let week = progressPosition(data.payload[0].start_date);
-        setCurrentWeek(week);
-      }
-
-      getProfile();
     }
-  }, [user, accessToken]);
+  }, [user, accessToken, submit]);
 
   return (
     <AppContext.Provider
@@ -82,6 +83,7 @@ export function AppProvider({ children }) {
         emotionsArray: emotionsArray,
         accessToken: accessToken,
         userData: userData,
+        setSubmit: setSubmit,
       }}
     >
       {children}

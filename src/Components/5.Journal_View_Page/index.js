@@ -105,7 +105,7 @@ function JournalView() {
         setJournalDelete(false);
       })
       .then(() => {
-        document.location.reload();
+        setreloadJournal(true);
       });
     return () => abortController.abort();
   }, [journalDelete]);
@@ -185,6 +185,7 @@ function JournalView() {
                 audioSource={journalEntry.audio}
                 imgSource={journalEntry.image}
                 vidSource={journalEntry.video}
+                key={index}
               />
             ))}
         </div>

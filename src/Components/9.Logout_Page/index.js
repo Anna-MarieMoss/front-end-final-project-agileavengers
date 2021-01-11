@@ -9,12 +9,12 @@ import './Logout.css';
 
 function Logout() {
   const theme = useContext(ThemeContext);
-  const { user, isAuthenticated, isLoading } = useAppContext();
+  const { userData, isAuthenticated, isLoading } = useAppContext();
   // if (isLoading) {
   //     return <div>Loading ...</div>;
   //   }
 
-  const name = user ? user.given_name : '';
+  const name = userData ? userData.name : '';
 
   return (
     <div id={theme} className={'logout'}>

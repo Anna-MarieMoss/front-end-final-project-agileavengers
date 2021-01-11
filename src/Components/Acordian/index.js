@@ -96,14 +96,14 @@ export default function JournalAccordion({
             <Paper elevation={1} className={classes.paper}>
               <Grid container wrap='nowrap'>
                 <Grid item>
-                {emotionNumber && (
-                  <Avatar
-                    style={{ backgroundColor: 'white', fontSize: '2em' }}
-                    className='journal-mood'
-                  >
-                    {emotion[0].emotion}
-                  </Avatar>
-                )}
+                  {emotionNumber && (
+                    <Avatar
+                      style={{ backgroundColor: 'white', fontSize: '2em' }}
+                      className='journal-mood'
+                    >
+                      {emotion[0].emotion}
+                    </Avatar>
+                  )}
                 </Grid>
                 <Grid item xs zeroMinWidth>
                   <Typography className={classes.date} noWrap>
@@ -138,10 +138,10 @@ export default function JournalAccordion({
                   </Grid>
                 </CardContent>
 
-                <div classname='journal-image'>
+                <div className='journal-image'>
                   {imgSource && (
                     <img
-                      classname='journal-image'
+                      className='journal-image'
                       src={imgSource}
                       alt='chosenImg'
                       style={{ width: '80%' }}
@@ -149,7 +149,7 @@ export default function JournalAccordion({
                   )}
                 </div>
 
-                <div classname='journal-video'>
+                <div className='journal-video'>
                   {vidSource && (
                     <video
                       src={vidSource}
@@ -160,7 +160,7 @@ export default function JournalAccordion({
                   )}
                 </div>
 
-                <div classname='journal-audio'>
+                <div className='journal-audio'>
                   {audioSource && (
                     <ReactAudioPlayer
                       src={audioSource}

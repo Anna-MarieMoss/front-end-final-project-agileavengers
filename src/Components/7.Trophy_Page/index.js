@@ -44,6 +44,7 @@ function Trophy() {
   return (
     isAuthenticated && (
       <div id={theme} className='trophy'>
+
         <div className='container'>
           <H1 text={`${userData?.name}'s Trophy Cabinet`} />
           <div classname='trophy-display'>
