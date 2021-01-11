@@ -59,7 +59,10 @@ const useStyles = makeStyles((theme) => ({
   media: {
     margin: '1em',
   },
-}));
+  journalactions: {
+    width: '100%',
+  }
+}))
 
 export default function JournalCard({
   text,
@@ -173,21 +176,21 @@ export default function JournalCard({
                     <AudiotrackRoundedIcon fontSize='small'/>
                   )}
                 </Grid> */}
-          <Grid>
-            <FavoriteButton
-              handleFavorite={handleFavorite}
-              journalEntryId={journalEntryId}
-              favorite={favorite}
-            />
-          </Grid>
-          <Grid>
-            <DeleteButton
-              handleDelete={handleDelete}
-              journalEntryId={journalEntryId}
-            />
-          </Grid>
-        </CardActions>
-      </Card>
+                <Grid className={classes.journalactions}>
+                    <FavoriteButton
+                    className={classes.journalactions}
+                      handleFavorite={handleFavorite}
+                      journalEntryId={journalEntryId}
+                      favorite={favorite}
+                    />
+                    <DeleteButton
+                      className={classes.journalactions}
+                      handleDelete={handleDelete}
+                      journalEntryId={journalEntryId}
+                    />
+                  </Grid>
+      </CardActions>
+    </Card>
     </div>
   );
 }
