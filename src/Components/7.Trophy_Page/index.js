@@ -9,6 +9,7 @@ import '../../App.css';
 import './trophies.css';
 import { ToastContainer, Slide } from 'react-toastify';
 import { Typography } from '@material-ui/core';
+import NavBar from '../NavBar/NavBar';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -79,6 +80,7 @@ function Trophy() {
           <div className='trophy-display'>
             {award?.map((trophy) => (
               <TrophyButton
+                className='trophy-button'
                 path={trophy.path}
                 id={trophy.id}
                 name={trophy.name}
@@ -88,6 +90,7 @@ function Trophy() {
             ))}
           </div>
         </div>
+        <NavBar />
       </div>
     )
   );

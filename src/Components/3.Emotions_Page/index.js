@@ -8,6 +8,7 @@ import H2 from '../DisplayText/H2Text';
 import { useHistory } from 'react-router';
 import { ThemeContext } from '../../ThemeContext';
 import JournalEntry from '../4.Journal_Entry_Page/index.js';
+import NavBar from '../NavBar/NavBar';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -66,29 +67,35 @@ function Emotions() {
 
   return (
     isAuthenticated && (
-      <div className={theme}>
-        <div className='container'>
-          {!chosenEmotion && (
-            <div>
-              <H1 text={`Hi ${userData?.name}`} />
-              <H2 text={'How are you feeling today?'} />
-              <div className='emotionsBar'>
-                {emotionsArray.map((emotion) => (
-                  <EmotionsButton
-                    text={emotion.emotion}
-                    handleClick={handleEmotion}
-                    emotionNumber={emotion.number}
-                    key={emotion.number}
-                  />
-                ))}
+      <div>
+        <div className={theme}>
+          <div className='container'>
+            {!chosenEmotion && (
+              <div>
+                <H1 text={`Hi ${userData?.name}`} />
+                <H2 text={'How are you feeling today?'} />
+                <div className='emotionsBar'>
+                  {emotionsArray.map((emotion) => (
+                    <EmotionsButton
+                      text={emotion.emotion}
+                      handleClick={handleEmotion}
+                      emotionNumber={emotion.number}
+                      key={emotion.number}
+                    />
+                  ))}
+                </div>
+                <p>
+                  {
+                    quoteData[Math.floor(Math.random() * quoteData.length)]
+                      .quote
+                  }
+                </p>
               </div>
-              <p>
-                {quoteData[Math.floor(Math.random() * quoteData.length)].quote}
-              </p>
-            </div>
-          )}
-          {chosenEmotion && <JournalEntry emotion={chosenEmotion} />}
+            )}
+            {chosenEmotion && <JournalEntry emotion={chosenEmotion} />}
+          </div>
         </div>
+        <NavBar />
       </div>
     )
   );

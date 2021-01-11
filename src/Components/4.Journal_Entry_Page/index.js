@@ -2,11 +2,11 @@ import React, { useState, useContext } from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 import { useAppContext } from '../../AppContext';
 import H1 from '../DisplayText/H1Text';
-import H2 from '../DisplayText/H2Text';
 import './journal.css';
 import { useHistory } from 'react-router';
 import TrophyButton from '../Buttons/TrophyButton/index';
 import { ThemeContext } from '../../ThemeContext';
+import NavBar from '../NavBar/NavBar';
 
 // MaterialUI Components
 import { Button } from '@material-ui/core';
@@ -146,25 +146,67 @@ export default function JournalEntry(chosenEmotion) {
     return <div id={theme}>Loading ...</div>;
   }
 
+  function handleClick(chosenEmotion) {
+    async function postMoodEntry() {
+      var assignedText;
+      if (chosenEmotion.emotion === 5) {
+        assignedText = 'You succeed!';
+      }
+      if (chosenEmotion.emotion === 4) {
+        assignedText = 'You had a great day.';
+      }
+      if (chosenEmotion.emotion === 3) {
+        assignedText = 'Today was frustrating.';
+      }
+      if (chosenEmotion.emotion === 2) {
+        assignedText = 'Coding makes me sad!';
+      }
+      if (chosenEmotion.emotion === 1) {
+        assignedText = 'Today was a difficult day!';
+      }
+      try {
+        const res = await fetch(`${BACKEND_URL}/posts`, {
+          method: 'POST',
+          body: JSON.stringify({
+            user_id: userId,
+            text: assignedText,
+            mood: chosenEmotion.emotion,
+          }),
+          headers: {
+            'content-type': 'application/JSON',
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+        console.log(res);
+        const data = await res.json();
+        console.log(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    postMoodEntry();
+    // once submted redirect to Journal View Page
+    history.push('/journalview');
+  }
+
   return (
     isAuthenticated && (
       <div className='wrapper' id={theme}>
-        <ToastContainer
-          transition={Slide} // changes the transition to a slide rather than a bounce.  Alerts are rendering multiple times at the moment due to the page re redering all of the buttons.  Look into how you can stop this happening but keeep the cool styling tomorrow.
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
         <div className='container' id={theme}>
-          <H2 text={`Hi ${userData?.name}! What have you been up to today?`} />
-          {/* <H2 text={`What did you learn today?`} /> */}
+          <ToastContainer
+            transition={Slide} // changes the transition to a slide rather than a bounce.  Alerts are rendering multiple times at the moment due to the page re redering all of the buttons.  Look into how you can stop this happening but keeep the cool styling tomorrow.
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
+          <H1 text={`Hi ${userData?.name}! What have you been up to today?`} />
           <br></br>
-          <div id='Emma-New-Form'>
+          <div id='journal-entry'>
             <TextField
               id='outlined-multiline-static'
               label='Journal Entry'
@@ -187,7 +229,7 @@ export default function JournalEntry(chosenEmotion) {
                 name='image'
                 accept='image/*'
                 //className={classes.input}
-                style={{ display: 'none' }}
+                style={{ display: 'none', overFlow: 'hidden' }}
                 id='image'
                 multiple
                 type='file'
@@ -195,17 +237,8 @@ export default function JournalEntry(chosenEmotion) {
                 value={imgUpload}
               />
               <label htmlFor={'image'}>
-                <Button
-                  variant='raised'
-                  component='span'
-                  style={{ textTransform: 'capitalize' }}
-                >
-                  {<PhotoRoundedIcon />} Image Upload
-                </Button>
+                <PhotoRoundedIcon fontSize='large' />
               </label>
-            </div>
-
-            <div className='file-entry'>
               <input
                 id='video'
                 type='file'
@@ -213,20 +246,11 @@ export default function JournalEntry(chosenEmotion) {
                 accept='video/*'
                 onChange={handleVideoInputChange}
                 value={vidUpload}
-                style={{ display: 'none' }}
+                style={{ display: 'none', overFlow: 'hidden' }}
               />
               <label htmlFor={'video'}>
-                <Button
-                  variant='raised'
-                  component='span'
-                  style={{ textTransform: 'capitalize' }}
-                >
-                  {<VideocamRoundedIcon />} Video Upload
-                </Button>
+                <VideocamRoundedIcon fontSize='large' />
               </label>
-            </div>
-
-            <div className='file-entry'>
               <input
                 id='audio'
                 type='file'
@@ -234,27 +258,21 @@ export default function JournalEntry(chosenEmotion) {
                 accept='audio/*'
                 onChange={handleAudioInputChange}
                 value={audioUpload}
-                style={{ display: 'none' }}
+                style={{ display: 'none', overFlow: 'hidden' }}
               />
               <label htmlFor={'audio'}>
-                <Button
-                  variant='raised'
-                  component='span'
-                  style={{ textTransform: 'capitalize' }}
-                >
-                  {<AudiotrackRoundedIcon />} Audio Upload
-                </Button>
+                <AudiotrackRoundedIcon fontSize='large' />
               </label>
             </div>
-            <Button
-              className='btn'
-              onClick={handleSubmitFile}
-              variant='outlined'
-              color={muiTheme(theme)}
-            >
-              Submit
-            </Button>
           </div>
+          <Button
+            className='btn'
+            onClick={handleSubmitFile}
+            variant='outlined'
+            color={muiTheme(theme)}
+          >
+            Submit
+          </Button>
           <br></br>
           {previewImgSource && (
             <img
@@ -297,9 +315,7 @@ export default function JournalEntry(chosenEmotion) {
             />
           )}
           <Button
-            onClick={() => {
-              history.push('/journalview');
-            }}
+            onClick={() => handleClick(chosenEmotion)}
             variant='outlined'
             className='btn'
             color={muiTheme(theme)}
@@ -307,6 +323,7 @@ export default function JournalEntry(chosenEmotion) {
             Skip
           </Button>
         </div>
+        <NavBar />
       </div>
     )
   );

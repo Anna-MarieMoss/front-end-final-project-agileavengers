@@ -10,7 +10,7 @@ function EmotionsButton({ text, emotionNumber, handleClick }) {
       id={theme}
       className={css.emotionButtons}
       key={emotionNumber}
-      style={{ fontSize: '50px', paddingBottom: '-80px' }}
+      style={{ fontSize: '50px', paddingBottom: '-80px', outline: 'none' }}
       onClick={() => {
         handleClick(emotionNumber);
       }}

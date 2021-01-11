@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useAppContext } from '../../AppContext';
 import JournalAccordion from '../Acordian';
-import JournalCard from "../journalCard";
+import JournalCard from '../journalCard';
 import H1 from '../DisplayText/H1Text/index';
 import { progressPosition } from '../../progressFunction';
 import { ThemeContext } from '../../ThemeContext';
+import NavBar from '../NavBar/NavBar';
 
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
@@ -30,12 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 // get all post
 function JournalView() {
-  const {
-    isAuthenticated,
-    isLoading,
-    accessToken,
-    userData,
-  } = useAppContext();
+  const { isAuthenticated, isLoading, accessToken, userData } = useAppContext();
   const [journalDisplay, setJournalDisplay] = useState([]);
   const [journalDelete, setJournalDelete] = useState(false);
   const [journalDeleteId, setJournalDeleteId] = useState(null);
@@ -49,7 +45,7 @@ function JournalView() {
 
   //Material UI
   const classes = useStyles();
-  
+
   //Detectign Theme
   // function getTheme(){
   //   if(theme === 'darkTheme'){
@@ -80,7 +76,7 @@ function JournalView() {
       getJournalById();
     }
   }, [userData, reloadJournal]);
-//reloadJournal, userId
+  //reloadJournal, userId
   function filterByFavorite() {
     setShowFavorites(!showFavorites);
   }
@@ -148,10 +144,17 @@ function JournalView() {
 
   return (
     isAuthenticated && (
-      <div className='container'>
-        <H1 text={`${userData?.name}'s journey so far....`} />
-        <Button onClick={filterByFavorite} style={{textTransform: 'capitalize'}}>
-          {showFavorites ? <Typography variant={'h6'}>Show All ✏️</Typography> : <Typography variant={'h6'}>Show Favorites ❤️</Typography>}
+      <div>
+        <H1 text={`Your Timeline`} />
+        <Button
+          onClick={filterByFavorite}
+          style={{ textTransform: 'capitalize' }}
+        >
+          {showFavorites ? (
+            <Typography variant={'h6'}>Show All ✏️</Typography>
+          ) : (
+            <Typography variant={'h6'}>Show Favorites ❤️</Typography>
+          )}
         </Button>
         <br></br>
         <FormControl className={classes.formControl}>
@@ -201,9 +204,9 @@ function JournalView() {
               />
             ))}
         </div>
+        <NavBar />
       </div>
     )
   );
 }
-
 export default JournalView;

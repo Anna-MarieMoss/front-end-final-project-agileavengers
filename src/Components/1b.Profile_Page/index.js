@@ -12,14 +12,7 @@ import { ThemeContext } from '../../ThemeContext';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     '& .MuiTextField-root': {
-//       margin: theme.spacing(1),
-//       width: '25ch',
-//     },
-//   },
-// }));
+
 function Profile() {
   //Dark / Light Theme
   const theme = useContext(ThemeContext);
@@ -129,7 +122,6 @@ function Profile() {
               }}
             />
           )}
-
           <TextField
             id='outlined-search'
             label='Myers-Briggs'
@@ -141,7 +133,11 @@ function Profile() {
               setMyersBriggs(value);
             }}
           />
-          <DatePicker values={selectedDate} handleDate={setSelectedDate} />
+          <DatePicker
+            values={selectedDate}
+            handleDate={setSelectedDate}
+            label='Start Date'
+          />
           {selectedDate && (
             <SubmitButton className='btn' handleClick={() => handleSubmit()} />
           )}
