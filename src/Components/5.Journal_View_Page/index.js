@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useAppContext } from '../../AppContext';
 import JournalAccordion from '../Acordian';
+import JournalCard from "../journalCard";
 import H1 from '../DisplayText/H1Text/index';
 import { progressPosition } from '../../progressFunction';
+import { ThemeContext } from '../../ThemeContext';
 
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Typography } from '@material-ui/core';
+import { Accordion, Button, Typography } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -41,12 +43,22 @@ function JournalView() {
   const [sortConstraint, setSortConstraint] = useState('Newest to oldest');
   const [showFavorites, setShowFavorites] = useState(false);
   const [reloadJournal, setreloadJournal] = useState(false);
+  const theme = useContext(ThemeContext);
+  //const [themeDark, setThemeDark] = useState(false);
 
   let userId = userData?.id;
 
   //Material UI
   const classes = useStyles();
   
+  //Detectign Theme
+  // function getTheme(){
+  //   if(theme === 'darkTheme'){
+  //       return setThemeDark(true);
+  //   }
+  // }
+  // let sd = getTheme();
+
   useEffect(() => {
     if (userId) {
       async function getJournalById() {
@@ -172,7 +184,7 @@ function JournalView() {
               }
             })
             .map((journalEntry, index) => (
-              <JournalAccordion
+              <JournalCard
                 text={journalEntry.text}
                 emotionNumber={journalEntry.mood}
                 journalDate={journalEntry.date}
@@ -183,6 +195,7 @@ function JournalView() {
                 audioSource={journalEntry.audio}
                 imgSource={journalEntry.image}
                 vidSource={journalEntry.video}
+                // avatarBackground={themeDark ? '#303030' : '#fafafa'}
               />
             ))}
         </div>

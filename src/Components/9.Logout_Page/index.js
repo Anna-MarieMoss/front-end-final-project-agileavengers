@@ -9,7 +9,7 @@ import './Logout.css';
 
 function Logout() {
   const theme = useContext(ThemeContext);
-  const { user, isAuthenticated, isLoading } = useAppContext();
+  const { userData, isAuthenticated, isLoading } = useAppContext();
   // if (isLoading) {
   //     return <div>Loading ...</div>;
   //   }
@@ -17,7 +17,7 @@ function Logout() {
   return (
     <div id={theme} className={'logout'}>
       <H2
-        text={`Great Stuff ${user?.given_name}! Don't forget to log back in tomorrow to update your journey`}
+        text={`Great Stuff ${userData?.name}! Don't forget to log back in tomorrow to update your journey`}
       />
       <SoCLogo style={{ width: '200px', margin: '20px' }} />
       <br />

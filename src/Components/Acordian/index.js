@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     // flexGrow: 1,
     // overflow: 'hidden',
     // padding: theme.spacing(0, 3),
-    margin: 0,
+    marginTop: '1em',
   },
   date: {
     maxWidth: '95%',
@@ -69,6 +69,7 @@ export default function JournalAccordion({
   audioSource,
   imgSource,
   vidSource,
+  avatarBackground,
 }) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -107,6 +108,14 @@ function getSummaryText(){
 }
 let summaryText = getSummaryText()
 
+//Date Format
+function getLongDate(){
+  let newDate = new Date(journalDate);
+  newDate = newDate.toString();
+return newDate.slice(0, 15);
+}
+let date = getLongDate();
+
 
   // Material UI expand the Acordian Function
   const handleChange = (panel) => (event, isExpanded) => {
@@ -128,7 +137,7 @@ let summaryText = getSummaryText()
                 <Grid item >
                 {emotionNumber && (
                   <Avatar
-                    style={{ backgroundColor: 'white', fontSize: '2em', strokeOpacity: '0' }}
+                    style={{ backgroundColor: "white", fontSize: '2em', strokeOpacity: '0' }}
                     className='journal-mood'
                   >
                     {emotion[0].emotion}
@@ -137,7 +146,7 @@ let summaryText = getSummaryText()
                 </Grid>
                 <Grid item xs zeroMinWidth >
                   <Typography className={classes.date} >
-                    {journalDate}
+                    {date}
                   </Typography>
                   {expanded ? "": <Typography className={classes.summary}  >{`${summaryText}...`}</Typography>}
                 </Grid>
