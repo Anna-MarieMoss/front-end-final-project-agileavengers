@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useAppContext } from '../../AppContext';
 import ReactAudioPlayer from 'react-audio-player';
 import { journalEntryWeek } from '../../journalWeek';
@@ -22,6 +22,7 @@ import TextFieldsRoundedIcon from '@material-ui/icons/TextFieldsRounded';
 import AudiotrackRoundedIcon from '@material-ui/icons/AudiotrackRounded';
 import VideocamRoundedIcon from '@material-ui/icons/VideocamRounded';
 import PhotoRoundedIcon from '@material-ui/icons/PhotoRounded';
+import { ThemeContext } from '../../ThemeContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -105,6 +106,15 @@ export default function JournalCard({
   }
   let date = getLongDate();
 
+  const theme = useContext(ThemeContext);
+
+  //set Mui Dark Theme
+  function muiTheme(theme) {
+    if (theme === 'lightTheme') {
+      return 'primary';
+    } else return 'secondary';
+  }
+
   return (
     <div>
       <Card className={classes.root}>
@@ -153,7 +163,11 @@ export default function JournalCard({
               </Typography>
               {emotionNumber && (
                 <Avatar
-                  style={{ fontSize: '3em', strokeOpacity: '0' }}
+                  id={theme}
+                  style={{
+                    fontSize: '3em',
+                    strokeOpacity: '0',
+                  }}
                   class='journal-mood'
                   className={classes.avatar}
                 >
