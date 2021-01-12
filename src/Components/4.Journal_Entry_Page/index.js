@@ -125,7 +125,7 @@ export default function JournalEntry({emotion}) {
           image: previewImgSource,
           video: previewVidSource,
           audio: previewAudioSource,
-          mood: chosenEmotion[0].emotion,
+          mood: emotion,
         }),
         headers: {
           'content-type': 'application/JSON',
