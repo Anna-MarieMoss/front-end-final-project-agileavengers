@@ -43,7 +43,7 @@
   },
   "scripts": {
     "start": "react-scripts -r dotenv/config start",
-    "build": "node build/build.js && mv _redirects dist",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
