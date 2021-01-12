@@ -19,8 +19,6 @@ function Profile() {
   const theme = useContext(ThemeContext);
   //Auth0
   const { user, isAuthenticated, accessToken, setSubmit } = useAppContext();
-  console.log(user);
-  console.log(accessToken);
 
   // History from React Router
   const history = useHistory();
