@@ -4,7 +4,7 @@ import { useAppContext } from '../../AppContext';
 import H1 from '../DisplayText/H1Text';
 import './journal.css';
 import { useHistory } from 'react-router';
-import TrophyButton from '../Buttons/TrophyButton/index';
+import PlaceholderQs from './PlaceholderQs';
 import { ThemeContext } from '../../ThemeContext';
 import NavBar from '../NavBar/NavBar';
 
@@ -222,7 +222,9 @@ export default function JournalEntry(chosenEmotion) {
               }}
               value={text}
               className='form-input'
-              placeholder='What have you learnt? How are things going?'
+              placeholder={
+                PlaceholderQs[Math.floor(Math.random() * PlaceholderQs.length)]
+              }
             />
             <div className='file-entry'>
               <input
