@@ -55,6 +55,7 @@ export function AppProvider({ children }) {
   //Get user profile based on email (Auth0 response) - NEW VERSION
   useEffect(() => {
     if (user?.email && accessToken) {
+      console.log('running', user.email, accessToken);
       fetch(`${BACKEND_URL}/users/${user?.email}`, {
         headers: {
           'content-type': 'application/JSON',
@@ -77,7 +78,7 @@ export function AppProvider({ children }) {
   //THEMES
   const [darkState, setDarkState] = useState(false);
   const [muiDarkState, setMuiDarkState] = useState(false);
-  
+
   //Toggles the dark and light theme
   const handleThemeChange = () => {
     setDarkState(!darkState);

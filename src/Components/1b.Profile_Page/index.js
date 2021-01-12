@@ -50,6 +50,7 @@ function Profile() {
         .then((data) => {
           if (data?.logins_count > 1) {
             history.push('/mood');
+            console.log('set submit to true');
             setSubmit(true);
           }
         })
@@ -97,7 +98,7 @@ function Profile() {
   }
 
   return (
-    <div id={theme} className={'container', 'profile'}>
+    <div id={theme} className={('container', 'profile')}>
       <H1 text={'Profile'} />
       <img className='profile-pic' src={user?.picture} alt={user?.name} />
       {user?.given_name ? (
