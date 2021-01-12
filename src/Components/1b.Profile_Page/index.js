@@ -49,7 +49,7 @@ function Profile() {
         .then((response) => response.json())
         .then((data) => {
           if (data?.logins_count > 1) {
-            history.push('/emotions');
+            history.push('/mood');
             setSubmit(true);
           }
         })
