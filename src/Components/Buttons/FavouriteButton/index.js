@@ -1,10 +1,31 @@
+import React from 'react';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
-function FavoriteButton({favoriteColor}) {
+function FavoriteButton({ handleFavorite, journalEntryId, favorite }) {
+  // function changeColor(journalEntryId, favorite) {
+  //     handleFavorite(journalEntryId, !favorite);
+  //   }
+  // }
+  if (favorite === true) {
     return (
-      <FavoriteIcon fontSize="large" variant="contained" style={{color: favoriteColor}}>
-      </FavoriteIcon>
+      <FavoriteIcon
+        fontSize='medium'
+        variant='contained'
+        style={{ color: '#DC143C' }}
+        onClick={() => handleFavorite(journalEntryId, !favorite)}
+        id={journalEntryId}
+      ></FavoriteIcon>
     );
   }
-  
-  export default FavoriteButton;
+
+  return (
+    <FavoriteIcon
+      fontSize='medium'
+      variant='contained'
+      onClick={() => handleFavorite(journalEntryId, !favorite)}
+      id={journalEntryId}
+    ></FavoriteIcon>
+  );
+}
+
+export default FavoriteButton;

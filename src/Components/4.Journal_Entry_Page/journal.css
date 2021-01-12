@@ -1,0 +1,22 @@
+.wrapper {
+  padding-bottom: 55px;
+}
+.container {
+  padding: 10%;
+  width: 85%;
+  padding: 0 20px;
+  /* border-radius: 20px; */
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin: 10%;
+  font-size: 1em;
+}
+
+.file-entry {
+  margin: 1em;
+}
+
+fieldset {
+  border-color: transparent;
+}

@@ -2,24 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import reportWebVitals from './reportWebVitals';
+import { AppProvider } from './AppContext';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Auth0Provider
+      domain='dev-ip1x4wr7.eu.auth0.com'
+      clientId='uimBAQwNVmsnUWbQ0LAR8sC2ynf4YOSE'
+      redirectUri={'http://localhost:3000/profile'}
+      audience='https://dev-ip1x4wr7.eu.auth0.com/api/v2/'
+      scope='read:current_user update:current_user_metadata create:current_user_metadata'
+      useRefreshTokens={true}
+    >
+      <AppProvider>
+        <App />
+      </AppProvider>
+    </Auth0Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://cra.link/PWA
-serviceWorkerRegistration.register();
-// we have changed from unregister to register (Emma/Mahdi) from tutorial
-
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
