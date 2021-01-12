@@ -93,7 +93,6 @@ function UsersMood() {
           }
           return acc;
         }, []);
-        console.log('this is res:', res);
         let graphRes = res.reduce(
           (acc, cur) => {
             if (acc[cur]) {

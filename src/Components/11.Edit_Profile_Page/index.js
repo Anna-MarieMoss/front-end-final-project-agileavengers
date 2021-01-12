@@ -34,10 +34,10 @@ function EditProfile() {
     // Material UI
     //const classes = useStyles();
     // Our States
-    const [name, setName] = useState(null);
-    const [myersBriggs, setMyersBriggs] = useState('');
-    const [selectedDate, setSelectedDate] = useState(null);
-  
+    const [name, setName] = useState(userData?.name);
+    const [myersBriggs, setMyersBriggs] = useState(userData?.personality);
+    const [selectedDate, setSelectedDate] = useState(userData?.start_date);
+
     // Auth0  - setting logincount
     useEffect(() => {
       if (user) {
@@ -59,7 +59,7 @@ function EditProfile() {
     function handleSubmit() {
       setSubmit(true);
       async function editProfile() {
-        const res = await fetch(`${BACKEND_URL}/users`, {
+        const res = await fetch(`${BACKEND_URL}/users/${userData?.id}`, {
           method: 'PATCH',
           headers: {
             'content-type': 'application/JSON',
@@ -67,11 +67,8 @@ function EditProfile() {
           },
           body: JSON.stringify({
             name: name,
-            email: user.email,
-            password: 'password',
             personality: myersBriggs,
             start_date: selectedDate,
-            points: 0,
           }),
         });
         const data = await res.json();
@@ -126,9 +123,7 @@ function EditProfile() {
               handleDate={setSelectedDate}
               label='Start Date'
             />
-            {selectedDate && (
               <SubmitButton className='btn' handleClick={() => handleSubmit()} />
-            )}
           </div>
         </form>
       </div>
