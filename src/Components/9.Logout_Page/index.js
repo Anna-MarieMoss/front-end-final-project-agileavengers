@@ -6,6 +6,8 @@ import { useAppContext } from '../../AppContext';
 import { ThemeContext } from '../../ThemeContext';
 import '../../App.css';
 import './Logout.css';
+import NavBar from '../NavBar/NavBar.js';
+import NavTop from '../NavTop/index.js';
 
 function Logout() {
   const theme = useContext(ThemeContext);
@@ -17,13 +19,17 @@ function Logout() {
   const name = userData ? userData?.name : '';
 
   return (
-    <div id={theme} className={'logout', 'container'}>
+    <div className={'logout'}>
+    <NavTop />
+    <div id={theme} className={'container'}>
       <H2
         text={`Great Stuff ${name}! Don't forget to log back in tomorrow to update your journey`}
       />
       <SoCLogo style={{ width: '200px', margin: '20px' }} />
       <br />
       <LogoutButton className='btn' />
+    </div>
+    <NavBar />
     </div>
   );
 }

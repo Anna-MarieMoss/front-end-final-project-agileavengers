@@ -5,6 +5,7 @@ import { ThemeContext } from '../../../ThemeContext';
 
 const useStyles = makeStyles({
   h5: {
+    padding: '0.5em',
     margin: '0.7em',
   },
 });

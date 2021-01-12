@@ -15,8 +15,10 @@ import Stats from './Components/8.Stats_Page';
 import Profile from './Components/1b.Profile_Page';
 import Logout from './Components/9.Logout_Page/index';
 import UsersMood from './Components/10.UsersMood/index.js';
+import EditProfile from './Components/11.Edit_Profile_Page/index.js'
 // Importing firebase for push noitifications
 // import firebase from './firebase';
+
 // Material UI Imports
 import { ThemeProvider } from '@material-ui/core/styles';
 import CircularProgressWithLabel from '@material-ui/core/CircularProgress';
@@ -24,6 +26,15 @@ import CircularProgressWithLabel from '@material-ui/core/CircularProgress';
 function App() {
   const { isLoading } = useAppContext();
   const { checkDarkState, theme } = useAppContext();
+  
+  let body = document.querySelector('body');
+  if (checkDarkState === 'darkTheme'){
+    body.style.background = '#303030';
+    body.style.color = '#fafafa';
+  }else if (checkDarkState === 'lightTheme') {
+    body.style.background = '#fafafa';
+    body.style.color = '#303030';
+  }
 
   // Wait While Authentication is loading
   if (isLoading) {
@@ -67,6 +78,9 @@ function App() {
                 </Route>
                 <Route path='/logout'>
                   <Logout />
+                </Route>
+                <Route path='/editprofile'>
+                  <EditProfile />
                 </Route>
                 <Route path='/'>
                   <Welcome />

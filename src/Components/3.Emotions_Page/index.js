@@ -9,6 +9,18 @@ import { ThemeContext } from '../../ThemeContext';
 import JournalEntry from '../4.Journal_Entry_Page/index.js';
 import NavBar from '../NavBar/NavBar';
 import CircularProgressWithLabel from '@material-ui/core/CircularProgress';
+import NavTop from '../NavTop/index.js';
+import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  h6: {
+    padding: '1.5em',
+  },
+});
+
+
+
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -16,6 +28,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 function Emotions() {
   const theme = useContext(ThemeContext);
   console.log(BACKEND_URL);
+  const classes = useStyles();
   // need user_id from ContextProvider
 
   const { emotionsArray, isAuthenticated, userData } = useAppContext();
@@ -40,7 +53,8 @@ function Emotions() {
     isAuthenticated && (
       <div>
         <div className={theme}>
-          <div className='container'>
+        <NavTop />
+          <div >
             {!chosenEmotion && (
               <div>
                 <H1 text={`Hi ${userData?.name}`} />
@@ -55,12 +69,12 @@ function Emotions() {
                     />
                   ))}
                 </div>
-                <p>
+                <Typography variant='h6' className={classes.h6}>
                   {
                     quoteData[Math.floor(Math.random() * quoteData.length)]
                       .quote
                   }
-                </p>
+                </Typography>
               </div>
             )}
             {chosenEmotion && <JournalEntry emotion={chosenEmotion} />}

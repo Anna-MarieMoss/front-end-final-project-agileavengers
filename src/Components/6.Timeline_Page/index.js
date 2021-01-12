@@ -7,6 +7,7 @@ import congratsData from './congratsData';
 import { useAppContext } from '../../AppContext';
 import { ThemeContext } from '../../ThemeContext';
 import Nav from '../NavBar/NavBar';
+import NavTop from '../NavTop/index.js';
 
 function Timeline() {
   const { currentWeek, isAuthenticated, isLoading } = useAppContext();
@@ -35,6 +36,7 @@ function Timeline() {
   return (
     isAuthenticated && (
       <div id={theme}>
+      <NavTop/>
         <div>
           <H1 text={'Your Journey'} />
           <H2 text={congratsMessage} />

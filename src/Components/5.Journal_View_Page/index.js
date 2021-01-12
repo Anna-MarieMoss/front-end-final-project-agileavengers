@@ -6,6 +6,7 @@ import H1 from '../DisplayText/H1Text/index';
 import { progressPosition } from '../../progressFunction';
 import { ThemeContext } from '../../ThemeContext';
 import NavBar from '../NavBar/NavBar';
+import NavTop from '../NavTop/index.js';
 
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
@@ -145,6 +146,7 @@ function JournalView() {
   return (
     isAuthenticated && (
       <div>
+      <NavTop />
         <H1 text={`Your Timeline`} />
         <Button
           onClick={filterByFavorite}

@@ -3,13 +3,13 @@ import { useAppContext } from '../../AppContext';
 // import { Trophies } from './Trophies.js'; //need to add additional trophies to this file
 import TrophyButton from '../Buttons/TrophyButton/index';
 import H1 from '../DisplayText/H1Text/index';
-import H2 from '../DisplayText/H2Text/index';
 import { ThemeContext } from '../../ThemeContext';
 import '../../App.css';
 import './trophies.css';
 import { ToastContainer, Slide } from 'react-toastify';
 import { Typography } from '@material-ui/core';
 import NavBar from '../NavBar/NavBar';
+import NavTop from '../NavTop/index.js';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -47,7 +47,8 @@ function Trophy() {
   }
   return (
     isAuthenticated && (
-      <div id={theme} className='trophy'>
+      <div id={theme} >
+      <NavTop />
         <ToastContainer
           transition={Slide} // changes the transition to a slide rather than a bounce.
           autoClose={5000}
@@ -59,7 +60,7 @@ function Trophy() {
           draggable
           pauseOnHover
         />
-        <div className='container'>
+        <div className={'trophycontainer'}>
           <H1 text={`${userData?.name}'s Trophy Cabinet`} />
           <br></br>
           <Typography variant='h6'>

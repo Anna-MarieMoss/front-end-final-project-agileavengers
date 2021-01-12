@@ -97,7 +97,7 @@ function Profile() {
   }
 
   return (
-    <div id={theme} className={'profile'}>
+    <div id={theme} className={'container', 'profile'}>
       <H1 text={'Profile'} />
       <img className='profile-pic' src={user?.picture} alt={user?.name} />
       {user?.given_name ? (
