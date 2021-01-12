@@ -4,6 +4,8 @@ import H2 from '../DisplayText/H2Text/index';
 import Graph from '../Graphs/index';
 import './Stats.css';
 import { Typography } from '@material-ui/core';
+import UsersMoods from '../10.UsersMood/index'
+import MyMood from '../My_Mood/index'
 
 function Stats() {
   const { isAuthenticated, isLoading, userData } = useAppContext();
@@ -24,6 +26,10 @@ function Stats() {
         <br></br>
         <Graph />
       </div>
+      <br></br>
+      <MyMood/>
+      <br></br>
+      <UsersMoods/>
     </div>
   );
 }

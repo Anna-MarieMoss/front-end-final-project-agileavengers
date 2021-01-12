@@ -188,7 +188,7 @@ const Graph = () => {
   //
   return (
     <div>
-      <Button
+      {/* <Button
         onClick={() => getLastTenMoods(true)}
         className='btn'
         variant='outlined'
@@ -203,7 +203,7 @@ const Graph = () => {
         color={muiTheme(theme)}
       >
         All Time Moods
-      </Button>
+      </Button> */}
       <Button
         onClick={toggleChartType}
         className='btn'
@@ -212,7 +212,7 @@ const Graph = () => {
       >
         Toggle Chart Type
       </Button>
-      <Select
+      {/* <Select
         labelId='sort-by'
         id='sort-by-select'
         value={filterMood}
@@ -224,7 +224,7 @@ const Graph = () => {
         <MenuItem value={3}>😬</MenuItem>
         <MenuItem value={4}>😀</MenuItem>
         <MenuItem value={5}>😍</MenuItem>
-      </Select>
+      </Select> */}
       <canvas
         ref={chartContainer}
         style={{ width: '100em', height: '100em' }}
