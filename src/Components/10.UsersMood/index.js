@@ -21,6 +21,21 @@ function UsersMood() {
   const [chartInstance, setChartInstance] = useState(null);
   const [graphData, setGraphData] = useState([]);
   const chartContainer = useRef(null);
+  const [chartData, setChartData] = useState([
+    { date: 0 },
+    { date: 0 },
+    { date: 0 },
+    { date: 0 },
+    { date: 0 },
+  ]);
+
+  // more state 
+  
+  const [getTenMoods, setGetTenMoods] = useState(true);
+  const [toggleData, setToggleData] = useState([]);
+  const [showGraph, setShowGraph] = useState(false);
+ 
+  let userId = userData?.id;
 
   //set Mui Dark Theme
   const theme = useContext(ThemeContext);
@@ -133,6 +148,42 @@ function UsersMood() {
     }
   }, [selectedDate]);
 
+  //
+  useEffect(() => {
+    async function getMood() {
+      const res = await fetch(`${BACKEND_URL}/posts/${userId}`, {
+        headers: {
+          'content-type': 'application/JSON',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      const data = await res.json();
+      // console.log( `data is  ${JSON.stringify(data)}`);
+
+      for (let post of data.payload) {
+        post.date = new Date(post.date).toDateString().slice(4);
+      }
+
+      // get date in nice format
+
+      console.log(`data payload is `, data.payload);
+      // console.log(`data is ${JSON.stringify(data.payload[0].mood)}`)
+      setChartData(getTenMoods ? data.payload.slice(0, 10) : data.payload);
+
+      //chartConfig.data.datasets[0].data = graphData.map((x) => x.mood);
+    }
+
+    getMood();
+  }, [showGraph, userData]);
+
+
+  // toggle user vs all userSelect: 
+  function toggleUsers() {
+    setToggleData(toggleData === graphData.map((x) => x.mood) ? chartData.map((x) => x.mood) : graphData.map((x) => x.mood));
+    console.log('user data has changed');
+  }
+  
+//
   return (
     <div className={'users-mood'}>
       <div className='container'>
@@ -225,8 +276,17 @@ function UsersMood() {
           style={{ width: '100em', height: '100em' }}
         />
       </div>
+     
+      <button
+        onClick={toggleUsers}
+        className='btn'
+        variant='outlined'
+        color={muiTheme(theme)}
+      >
+        Toggle Data Type
+      </button>
     </div>
   );
-}
 
+  }
 export default UsersMood;
