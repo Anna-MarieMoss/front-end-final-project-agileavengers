@@ -170,7 +170,6 @@ export default function JournalCard({
                     strokeOpacity: '0',
                   }}
                   class='journal-mood'
-                  className={classes.avatar}
                 >
                   {emotion[0].emotion}
                 </p>
