@@ -1,4 +1,7 @@
-.darkTheme,
+.darkTheme {
+  padding-bottom: 270px;
+}
+
 .lightTheme {
   padding-bottom: 270px;
 }

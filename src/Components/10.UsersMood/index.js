@@ -1,16 +1,12 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useAppContext } from '../../AppContext';
 import Chartjs from 'chart.js';
-import H2 from '../DisplayText/H2Text/index';
+import H1 from '../DisplayText/H1Text/index';
 import 'date-fns';
-import Grid from '@material-ui/core/Grid';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
 import { ThemeContext } from '../../ThemeContext';
 import DatePicker from '../Input/DateInput/index.js';
+import NavBar from '../NavBar/NavBar';
+import NavTop from '../NavTop/index.js';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -154,14 +150,15 @@ function UsersMood() {
   //select date
   function headingText() {
     if (selectedDate === null) {
-      return 'Your Moods';
-    } else return `Your Moods On ${date}`;
+      return 'General Bootcampers Moods';
+    } else return `Bootcampers Moods On ${date}`;
   }
 
   return (
     <div className={'users-mood'}>
+    <NavTop />
       <div className='container'>
-        <H2 text={headingText()} />
+        <H1 text={headingText()} />
         {/* <Typography variant='h6'>
         {`Bootcampers mood on the: ${selectedDate}`}
       </Typography> */}
@@ -244,6 +241,7 @@ function UsersMood() {
           style={{ width: '100em', height: '100em' }}
         />
       </div>
+      <NavBar />
     </div>
   );
 }

@@ -77,6 +77,7 @@ export function AppProvider({ children }) {
   //THEMES
   const [darkState, setDarkState] = useState(false);
   const [muiDarkState, setMuiDarkState] = useState(false);
+  
   //Toggles the dark and light theme
   const handleThemeChange = () => {
     setDarkState(!darkState);
