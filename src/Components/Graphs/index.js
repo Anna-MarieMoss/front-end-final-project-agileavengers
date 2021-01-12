@@ -164,19 +164,19 @@ const Graph = () => {
                   return value;
                 }
                 if (value === 1) {
-                  return '😢 ' + value;
+                  return '😢';
                 }
                 if (value === 2) {
-                  return '😒 ' + value;
+                  return '😒';
                 }
                 if (value === 3) {
-                  return '😬 ' + value;
+                  return '😬';
                 }
                 if (value === 4) {
-                  return '😀 ' + value;
+                  return '😀';
                 }
                 if (value === 5) {
-                  return '😍 ' + value;
+                  return '😍';
                 }
               },
             },
