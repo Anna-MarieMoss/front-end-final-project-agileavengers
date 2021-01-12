@@ -37,7 +37,7 @@ function Profile() {
 
   // Auth0  - setting logincount
   useEffect(() => {
-    if (!user?.sub && !accessToken) {
+    if (!user?.sub && !accessToken && !user?.given_name) {
       return <div>Loading ...</div>;
     }
     if (user) {
