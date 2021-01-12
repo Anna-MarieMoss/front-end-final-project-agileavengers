@@ -4,22 +4,25 @@ import SoCLogo from '../Pictures/SocLogo/index';
 import LoginButton from '../Buttons/LogInButton/index';
 import './WelcomePage.css';
 import { ThemeContext } from '../../ThemeContext';
+import {Typography} from '@material-ui/core';
 
 function Welcome() {
   const theme = useContext(ThemeContext);
   return (
-    <div id={theme} className={'welcome', 'container'}>
-      <H1 text={`Hi welcome to your SoC Journal`} />
-      <SoCLogo style={{ width: '100px' }} />
-      <p>
-        Your personal space to record your once in a lifetime School of Code
-        experience!
-      </p>
-      <p>
-        There will be highs and low, tears and tantrums, but you’re going to
-        want to remember this experience and how you grew forever.
-      </p>
+    <div id={theme} className={('welcome', 'container')}>
+      <H1 text={`Welcome to your SoC Journal`} />
+      <SoCLogo />
+      <Typography variant='body2'>
+        Your Personal Space to Record Your Once in a Lifetime School of Code Experience!
+        <br></br>
+        <br></br>
+        There Will be Highs, there Will be Lows, Tears and Tantrums, But it Will Fly By and You Will be Amazed at All that You Learn!<br></br>
+        <br></br>Record Your Progress and Transformation Here!!
+      </Typography>
+      <br></br>
+      <div width='50%' margin="2em">
       <LoginButton />
+      </div>
     </div>
   );
 }

@@ -16,8 +16,8 @@ import VideocamRoundedIcon from '@material-ui/icons/VideocamRounded';
 import PhotoRoundedIcon from '@material-ui/icons/PhotoRounded';
 
 //Alerts
-import toaster from 'toasted-notes';
-import 'toasted-notes/src/styles.css';
+import { ToastContainer, toast, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -88,6 +88,9 @@ export default function JournalEntry(chosenEmotion) {
   const handleSubmitFile = (e) => {
     console.log('submitting');
     e.preventDefault();
+    toast(`Yay! You've successfully added to your journal!`, {
+      position: toast.POSITION.TOP_RIGHT,
+    });
     postJournalEntry(
       userId,
       text,
@@ -128,9 +131,6 @@ export default function JournalEntry(chosenEmotion) {
     } catch (error) {
       console.error(error);
     }
-    toaster.notify(`Yay! You've successfully added to your journal!`, {
-      duration: 2000,
-    });
     // once submted redirect to Journal View Page
     history.push('/journalview');
   }
@@ -193,7 +193,18 @@ export default function JournalEntry(chosenEmotion) {
     isAuthenticated && (
       <div className='wrapper' id={theme}>
         <div className='container' id={theme}>
-          <H1 text={`How Was Your Day?`} />
+          <ToastContainer
+            transition={Slide} // changes the transition to a slide rather than a bounce.  Alerts are rendering multiple times at the moment due to the page re redering all of the buttons.  Look into how you can stop this happening but keeep the cool styling tomorrow.
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
+          <H1 text={`Hi ${userData?.name}! What have you been up to today?`} />
           <br></br>
           <div id='journal-entry'>
             <TextField

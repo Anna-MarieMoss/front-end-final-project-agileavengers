@@ -3,9 +3,12 @@ import { useAppContext } from '../../AppContext';
 // import { Trophies } from './Trophies.js'; //need to add additional trophies to this file
 import TrophyButton from '../Buttons/TrophyButton/index';
 import H1 from '../DisplayText/H1Text/index';
+import H2 from '../DisplayText/H2Text/index';
 import { ThemeContext } from '../../ThemeContext';
 import '../../App.css';
 import './trophies.css';
+import { ToastContainer, Slide } from 'react-toastify';
+import { Typography } from '@material-ui/core';
 import NavBar from '../NavBar/NavBar';
 
 //Backend URL
@@ -45,8 +48,35 @@ function Trophy() {
   return (
     isAuthenticated && (
       <div id={theme} className='trophy'>
+        <ToastContainer
+          transition={Slide} // changes the transition to a slide rather than a bounce.
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <div className='container'>
           <H1 text={`${userData?.name}'s Trophy Cabinet`} />
+          <br></br>
+          <Typography variant='h6'>
+            {' '}
+            You're fast becoming a coding ninja!<br></br>
+            <img
+              src='https://cdn1.iconfinder.com/data/icons/ninja-things-1/720/ninja-background-512.png'
+              alt='ninja'
+              height='15%'
+              width='15%'
+              className='center'
+            />
+            <br></br>
+            Click below to claim your trophy, as you master each new skill.
+          </Typography>
+          <br></br>
+          <br></br>
           <div className='trophy-display'>
             {award?.map((trophy) => (
               <TrophyButton
