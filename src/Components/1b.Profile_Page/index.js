@@ -84,7 +84,7 @@ function Profile() {
       console.log(data);
     }
     createProfile();
-    history.push('/emotions');
+    history.push('/mood');
   }
 
   //set Mui Dark Theme
