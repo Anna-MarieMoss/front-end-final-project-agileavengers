@@ -37,7 +37,7 @@ function Timeline() {
     isAuthenticated && (
       <div id={theme}>
       <NavTop/>
-        <div className='container'>
+        <div className='timeline-container'>
           <H1 text={'Your Journey'} />
           <H2 text={congratsMessage} />
           <ThemeProvider>
