@@ -95,10 +95,10 @@ function NavBar() {
         <MenuItem
           className='menu-item'
           component={Link}
-          to='/emotions'
+          to='/mood'
           onClick={navClose}
         >
-          Emotions
+          Your Mood
         </MenuItem>
         <MenuItem
           className='menu-item'
@@ -114,7 +114,7 @@ function NavBar() {
           to='/stats'
           onClick={navClose}
         >
-          Stats
+          Your Stats
         </MenuItem>
         <MenuItem
           className='menu-item'
@@ -122,7 +122,7 @@ function NavBar() {
           to='/usersmood'
           onClick={navClose}
         >
-          Users Mood
+          General Mood
         </MenuItem>
         <MenuItem
           className='menu-item'

@@ -1,3 +1,67 @@
+/* html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+caption {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+} */
+
 :root {
   /* --green: #31986a;
   --blue: #4a90e2;
@@ -71,14 +135,22 @@ body {
   border-radius: 50%;
 }
 
+#soc-logo {
+  width: 8em;
+  display: flex;
+  align-self: center;
+  margin: 0.5em;
+}
+
 * {
   font-family: var(--fontFamily);
   box-sizing: border-box;
 }
 
-.wrapper {
+/* .wrapper {
   padding-bottom: 55px;
-}
+} */
+
 .container {
   padding: 10%;
   width: 85%;
@@ -90,3 +162,11 @@ body {
   margin: 10%;
   font-size: 1em;
 }
+
+/* Emma workign on Buttons */
+/* .MuiButton-outlined {
+  padding: 2em;
+}
+.MuiButton-outlinedPrimary {
+  margin: 3em;
+} */

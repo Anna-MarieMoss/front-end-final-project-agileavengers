@@ -5,7 +5,7 @@ import { ThemeContext } from '../../../ThemeContext';
 
 const useStyles = makeStyles({
   h4: {
-    marginTop: '1em',
+    marginTop: '2em',
     marginBottom: '0.5em',
   },
 });

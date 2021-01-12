@@ -39,7 +39,7 @@ function App() {
                 <Route path='/profile'>
                   <Profile />
                 </Route>
-                <Route path='/emotions'>
+                <Route path='/mood'>
                   <Emotions />
                 </Route>
                 <Route path='/journalentry'>
