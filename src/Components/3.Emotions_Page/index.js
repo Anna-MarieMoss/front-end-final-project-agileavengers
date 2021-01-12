@@ -5,10 +5,10 @@ import './EmotionsPage.css';
 import { useAppContext } from '../../AppContext';
 import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
-import { useHistory } from 'react-router';
 import { ThemeContext } from '../../ThemeContext';
 import JournalEntry from '../4.Journal_Entry_Page/index.js';
 import NavBar from '../NavBar/NavBar';
+import CircularProgressWithLabel from '@material-ui/core/CircularProgress';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -18,12 +18,7 @@ function Emotions() {
   console.log(BACKEND_URL);
   // need user_id from ContextProvider
 
-  const {
-    emotionsArray,
-    isAuthenticated,
-    isLoading,
-    userData,
-  } = useAppContext();
+  const { emotionsArray, isAuthenticated, userData } = useAppContext();
   //need to figure out how to close the ability to click for the day/only enable one click per day
   const [chosenEmotion, setChosenEmotion] = useState(null);
   const [emotionChosen, setEmotionChosen] = useState(false);
@@ -34,7 +29,11 @@ function Emotions() {
   }
 
   if (!userData?.name) {
-    return <div>Loading ...</div>;
+    return (
+      <div className='progressBar'>
+        <CircularProgressWithLabel />
+      </div>
+    );
   }
 
   return (

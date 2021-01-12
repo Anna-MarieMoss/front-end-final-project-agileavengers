@@ -9,6 +9,7 @@ import { useAppContext } from '../../AppContext';
 import { useHistory } from 'react-router';
 import './Profile.css';
 import { ThemeContext } from '../../ThemeContext';
+import CircularProgressWithLabel from '@material-ui/core/CircularProgress';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -17,13 +18,7 @@ function Profile() {
   //Dark / Light Theme
   const theme = useContext(ThemeContext);
   //Auth0
-  const {
-    user,
-    isAuthenticated,
-    isLoading,
-    accessToken,
-    setSubmit,
-  } = useAppContext();
+  const { user, isAuthenticated, accessToken, setSubmit } = useAppContext();
 
   // History from React Router
   const history = useHistory();
@@ -38,7 +33,11 @@ function Profile() {
   // Auth0  - setting logincount
   useEffect(() => {
     if (!user?.sub && !accessToken && !user?.given_name) {
-      return <div>Loading ...</div>;
+      return (
+        <div className='progressBar'>
+          <CircularProgressWithLabel />
+        </div>
+      );
     }
     if (user) {
       const domain = 'dev-ip1x4wr7.eu.auth0.com';
