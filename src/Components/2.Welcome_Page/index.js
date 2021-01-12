@@ -5,11 +5,13 @@ import LoginButton from '../Buttons/LogInButton/index';
 import './WelcomePage.css';
 import { ThemeContext } from '../../ThemeContext';
 import {Typography} from '@material-ui/core';
+import NavTop from '../NavTop/index.js';
 
 function Welcome() {
   const theme = useContext(ThemeContext);
   return (
     <div id={theme} className={('welcome', 'container')}>
+    <NavTop/>
       <H1 text={`Welcome to your SoC Journal`} />
       <SoCLogo />
       <Typography variant='body2'>
