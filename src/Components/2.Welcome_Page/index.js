@@ -19,7 +19,10 @@ function Welcome() {
         There Will be Highs, there Will be Lows, Tears and Tantrums, But it Will Fly By and You Will be Amazed at All that You Learn!<br></br>
         <br></br>Record Your Progress and Transformation Here!!
       </Typography>
+      <br></br>
+      <div width='50%' margin="2em">
       <LoginButton />
+      </div>
     </div>
   );
 }
