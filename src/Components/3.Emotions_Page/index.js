@@ -22,46 +22,18 @@ function Emotions() {
     emotionsArray,
     isAuthenticated,
     isLoading,
-    accessToken,
     userData,
   } = useAppContext();
   //need to figure out how to close the ability to click for the day/only enable one click per day
   const [chosenEmotion, setChosenEmotion] = useState(null);
-  const history = useHistory();
   const [emotionChosen, setEmotionChosen] = useState(false);
 
   function handleEmotion(emotionNum) {
-    console.log('running');
     setChosenEmotion(emotionNum);
     setEmotionChosen(true);
-    console.log(`your chosen emotion is ${chosenEmotion}`);
   }
 
-  // We need to connect to the Database via a valid URL & Need to get the userID & name from the context provider
-
-  // useEffect(() => {
-  //   if (chosenEmotion) {
-  //     async function postEmotion() {
-  //       const res = await fetch(`${BACKEND_URL}/moods`, {
-  //         method: 'POST',
-  //         headers: {
-  //           'content-type': 'application/JSON',
-  //           Authorization: `Bearer ${accessToken}`,
-  //         },
-  //         body: JSON.stringify({
-  //           user_id: userData?.id,
-  //           mood: chosenEmotion,
-  //         }),
-  //       });
-  //       const data = await res.json();
-  //       console.log(data);
-  //     }
-  //     postEmotion();
-  //     history.push('/journalentry');
-  //   }
-  // }, [chosenEmotion]);
-
-  if (isLoading) {
+  if (!userData?.name) {
     return <div>Loading ...</div>;
   }
 

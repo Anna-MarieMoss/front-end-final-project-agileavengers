@@ -37,6 +37,9 @@ function Profile() {
 
   // Auth0  - setting logincount
   useEffect(() => {
+    if (!user?.sub && !accessToken) {
+      return <div>Loading ...</div>;
+    }
     if (user) {
       const domain = 'dev-ip1x4wr7.eu.auth0.com';
       fetch(`https://${domain}/api/v2/users/${user?.sub}`, {

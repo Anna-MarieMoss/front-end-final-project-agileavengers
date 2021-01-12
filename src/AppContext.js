@@ -114,6 +114,7 @@ export function AppProvider({ children }) {
         accessToken: accessToken,
         userData: userData,
         setSubmit: setSubmit,
+        submit: submit,
         handleThemeChange: handleThemeChange,
         darkState: darkState,
         checkDarkState: checkDarkState,

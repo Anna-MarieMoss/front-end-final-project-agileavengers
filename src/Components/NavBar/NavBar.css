@@ -1,4 +1,4 @@
 .MuiBottomNavigation-root {
-  position: sticky;
+  position: fixed;
   bottom: 0;
 }

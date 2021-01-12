@@ -4,7 +4,7 @@ import { useAppContext } from '../../AppContext';
 import H1 from '../DisplayText/H1Text';
 import './journal.css';
 import { useHistory } from 'react-router';
-import TrophyButton from '../Buttons/TrophyButton/index';
+import PlaceholderQs from './PlaceholderQs';
 import { ThemeContext } from '../../ThemeContext';
 import NavBar from '../NavBar/NavBar';
 
@@ -191,71 +191,70 @@ export default function JournalEntry(chosenEmotion) {
 
   return (
     isAuthenticated && (
-
       <div className='wrapper' id={theme}>
-      <div className='container' id={theme}>
-        <H1 text={`How Was Your Day?`} />
-       <br></br>
-        <div id='journal-entry'>
-          <TextField
-                id="outlined-multiline-static"
-                label="Journal Entry"
-                fullWidth='true'
-                multiline
-                rows={4}
-                defaultValue='Default Value'
-                variant='outlined'
-                color={muiTheme(theme)}
-                onChange={(event) => {
-                  const { value } = event.target;
-                  setText(value);
-                }}
-                value={text}
-                className='form-input'
-                placeholder='What did you learn today?'
-          />
-          <div className='file-entry'>
-            <input
-              name='image'
-              accept="image/*"
-              //className={classes.input}
-              style={{ display: 'none',  overFlow: 'hidden' }}
-              id="image"
-              multiple
-              type="file"
-              onChange={handleImageInputChange}
-              value={imgUpload}
-             
+        <div className='container' id={theme}>
+          <H1 text={`How Was Your Day?`} />
+          <br></br>
+          <div id='journal-entry'>
+            <TextField
+              id='outlined-multiline-static'
+              label='Journal Entry'
+              fullWidth='true'
+              multiline
+              rows={4}
+              defaultValue='Default Value'
+              variant='outlined'
+              color={muiTheme(theme)}
+              onChange={(event) => {
+                const { value } = event.target;
+                setText(value);
+              }}
+              value={text}
+              className='form-input'
+              placeholder={
+                PlaceholderQs[Math.floor(Math.random() * PlaceholderQs.length)]
+              }
             />
-            <label htmlFor={'image'} >
+            <div className='file-entry'>
+              <input
+                name='image'
+                accept='image/*'
+                //className={classes.input}
+                style={{ display: 'none', overFlow: 'hidden' }}
+                id='image'
+                multiple
+                type='file'
+                onChange={handleImageInputChange}
+                value={imgUpload}
+              />
+              <label htmlFor={'image'}>
                 <PhotoRoundedIcon fontSize='large' />
-            </label> 
-            <input
-              id='video'
-              type='file'
-              name='video'
-              accept='video/*'
-              onChange={handleVideoInputChange}
-              value={vidUpload}
-              style={{ display: 'none',  overFlow: 'hidden'}}
-            />
-            <label htmlFor={'video'} >
+              </label>
+              <input
+                id='video'
+                type='file'
+                name='video'
+                accept='video/*'
+                onChange={handleVideoInputChange}
+                value={vidUpload}
+                style={{ display: 'none', overFlow: 'hidden' }}
+              />
+              <label htmlFor={'video'}>
                 <VideocamRoundedIcon fontSize='large' />
-            </label>
-            <input
-              id='audio'
-              type='file'
-              //name='audio'
-              accept='audio/*'
-   
-              onChange={handleAudioInputChange}
-              value={audioUpload}
-              style={{ display: 'none',  overFlow: 'hidden' }}
-            />
-            <label htmlFor={'audio'} >
-              <AudiotrackRoundedIcon fontSize='large' />
-            </label>
-          </div>
+              </label>
+              <input
+                id='audio'
+                type='file'
+                //name='audio'
+                accept='audio/*'
+                onChange={handleAudioInputChange}
+                value={audioUpload}
+                style={{ display: 'none', overFlow: 'hidden' }}
+              />
+              <label htmlFor={'audio'}>
+                <AudiotrackRoundedIcon fontSize='large' />
+              </label>
+            </div>
           </div>
           <Button
             className='btn'
@@ -307,13 +306,13 @@ export default function JournalEntry(chosenEmotion) {
             />
           )}
           <Button
-              onClick={() => handleClick(chosenEmotion)}
-              variant='outlined'
-              className='btn'
-              color={muiTheme(theme)}
-            >
-              Skip
-            </Button>
+            onClick={() => handleClick(chosenEmotion)}
+            variant='outlined'
+            className='btn'
+            color={muiTheme(theme)}
+          >
+            Skip
+          </Button>
         </div>
         <NavBar />
       </div>
