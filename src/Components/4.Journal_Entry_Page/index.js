@@ -4,9 +4,9 @@ import { useAppContext } from '../../AppContext';
 import H1 from '../DisplayText/H1Text';
 import './journal.css';
 import { useHistory } from 'react-router';
-import TrophyButton from '../Buttons/TrophyButton/index';
 import { ThemeContext } from '../../ThemeContext';
 import NavBar from '../NavBar/NavBar';
+import NavTop from '../NavTop/index.js';
 
 // MaterialUI Components
 import { Button } from '@material-ui/core';
@@ -22,15 +22,22 @@ import 'react-toastify/dist/ReactToastify.css';
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
-export default function JournalEntry(chosenEmotion) {
+export default function JournalEntry({emotion}) {
   //Dark / Light Theme
   const theme = useContext(ThemeContext);
 
   // Use Context
-  const { isAuthenticated, isLoading, accessToken, userData } = useAppContext();
+  const { isAuthenticated, isLoading, accessToken, userData, emotionsArray } = useAppContext();
 
   const userId = userData?.id;
-
+   // Matching the Emoji to Mood Number
+   const chosenEmotion = emotionsArray.filter((em) => {
+    if (em.number === emotion) {
+      return true;
+    }
+    return false;
+  });
+  
   // History from React Router
   const history = useHistory();
 
@@ -100,8 +107,6 @@ export default function JournalEntry(chosenEmotion) {
     );
   };
 
-  console.log('this is my chosen emotion:', chosenEmotion.emotion);
-
   async function postJournalEntry(
     userId,
     text,
@@ -118,16 +123,14 @@ export default function JournalEntry(chosenEmotion) {
           image: previewImgSource,
           video: previewVidSource,
           audio: previewAudioSource,
-          mood: chosenEmotion.emotion,
+          mood: chosenEmotion[0].emotion,
         }),
         headers: {
           'content-type': 'application/JSON',
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      console.log(res);
       const data = await res.json();
-      console.log(data);
     } catch (error) {
       console.error(error);
     }
@@ -146,22 +149,22 @@ export default function JournalEntry(chosenEmotion) {
     return <div id={theme}>Loading ...</div>;
   }
 
-  function handleClick(chosenEmotion) {
+  function handleClick(emotion) {
     async function postMoodEntry() {
       var assignedText;
-      if (chosenEmotion.emotion === 5) {
+      if (emotion === 5) {
         assignedText = 'You succeed!';
       }
-      if (chosenEmotion.emotion === 4) {
+      if (emotion === 4) {
         assignedText = 'You had a great day.';
       }
-      if (chosenEmotion.emotion === 3) {
+      if (emotion === 3) {
         assignedText = 'Today was frustrating.';
       }
-      if (chosenEmotion.emotion === 2) {
+      if (emotion === 2) {
         assignedText = 'Coding makes me sad!';
       }
-      if (chosenEmotion.emotion === 1) {
+      if (emotion === 1) {
         assignedText = 'Today was a difficult day!';
       }
       try {
@@ -191,7 +194,8 @@ export default function JournalEntry(chosenEmotion) {
 
   return (
     isAuthenticated && (
-      <div className='wrapper' id={theme}>
+      <div id={theme}>
+      <NavTop />
         <div className='container' id={theme}>
           <ToastContainer
             transition={Slide} // changes the transition to a slide rather than a bounce.  Alerts are rendering multiple times at the moment due to the page re redering all of the buttons.  Look into how you can stop this happening but keeep the cool styling tomorrow.
@@ -205,6 +209,9 @@ export default function JournalEntry(chosenEmotion) {
             pauseOnHover
           />
           <H1 text={`Hi ${userData?.name}! What have you been up to today?`} />
+          {emotion && (
+            <h1 style={{fontSize:'5em'}}>{chosenEmotion[0].emotion}</h1>
+          )}
           <br></br>
           <div id='journal-entry'>
             <TextField
@@ -323,7 +330,7 @@ export default function JournalEntry(chosenEmotion) {
             Skip
           </Button>
         </div>
-        <NavBar />
+        {!emotion && (<NavBar />)}
       </div>
     )
   );

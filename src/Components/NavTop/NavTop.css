@@ -1,0 +1,4 @@
+.MuiAppBar-positionFixed {
+  position: sticky;
+  top: 0;
+}

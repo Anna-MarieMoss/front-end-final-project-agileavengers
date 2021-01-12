@@ -47,7 +47,7 @@ function Profile() {
         .then((response) => response.json())
         .then((data) => {
           if (data?.logins_count > 1) {
-            history.push('/emotions');
+            history.push('/mood');
             setSubmit(true);
           }
         })
@@ -95,7 +95,7 @@ function Profile() {
   }
 
   return (
-    <div id={theme} className={'profile'}>
+    <div id={theme} className={'container', 'profile'}>
       <H1 text={'Profile'} />
       <img className='profile-pic' src={user?.picture} alt={user?.name} />
       {user?.given_name ? (
