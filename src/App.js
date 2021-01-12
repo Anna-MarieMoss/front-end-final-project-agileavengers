@@ -21,6 +21,7 @@ import EditProfile from './Components/11.Edit_Profile_Page/index.js'
 
 // Material UI Imports
 import { ThemeProvider } from '@material-ui/core/styles';
+import CircularProgressWithLabel from '@material-ui/core/CircularProgress';
 
 function App() {
   const { isLoading } = useAppContext();
@@ -37,7 +38,11 @@ function App() {
 
   // Wait While Authentication is loading
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return (
+      <div className='progressBar'>
+        <CircularProgressWithLabel />
+      </div>
+    );
   }
 
   return (

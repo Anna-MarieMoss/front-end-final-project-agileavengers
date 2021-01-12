@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useAppContext } from '../../AppContext';
 import ReactAudioPlayer from 'react-audio-player';
 import { journalEntryWeek } from '../../journalWeek';
+import Linkify from 'react-linkify';
 
 // App Components
 import DeleteButton from '../Buttons/DeleteButton/index.js';
@@ -176,7 +177,15 @@ export default function JournalCard({
               )}
             </Grid>
             <Typography variant='h6' component='h6' className='journaltext'>
-              {text}
+              <Linkify
+                componentDecorator={(decoratedHref, decoratedText, key) => (
+                  <a target='blank' href={decoratedHref} key={key}>
+                    {decoratedText}
+                  </a>
+                )}
+              >
+                {text}
+              </Linkify>
             </Typography>
           </CardContent>
         </CardActionArea>
