@@ -69,9 +69,9 @@ const useStyles = makeStyles((theme) => ({
     justify: 'space-between',
     spacing: 3,
   },
-  avatar: {
-    width: '100%',
-  },
+  // avatar: {
+  //   width: '100%',
+  // },
 }));
 
 export default function JournalCard({
@@ -163,7 +163,7 @@ export default function JournalCard({
                 {date}
               </Typography>
               {emotionNumber && (
-                <Avatar
+                <p
                   id={theme}
                   style={{
                     fontSize: '3em',
@@ -173,7 +173,7 @@ export default function JournalCard({
                   className={classes.avatar}
                 >
                   {emotion[0].emotion}
-                </Avatar>
+                </p>
               )}
             </Grid>
             <Typography variant='h6' component='h6' className='journaltext'>
