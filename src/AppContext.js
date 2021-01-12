@@ -55,7 +55,7 @@ export function AppProvider({ children }) {
   //Get user profile based on email (Auth0 response) - NEW VERSION
   useEffect(() => {
     if (user?.email && accessToken) {
-      console.log('running', user.email, accessToken);
+      console.log(BACKEND_URL);
       fetch(`${BACKEND_URL}/users/${user?.email}`, {
         headers: {
           'content-type': 'application/JSON',
