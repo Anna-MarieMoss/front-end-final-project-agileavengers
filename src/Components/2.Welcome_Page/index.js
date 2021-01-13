@@ -4,14 +4,15 @@ import SoCLogo from '../Pictures/SocLogo/index';
 import LoginButton from '../Buttons/LogInButton/index';
 import './WelcomePage.css';
 import { ThemeContext } from '../../ThemeContext';
+import TopNav from '../NavTop/index';
 import {Typography} from '@material-ui/core';
-import NavTop from '../NavTop/index.js';
 
 function Welcome() {
   const theme = useContext(ThemeContext);
   return (
-    <div id={theme} className={('welcome', 'container')}>
-    <NavTop/>
+    <div id={theme} className={('welcome')}>
+    <TopNav />
+    <div className='container' >
       <H1 text={`Welcome to your SoC Journal`} />
       <SoCLogo />
       <Typography variant='body2'>
@@ -24,6 +25,7 @@ function Welcome() {
       <br></br>
       <div width='50%' margin="2em">
       <LoginButton />
+      </div>
       </div>
     </div>
   );
