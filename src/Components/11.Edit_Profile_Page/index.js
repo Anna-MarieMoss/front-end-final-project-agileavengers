@@ -10,94 +10,82 @@ import { useHistory } from 'react-router';
 import { ThemeContext } from '../../ThemeContext';
 import NavBar from '../NavBar/NavBar';
 import NavTop from '../NavTop/index.js';
-import './EditProfile.css'
+import './EditProfile.css';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function EditProfile() {
-    //Dark / Light Theme
-    const theme = useContext(ThemeContext);
-    //Auth0
-    const {
-      userData,
-      user,
-      isAuthenticated,
-      isLoading,
-      accessToken,
-      setSubmit,
-    } = useAppContext();
-  
-    // History from React Router
-    const history = useHistory();
-  
-    // Material UI
-    //const classes = useStyles();
-    // Our States
-    const [name, setName] = useState(userData?.name);
-    const [myersBriggs, setMyersBriggs] = useState(userData?.personality);
-    const [selectedDate, setSelectedDate] = useState(userData?.start_date);
+  //Dark / Light Theme
+  const theme = useContext(ThemeContext);
+  //Auth0
+  const {
+    userData,
+    user,
+    isAuthenticated,
+    isLoading,
+    accessToken,
+    setSubmit,
+  } = useAppContext();
 
-    // Auth0  - setting logincount
-    useEffect(() => {
-      if (user) {
-        const domain = 'dev-ip1x4wr7.eu.auth0.com';
-        fetch(`https://${domain}/api/v2/users/${user?.sub}`, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
-          .then((response) => response.json())
-          .catch((e) => {
-            console.error(e);
-          });
-      }
-    }, [user, accessToken, history]);
-  
+  // History from React Router
+  const history = useHistory();
 
-    //Edit Profile Patch - needs work Jeremy
-    function handleSubmit() {
+  if (!isAuthenticated) {
+    history.push('/');
+  }
+
+  // Material UI
+  //const classes = useStyles();
+  // Our States
+  const [name, setName] = useState(userData?.name);
+  const [myersBriggs, setMyersBriggs] = useState(userData?.personality);
+  const [selectedDate, setSelectedDate] = useState(userData?.start_date);
+
+  //Edit Profile Patch - needs work Jeremy
+  function handleSubmit() {
+    console.log('running');
+    async function editProfile() {
+      const res = await fetch(`${BACKEND_URL}/users/${userData?.id}`, {
+        method: 'PATCH',
+        headers: {
+          'content-type': 'application/JSON',
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          name: name,
+          personality: myersBriggs,
+          start_date: selectedDate,
+        }),
+      });
+      const data = await res.json();
+      console.log(data);
       setSubmit(true);
-      async function editProfile() {
-        const res = await fetch(`${BACKEND_URL}/users/${userData?.id}`, {
-          method: 'PATCH',
-          headers: {
-            'content-type': 'application/JSON',
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify({
-            name: name,
-            personality: myersBriggs,
-            start_date: selectedDate,
-          }),
-        });
-        const data = await res.json();
-        console.log(data);
-      }
-      editProfile();
     }
-  
-    //set Mui Dark Theme
-    function muiTheme(theme) {
-      if (theme === 'lightTheme') {
-        return 'primary';
-      } else return 'secondary';
-    }
-  
-    return (
-        <div  >
+    editProfile();
+  }
+
+  //set Mui Dark Theme
+  function muiTheme(theme) {
+    if (theme === 'lightTheme') {
+      return 'primary';
+    } else return 'secondary';
+  }
+
+  return (
+    isAuthenticated && (
+      <div>
         <NavTop />
-      <div id={theme} className={'container'}>
-        <H1 text={'Edit Profile'} />
-        <div className='profile-div'>
-        <img className='profile-pic' src={user?.picture} alt={user?.name} />
-        </div>
-        <form /*className={classes.root}*/ noValidate autoComplete='off'>
-          <div id={theme} className={'profile'}>
-            
+        <div id={theme} className={'container'}>
+          <H1 text={'Edit Profile'} />
+          <div className='profile-div'>
+            <img className='profile-pic' src={user?.picture} alt={user?.name} />
+          </div>
+          <form /*className={classes.root}*/ noValidate autoComplete='off'>
+            <div id={theme} className={'profile'}>
               <TextField
                 id='outlined-search'
-                label='Name'
+                label={`Name: ${name}`}
                 type='text'
                 variant='outlined'
                 color={muiTheme(theme)}
@@ -107,28 +95,32 @@ function EditProfile() {
                 }}
               />
               <br></br>
-            <TextField
-              id='outlined-search'
-              label='Myers-Briggs'
-              type='text'
-              variant='outlined'
-              color={muiTheme(theme)}
-              onChange={(event) => {
-                const { value } = event.target;
-                setMyersBriggs(value);
-              }}
-            />
-            <DatePicker
-              values={selectedDate}
-              handleDate={setSelectedDate}
-              label='Start Date'
-            />
-              <SubmitButton className='btn' handleClick={() => handleSubmit()} />
-          </div>
-        </form>
+              <TextField
+                id='outlined-search'
+                label={`Myers-Briggs: ${myersBriggs}`}
+                type='text'
+                variant='outlined'
+                color={muiTheme(theme)}
+                onChange={(event) => {
+                  const { value } = event.target;
+                  setMyersBriggs(value);
+                }}
+              />
+              <DatePicker
+                values={selectedDate}
+                handleDate={setSelectedDate}
+                label='Start Date'
+              />
+              <SubmitButton
+                className='btn'
+                handleClick={() => handleSubmit()}
+              />
+            </div>
+          </form>
+        </div>
+        <NavBar />
       </div>
-      <NavBar />
-      </div>
-    );
-  }
-  export default EditProfile;
+    )
+  );
+}
+export default EditProfile;

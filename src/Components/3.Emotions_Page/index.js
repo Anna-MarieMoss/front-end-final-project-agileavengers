@@ -12,6 +12,7 @@ import CircularProgressWithLabel from '@material-ui/core/CircularProgress';
 import NavTop from '../NavTop/index.js';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles({
   h6: {
@@ -19,15 +20,12 @@ const useStyles = makeStyles({
   },
 });
 
-
-
-
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function Emotions() {
   const theme = useContext(ThemeContext);
-  console.log(BACKEND_URL);
+  const history = useHistory();
   const classes = useStyles();
   // need user_id from ContextProvider
 
@@ -35,6 +33,10 @@ function Emotions() {
   //need to figure out how to close the ability to click for the day/only enable one click per day
   const [chosenEmotion, setChosenEmotion] = useState(null);
   const [emotionChosen, setEmotionChosen] = useState(false);
+
+  if (!isAuthenticated) {
+    history.push('/');
+  }
 
   function handleEmotion(emotionNum) {
     setChosenEmotion(emotionNum);
@@ -53,8 +55,8 @@ function Emotions() {
     isAuthenticated && (
       <div>
         <div className={theme}>
-        <NavTop />
-          <div >
+          <NavTop />
+          <div>
             {!chosenEmotion && (
               <div>
                 <H1 text={`Hi ${userData?.name}`} />

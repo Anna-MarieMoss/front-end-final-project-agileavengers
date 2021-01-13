@@ -24,24 +24,33 @@ import 'react-toastify/dist/ReactToastify.css';
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
-export default function JournalEntry({emotion}) {
+export default function JournalEntry({ emotion }) {
   //Dark / Light Theme
   const theme = useContext(ThemeContext);
+  const history = useHistory();
 
   // Use Context
-  const { isAuthenticated, isLoading, accessToken, userData, emotionsArray } = useAppContext();
+  const {
+    isAuthenticated,
+    isLoading,
+    accessToken,
+    userData,
+    emotionsArray,
+  } = useAppContext();
 
   const userId = userData?.id;
-   // Matching the Emoji to Mood Number
-   const chosenEmotion = emotionsArray.filter((em) => {
+
+  if (!isAuthenticated) {
+    history.push('/');
+  }
+
+  // Matching the Emoji to Mood Number
+  const chosenEmotion = emotionsArray.filter((em) => {
     if (em.number === emotion) {
       return true;
     }
     return false;
   });
-  
-  // History from React Router
-  const history = useHistory();
 
   // Code to hold the states of each input...
   const [text, setText] = useState('');
@@ -197,7 +206,7 @@ export default function JournalEntry({emotion}) {
   return (
     isAuthenticated && (
       <div id={theme}>
-      <NavTop />
+        <NavTop />
         <div className='container' id={theme}>
           <ToastContainer
             transition={Slide} // changes the transition to a slide rather than a bounce.  Alerts are rendering multiple times at the moment due to the page re redering all of the buttons.  Look into how you can stop this happening but keeep the cool styling tomorrow.
@@ -212,7 +221,7 @@ export default function JournalEntry({emotion}) {
           />
           <H1 text={`Hi ${userData?.name}! What have you been up to today?`} />
           {emotion && (
-            <h1 style={{fontSize:'5em'}}>{chosenEmotion[0].emotion}</h1>
+            <h1 style={{ fontSize: '5em' }}>{chosenEmotion[0].emotion}</h1>
           )}
           <br></br>
           <div id='journal-entry'>
@@ -334,7 +343,7 @@ export default function JournalEntry({emotion}) {
             Skip
           </Button>
         </div>
-        {!emotion && (<NavBar />)}
+        {!emotion && <NavBar />}
       </div>
     )
   );
