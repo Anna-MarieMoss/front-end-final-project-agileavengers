@@ -30,7 +30,7 @@ export default function NavTop(){
         <AppBar position="fixed">
           <Toolbar >
           <div  >
-          <img src={pic} alt="Soc Logo" id='navbarlogo' style={{width: '2em', height: 'auto', position: 'relative'}}/> </div>
+          <img src={pic} alt="Soc Logo" id='navbarlogo' style={{width: '0.5em', height: 'auto', position: 'fixed'}}/> </div>
             <Typography variant="h6" className={classes.title}>
               Reflect
             </Typography>
