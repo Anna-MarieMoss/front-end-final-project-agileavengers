@@ -14,7 +14,7 @@ const congratsData = [
   },
   {
     week: 'week3',
-    message: 'week 3 well done',
+    message: `"Well done so far! Keep at it, you will be learning some back-end soon"`,
   },
   {
     week: 'week4',
@@ -49,27 +49,23 @@ const congratsData = [
   {
     week: 'week10',
     message:
-      '"You measure the size of the accomplishment by the obstacles you had to overcome to reach your goals."',
+      '"Review your trophies, how is your skillset growing compared to Week 1."',
   },
   {
     week: 'week11',
-    message:
-      '"You measure the size of the accomplishment by the obstacles you had to overcome to reach your goals."',
+    message: `"Remember a problem shared is a problem halved, a joy shared is a joy doubled."`,
   },
   {
     week: 'week12',
-    message:
-      '"You measure the size of the accomplishment by the obstacles you had to overcome to reach your goals."',
+    message: `"Final Projects are nearly here, you have learnt so much within an accelerated learning environment."`,
   },
   {
     week: 'week13',
-    message:
-      '"You measure the size of the accomplishment by the obstacles you had to overcome to reach your goals."',
+    message: `"You should be starting your projects this week, make sure to plan in as much detail as possible!"`,
   },
   {
     week: 'week14',
-    message:
-      '"You measure the size of the accomplishment by the obstacles you had to overcome to reach your goals."',
+    message: '"Have you started coding for your Final Projects yet?"',
   },
   {
     week: 'week15',

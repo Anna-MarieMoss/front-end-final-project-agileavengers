@@ -12,7 +12,6 @@ import { ThemeContext } from '../../ThemeContext';
 import CircularProgressWithLabel from '@material-ui/core/CircularProgress';
 import NavTop from '../NavTop/index.js';
 
-
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -110,11 +109,11 @@ function Profile() {
         <img className='profile-pic' src={user?.picture} alt={user?.name} />
         {user?.given_name ? (
           <H2
-            text={`Hi ${user?.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
+            text={`Hi ${user?.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and bootcamp start date`}
           />
         ) : (
           <H2
-            text={`Hi, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
+            text={`Hi, Welcome to your Profile Page, please add your Myers-Briggs and bootcamp start date`}
           />
         )}
         <form /*className={classes.root}*/ noValidate autoComplete='off'>
