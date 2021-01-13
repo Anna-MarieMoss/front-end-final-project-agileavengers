@@ -32,10 +32,14 @@ export default function NavTop() {
 
   return (
     <div className={classes.root}>
-      <AppBar position='fixed' >
+      <AppBar position='fixed'>
         <Toolbar>
-        <img src={pic} alt={'reflect log'}  style={{position: 'relative', width: '4rem', padding: 0}}/>
-          <Typography variant='h6' className={classes.title}>
+          <img
+            src={pic}
+            alt={'reflect log'}
+            style={{ position: 'relative', width: '4rem', padding: 0 }}
+          />
+          <Typography variant='h6' className={classes.title} id='reflect'>
             Reflect
           </Typography>
           {isAuthenticated && (

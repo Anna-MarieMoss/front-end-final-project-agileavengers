@@ -5,27 +5,29 @@ import LoginButton from '../Buttons/LogInButton/index';
 import './WelcomePage.css';
 import { ThemeContext } from '../../ThemeContext';
 import TopNav from '../NavTop/index';
-import {Typography} from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 
 function Welcome() {
   const theme = useContext(ThemeContext);
   return (
-    <div id={theme} className={('welcome')}>
-    <TopNav />
-    <div className='container' >
-      <H1 text={`Welcome to your SoC Journal`} />
-      <SoCLogo />
-      <Typography variant='body2'>
-        Your Personal Space to Record Your Once in a Lifetime School of Code Experience!
+    <div id={theme} className={'welcome'}>
+      <TopNav />
+      <div className='container'>
+        <H1 text={`Welcome to your SoC Journal`} />
+        <SoCLogo />
+        <Typography variant='body2'>
+          Your personal space to record your once in a lifetime School of Code
+          experience!
+          <br></br>
+          <br></br>
+          There will be highs, there will be lows, tears and tantrums, but it
+          will fly by and you will be amazed at all that you learn!<br></br>
+          <br></br>Record your progress and transformation here!!
+        </Typography>
         <br></br>
-        <br></br>
-        There Will be Highs, there Will be Lows, Tears and Tantrums, But it Will Fly By and You Will be Amazed at All that You Learn!<br></br>
-        <br></br>Record Your Progress and Transformation Here!!
-      </Typography>
-      <br></br>
-      <div width='50%' margin="2em">
-      <LoginButton />
-      </div>
+        <div width='50%' margin='2em'>
+          <LoginButton />
+        </div>
       </div>
     </div>
   );
