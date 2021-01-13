@@ -15,7 +15,8 @@ function Welcome() {
       <div className='container'>
         <H1 text={`Welcome to your SoC Journal`} />
         <SoCLogo />
-        <Typography variant='body2'>
+        <br></br>
+        <Typography variant='body1'>
           Your personal space to record your once in a lifetime School of Code
           experience!
           <br></br>
