@@ -29,7 +29,7 @@ export default function NavTop(){
         <AppBar position="fixed">
           <Toolbar >
             <Typography variant="h6" className={classes.title}>
-              WafflR
+              Reflect
             </Typography>
             <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" component={Link}
                 to='/editprofile'>
