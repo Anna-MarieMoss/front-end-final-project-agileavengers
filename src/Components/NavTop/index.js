@@ -6,7 +6,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import FaceRoundedIcon from '@material-ui/icons/FaceRounded';
 import IconButton from '@material-ui/core/IconButton';
+
 import { useAppContext } from '../../AppContext';
+import pic from './SoC_Logo.png';
+
 
 import './NavTop.css';
 
