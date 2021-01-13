@@ -32,6 +32,10 @@ function Profile() {
   const [myersBriggs, setMyersBriggs] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
 
+  if (!isAuthenticated) {
+    history.push('/');
+  }
+
   // Auth0  - setting logincount
   useEffect(() => {
     if (!user?.sub && !accessToken && !user?.given_name) {
@@ -52,6 +56,7 @@ function Profile() {
         .then((data) => {
           if (data?.logins_count > 1) {
             history.push('/mood');
+            console.log('set submit to true');
             setSubmit(true);
           }
         })
@@ -99,56 +104,60 @@ function Profile() {
   }
 
   return (
-    <div id={theme} className={'container', 'profile'}>
-    <NavTop />
-      <H1 text={'Profile'} />
-      <img className='profile-pic' src={user?.picture} alt={user?.name} />
-      {user?.given_name ? (
-        <H2
-          text={`Hi ${user?.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
-        />
-      ) : (
-        <H2
-          text={`Hi, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
-        />
-      )}
-      <form /*className={classes.root}*/ noValidate autoComplete='off'>
-        <div id={theme} className={'profile'}>
-          {!user?.given_name && (
+    isAuthenticated && (
+      <div id={theme} className={('container', 'profile')}>
+        <H1 text={'Profile'} />
+        <img className='profile-pic' src={user?.picture} alt={user?.name} />
+        {user?.given_name ? (
+          <H2
+            text={`Hi ${user?.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
+          />
+        ) : (
+          <H2
+            text={`Hi, Welcome to your Profile Page, please add your Myers-Briggs and Start Date`}
+          />
+        )}
+        <form /*className={classes.root}*/ noValidate autoComplete='off'>
+          <div id={theme} className={'profile'}>
+            {!user?.given_name && (
+              <TextField
+                id='outlined-search'
+                label='Name'
+                type='text'
+                variant='outlined'
+                color={muiTheme(theme)}
+                onChange={(event) => {
+                  const { value } = event.target;
+                  setName(value);
+                }}
+              />
+            )}
             <TextField
               id='outlined-search'
-              label='Name'
+              label='Myers-Briggs'
               type='text'
               variant='outlined'
               color={muiTheme(theme)}
               onChange={(event) => {
                 const { value } = event.target;
-                setName(value);
+                setMyersBriggs(value);
               }}
             />
-          )}
-          <TextField
-            id='outlined-search'
-            label='Myers-Briggs'
-            type='text'
-            variant='outlined'
-            color={muiTheme(theme)}
-            onChange={(event) => {
-              const { value } = event.target;
-              setMyersBriggs(value);
-            }}
-          />
-          <DatePicker
-            values={selectedDate}
-            handleDate={setSelectedDate}
-            label='Start Date'
-          />
-          {selectedDate && (
-            <SubmitButton className='btn' handleClick={() => handleSubmit()} />
-          )}
-        </div>
-      </form>
-    </div>
+            <DatePicker
+              values={selectedDate}
+              handleDate={setSelectedDate}
+              label='Start Date'
+            />
+            {selectedDate && (
+              <SubmitButton
+                className='btn'
+                handleClick={() => handleSubmit()}
+              />
+            )}
+          </div>
+        </form>
+      </div>
+    )
   );
 }
 export default Profile;

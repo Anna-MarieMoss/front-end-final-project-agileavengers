@@ -8,11 +8,16 @@ import { useAppContext } from '../../AppContext';
 import { ThemeContext } from '../../ThemeContext';
 import Nav from '../NavBar/NavBar';
 import NavTop from '../NavTop/index.js';
+import { useHistory } from 'react-router';
 
 function Timeline() {
   const { currentWeek, isAuthenticated, isLoading } = useAppContext();
   const [congratsMessage, setcongratsMessage] = useState(null);
-  // console.log(`in timeline ${currentWeek}, ${congratsMessage}`);
+  const history = useHistory();
+
+  if (!isAuthenticated) {
+    history.push('/');
+  }
 
   useEffect(() => {
     if (currentWeek) {
@@ -36,7 +41,7 @@ function Timeline() {
   return (
     isAuthenticated && (
       <div id={theme}>
-      <NavTop/>
+        <NavTop />
         <div className='timeline-container'>
           <H1 text={'Your Journey'} />
           <H2 text={congratsMessage} />

@@ -7,6 +7,7 @@ import { ThemeContext } from '../../ThemeContext';
 import DatePicker from '../Input/DateInput/index.js';
 import NavBar from '../NavBar/NavBar';
 import NavTop from '../NavTop/index.js';
+import { useHistory } from 'react-router';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -24,6 +25,10 @@ function UsersMood() {
   const [chartInstance, setChartInstance] = useState(null);
   const [graphData, setGraphData] = useState([]);
   const chartContainer = useRef(null);
+
+  // if (!isAuthenticated) {
+  //   history.push('/');
+  // }
 
   //set Mui Dark Theme
   const theme = useContext(ThemeContext);
@@ -154,94 +159,96 @@ function UsersMood() {
   }
 
   return (
-    <div className={'users-mood'}>
-    <NavTop />
-      <div className='container'>
-        <H1 text={headingText()} />
-        {/* <Typography variant='h6'>
+    isAuthenticated && (
+      <div className={'users-mood'}>
+        <NavTop />
+        <div className='container'>
+          <H1 text={headingText()} />
+          {/* <Typography variant='h6'>
         {`Bootcampers mood on the: ${selectedDate}`}
       </Typography> */}
 
-        <DatePicker
-          values={selectedDate}
-          handleDate={handleDate}
-          label='Select a Date'
-        />
-        <div className='pie-legend'>
-          <button
-            style={{
-              backgroundColor: 'rgba(106, 76, 147, 1)',
-              width: '3em',
-              borderRadius: '30px',
-              border: 0,
-              fontSize: '1.5em',
-              margin: '0.3em',
-              outline: 'none',
-            }}
-          >
-            😢
-          </button>
-          <button
-            style={{
-              backgroundColor: 'rgba(25, 130, 196, 1)',
-              width: '3em',
-              borderRadius: '30px',
-              border: 0,
-              fontSize: '1.5em',
-              margin: '0.3em',
-              outline: 'none',
-            }}
-          >
-            😒
-          </button>
-          <button
-            style={{
-              backgroundColor: 'rgba(138, 201, 38, 1)',
-              width: '3em',
-              borderRadius: '30px',
-              border: 0,
-              fontSize: '1.5em',
-              margin: '0.3em',
-              outline: 'none',
-            }}
-          >
-            😬
-          </button>
-          <button
-            style={{
-              backgroundColor: 'rgba(255, 202, 58, 1)',
-              width: '3em',
-              borderRadius: '30px',
-              border: 0,
-              fontSize: '1.5em',
-              margin: '0.3em',
-              outline: 'none',
-            }}
-          >
-            😀
-          </button>
-          <button
-            style={{
-              backgroundColor: 'rgba(255, 89, 94, 1)',
-              width: '3em',
-              borderRadius: '30px',
-              border: 0,
-              fontSize: '1.5em',
-              margin: '0.3em',
-              outline: 'none',
-            }}
-          >
-            😍
-          </button>
+          <DatePicker
+            values={selectedDate}
+            handleDate={handleDate}
+            label='Select a Date'
+          />
+          <div className='pie-legend'>
+            <button
+              style={{
+                backgroundColor: 'rgba(106, 76, 147, 1)',
+                width: '3em',
+                borderRadius: '30px',
+                border: 0,
+                fontSize: '1.5em',
+                margin: '0.3em',
+                outline: 'none',
+              }}
+            >
+              😢
+            </button>
+            <button
+              style={{
+                backgroundColor: 'rgba(25, 130, 196, 1)',
+                width: '3em',
+                borderRadius: '30px',
+                border: 0,
+                fontSize: '1.5em',
+                margin: '0.3em',
+                outline: 'none',
+              }}
+            >
+              😒
+            </button>
+            <button
+              style={{
+                backgroundColor: 'rgba(138, 201, 38, 1)',
+                width: '3em',
+                borderRadius: '30px',
+                border: 0,
+                fontSize: '1.5em',
+                margin: '0.3em',
+                outline: 'none',
+              }}
+            >
+              😬
+            </button>
+            <button
+              style={{
+                backgroundColor: 'rgba(255, 202, 58, 1)',
+                width: '3em',
+                borderRadius: '30px',
+                border: 0,
+                fontSize: '1.5em',
+                margin: '0.3em',
+                outline: 'none',
+              }}
+            >
+              😀
+            </button>
+            <button
+              style={{
+                backgroundColor: 'rgba(255, 89, 94, 1)',
+                width: '3em',
+                borderRadius: '30px',
+                border: 0,
+                fontSize: '1.5em',
+                margin: '0.3em',
+                outline: 'none',
+              }}
+            >
+              😍
+            </button>
+          </div>
+          <br></br>
+          <canvas
+            ref={chartContainer}
+            style={{ width: '100em', height: '100em' }}
+          />
         </div>
-        <br></br>
-        <canvas
-          ref={chartContainer}
-          style={{ width: '100em', height: '100em' }}
-        />
+        <NavBar />
       </div>
-      <NavBar />
-    </div>
+    )
   );
 }
 
