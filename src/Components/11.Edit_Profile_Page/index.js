@@ -65,6 +65,10 @@ function EditProfile() {
       toast(`Profile page updated!`, {
         position: toast.POSITION.TOP_RIGHT,
       });
+
+      setTimeout(function () {
+        history.push('/journalview');
+      }, 2000);
     }
     editProfile();
   }
