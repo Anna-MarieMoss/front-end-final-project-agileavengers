@@ -17,12 +17,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
-import TextFieldsRoundedIcon from '@material-ui/icons/TextFieldsRounded';
-import AudiotrackRoundedIcon from '@material-ui/icons/AudiotrackRounded';
-import VideocamRoundedIcon from '@material-ui/icons/VideocamRounded';
-import PhotoRoundedIcon from '@material-ui/icons/PhotoRounded';
 import { ThemeContext } from '../../ThemeContext';
 
 const useStyles = makeStyles((theme) => ({

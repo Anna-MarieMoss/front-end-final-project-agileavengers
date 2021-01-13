@@ -8,20 +8,19 @@ import FaceRoundedIcon from '@material-ui/icons/FaceRounded';
 import IconButton from '@material-ui/core/IconButton';
 
 import { useAppContext } from '../../AppContext';
-import pic from './SoC_Logo.png';
-
-
+import pic from './logo.png';
 import './NavTop.css';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    width: '100%',
-    margin: '0px',
-    background: 'linear-gradient(90deg, #f7797d, #FBD786, #C6FFDD)',
-  },
+  // root: {
+  //   flexGrow: 1,
+  //   width: '100%',
+  //   margin: '0px',
+  //   background: 'linear-gradient(90deg, #f7797d, #FBD786, #C6FFDD)',
+  // },
   title: {
     flexGrow: 1,
+    alignContent: 'center',
   },
 }));
 
@@ -33,8 +32,9 @@ export default function NavTop() {
     <div className={classes.root}>
       <AppBar position='fixed'>
         <Toolbar>
+        <img src={pic} alt={'reflect log'}  style={{position: 'relative', width: '4rem', padding: 0}}/>
           <Typography variant='h6' className={classes.title}>
-            WafflR
+            Reflect
           </Typography>
           {isAuthenticated && (
             <IconButton
