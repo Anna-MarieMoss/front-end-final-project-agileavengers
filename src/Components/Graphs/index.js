@@ -29,8 +29,9 @@ const Graph = () => {
     0,
     0,
   ]);
+  const [showAllTime, setShowAllTime] = useState(false);
+
   let userId = userData?.id;
-  //graph
 
   const theme = useContext(ThemeContext);
   //set Mui Dark Theme
@@ -49,17 +50,17 @@ const Graph = () => {
   //   console.log('showUserAllTime is:', !showUserAllTime);
   // }
 
-  // function toggleUserAllTime() {
-  //   setShowUserAllTimeMood(!showUserAllTime);
-  //   console.log('showUserAllTime is:', !showUserAllTime);
-  // }
+  function toggleAllTime() {
+    setShowAllTime(!showAllTime);
+    console.log('showAllTime is:', !showAllTime);
+  }
 
   useEffect(() => {
     if (chartContainer && chartContainer.current) {
       const newChartInstance = new Chartjs(chartContainer.current, chartConfig);
       setChartInstance(newChartInstance);
     }
-  }, [chartContainer, graphData, userData]);
+  }, [chartContainer, graphData, userData, showAllTime]);
 
   const updateDataset = (datasetIndex, newData) => {
     chartInstance.data.datasets[datasetIndex].data = newData;
@@ -90,7 +91,7 @@ const Graph = () => {
     }
 
     getMood();
-  }, [userData]);
+  }, [userData, showAllTime]);
 
   let chartConfig = {
     type: 'bar',
@@ -184,21 +185,23 @@ const Graph = () => {
   //
   return (
     <div>
-      {/* <Button
-        //onClick={}
+      <Button
+        onClick={toggleAllTime}
         className='btn'
         variant='outlined'
         color={muiTheme(theme)}
       >
-        Toggle Chart Type
-      </Button> */}
+        {showAllTime ? 'Show Last Ten Moods' : 'Show All Time'}
+      </Button>
 
-      <canvas
-        ref={chartContainer}
-        style={{ width: '100em', height: '100em' }}
-      />
+      {!showAllTime && (
+        <canvas
+          ref={chartContainer}
+          style={{ width: '100em', height: '100em' }}
+        />
+      )}
 
-      <MyAllTimeMood pieGraphData={pieGraphData} />
+      {showAllTime && <MyAllTimeMood pieGraphData={pieGraphData} />}
     </div>
   );
 };
