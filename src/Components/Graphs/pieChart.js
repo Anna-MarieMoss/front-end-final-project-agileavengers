@@ -15,8 +15,8 @@ import { ThemeContext } from '../../ThemeContext';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function UsersMood(graphData) {
-  const { isAuthenticated, isLoading, accessToken, userData, user } = useAppContext();
-  // const [selectedDate, setSelectedDate] = useState('');
+//   const { isAuthenticated, isLoading, accessToken, userData, user } = useAppContext();
+//   const [selectedDate, setSelectedDate] = useState('');
   // const [usersMoodResponse, setUsersMoodResponse] = useState([{ mood: 1 , date: '2021-01-01'},
   // { mood: 3 , date: '2021-01-02', user_id: 1},
   // { mood: 5 , date: '2021-01-03', user_id: 2},
@@ -33,8 +33,8 @@ function UsersMood(graphData) {
   const chartContainer = useRef(null);
   // const [myData, setMyData] = useState(true);
  
-  // more state 
-  let userId = 2;
+//   // more state 
+//   let userId = 2;
 
   //set Mui Dark Theme
   const theme = useContext(ThemeContext);
@@ -71,7 +71,7 @@ function UsersMood(graphData) {
       },
       title: {
         display: false,
-        text: `Bootcampers mood on the: ${selectedDate}`,
+        text: `Bootcampers mood`,
       },
       layout: {
         padding: {
@@ -160,7 +160,8 @@ function UsersMood(graphData) {
       const newChartInstance = new Chartjs(chartContainer.current, chartConfig);
       setChartInstance(newChartInstance);
     }
-  }, [chartContainer, graphData]);
+  }, []);
+//   chartContainer, graphData
 
 //   useEffect(() => {
 //     if (selectedDate) {
