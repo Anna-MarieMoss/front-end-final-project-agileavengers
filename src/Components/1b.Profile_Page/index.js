@@ -10,6 +10,8 @@ import { useHistory } from 'react-router';
 import './Profile.css';
 import { ThemeContext } from '../../ThemeContext';
 import CircularProgressWithLabel from '@material-ui/core/CircularProgress';
+import NavTop from '../NavTop/index.js';
+
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -98,6 +100,7 @@ function Profile() {
 
   return (
     <div id={theme} className={'container', 'profile'}>
+    <NavTop />
       <H1 text={'Profile'} />
       <img className='profile-pic' src={user?.picture} alt={user?.name} />
       {user?.given_name ? (
