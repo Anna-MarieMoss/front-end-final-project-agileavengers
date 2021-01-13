@@ -11,12 +11,12 @@ import pic from './SoC_Logo.png';
 import './NavTop.css';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-      width: '100%',
-    margin: '0px',
-    background: 'linear-gradient(90deg, #f7797d, #FBD786, #C6FFDD)',
-    },
+    // root: {
+    //   flexGrow: 1,
+    //   width: '100%',
+    // margin: '0px',
+    // background: 'linear-gradient(90deg, #f7797d, #FBD786, #C6FFDD)',
+    // },
     title: {
       flexGrow: 1,
     },
@@ -30,7 +30,7 @@ export default function NavTop(){
         <AppBar position="fixed">
           <Toolbar >
           <div  >
-          <img id='soc-logo' src={pic} alt="Soc Logo" width='2em'/> </div>
+          <img src={pic} alt="Soc Logo" id='navbarlogo' style={{width: '2em', height: 'auto', position: 'relative'}}/> </div>
             <Typography variant="h6" className={classes.title}>
               Reflect
             </Typography>
