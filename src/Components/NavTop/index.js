@@ -8,8 +8,6 @@ import FaceRoundedIcon from '@material-ui/icons/FaceRounded';
 import IconButton from '@material-ui/core/IconButton';
 
 import { useAppContext } from '../../AppContext';
-import pic from './SoC_Logo.png';
-
 
 import './NavTop.css';
 
