@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import './ProgressBar.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Timeline from '@material-ui/lab/Timeline';
 import TimelineItem from '@material-ui/lab/TimelineItem';
@@ -9,6 +10,9 @@ import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
 import TimelineDot from '@material-ui/lab/TimelineDot';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
+import DeveloperModeIcon from '@material-ui/icons/DeveloperMode';
+import WebIcon from '@material-ui/icons/Web';
+import CreateIcon from '@material-ui/icons/Create';
 import FunctionsIcon from '@material-ui/icons/Functions';
 import CodeIcon from '@material-ui/icons/Code';
 import StorageIcon from '@material-ui/icons/Storage';
@@ -48,6 +52,9 @@ export default function ProgressBar({ pic, week }) {
     week10,
     week11,
     week12,
+    week13,
+    week14,
+    week15,
     week16,
   } = useThemeContext();
   const classes = useStyles();
@@ -324,6 +331,68 @@ export default function ProgressBar({ pic, week }) {
           </Typography>
         </TimelineOppositeContent>
         <TimelineSeparator>
+          <TimelineDot style={dotSwitch[week13 ? 'dark' : 'light']}>
+            <CreateIcon color={week13 ? muiTheme(theme) : 'disabled'} />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent>
+          <Paper
+            elevation={3}
+            className={classes.paper}
+            style={themeSwitch[week13 ? 'dark' : 'light']}
+          >
+            <Typography variant='h6' component='h1'>
+              Week 13
+            </Typography>
+            <Typography>Planning your final project</Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot style={dotSwitch[week14 ? 'dark' : 'light']}>
+            <WebIcon color={week14 ? muiTheme(theme) : 'disabled'} />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent>
+          <Paper
+            elevation={3}
+            className={classes.paper}
+            style={themeSwitch[week14 ? 'dark' : 'light']}
+          >
+            <Typography variant='h6' component='h1'>
+              Week 14
+            </Typography>
+            <Typography>Started work on your final project MVP</Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot style={dotSwitch[week15 ? 'dark' : 'light']}>
+            <DeveloperModeIcon color={week15 ? muiTheme(theme) : 'disabled'} />
+          </TimelineDot>
+          <TimelineConnector />
+        </TimelineSeparator>
+        <TimelineContent>
+          <Paper
+            elevation={3}
+            className={classes.paper}
+            style={themeSwitch[week15 ? 'dark' : 'light']}
+          >
+            <Typography variant='h6' component='h1'>
+              Week 15
+            </Typography>
+            <Typography>
+              You've almost developed your first full stack app
+            </Typography>
+          </Paper>
+        </TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
           <TimelineDot style={dotSwitch[week16 ? 'dark' : 'light']}>
             <NewReleasesIcon color={week16 ? muiTheme(theme) : 'disabled'} />
           </TimelineDot>
@@ -337,7 +406,7 @@ export default function ProgressBar({ pic, week }) {
             <Typography variant='h6' component='h1'>
               Week 16
             </Typography>
-            <Typography>You're a full stack developer</Typography>
+            <Typography>You're a coding pro</Typography>
           </Paper>
         </TimelineContent>
       </TimelineItem>
