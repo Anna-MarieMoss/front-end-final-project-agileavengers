@@ -83,7 +83,7 @@
           });
         }
       }
-      // reminderNotification();
+      reminderNotification();
 
       function hackerthonNotification() {
         if (Notification.permission == 'granted') {
@@ -123,7 +123,7 @@
           });
         }
       }
-      // hackerthonNotification();
+      hackerthonNotification();
 
       function youOkNotification() {
         if (Notification.permission == 'granted') {
@@ -160,7 +160,7 @@
           });
         }
       }
-      // youOkNotification();
+      youOkNotification();
 
       function goodLuckNotification() {
         if (Notification.permission == 'granted') {
@@ -197,13 +197,13 @@
           });
         }
       }
-      // goodLuckNotification();
+      goodLuckNotification();
 
       // Subscribing to Push Notifications
       // check if we already have a subscription object and update the UI accordingly
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker
-          .register('sw.js')
+          .register('./serviceworker-wholesite.js')
           .then(function (reg) {
             console.log('Service Worker Registered!', reg);
 
