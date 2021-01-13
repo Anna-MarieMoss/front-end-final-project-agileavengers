@@ -69,13 +69,11 @@ const congratsData = [
   },
   {
     week: 'week15',
-    message:
-      '"You measure the size of the accomplishment by the obstacles you had to overcome to reach your goals."',
+    message: `"Are you nearly at the MVP for your Final Project? Review with your group and don't forget to be agile!"`,
   },
   {
     week: 'week16',
-    message:
-      '"You measure the size of the accomplishment by the obstacles you had to overcome to reach your goals."',
+    message: `"It is the last week! Well done on coming so far and learning so much! Review your trophies, is there any skills you want to master that you haven't yet?"`,
   },
 ];
 
