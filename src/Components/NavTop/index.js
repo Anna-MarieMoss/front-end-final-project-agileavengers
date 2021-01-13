@@ -8,7 +8,9 @@ import FaceRoundedIcon from '@material-ui/icons/FaceRounded';
 import IconButton from '@material-ui/core/IconButton';
 
 import { useAppContext } from '../../AppContext';
+
 import pic from './logo.png';
+
 import './NavTop.css';
 
 const useStyles = makeStyles((theme) => ({
