@@ -30,7 +30,7 @@ export default function NavTop(){
         <AppBar position="fixed">
           <Toolbar >
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" >
-          {<img id='soc-logo' src={pic} alt="Soc Logo" />} </IconButton>
+          {<img id='soc-logo' src={pic} alt="Soc Logo" width='2em'/>} </IconButton>
             <Typography variant="h6" className={classes.title}>
               Reflect
             </Typography>
