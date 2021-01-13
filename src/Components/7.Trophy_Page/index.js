@@ -10,6 +10,7 @@ import { ToastContainer, Slide } from 'react-toastify';
 import { Typography } from '@material-ui/core';
 import NavBar from '../NavBar/NavBar';
 import NavTop from '../NavTop/index.js';
+import { useHistory } from 'react-router';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -18,6 +19,11 @@ function Trophy() {
   const theme = useContext(ThemeContext);
   const { userData, isAuthenticated, isLoading, accessToken } = useAppContext();
   const [award, setAward] = useState();
+  const history = useHistory();
+
+  if (!isAuthenticated) {
+    history.push('/');
+  }
 
   let user_Id = userData?.id; //we need to get this from the app context
 
@@ -47,8 +53,8 @@ function Trophy() {
   }
   return (
     isAuthenticated && (
-      <div id={theme} >
-      <NavTop />
+      <div id={theme}>
+        <NavTop />
         <ToastContainer
           transition={Slide} // changes the transition to a slide rather than a bounce.
           autoClose={5000}

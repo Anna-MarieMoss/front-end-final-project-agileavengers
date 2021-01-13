@@ -7,6 +7,7 @@ import { progressPosition } from '../../progressFunction';
 import { ThemeContext } from '../../ThemeContext';
 import NavBar from '../NavBar/NavBar';
 import NavTop from '../NavTop/index.js';
+import { useHistory } from 'react-router';
 
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
@@ -40,20 +41,16 @@ function JournalView() {
   const [showFavorites, setShowFavorites] = useState(false);
   const [reloadJournal, setreloadJournal] = useState(false);
   const theme = useContext(ThemeContext);
-  //const [themeDark, setThemeDark] = useState(false);
+  const history = useHistory();
 
   let userId = userData?.id;
 
   //Material UI
   const classes = useStyles();
 
-  //Detectign Theme
-  // function getTheme(){
-  //   if(theme === 'darkTheme'){
-  //       return setThemeDark(true);
-  //   }
-  // }
-  // let sd = getTheme();
+  if (!isAuthenticated) {
+    history.push('/');
+  }
 
   useEffect(() => {
     if (userId) {
@@ -146,7 +143,7 @@ function JournalView() {
   return (
     isAuthenticated && (
       <div>
-      <NavTop />
+        <NavTop />
         <H1 text={`Your Timeline`} />
         <Button
           onClick={filterByFavorite}

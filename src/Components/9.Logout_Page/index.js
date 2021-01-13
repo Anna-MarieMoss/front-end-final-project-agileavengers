@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import LogoutButton from '../Buttons/LogOutButton/index';
 import H2 from '../DisplayText/H2Text/index';
 import SoCLogo from '../Pictures/SocLogo/index';
 import { useAppContext } from '../../AppContext';
@@ -8,29 +7,39 @@ import '../../App.css';
 import './Logout.css';
 import NavBar from '../NavBar/NavBar.js';
 import NavTop from '../NavTop/index.js';
+import { useHistory } from 'react-router';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function Logout() {
   const theme = useContext(ThemeContext);
   const { userData, isAuthenticated, isLoading } = useAppContext();
-  // if (isLoading) {
-  //     return <div>Loading ...</div>;
-  //   }
+  const { logout } = useAuth0();
+  const history = useHistory();
+
+  if (!isAuthenticated) {
+    history.push('/');
+  }
 
   const name = userData ? userData?.name : '';
 
+  setTimeout(function () {
+    logout({ returnTo: window.location.origin });
+  }, 2000);
+
   return (
-    <div className={'logout'}>
-    <NavTop />
-    <div id={theme} className={'container'}>
-      <H2
-        text={`Great Stuff ${name}! Don't forget to log back in tomorrow to update your journey`}
-      />
-      <SoCLogo style={{ width: '200px', margin: '20px' }} />
-      <br />
-      <LogoutButton className='btn' />
-    </div>
-    <NavBar />
-    </div>
+    isAuthenticated && (
+      <div className={'logout'}>
+        <NavTop />
+        <div id={theme} className={'container'}>
+          <H2
+            text={`Great Stuff ${name}! Don't forget to log back in tomorrow to update your journey`}
+          />
+          <SoCLogo style={{ width: '200px', margin: '20px' }} />
+          <br />
+        </div>
+        <NavBar />
+      </div>
+    )
   );
 }
 

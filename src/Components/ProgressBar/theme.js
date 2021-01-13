@@ -1,3 +1,5 @@
+// CCS for the card - light is completed
+
 export const themeSwitch = {
   light: {
     backgroundColor: 'white',
@@ -9,13 +11,14 @@ export const themeSwitch = {
   },
 };
 
+// CSS for the centre dots- light is completed
 export const dotSwitch = {
   light: {
     backgroundColor: 'var(--green)',
     color: 'black',
   },
   dark: {
-    backgroundColor: 'lightgrey',
+    backgroundColor: 'green',
     color: 'white',
   },
 };
