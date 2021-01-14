@@ -285,14 +285,6 @@ export default function JournalEntry({ emotion }) {
               </label>
             </div>
           </div>
-          <Button
-            className='btn'
-            onClick={handleSubmitFile}
-            variant='outlined'
-            color={muiTheme(theme)}
-          >
-            Submit
-          </Button>
           <br></br>
           {previewImgSource && (
             <img
@@ -334,6 +326,15 @@ export default function JournalEntry({ emotion }) {
               controls
             />
           )}
+          <Button
+            className='btn'
+            onClick={handleSubmitFile}
+            variant='outlined'
+            color={muiTheme(theme)}
+          >
+            Submit
+          </Button>
+          <br></br>
           <Button
             onClick={() => handleClick(chosenEmotion)}
             variant='outlined'
