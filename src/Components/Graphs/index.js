@@ -181,7 +181,7 @@ const Graph = () => {
         variant='outlined'
         color={muiTheme(theme)}
       >
-        {showAllTime ? 'Show Last Ten Moods' : 'Show All Time'}
+        {showAllTime ? 'Last Ten' : 'All Time'}
       </Button>
       <br></br>
       <br></br>
