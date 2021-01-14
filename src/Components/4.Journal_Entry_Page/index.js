@@ -327,6 +327,7 @@ export default function JournalEntry({ emotion }) {
               controls
             />
           )}
+          <div width='50%' margin='2em'>
           <Button
             className='btn'
             onClick={handleSubmitFile}
@@ -335,6 +336,8 @@ export default function JournalEntry({ emotion }) {
           >
             Submit
           </Button>
+          <br></br>
+          <br></br>
           {emotion && (
             <Button
               onClick={() => handleClick(chosenEmotion)}
@@ -345,6 +348,7 @@ export default function JournalEntry({ emotion }) {
               Skip
             </Button>
           )}
+          </div>
         </div>
         {!emotion && <NavBar />}
       </div>
