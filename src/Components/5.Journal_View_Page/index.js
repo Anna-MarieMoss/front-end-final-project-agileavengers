@@ -16,7 +16,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -136,6 +135,13 @@ function JournalView() {
     setreloadJournal(true);
   }
 
+  //set Mui Dark Theme
+  function muiTheme(theme) {
+    if (theme === 'lightTheme') {
+      return 'primary';
+    } else return 'secondary';
+  }
+
   if (isLoading) {
     return <div>Loading ...</div>;
   }
@@ -148,12 +154,10 @@ function JournalView() {
         <Button
           onClick={filterByFavorite}
           style={{ textTransform: 'capitalize' }}
+          variant='outlined'
+          color={muiTheme(theme)}
         >
-          {showFavorites ? (
-            <Typography variant={'h6'}>Show All ✏️</Typography>
-          ) : (
-            <Typography variant={'h6'}>Show Favorites ❤️</Typography>
-          )}
+          {showFavorites ? 'Show All ✏️' : 'Show Favorites ❤️'}
         </Button>
         <br></br>
         <FormControl className={classes.formControl}>
