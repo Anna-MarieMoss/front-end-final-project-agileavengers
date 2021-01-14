@@ -26,17 +26,6 @@ self.addEventListener('activate', (event) => {
 
 //listen for requests and set the cache to be all the pages on the website that are visited - means you dont have to ist all pages on website
 self.addEventListener('fetch', (event) => {
-  ////
-  if (
-    event.request.url === 'https://goofy-varahamihira-23d1d6.netlify.app/logout'
-  ) {
-    event.waitUntil(
-      self.registration.showNotification('hiya!', {
-        body: 'testing the one off notification',
-      })
-    );
-  }
-  /////
   event.respondWith(
     fetch(event.request)
       .then((res) => {
