@@ -131,6 +131,7 @@ function Profile() {
                 }}
               />
             )}
+            <br></br>
             <TextField
               id='outlined-search'
               label='Myers-Briggs'
@@ -142,11 +143,13 @@ function Profile() {
                 setMyersBriggs(value);
               }}
             />
+            <br></br>
             <DatePicker
               values={selectedDate}
               handleDate={setSelectedDate}
               label='Start Date'
             />
+            <br></br>
             {selectedDate && (
               <SubmitButton
                 className='btn'

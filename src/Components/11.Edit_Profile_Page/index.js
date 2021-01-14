@@ -126,11 +126,13 @@ function EditProfile() {
                   setMyersBriggs(value);
                 }}
               />
+              <br></br>
               <DatePicker
                 values={selectedDate}
                 handleDate={setSelectedDate}
                 label='Bootcamp Start Date'
               />
+              <br></br>
               <Button
                 className='btn'
                 onClick={() => handleSubmit()}
