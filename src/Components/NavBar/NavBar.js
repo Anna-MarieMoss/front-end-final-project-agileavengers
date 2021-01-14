@@ -62,7 +62,7 @@ function NavBar() {
       <BottomNavigationAction
         component={Link}
         to='/journalentry'
-        label='Create Post'
+        label='Post'
         value='createPost'
         icon={<EditRoundedIcon color='type' />}
       />
