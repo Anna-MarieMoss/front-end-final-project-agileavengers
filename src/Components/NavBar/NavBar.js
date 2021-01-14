@@ -64,24 +64,24 @@ function NavBar() {
         to='/journalview'
         label='Journal'
         value='journal'
-        icon={<MenuBookIcon color={muiTheme(theme)} />}
+        icon={<MenuBookIcon color='type' />}
       />
       <BottomNavigationAction
         component={Link}
         to='/timeline'
         label='TimeLine'
         value='timeline'
-        icon={<ScheduleRoundedIcon color={muiTheme(theme)} />}
+        icon={<ScheduleRoundedIcon color='type' />}
       />
       <BottomNavigationAction
         component={Link}
         to='/trophy'
         label='Trophies'
         value='trophies'
-        icon={<EmojiEventsRoundedIcon color={muiTheme(theme)} />}
+        icon={<EmojiEventsRoundedIcon color='type' />}
       />
       <BottomNavigationAction
-        icon={<MenuRoundedIcon color={muiTheme(theme)} />}
+        icon={<MenuRoundedIcon color='type' />}
         aria-controls='simple-menu'
         aria-haspopup='true'
         onClick={navClick}
