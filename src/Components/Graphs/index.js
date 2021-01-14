@@ -93,12 +93,6 @@ const Graph = () => {
     getMood();
   }, [userData, showAllTime]);
 
-  'rgba(106, 76, 147, 1)',
-    'rgba(25, 130, 196, 1)',
-    'rgba(138, 201, 38, 1)',
-    'rgba(255, 202, 58, 1)',
-    'rgba(255, 89, 94, 1)';
-
   let chartConfig = {
     type: 'bar',
     data: {
