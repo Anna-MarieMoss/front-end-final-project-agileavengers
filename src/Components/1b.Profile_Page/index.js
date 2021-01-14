@@ -104,16 +104,18 @@ function Profile() {
 
   return (
     isAuthenticated && (
+      <div>
+      <NavTop />
       <div id={theme} className={('container', 'profile')}>
         <H1 text={'Profile'} />
         <img className='profile-pic' src={user?.picture} alt={user?.name} />
         {user?.given_name ? (
           <H2
-            text={`Hi ${user?.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and bootcamp start date`}
+            text={`Hi ${user?.given_name}, Welcome to your Profile Page, please add your name and bootcamp start date`}
           />
         ) : (
           <H2
-            text={`Hi, Welcome to your Profile Page, please add your Myers-Briggs and bootcamp start date`}
+            text={`Hi, Welcome to your Profile Page, please add your name and bootcamp start date`}
           />
         )}
         <form /*className={classes.root}*/ noValidate autoComplete='off'>
@@ -132,17 +134,6 @@ function Profile() {
               />
             )}
             <br></br>
-            <TextField
-              id='outlined-search'
-              label='Myers-Briggs'
-              type='text'
-              variant='outlined'
-              color={muiTheme(theme)}
-              onChange={(event) => {
-                const { value } = event.target;
-                setMyersBriggs(value);
-              }}
-            />
             <br></br>
             <DatePicker
               values={selectedDate}
@@ -158,6 +149,7 @@ function Profile() {
             )}
           </div>
         </form>
+      </div>
       </div>
     )
   );
