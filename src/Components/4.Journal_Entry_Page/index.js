@@ -327,6 +327,14 @@ export default function JournalEntry({ emotion }) {
               controls
             />
           )}
+          <Button
+            className='btn'
+            onClick={handleSubmitFile}
+            variant='outlined'
+            color={muiTheme(theme)}
+          >
+            Submit
+          </Button>
           {emotion && (
             <Button
               onClick={() => handleClick(chosenEmotion)}
