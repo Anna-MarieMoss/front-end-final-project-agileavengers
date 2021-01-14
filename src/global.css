@@ -5,6 +5,7 @@
 }
 
 .btn {
+  width: 40%;
   cursor: pointer;
   padding: 10px;
   margin: 10px;
@@ -79,7 +80,7 @@ body {
 } */
 
 .timeline-container {
-  padding-bottom: 400px;
+  padding-bottom: 150px;
 }
 
 .container {
@@ -88,11 +89,12 @@ body {
   display: flex;
   flex-direction: column;
   align-self: center;
-  padding-bottom: 150px;
+  padding-bottom: 200px;
 }
 .trophycontainer {
   padding-left: 10%;
   padding-right: 10%;
+  padding-bottom: 20%;
   width: 100%;
   display: flex;
   flex-direction: column;
