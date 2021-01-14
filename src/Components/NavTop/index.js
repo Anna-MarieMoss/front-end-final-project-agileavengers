@@ -37,7 +37,7 @@ export default function NavTop() {
           <img
             src={pic}
             alt={'reflect log'}
-            style={{ position: 'relative', width: '4rem', padding: 0 }}
+            style={{ position: 'relative', width: '3rem', padding: 0 }}
           />
           <Typography variant='h6' className={classes.title} id='reflect'>
             Reflect
