@@ -331,6 +331,7 @@ export default function JournalEntry({ emotion }) {
             onClick={handleSubmitFile}
             variant='outlined'
             color={muiTheme(theme)}
+            to='/journalview'
           >
             Submit
           </Button>
@@ -340,6 +341,7 @@ export default function JournalEntry({ emotion }) {
             variant='outlined'
             className='btn'
             color={muiTheme(theme)}
+            to='/journalview'
           >
             Skip
           </Button>
