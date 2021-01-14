@@ -64,31 +64,31 @@ function NavBar() {
         to='/journalentry'
         label='Post'
         value='createPost'
-        icon={<EditRoundedIcon color='neutral' />}
+        icon={<EditRoundedIcon color='action' />}
       />
       <BottomNavigationAction
         component={Link}
         to='/journalview'
         label='Journal'
         value='journal'
-        icon={<MenuBookIcon color='neutral' />}
+        icon={<MenuBookIcon color='action' />}
       />
       <BottomNavigationAction
         component={Link}
         to='/timeline'
         label='TimeLine'
         value='timeline'
-        icon={<ScheduleRoundedIcon color='neutral' />}
+        icon={<ScheduleRoundedIcon color='action' />}
       />
       <BottomNavigationAction
         component={Link}
         to='/trophy'
         label='Trophies'
         value='trophies'
-        icon={<EmojiEventsRoundedIcon color='neutral' />}
+        icon={<EmojiEventsRoundedIcon color='action' />}
       />
       <BottomNavigationAction
-        icon={<MenuRoundedIcon color='neutral' />}
+        icon={<MenuRoundedIcon color='action' />}
         aria-controls='simple-menu'
         aria-haspopup='true'
         onClick={navClick}

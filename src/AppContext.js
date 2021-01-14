@@ -105,6 +105,10 @@ export function AppProvider({ children }) {
       neutral: {
         main: '#303030',
       },
+      action: {
+        selected: '#303030',
+        selectedOpacity: 0.08,
+      },
     },
   });
 
