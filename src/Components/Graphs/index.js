@@ -185,6 +185,16 @@ const Graph = () => {
   //
   return (
     <div>
+      {!showAllTime && (
+        <div>
+          <h1>Your Last Ten Moods</h1>
+          <canvas
+            ref={chartContainer}
+            style={{ width: '100em', height: '100em' }}
+          />
+        </div>
+      )}
+      {showAllTime && <MyAllTimeMood pieGraphData={pieGraphData} />}
       <Button
         onClick={toggleAllTime}
         className='btn'
@@ -193,15 +203,6 @@ const Graph = () => {
       >
         {showAllTime ? 'Show Last Ten Moods' : 'Show All Time'}
       </Button>
-
-      {!showAllTime && (
-        <canvas
-          ref={chartContainer}
-          style={{ width: '100em', height: '100em' }}
-        />
-      )}
-
-      {showAllTime && <MyAllTimeMood pieGraphData={pieGraphData} />}
     </div>
   );
 };

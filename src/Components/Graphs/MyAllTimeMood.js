@@ -114,6 +114,8 @@ function MyAllTimeMood({ pieGraphData }) {
       <div className={'users-mood'}>
         <br></br>
 
+        <h1>Your All Time Mood Stats</h1>
+
         <div className='pie-legend'>
           <button
             style={{
