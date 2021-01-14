@@ -11,6 +11,7 @@ import './Profile.css';
 import { ThemeContext } from '../../ThemeContext';
 import CircularProgressWithLabel from '@material-ui/core/CircularProgress';
 import NavTop from '../NavTop/index.js';
+import { Typography } from '@material-ui/core';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -105,59 +106,51 @@ function Profile() {
   return (
     isAuthenticated && (
       <div>
-      <NavTop />
-      <div id={theme} className={('container', 'profile')}>
-        <H1 text={'Profile'} />
-        <img className='profile-pic' src={user?.picture} alt={user?.name} />
-        {user?.given_name ? (
-          {/* <H2
-            text={`Hi ${user?.given_name}, welcome to your Profile Page. Please add your name and bootcamp start date`}
-          />
-        ) : (
-          <H2
-            text={`Hi Bootcamper, welcome to your Profile Page. Please add your name and bootcamp start date`}
-          /> */}
-          ///
-          <Typography variant='h6'>
-        Hi {user?.given_name}, welcome to your Profile Page. Please add your name and bootcamp start date
-        </Typography>}
-         ) : ( 
-        {<Typography variant='h6'>Hi Bootcamper, welcome to your Profile Page. Please add your name and bootcamp start date
-        </Typography>}
-          ///
-        )}
-        <form /*className={classes.root}*/ noValidate autoComplete='off'>
-          <div id={theme} className={'profile'}>
-            {!user?.given_name && (
-              <TextField
-                id='outlined-search'
-                label='Name'
-                type='text'
-                variant='outlined'
-                color={muiTheme(theme)}
-                onChange={(event) => {
-                  const { value } = event.target;
-                  setName(value);
-                }}
-              />
-            )}
-            <br></br>
-            <br></br>
-            <DatePicker
-              values={selectedDate}
-              handleDate={setSelectedDate}
-              label='Start Date'
+        <NavTop />
+        <div id={theme} className={('container', 'profile')}>
+          <H1 text={'Profile'} />
+          <img className='profile-pic' src={user?.picture} alt={user?.name} />
+          {user?.given_name ? (
+            <H2
+              text={`Hi ${user?.given_name}, welcome to your Profile Page. Please add your name and bootcamp start date`}
             />
-            <br></br>
-            {selectedDate && (
-              <SubmitButton
-                className='btn'
-                handleClick={() => handleSubmit()}
+          ) : (
+            <H2
+              text={`Hi Bootcamper, welcome to your Profile Page. Please add your name and bootcamp start date`}
+            />
+          )}
+          <form /*className={classes.root}*/ noValidate autoComplete='off'>
+            <div id={theme} className={'profile'}>
+              {!user?.given_name && (
+                <TextField
+                  id='outlined-search'
+                  label='Name'
+                  type='text'
+                  variant='outlined'
+                  color={muiTheme(theme)}
+                  onChange={(event) => {
+                    const { value } = event.target;
+                    setName(value);
+                  }}
+                />
+              )}
+              <br></br>
+              <br></br>
+              <DatePicker
+                values={selectedDate}
+                handleDate={setSelectedDate}
+                label='Start Date'
               />
-            )}
-          </div>
-        </form>
-      </div>
+              <br></br>
+              {selectedDate && (
+                <SubmitButton
+                  className='btn'
+                  handleClick={() => handleSubmit()}
+                />
+              )}
+            </div>
+          </form>
+        </div>
       </div>
     )
   );
