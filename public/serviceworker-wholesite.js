@@ -62,7 +62,7 @@ self.addEventListener('notificationclick', function (e) {
     notification.close();
   } else {
     // Open a new window and take them to the journal website so that they can make an entry -
-    clientsClaim.openWindow('https://goofy-varahamihira-23d1d6.netlify.app/'); // need to programme this with the proper url when the site is deployed.
+    clientsClaim.openWindow('https://reflectjournal.netlify.app'); // need to programme this with the proper url when the site is deployed.
     notification.close();
   }
 });
