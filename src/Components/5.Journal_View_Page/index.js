@@ -161,12 +161,15 @@ function JournalView() {
         </Button>
         <br></br>
         <FormControl className={classes.formControl}>
-          <InputLabel id='sort-by'>Sort By...</InputLabel>
+          <InputLabel color={muiTheme(theme)} id='sort-by'>
+            Sort By...
+          </InputLabel>
           <Select
             labelId='sort-by'
             id='sort-by-select'
             value={sortConstraint}
             onChange={changeSortBy}
+            color={muiTheme(theme)}
           >
             <MenuItem value={'Newest to oldest'}>Newest to Oldest</MenuItem>
             <MenuItem value={'Oldest to newest'}>Oldest to Newest</MenuItem>
