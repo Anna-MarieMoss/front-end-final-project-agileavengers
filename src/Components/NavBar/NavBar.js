@@ -64,6 +64,7 @@ function NavBar() {
         to='/journalentry'
         label='Post'
         value='createPost'
+        color='action'
         icon={<EditRoundedIcon color='action' />}
       />
       <BottomNavigationAction
@@ -71,6 +72,7 @@ function NavBar() {
         to='/journalview'
         label='Journal'
         value='journal'
+        color='action'
         icon={<MenuBookIcon color='action' />}
       />
       <BottomNavigationAction
@@ -78,6 +80,7 @@ function NavBar() {
         to='/timeline'
         label='TimeLine'
         value='timeline'
+        color='action'
         icon={<ScheduleRoundedIcon color='action' />}
       />
       <BottomNavigationAction
@@ -85,9 +88,11 @@ function NavBar() {
         to='/trophy'
         label='Trophies'
         value='trophies'
+        color='action'
         icon={<EmojiEventsRoundedIcon color='action' />}
       />
       <BottomNavigationAction
+        color='action'
         icon={<MenuRoundedIcon color='action' />}
         aria-controls='simple-menu'
         aria-haspopup='true'
