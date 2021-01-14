@@ -165,7 +165,7 @@ export default function JournalEntry({ emotion }) {
     async function postMoodEntry() {
       var assignedText;
       if (emotion[0].number === 5) {
-        assignedText = 'You succeed!';
+        assignedText = 'You succeeded!';
       }
       if (emotion[0].number === 4) {
         assignedText = 'You had a great day.';
