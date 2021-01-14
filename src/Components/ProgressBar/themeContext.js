@@ -17,34 +17,60 @@ export function ThemeProvider({ children }) {
   const [week10, setweek10] = useState(false);
   const [week11, setweek11] = useState(false);
   const [week12, setweek12] = useState(false);
+  const [week13, setweek13] = useState(false);
+  const [week14, setweek14] = useState(false);
+  const [week15, setweek15] = useState(false);
   const [week16, setweek16] = useState(false);
   const { currentWeek } = useAppContext();
 
   useEffect(() => {
-    if (
-      currentWeek === 'week13' ||
-      currentWeek === 'week14' ||
-      currentWeek === 'week15'
-    ) {
+    if (currentWeek === 'week15') {
       setweek16(true);
+    }
+    if (currentWeek === 'week14') {
+      setweek16(true);
+      setweek15(true);
+    }
+    if (currentWeek === 'week13') {
+      setweek16(true);
+      setweek14(true);
+      setweek15(true);
+    }
+    if (currentWeek === 'week12') {
+      setweek16(true);
+      setweek13(true);
+      setweek14(true);
+      setweek15(true);
     } else if (currentWeek === 'week11') {
       setweek12(true);
       setweek16(true);
+      setweek13(true);
+      setweek14(true);
+      setweek15(true);
     } else if (currentWeek === 'week10') {
       setweek11(true);
       setweek12(true);
       setweek16(true);
+      setweek13(true);
+      setweek14(true);
+      setweek15(true);
     } else if (currentWeek === 'week9') {
       setweek10(true);
       setweek11(true);
       setweek12(true);
       setweek16(true);
+      setweek13(true);
+      setweek14(true);
+      setweek15(true);
     } else if (currentWeek === 'week8') {
       setweek9(true);
       setweek10(true);
       setweek11(true);
       setweek12(true);
       setweek16(true);
+      setweek13(true);
+      setweek14(true);
+      setweek15(true);
     } else if (currentWeek === 'week7') {
       setweek8(true);
       setweek9(true);
@@ -52,6 +78,9 @@ export function ThemeProvider({ children }) {
       setweek11(true);
       setweek12(true);
       setweek16(true);
+      setweek13(true);
+      setweek14(true);
+      setweek15(true);
     } else if (currentWeek === 'week6') {
       setweek7(true);
       setweek8(true);
@@ -60,6 +89,9 @@ export function ThemeProvider({ children }) {
       setweek11(true);
       setweek12(true);
       setweek16(true);
+      setweek13(true);
+      setweek14(true);
+      setweek15(true);
     } else if (currentWeek === 'week5') {
       setweek6(true);
       setweek7(true);
@@ -69,6 +101,9 @@ export function ThemeProvider({ children }) {
       setweek11(true);
       setweek12(true);
       setweek16(true);
+      setweek13(true);
+      setweek14(true);
+      setweek15(true);
     } else if (currentWeek === 'week4') {
       setweek5(true);
       setweek6(true);
@@ -79,6 +114,9 @@ export function ThemeProvider({ children }) {
       setweek11(true);
       setweek12(true);
       setweek16(true);
+      setweek13(true);
+      setweek14(true);
+      setweek15(true);
     } else if (currentWeek === 'week3') {
       setweek4(true);
       setweek5(true);
@@ -90,6 +128,9 @@ export function ThemeProvider({ children }) {
       setweek11(true);
       setweek12(true);
       setweek16(true);
+      setweek13(true);
+      setweek14(true);
+      setweek15(true);
     } else if (currentWeek === 'week2') {
       setweek3(true);
       setweek4(true);
@@ -102,6 +143,9 @@ export function ThemeProvider({ children }) {
       setweek11(true);
       setweek12(true);
       setweek16(true);
+      setweek13(true);
+      setweek14(true);
+      setweek15(true);
     } else if (currentWeek === 'week1') {
       setweek2(true);
       setweek3(true);
@@ -115,6 +159,9 @@ export function ThemeProvider({ children }) {
       setweek11(true);
       setweek12(true);
       setweek16(true);
+      setweek13(true);
+      setweek14(true);
+      setweek15(true);
     } else if (currentWeek === 'week0') {
       setweek1(true);
       setweek2(true);
@@ -129,6 +176,9 @@ export function ThemeProvider({ children }) {
       setweek11(true);
       setweek12(true);
       setweek16(true);
+      setweek13(true);
+      setweek14(true);
+      setweek15(true);
     }
   }, [currentWeek]);
 
@@ -147,6 +197,9 @@ export function ThemeProvider({ children }) {
         week10: week10,
         week11: week11,
         week12: week12,
+        week13: week13,
+        week14: week14,
+        week15: week15,
         week16: week16,
       }}
     >

@@ -161,21 +161,22 @@ export default function JournalEntry({ emotion }) {
   }
 
   function handleClick(emotion) {
+    console.log(emotion);
     async function postMoodEntry() {
       var assignedText;
-      if (emotion === 5) {
-        assignedText = 'You succeed!';
+      if (emotion[0].number === 5) {
+        assignedText = 'You succeeded!';
       }
-      if (emotion === 4) {
+      if (emotion[0].number === 4) {
         assignedText = 'You had a great day.';
       }
-      if (emotion === 3) {
+      if (emotion[0].number === 3) {
         assignedText = 'Today was frustrating.';
       }
-      if (emotion === 2) {
+      if (emotion[0].number === 2) {
         assignedText = 'Coding makes me sad!';
       }
-      if (emotion === 1) {
+      if (emotion[0].number === 1) {
         assignedText = 'Today was a difficult day!';
       }
       try {
@@ -184,7 +185,7 @@ export default function JournalEntry({ emotion }) {
           body: JSON.stringify({
             user_id: userId,
             text: assignedText,
-            mood: chosenEmotion.emotion,
+            mood: emotion[0].number,
           }),
           headers: {
             'content-type': 'application/JSON',
@@ -285,14 +286,6 @@ export default function JournalEntry({ emotion }) {
               </label>
             </div>
           </div>
-          <Button
-            className='btn'
-            onClick={handleSubmitFile}
-            variant='outlined'
-            color={muiTheme(theme)}
-          >
-            Submit
-          </Button>
           <br></br>
           {previewImgSource && (
             <img
@@ -335,13 +328,23 @@ export default function JournalEntry({ emotion }) {
             />
           )}
           <Button
-            onClick={() => handleClick(chosenEmotion)}
-            variant='outlined'
             className='btn'
+            onClick={handleSubmitFile}
+            variant='outlined'
             color={muiTheme(theme)}
           >
-            Skip
+            Submit
           </Button>
+          {emotion && (
+            <Button
+              onClick={() => handleClick(chosenEmotion)}
+              variant='outlined'
+              className='btn'
+              color={muiTheme(theme)}
+            >
+              Skip
+            </Button>
+          )}
         </div>
         {!emotion && <NavBar />}
       </div>

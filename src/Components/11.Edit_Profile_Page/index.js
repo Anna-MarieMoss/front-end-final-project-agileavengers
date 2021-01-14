@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import DatePicker from '../Input/DateInput/index.js';
 import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
+import { ToastContainer, toast, Slide } from 'react-toastify';
 import SubmitButton from '../Buttons/SubmitButton/index';
 import { useAppContext } from '../../AppContext';
 import { useHistory } from 'react-router';
@@ -11,6 +12,7 @@ import { ThemeContext } from '../../ThemeContext';
 import NavBar from '../NavBar/NavBar';
 import NavTop from '../NavTop/index.js';
 import './EditProfile.css';
+import { Button } from '@material-ui/core';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -61,6 +63,13 @@ function EditProfile() {
       const data = await res.json();
       console.log(data);
       setSubmit(true);
+      toast(`Profile page updated!`, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+
+      setTimeout(function () {
+        history.push('/journalview');
+      }, 2000);
     }
     editProfile();
   }
@@ -76,6 +85,17 @@ function EditProfile() {
     isAuthenticated && (
       <div>
         <NavTop />
+        <ToastContainer
+          transition={Slide} // changes the transition to a slide rather than a bounce.  Alerts are rendering multiple times at the moment due to the page re redering all of the buttons.  Look into how you can stop this happening but keeep the cool styling tomorrow.
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <div id={theme} className={'container'}>
           <H1 text={'Edit Profile'} />
           <div className='profile-div'>
@@ -95,6 +115,7 @@ function EditProfile() {
                 }}
               />
               <br></br>
+              <br></br>
               <TextField
                 id='outlined-search'
                 label={`Myers-Briggs: ${myersBriggs}`}
@@ -106,15 +127,22 @@ function EditProfile() {
                   setMyersBriggs(value);
                 }}
               />
+              <br></br>
+              <br></br>
               <DatePicker
                 values={selectedDate}
                 handleDate={setSelectedDate}
-                label='Start Date'
+                label='Bootcamp Start Date'
               />
-              <SubmitButton
+              <br></br>
+              <Button
                 className='btn'
-                handleClick={() => handleSubmit()}
-              />
+                onClick={() => handleSubmit()}
+                variant='outlined'
+                color={muiTheme(theme)}
+              >
+                Submit
+              </Button>
             </div>
           </form>
         </div>

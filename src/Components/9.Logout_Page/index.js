@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import H2 from '../DisplayText/H2Text/index';
-import SoCLogo from '../Pictures/SocLogo/index';
+import H1 from '../DisplayText/H1Text/index';
+import Reflect from '../Pictures/Reflect/index';
 import { useAppContext } from '../../AppContext';
 import { ThemeContext } from '../../ThemeContext';
 import '../../App.css';
@@ -31,10 +31,10 @@ function Logout() {
       <div className={'logout'}>
         <NavTop />
         <div id={theme} className={'container'}>
-          <H2
+          <H1
             text={`Great Stuff ${name}! Don't forget to log back in tomorrow to update your journey`}
           />
-          <SoCLogo style={{ width: '200px', margin: '20px' }} />
+          <Reflect style={{ width: '200px', margin: '20px' }} />
           <br />
         </div>
         <NavBar />
