@@ -15,13 +15,14 @@ function Welcome() {
       <div className='container'>
         <H1 text={`Welcome to your SoC Journal`} />
         <Reflect />
+        <br></br>
         <Typography variant='body1'>
           Your personal space to record your once in a lifetime School of Code
           experience!
           <br></br>
           <br></br>
-          There will be highs, there will be lows, tears and tantrums, but it
-          will fly by and you will be amazed at all that you learn!<br></br>
+          There will be highs and lows, tears and tantrums, but it will fly by
+          and you will be amazed at all that you learn!<br></br>
           <br></br>Record your progress and transformation here!!
         </Typography>
         <br></br>

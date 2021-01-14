@@ -12,8 +12,8 @@
 
 .emotionButtons {
   border: 0px;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  padding-left: 0.15em;
-  padding-right: 0.15em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  /* padding-left: 0.15em;
+  padding-right: 0.15em; */
 }

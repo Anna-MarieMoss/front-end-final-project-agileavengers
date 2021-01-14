@@ -77,7 +77,7 @@ export default function ProgressBar({ pic, week }) {
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week1 ? 'dark' : 'light']}>
-            <GitHubIcon color={week1 ? muiTheme(theme) : 'disabled'} />
+            <GitHubIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -102,7 +102,7 @@ export default function ProgressBar({ pic, week }) {
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week2 ? 'dark' : 'light']}>
-            <FunctionsIcon color={week2 ? muiTheme(theme) : 'disabled'} />
+            <FunctionsIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -122,7 +122,7 @@ export default function ProgressBar({ pic, week }) {
       <TimelineItem>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week3 ? 'dark' : 'light']}>
-            <CodeIcon color={week3 ? muiTheme(theme) : 'disabled'} />
+            <CodeIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -142,7 +142,7 @@ export default function ProgressBar({ pic, week }) {
       <TimelineItem>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week4 ? 'dark' : 'light']}>
-            <StorageIcon color={week4 ? muiTheme(theme) : 'disabled'} />
+            <StorageIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -162,7 +162,7 @@ export default function ProgressBar({ pic, week }) {
       <TimelineItem>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week5 ? 'dark' : 'light']}>
-            <DevicesIcon color={week5 ? muiTheme(theme) : 'disabled'} />
+            <DevicesIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -182,7 +182,7 @@ export default function ProgressBar({ pic, week }) {
       <TimelineItem>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week6 ? 'dark' : 'light']}>
-            <BuildIcon color={week6 ? muiTheme(theme) : 'disabled'} />
+            <BuildIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -207,7 +207,7 @@ export default function ProgressBar({ pic, week }) {
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week7 ? 'dark' : 'light']}>
-            <FunctionsIcon color={week7 ? muiTheme(theme) : 'disabled'} />
+            <FunctionsIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -227,7 +227,7 @@ export default function ProgressBar({ pic, week }) {
       <TimelineItem>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week8 ? 'dark' : 'light']}>
-            <AccountTreeIcon color={week8 ? muiTheme(theme) : 'disabled'} />
+            <AccountTreeIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -247,7 +247,7 @@ export default function ProgressBar({ pic, week }) {
       <TimelineItem>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week9 ? 'dark' : 'light']}>
-            <DeveloperBoardIcon color={week9 ? muiTheme(theme) : 'disabled'} />
+            <DeveloperBoardIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -267,7 +267,7 @@ export default function ProgressBar({ pic, week }) {
       <TimelineItem>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week10 ? 'dark' : 'light']}>
-            <RouterIcon color={week10 ? muiTheme(theme) : 'disabled'} />
+            <RouterIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -287,7 +287,7 @@ export default function ProgressBar({ pic, week }) {
       <TimelineItem>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week11 ? 'dark' : 'light']}>
-            <GroupIcon color={week11 ? muiTheme(theme) : 'disabled'} />
+            <GroupIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -307,7 +307,7 @@ export default function ProgressBar({ pic, week }) {
       <TimelineItem>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week12 ? 'dark' : 'light']}>
-            <EmojiEmotionsIcon color={week12 ? muiTheme(theme) : 'disabled'} />
+            <EmojiEmotionsIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -332,7 +332,7 @@ export default function ProgressBar({ pic, week }) {
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week13 ? 'dark' : 'light']}>
-            <CreateIcon color={week13 ? muiTheme(theme) : 'disabled'} />
+            <CreateIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -352,7 +352,7 @@ export default function ProgressBar({ pic, week }) {
       <TimelineItem>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week14 ? 'dark' : 'light']}>
-            <WebIcon color={week14 ? muiTheme(theme) : 'disabled'} />
+            <WebIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -372,7 +372,7 @@ export default function ProgressBar({ pic, week }) {
       <TimelineItem>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week15 ? 'dark' : 'light']}>
-            <DeveloperModeIcon color={week15 ? muiTheme(theme) : 'disabled'} />
+            <DeveloperModeIcon />
           </TimelineDot>
           <TimelineConnector />
         </TimelineSeparator>
@@ -394,7 +394,7 @@ export default function ProgressBar({ pic, week }) {
       <TimelineItem>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week16 ? 'dark' : 'light']}>
-            <NewReleasesIcon color={week16 ? muiTheme(theme) : 'disabled'} />
+            <NewReleasesIcon />
           </TimelineDot>
         </TimelineSeparator>
         <TimelineContent>
