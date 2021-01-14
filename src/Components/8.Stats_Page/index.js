@@ -22,11 +22,11 @@ function Stats() {
     isAuthenticated && (
       <div className={'stats'}>
         <NavTop />
-        <div className='container'>
+        <div className='container' style={{ marginBottom: 0 }}>
           <H1 text={`Your Mood Stats`} />
-          <Typography variant='h6'>
+          {/* <Typography variant='h6'>
             Display your mood throughout the bootcamp
-          </Typography>
+          </Typography> */}
           <br></br>
           <Graph />
         </div>

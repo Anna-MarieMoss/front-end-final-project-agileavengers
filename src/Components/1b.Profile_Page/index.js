@@ -11,6 +11,7 @@ import './Profile.css';
 import { ThemeContext } from '../../ThemeContext';
 import CircularProgressWithLabel from '@material-ui/core/CircularProgress';
 import NavTop from '../NavTop/index.js';
+import { Typography } from '@material-ui/core';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -104,57 +105,52 @@ function Profile() {
 
   return (
     isAuthenticated && (
-      <div id={theme} className={('container', 'profile')}>
-        <H1 text={'Profile'} />
-        <img className='profile-pic-css' src={user?.picture} alt={user?.name} />
-        {user?.given_name ? (
-          <H2
-            text={`Hi ${user?.given_name}, Welcome to your Profile Page, please add your Myers-Briggs and bootcamp start date`}
-          />
-        ) : (
-          <H2
-            text={`Hi, Welcome to your Profile Page, please add your Myers-Briggs and bootcamp start date`}
-          />
-        )}
-        <form /*className={classes.root}*/ noValidate autoComplete='off'>
-          <div id={theme} className={'profile'}>
-            {!user?.given_name && (
-              <TextField
-                id='outlined-search'
-                label='Name'
-                type='text'
-                variant='outlined'
-                color={muiTheme(theme)}
-                onChange={(event) => {
-                  const { value } = event.target;
-                  setName(value);
-                }}
-              />
-            )}
-            <TextField
-              id='outlined-search'
-              label='Myers-Briggs'
-              type='text'
-              variant='outlined'
-              color={muiTheme(theme)}
-              onChange={(event) => {
-                const { value } = event.target;
-                setMyersBriggs(value);
-              }}
+      <div>
+        <NavTop />
+        <div id={theme} className={('container', 'profile')}>
+          <H1 text={'Profile'} />
+          <img className='profile-pic' src={user?.picture} alt={user?.name} />
+          {user?.given_name ? (
+            <H2
+              text={`Hi ${user?.given_name}, welcome to your Profile Page. Please add your name and bootcamp start date`}
             />
-            <DatePicker
-              values={selectedDate}
-              handleDate={setSelectedDate}
-              label='Start Date'
+          ) : (
+            <H2
+              text={`Hi Bootcamper, welcome to your Profile Page. Please add your name and bootcamp start date`}
             />
-            {selectedDate && (
-              <SubmitButton
-                className='btn'
-                handleClick={() => handleSubmit()}
+          )}
+          <form /*className={classes.root}*/ noValidate autoComplete='off'>
+            <div id={theme} className={'profile'}>
+              {!user?.given_name && (
+                <TextField
+                  id='outlined-search'
+                  label='Name'
+                  type='text'
+                  variant='outlined'
+                  color={muiTheme(theme)}
+                  onChange={(event) => {
+                    const { value } = event.target;
+                    setName(value);
+                  }}
+                />
+              )}
+              <br></br>
+              <br></br>
+              <DatePicker
+                values={selectedDate}
+                handleDate={setSelectedDate}
+                label='Start Date'
               />
-            )}
-          </div>
-        </form>
+              <br></br>
+              {selectedDate && (
+                <SubmitButton
+                  className='btn'
+                  handleClick={() => handleSubmit()}
+                />
+              )}
+            </div>
+          </form>
+        </div>
       </div>
     )
   );

@@ -165,7 +165,7 @@ export default function JournalEntry({ emotion }) {
     async function postMoodEntry() {
       var assignedText;
       if (emotion[0].number === 5) {
-        assignedText = 'You succeed!';
+        assignedText = 'You succeeded!';
       }
       if (emotion[0].number === 4) {
         assignedText = 'You had a great day.';
@@ -286,14 +286,6 @@ export default function JournalEntry({ emotion }) {
               </label>
             </div>
           </div>
-          <Button
-            className='btn'
-            onClick={handleSubmitFile}
-            variant='outlined'
-            color={muiTheme(theme)}
-          >
-            Submit
-          </Button>
           <br></br>
           {previewImgSource && (
             <img
@@ -335,6 +327,14 @@ export default function JournalEntry({ emotion }) {
               controls
             />
           )}
+          <Button
+            className='btn'
+            onClick={handleSubmitFile}
+            variant='outlined'
+            color={muiTheme(theme)}
+          >
+            Submit
+          </Button>
           {emotion && (
             <Button
               onClick={() => handleClick(chosenEmotion)}

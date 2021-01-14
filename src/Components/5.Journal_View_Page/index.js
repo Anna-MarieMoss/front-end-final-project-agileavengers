@@ -16,7 +16,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -136,33 +135,41 @@ function JournalView() {
     setreloadJournal(true);
   }
 
+  //set Mui Dark Theme
+  function muiTheme(theme) {
+    if (theme === 'lightTheme') {
+      return 'primary';
+    } else return 'secondary';
+  }
+
   if (isLoading) {
     return <div>Loading ...</div>;
   }
 
   return (
     isAuthenticated && (
-      <div>
+      <div style={{paddingBottom: '100px'}}>
         <NavTop />
         <H1 text={`Your Timeline`} />
         <Button
           onClick={filterByFavorite}
           style={{ textTransform: 'capitalize' }}
+          variant='outlined'
+          color={muiTheme(theme)}
         >
-          {showFavorites ? (
-            <Typography variant={'h6'}>Show All ✏️</Typography>
-          ) : (
-            <Typography variant={'h6'}>Show Favorites ❤️</Typography>
-          )}
+          {showFavorites ? 'Show All ✏️' : 'Show Favorites ❤️'}
         </Button>
         <br></br>
         <FormControl className={classes.formControl}>
-          <InputLabel id='sort-by'>Sort By...</InputLabel>
+          <InputLabel color={muiTheme(theme)} id='sort-by'>
+            Sort By...
+          </InputLabel>
           <Select
             labelId='sort-by'
             id='sort-by-select'
             value={sortConstraint}
             onChange={changeSortBy}
+            color={muiTheme(theme)}
           >
             <MenuItem value={'Newest to oldest'}>Newest to Oldest</MenuItem>
             <MenuItem value={'Oldest to newest'}>Oldest to Newest</MenuItem>
@@ -178,12 +185,22 @@ function JournalView() {
                 return b.mood - a.mood;
               } else if (sortConstraint === 'Mood low to high') {
                 return a.mood - b.mood;
+              } else if (
+                sortConstraint === 'Newest to oldest' &&
+                new Date(a.date) - new Date(b.date) === 0
+              ) {
+                return b.id - a.id;
               } else if (sortConstraint === 'Newest to oldest') {
                 return new Date(b.date) - new Date(a.date);
+              } else if (
+                sortConstraint === 'Oldest to newest' &&
+                new Date(a.date) - new Date(b.date) === 0
+              ) {
+                return b.id - a.id;
               } else if (sortConstraint === 'Oldest to newest') {
                 return new Date(a.date) - new Date(b.date);
               } else {
-                return new Date(b.date) - new Date(a.date);
+                return b.id - a.id;
               }
             })
             .map((journalEntry, index) => (
