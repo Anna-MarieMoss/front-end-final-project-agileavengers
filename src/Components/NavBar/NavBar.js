@@ -61,6 +61,13 @@ function NavBar() {
     >
       <BottomNavigationAction
         component={Link}
+        to='/journalentry'
+        label='Create Post'
+        value='createPost'
+        icon={<EditRoundedIcon color='type' />}
+      />
+      <BottomNavigationAction
+        component={Link}
         to='/journalview'
         label='Journal'
         value='journal'
@@ -111,14 +118,14 @@ function NavBar() {
         >
           Your Mood
         </MenuItem>
-        <MenuItem
+        {/* <MenuItem
           className='menu-item'
           component={Link}
           to='/journalentry'
           onClick={navClose}
         >
           Journal Entry
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem
           className='menu-item'
           component={Link}
