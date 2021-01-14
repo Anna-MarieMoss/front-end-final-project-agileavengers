@@ -58,6 +58,7 @@ function NavBar() {
       // showlabel={false}
       className={classes.root}
       id='navbarshow'
+      color='action'
     >
       <BottomNavigationAction
         component={Link}
