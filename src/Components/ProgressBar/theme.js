@@ -7,18 +7,18 @@ export const themeSwitch = {
   },
   dark: {
     backgroundColor: 'lightgrey',
-    color: 'darkgrey',
+    color: '#585858',
   },
 };
 
 // CSS for the centre dots- light is completed
 export const dotSwitch = {
   light: {
-    backgroundColor: 'var(--green)',
-    color: 'black',
+    backgroundColor: 'white',
+    color: 'pink',
   },
   dark: {
-    backgroundColor: 'green',
-    color: 'white',
+    backgroundColor: 'lightgrey',
+    color: 'pink',
   },
 };

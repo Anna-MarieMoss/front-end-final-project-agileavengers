@@ -3,6 +3,8 @@ import Chartjs from 'chart.js';
 import { Button } from '@material-ui/core';
 import { useAppContext } from '../../AppContext';
 import { ThemeContext } from '../../ThemeContext';
+import UsersMood from '../10.UsersMood';
+import MyAllTimeMood from './MyAllTimeMood';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -14,10 +16,22 @@ const Graph = () => {
   const { isAuthenticated, isLoading, accessToken, userData } = useAppContext();
   const chartContainer = useRef(null);
   const [chartInstance, setChartInstance] = useState(null);
-  const [graphData, setGraphData] = useState([0, 0, 0, 0, 0]);
-  const [showGraph, setShowGraph] = useState(false);
+  const [graphData, setGraphData] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  const [pieGraphData, setPieGraphData] = useState([
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+  ]);
+  const [showAllTime, setShowAllTime] = useState(false);
+
   let userId = userData?.id;
-  //graph
 
   const theme = useContext(ThemeContext);
   //set Mui Dark Theme
@@ -29,9 +43,16 @@ const Graph = () => {
 
   const randomInt = () => Math.floor(Math.random() * (5 - 1 + 1)) + 1;
 
-  function handleMood() {
-    setShowGraph(true);
-    console.log(`graph should be showing`);
+  // function toggleGeneralMood() {
+  //   setShowGeneralMood(!showGeneralMood);
+  //   console.log('showGeneralMood is:', !showGeneralMood);
+  //   setShowUserAllTimeMood(!showUserAllTime);
+  //   console.log('showUserAllTime is:', !showUserAllTime);
+  // }
+
+  function toggleAllTime() {
+    setShowAllTime(!showAllTime);
+    console.log('showAllTime is:', !showAllTime);
   }
 
   useEffect(() => {
@@ -39,27 +60,11 @@ const Graph = () => {
       const newChartInstance = new Chartjs(chartContainer.current, chartConfig);
       setChartInstance(newChartInstance);
     }
-  }, [chartContainer, graphData]);
+  }, [chartContainer, graphData, userData, showAllTime]);
 
   const updateDataset = (datasetIndex, newData) => {
     chartInstance.data.datasets[datasetIndex].data = newData;
     chartInstance.update();
-  };
-
-  const onButtonClick = () => {
-    const data = [
-      randomInt(),
-      randomInt(),
-      randomInt(),
-      randomInt(),
-      randomInt(),
-      randomInt(),
-      randomInt(),
-      randomInt(),
-      randomInt(),
-      randomInt(),
-    ];
-    updateDataset(0, data);
   };
 
   useEffect(() => {
@@ -73,15 +78,20 @@ const Graph = () => {
       const data = await res.json();
       // console.log( `data is  ${JSON.stringify(data)}`);
 
+      for (let post of data.payload) {
+        post.date = new Date(post.date).toDateString().slice(4);
+      }
+
+      setPieGraphData(data.payload);
       console.log(`data payload is `, data.payload);
       // console.log(`data is ${JSON.stringify(data.payload[0].mood)}`)
-      setGraphData(data.payload);
+      setGraphData(data.payload.slice(0, 10));
       console.log(`graphData state is`, graphData);
       //chartConfig.data.datasets[0].data = graphData.map((x) => x.mood);
     }
 
     getMood();
-  }, [showGraph]);
+  }, [userData, showAllTime]);
 
   'rgba(106, 76, 147, 1)',
     'rgba(25, 130, 196, 1)',
@@ -92,18 +102,7 @@ const Graph = () => {
   let chartConfig = {
     type: 'bar',
     data: {
-      labels: [
-        'Day One',
-        'Day Two',
-        'Day Three',
-        'Day Four',
-        'Day Five',
-        'Day One',
-        'Day Two',
-        'Day Three',
-        'Day Four',
-        'Day Five',
-      ],
+      labels: graphData.map((x) => x.date),
       datasets: [
         {
           label: 'Mood',
@@ -137,11 +136,52 @@ const Graph = () => {
       ],
     },
     options: {
+      legend: {
+        display: false,
+      },
       scales: {
+        xAxes: [
+          {
+            scaleLabel: {
+              display: true,
+              labelString: 'Date',
+            },
+            ticks: {
+              fontSize: 10,
+            },
+          },
+        ],
         yAxes: [
           {
+            fontSize: 20,
+            scaleLabel: {
+              display: true,
+              labelString: 'Moods',
+            },
             ticks: {
-              beginAtZero: true,
+              min: 0,
+              max: 5,
+              fontSize: 15,
+              callback: function (value, index, values) {
+                if (value === 0) {
+                  return value;
+                }
+                if (value === 1) {
+                  return '😢';
+                }
+                if (value === 2) {
+                  return '😒';
+                }
+                if (value === 3) {
+                  return '😬';
+                }
+                if (value === 4) {
+                  return '😀';
+                }
+                if (value === 5) {
+                  return '😍';
+                }
+              },
             },
           },
         ],
@@ -152,25 +192,23 @@ const Graph = () => {
   return (
     <div>
       <Button
-        onClick={onButtonClick}
+        onClick={toggleAllTime}
         className='btn'
         variant='outlined'
         color={muiTheme(theme)}
       >
-        Switch View
+        {showAllTime ? 'Show Last Ten Moods' : 'Show All Time'}
       </Button>
-      <Button
-        onClick={handleMood}
-        className='btn'
-        variant='outlined'
-        color={muiTheme(theme)}
-      >
-        Get Mood Data
-      </Button>
-      <canvas
-        ref={chartContainer}
-        style={{ width: '100em', height: '100em' }}
-      />
+      {!showAllTime && (
+        <div>
+          <h1>Your Last Ten Moods</h1>
+          <canvas
+            ref={chartContainer}
+            style={{ width: '100em', height: '100em' }}
+          />
+        </div>
+      )}
+      {showAllTime && <MyAllTimeMood pieGraphData={pieGraphData} />}
     </div>
   );
 };

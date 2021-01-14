@@ -148,7 +148,7 @@ function JournalView() {
 
   return (
     isAuthenticated && (
-      <div>
+      <div style={{paddingBottom: '100px'}}>
         <NavTop />
         <H1 text={`Your Timeline`} />
         <Button
