@@ -94,6 +94,7 @@ function NavBar() {
       />
       <BottomNavigationAction
         color='action'
+        label='Menu'
         icon={<MenuRoundedIcon color='action' />}
         aria-controls='simple-menu'
         aria-haspopup='true'
