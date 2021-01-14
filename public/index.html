@@ -35,7 +35,7 @@
         });
       }
 
-      // //////// PUSH NOTIFICATIONS CODE ///////////
+      //////// PUSH NOTIFICATIONS CODE ///////////
 
       // Checks if Push notification and service workers are supported by your browser
       function isPushNotificationSupported() {
@@ -56,7 +56,8 @@
               body: `Don't forget to pop a note in your School of Code Journal!`,
               icon:
                 'https://d33wubrfki0l68.cloudfront.net/e6fddcbea146f91d2f3c160f7d56a9391a4740b0/4e758/static/logo-51c754388b198e5bbb0d08a971ebbfa2.png',
-              vibrate: [100, 50, 100],
+              // vibrate: [100, 50, 100],
+              silent: true,
               image:
                 'https://contenthub-static.grammarly.com/blog/wp-content/uploads/2018/06/how-are-you-doing-760x400.jpg',
               data: {
@@ -93,7 +94,8 @@
               body: `Don't forget to take a photo with your partner and record how it went in your journal`,
               icon:
                 'https://d33wubrfki0l68.cloudfront.net/e6fddcbea146f91d2f3c160f7d56a9391a4740b0/4e758/static/logo-51c754388b198e5bbb0d08a971ebbfa2.png',
-              vibrate: [100, 50, 100],
+              // vibrate: [100, 50, 100],
+              silent: true,
               image:
                 'https://www.founderpassion.org/wp-content/uploads/2017/09/hackathon-founderpassion-foundation.png',
               data: {
@@ -130,10 +132,11 @@
           navigator.serviceWorker.getRegistration().then(function (reg) {
             // Adding notification options - images, text etc
             var options = {
-              body: `Hi there, it looks like you have had a tough few of days.  We hope you're ok.  Let's get you booked in for a chat with one of the coaches.`,
+              body: `Hi there, it looks like you have had a few tough days.  We hope you're ok.  Let's get you booked in for a chat with one of the coaches.`,
               icon:
                 'https://d33wubrfki0l68.cloudfront.net/e6fddcbea146f91d2f3c160f7d56a9391a4740b0/4e758/static/logo-51c754388b198e5bbb0d08a971ebbfa2.png',
-              vibrate: [100, 50, 100],
+              // vibrate: [100, 50, 100],
+              silent: true,
               image:
                 'https://cdn-tehran.wisgoon.com/dlir-s3/500x268_1376338656068847.jpg',
               data: {
@@ -170,7 +173,8 @@
               body: `OMG where has the time gone?  Good luck with you final project, you're going to kill it.`,
               icon:
                 'https://d33wubrfki0l68.cloudfront.net/e6fddcbea146f91d2f3c160f7d56a9391a4740b0/4e758/static/logo-51c754388b198e5bbb0d08a971ebbfa2.png',
-              vibrate: [100, 50, 100],
+              // vibrate: [100, 50, 100],
+              silent: true,
               image:
                 'https://thumbs.dreamstime.com/t/image-ecstatic-people-men-women-basic-clothing-screaming-surprise-delight-raising-arms-isolated-over-yellow-124181475.jpg',
               data: {
@@ -180,7 +184,7 @@
               // Optional - Add actions to the notification.  One to go to journal and the other to close notification.
               actions: [
                 {
-                  action: 'email',
+                  action: 'Login to journal',
                   title: 'Message Coach',
                   icon:
                     'https://webstockreview.net/images/check-mark-icon-png-3.png',
@@ -203,7 +207,7 @@
       // check if we already have a subscription object and update the UI accordingly
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker
-          .register('sw.js')
+          .register('./serviceworker-wholesite.js')
           .then(function (reg) {
             console.log('Service Worker Registered!', reg);
 
