@@ -1,15 +1,10 @@
 :root {
-  /* --green: #31986a;
-  --blue: #4a90e2;
-  --blueAlpha: #4a91e27c; */
   --fontFamily: Roboto, Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
 
 .btn {
-  /* background-color: var(--green);
-  color: white; */
   cursor: pointer;
   padding: 10px;
   margin: 10px;
@@ -27,31 +22,10 @@
   overflow: hidden;
 }
 
-/* 
-button:hover {
-  background-color: var(--blue);
-} */
-
 .flex-row {
   display: flex;
   flex-direction: row;
 }
-
-/* .nav-bar {
-  display: flex;
-  overflow: hidden;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-} */
-
-/* .navbar {
-  background-color: #333;
-  overflow: hidden;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-} */
 
 .flex-col {
   display: flex;

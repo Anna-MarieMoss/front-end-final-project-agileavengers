@@ -163,6 +163,7 @@ export default function JournalCard({
                   style={{
                     fontSize: '3em',
                     strokeOpacity: '0',
+                    backgroundColor: 'transparent',
                   }}
                   class='journal-mood'
                 >
@@ -184,20 +185,6 @@ export default function JournalCard({
           </CardContent>
         </CardActionArea>
         <CardActions>
-          {/* <Grid className={classes.icons}>
-                  {text && (
-                    <TextFieldsRoundedIcon fontSize='small'/>
-                  )}
-                  {imgSource && (
-                    <PhotoRoundedIcon fontSize='small'/>
-                  )}
-                  {vidSource && (
-                    <VideocamRoundedIcon fontSize='small'/>
-                  )}
-                  {audioSource && (
-                    <AudiotrackRoundedIcon fontSize='small'/>
-                  )}
-                </Grid> */}
           <Grid className={classes.journalactions}>
             <FavoriteButton
               className={classes.journalactionsicons}
