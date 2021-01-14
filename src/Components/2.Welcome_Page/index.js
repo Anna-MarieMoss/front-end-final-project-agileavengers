@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import H1 from '../DisplayText/H1Text/index';
-import SoCLogo from '../Pictures/SocLogo/index';
+import Reflect from '../Pictures/Reflect/index';
 import LoginButton from '../Buttons/LogInButton/index';
 import './WelcomePage.css';
 import { ThemeContext } from '../../ThemeContext';
@@ -14,7 +14,7 @@ function Welcome() {
       <TopNav />
       <div className='container'>
         <H1 text={`Welcome to your SoC Journal`} />
-        <SoCLogo />
+        <Reflect />
         <Typography variant='body2'>
           Your personal space to record your once in a lifetime School of Code
           experience!

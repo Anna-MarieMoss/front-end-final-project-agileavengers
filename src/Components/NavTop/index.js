@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 
 import { useAppContext } from '../../AppContext';
 
-import pic from './logo.png';
+import pic from './reflect.png';
 
 import './NavTop.css';
 
