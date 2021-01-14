@@ -114,7 +114,7 @@ body {
   display: flex;
   flex-direction: column;
   align-self: center;
-  padding-bottom: 300px;
+  padding-bottom: 150px;
 }
 .trophycontainer {
   padding-left: 10%;
