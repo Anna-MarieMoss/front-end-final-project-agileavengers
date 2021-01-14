@@ -115,6 +115,7 @@ function EditProfile() {
                 }}
               />
               <br></br>
+              <br></br>
               <TextField
                 id='outlined-search'
                 label={`Myers-Briggs: ${myersBriggs}`}
@@ -126,6 +127,7 @@ function EditProfile() {
                   setMyersBriggs(value);
                 }}
               />
+              <br></br>
               <br></br>
               <DatePicker
                 values={selectedDate}
