@@ -15,10 +15,10 @@ export const themeSwitch = {
 export const dotSwitch = {
   light: {
     backgroundColor: 'white',
-    color: 'pink',
+    color: '#f7797d',
   },
   dark: {
     backgroundColor: 'lightgrey',
-    color: 'pink',
+    color: '#585858',
   },
 };

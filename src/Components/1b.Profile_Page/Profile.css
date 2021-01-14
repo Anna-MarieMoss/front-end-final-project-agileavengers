@@ -7,3 +7,10 @@
   background-color: #fafafa;
   color: #303030;
 }
+
+.profile-pic-css {
+  border-radius: 50%;
+  width: 40%;
+  height: auto;
+  margin: 2em;
+}

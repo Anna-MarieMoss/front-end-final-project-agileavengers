@@ -185,12 +185,22 @@ function JournalView() {
                 return b.mood - a.mood;
               } else if (sortConstraint === 'Mood low to high') {
                 return a.mood - b.mood;
+              } else if (
+                sortConstraint === 'Newest to oldest' &&
+                new Date(a.date) - new Date(b.date) === 0
+              ) {
+                return b.id - a.id;
               } else if (sortConstraint === 'Newest to oldest') {
                 return new Date(b.date) - new Date(a.date);
+              } else if (
+                sortConstraint === 'Oldest to newest' &&
+                new Date(a.date) - new Date(b.date) === 0
+              ) {
+                return b.id - a.id;
               } else if (sortConstraint === 'Oldest to newest') {
                 return new Date(a.date) - new Date(b.date);
               } else {
-                return new Date(b.date) - new Date(a.date);
+                return b.id - a.id;
               }
             })
             .map((journalEntry, index) => (
