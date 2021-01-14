@@ -132,6 +132,7 @@ function Profile() {
               />
             )}
             <br></br>
+            <br></br>
             <TextField
               id='outlined-search'
               label='Myers-Briggs'
