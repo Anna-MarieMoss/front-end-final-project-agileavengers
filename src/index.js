@@ -10,7 +10,7 @@ ReactDOM.render(
     <Auth0Provider
       domain='dev-ip1x4wr7.eu.auth0.com'
       clientId='uimBAQwNVmsnUWbQ0LAR8sC2ynf4YOSE'
-      redirectUri={'https://goofy-varahamihira-23d1d6.netlify.app/profile'}
+      redirectUri={'http://reflectjournal.netlify.app/profile'}
       audience='https://dev-ip1x4wr7.eu.auth0.com/api/v2/'
       scope='read:current_user update:current_user_metadata create:current_user_metadata'
       useRefreshTokens={true}
