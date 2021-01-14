@@ -40,7 +40,7 @@ export default function NavTop() {
             style={{ position: 'relative', width: '3rem', padding: 0 }}
           />
           <Typography variant='h6' className={classes.title} id='reflect'>
-            Reflect
+            reflect
           </Typography>
           {isAuthenticated && (
             <IconButton
