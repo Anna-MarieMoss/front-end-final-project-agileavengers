@@ -9,6 +9,7 @@ import EmojiEventsRoundedIcon from '@material-ui/icons/EmojiEventsRounded';
 import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
+import NoteIcon from '@material-ui/icons/Note';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { ToggleButton } from '@material-ui/lab';
@@ -54,7 +55,7 @@ function NavBar() {
         to='/journalview'
         label='Journal'
         value='journal'
-        icon={<EditRoundedIcon />}
+        icon={<NoteIcon />}
       />
       <BottomNavigationAction
         component={Link}
@@ -97,6 +98,7 @@ function NavBar() {
           component={Link}
           to='/mood'
           onClick={navClose}
+          icon={<EmojiEventsRoundedIcon />}
         >
           Your Mood
         </MenuItem>
