@@ -1,0 +1,12 @@
+.MuiTypography-root {
+  text-align: center;
+  font-size: 1em;
+}
+
+.MuiTimelineContent-root .MuiTypography-h6 {
+  font-size: 1em;
+}
+
+.MuiTimelineContent-root .MuiTypography-body1 {
+  font-size: 0.8em;
+}
