@@ -1,7 +1,7 @@
 const congratsData = [
   {
     week: 'week0',
-    message: '"week 0 message"',
+    message: '"School of Code is about to being! Are you feeling ready?"',
   },
   {
     week: 'week1',

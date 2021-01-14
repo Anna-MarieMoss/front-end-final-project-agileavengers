@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import React from 'react';
+import React, { useContext } from 'react';
 import './NavBar.css';
 // Material UI Imports
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,11 +9,13 @@ import EmojiEventsRoundedIcon from '@material-ui/icons/EmojiEventsRounded';
 import ScheduleRoundedIcon from '@material-ui/icons/ScheduleRounded';
 import EditRoundedIcon from '@material-ui/icons/EditRounded';
 import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { ToggleButton } from '@material-ui/lab';
 import BrightnessIcon4 from '@material-ui/icons/Brightness4';
 import { useAppContext } from '../../AppContext';
+import { ThemeContext } from '../../ThemeContext';
 
 const useStyles = makeStyles({
   root: {
@@ -28,6 +30,14 @@ function NavBar() {
   const [value, setValue] = React.useState(0);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { handleThemeChange, darkState } = useAppContext();
+  //Dark / Light Theme
+  const theme = useContext(ThemeContext);
+  //set Mui Dark Theme
+  function muiTheme(theme) {
+    if (theme === 'lightTheme') {
+      return 'primary';
+    } else return 'secondary';
+  }
 
   //Handles the Expanded Navigation
   const navClick = (event) => {
@@ -51,27 +61,39 @@ function NavBar() {
     >
       <BottomNavigationAction
         component={Link}
+        to='/journalentry'
+        label='Post'
+        value='createPost'
+        color='action'
+        icon={<EditRoundedIcon color='action' />}
+      />
+      <BottomNavigationAction
+        component={Link}
         to='/journalview'
         label='Journal'
         value='journal'
-        icon={<EditRoundedIcon />}
+        color='action'
+        icon={<MenuBookIcon color='action' />}
       />
       <BottomNavigationAction
         component={Link}
         to='/timeline'
         label='TimeLine'
         value='timeline'
-        icon={<ScheduleRoundedIcon />}
+        color='action'
+        icon={<ScheduleRoundedIcon color='action' />}
       />
       <BottomNavigationAction
         component={Link}
         to='/trophy'
         label='Trophies'
         value='trophies'
-        icon={<EmojiEventsRoundedIcon />}
+        color='action'
+        icon={<EmojiEventsRoundedIcon color='action' />}
       />
       <BottomNavigationAction
-        icon={<MenuRoundedIcon />}
+        color='action'
+        icon={<MenuRoundedIcon color='action' />}
         aria-controls='simple-menu'
         aria-haspopup='true'
         onClick={navClick}
@@ -97,17 +119,18 @@ function NavBar() {
           component={Link}
           to='/mood'
           onClick={navClose}
+          icon={<EmojiEventsRoundedIcon />}
         >
           Your Mood
         </MenuItem>
-        <MenuItem
+        {/* <MenuItem
           className='menu-item'
           component={Link}
           to='/journalentry'
           onClick={navClose}
         >
           Journal Entry
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem
           className='menu-item'
           component={Link}

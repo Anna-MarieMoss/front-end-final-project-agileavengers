@@ -102,6 +102,13 @@ export function AppProvider({ children }) {
         dark: '#d1ffe3',
         // contrastText: '#000',
       },
+      neutral: {
+        main: '#303030',
+      },
+      action: {
+        selected: '#303030',
+        selectedOpacity: 0.08,
+      },
     },
   });
 

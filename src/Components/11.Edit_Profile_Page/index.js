@@ -12,6 +12,7 @@ import { ThemeContext } from '../../ThemeContext';
 import NavBar from '../NavBar/NavBar';
 import NavTop from '../NavTop/index.js';
 import './EditProfile.css';
+import { Button } from '@material-ui/core';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -114,6 +115,7 @@ function EditProfile() {
                 }}
               />
               <br></br>
+              <br></br>
               <TextField
                 id='outlined-search'
                 label={`Myers-Briggs: ${myersBriggs}`}
@@ -125,15 +127,22 @@ function EditProfile() {
                   setMyersBriggs(value);
                 }}
               />
+              <br></br>
+              <br></br>
               <DatePicker
                 values={selectedDate}
                 handleDate={setSelectedDate}
-                label='Start Date'
+                label='Bootcamp Start Date'
               />
-              <SubmitButton
+              <br></br>
+              <Button
                 className='btn'
-                handleClick={() => handleSubmit()}
-              />
+                onClick={() => handleSubmit()}
+                variant='outlined'
+                color={muiTheme(theme)}
+              >
+                Submit
+              </Button>
             </div>
           </form>
         </div>
