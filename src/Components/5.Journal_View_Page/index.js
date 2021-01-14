@@ -9,6 +9,10 @@ import NavBar from '../NavBar/NavBar';
 import NavTop from '../NavTop/index.js';
 import { useHistory } from 'react-router';
 
+//Alerts
+import { ToastContainer, toast, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
 import { Accordion, Button, Typography } from '@material-ui/core';
@@ -29,6 +33,12 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
 }));
+
+function levelUp() {
+  toast(`Yay! You've successfully added to your journal!`, {
+    position: toast.POSITION.TOP_RIGHT,
+  });
+}
 
 // get all post
 function JournalView() {
@@ -63,6 +73,9 @@ function JournalView() {
         // if Access Token Middleware is added to moods and posts BE -need to add header with AT
         const data = await res.json();
         const { payload } = data;
+        if (payload === 20) {
+          levelUp();
+        }
         for (let post of payload) {
           post.date = post.date.slice(0, 10);
         }
@@ -148,8 +161,19 @@ function JournalView() {
 
   return (
     isAuthenticated && (
-      <div style={{paddingBottom: '100px'}}>
+      <div style={{ paddingBottom: '100px' }}>
         <NavTop />
+        <ToastContainer
+          transition={Slide} // changes the transition to a slide rather than a bounce.  Alerts are rendering multiple times at the moment due to the page re redering all of the buttons.  Look into how you can stop this happening but keeep the cool styling tomorrow.
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <H1 text={`Your Timeline`} />
         <Button
           onClick={filterByFavorite}
