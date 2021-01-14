@@ -185,6 +185,14 @@ const Graph = () => {
   //
   return (
     <div>
+      <Button
+        onClick={toggleAllTime}
+        className='btn'
+        variant='outlined'
+        color={muiTheme(theme)}
+      >
+        {showAllTime ? 'Show Last Ten Moods' : 'Show All Time'}
+      </Button>
       {!showAllTime && (
         <div>
           <h1>Your Last Ten Moods</h1>
@@ -195,14 +203,6 @@ const Graph = () => {
         </div>
       )}
       {showAllTime && <MyAllTimeMood pieGraphData={pieGraphData} />}
-      <Button
-        onClick={toggleAllTime}
-        className='btn'
-        variant='outlined'
-        color={muiTheme(theme)}
-      >
-        {showAllTime ? 'Show Last Ten Moods' : 'Show All Time'}
-      </Button>
     </div>
   );
 };
