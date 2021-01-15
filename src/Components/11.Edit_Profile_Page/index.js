@@ -143,7 +143,7 @@ function EditProfile() {
                   variant='outlined'
                   color={muiTheme(theme)}
                 >
-                  Submit
+                  Update
                 </Button>
               </div>
             </form>
