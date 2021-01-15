@@ -154,9 +154,10 @@ export default function JournalCard({
           </CardMedia>
           <CardContent>
             <Grid>
-              <Typography gutterBottom variant='h5' component='h4'>
+              <p>{date}</p>
+              {/* <Typography gutterBottom variant='h6' component='h6'>
                 {date}
-              </Typography>
+              </Typography> */}
               {emotionNumber && (
                 <p
                   id={theme}

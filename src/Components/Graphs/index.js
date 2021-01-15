@@ -15,6 +15,7 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const Graph = () => {
   const { isAuthenticated, isLoading, accessToken, userData } = useAppContext();
   const chartContainer = useRef(null);
+  const theme = useContext(ThemeContext);
   const [chartInstance, setChartInstance] = useState(null);
   const [graphData, setGraphData] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
   const [pieGraphData, setPieGraphData] = useState([
@@ -33,13 +34,17 @@ const Graph = () => {
 
   let userId = userData?.id;
 
-  const theme = useContext(ThemeContext);
-
   //set Mui Dark Theme
   function muiTheme(theme) {
     if (theme === 'lightTheme') {
       return 'primary';
     } else return 'secondary';
+  }
+  //set graph Dark Theme
+  function graphTheme(theme) {
+    if (theme === 'lightTheme') {
+      return '#303030';
+    } else return '#fafafa';
   }
 
   function toggleAllTime() {
@@ -125,6 +130,9 @@ const Graph = () => {
       legend: {
         display: false,
       },
+      labels: {
+        fontColor: graphTheme(theme),
+      },
       scales: {
         xAxes: [
           {
@@ -133,6 +141,7 @@ const Graph = () => {
             },
             ticks: {
               fontSize: 10,
+              fontColor: graphTheme(theme),
             },
           },
         ],
@@ -140,15 +149,16 @@ const Graph = () => {
           {
             fontSize: 20,
             scaleLabel: {
-              display: true
+              display: true,
             },
             ticks: {
               min: 0,
               max: 5,
               fontSize: 15,
+              fontColor: graphTheme(theme),
               callback: function (value, index, values) {
                 if (value === 0) {
-                  return value;
+                  return '';
                 }
                 if (value === 1) {
                   return '😢';
@@ -186,17 +196,17 @@ const Graph = () => {
       <br></br>
       <br></br>
       <div>
-      {!showAllTime && (
-        <div>
-          <h1>Your Last Ten Moods</h1>
-          <canvas
-            ref={chartContainer}
-            style={{ width: '100em', height: '100em' }}
-          />
-        </div>
-      )}
-      {showAllTime && <MyAllTimeMood pieGraphData={pieGraphData} />}
-    </div>
+        {!showAllTime && (
+          <div>
+            <h1>Your Last Ten Moods</h1>
+            <canvas
+              ref={chartContainer}
+              style={{ width: '100em', height: '100em' }}
+            />
+          </div>
+        )}
+        {showAllTime && <MyAllTimeMood pieGraphData={pieGraphData} />}
+      </div>
     </div>
   );
 };

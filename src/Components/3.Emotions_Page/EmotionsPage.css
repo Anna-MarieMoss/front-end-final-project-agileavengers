@@ -5,3 +5,14 @@
 .lightTheme {
   padding-bottom: 150px;
 }
+
+.container {
+  padding: 5%;
+  width: 85%;
+  /* border-radius: 20px; */
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin: 5%;
+  font-size: 1em;
+}

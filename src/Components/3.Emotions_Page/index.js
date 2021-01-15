@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import EmotionsButton from '../Buttons/EmotionsButtons';
 import quoteData from './quotesData.js';
 import './EmotionsPage.css';
 import { useAppContext } from '../../AppContext';
-import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
+import H1 from '../DisplayText/H1Text';
 import { ThemeContext } from '../../ThemeContext';
 import JournalEntry from '../4.Journal_Entry_Page/index.js';
 import NavBar from '../NavBar/NavBar';
@@ -56,11 +56,14 @@ function Emotions() {
       <div>
         <div className={theme}>
           <NavTop />
-          <div >
+          <div>
             {!chosenEmotion && (
               <div>
-                <H1 text={`Hi ${userData?.name}`} />
-                <H2 text={'How are you feeling today?'} />
+                <div>
+                  <H1 text={`Hi ${userData?.name}!`} />
+
+                  <H2 text={`How are you feeling today?`} />
+                </div>
                 <div className='emotionsBar'>
                   {emotionsArray.map((emotion) => (
                     <EmotionsButton

@@ -8,6 +8,7 @@ import DatePicker from '../Input/DateInput/index.js';
 import NavBar from '../NavBar/NavBar';
 import NavTop from '../NavTop/index.js';
 import { useHistory } from 'react-router';
+import { Typography } from '@material-ui/core';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -155,91 +156,96 @@ function UsersMood() {
   function headingText() {
     if (selectedDate === null) {
       return 'General Bootcampers Moods';
-    } else return `Bootcampers Moods On ${date}`;
+    } else return `Bootcampers Moods For ${date}`;
   }
 
   return (
     isAuthenticated && (
       <div className={'users-mood'}>
         <NavTop />
-        <div className='container'>
+        <div>
           <H1 text={headingText()} />
           {/* <Typography variant='h6'>
         {`Bootcampers mood on the: ${selectedDate}`}
       </Typography> */}
-
-          <DatePicker
-            values={selectedDate}
-            handleDate={handleDate}
-            label='Select a Date'
-          />
-          <div className='pie-legend'>
-          <button
-            style={{
-              backgroundColor: 'rgba(255, 89, 94, 0.3)',
-              width: '3em',
-              borderRadius: '30px',
-              border: 0,
-              fontSize: '1.5em',
-              margin: '0.3em',
-              outline: 'none',
-            }}
-          >
-            😢
-          </button>
-          <button
-            style={{
-              backgroundColor: 'rgba(106, 76, 147, 0.3)',
-              width: '3em',
-              borderRadius: '30px',
-              border: 0,
-              fontSize: '1.5em',
-              margin: '0.3em',
-              outline: 'none',
-            }}
-          >
-            😒
-          </button>
-          <button
-            style={{
-              backgroundColor: 'rgba(25, 130, 196, 0.3)',
-              width: '3em',
-              borderRadius: '30px',
-              border: 0,
-              fontSize: '1.5em',
-              margin: '0.3em',
-              outline: 'none',
-            }}
-          >
-            😬
-          </button>
-          <button
-            style={{
-              backgroundColor: 'rgba(255, 202, 58, 0.3)',
-              width: '3em',
-              borderRadius: '30px',
-              border: 0,
-              fontSize: '1.5em',
-              margin: '0.3em',
-              outline: 'none',
-            }}
-          >
-            😀
-          </button>
-          <button
-            style={{
-              backgroundColor: 'rgba(138, 201, 38, 0.3)',
-              width: '3em',
-              borderRadius: '30px',
-              border: 0,
-              fontSize: '1.5em',
-              margin: '0.3em',
-              outline: 'none',
-            }}
-          >
-            😍
-          </button>
-        </div>
+          <div className='container'>
+            <Typography variant='h6'>
+              See how your fellow bootcampers rated their moods for a selected
+              day. Did you have a similar day to others?
+            </Typography>
+            <DatePicker
+              values={selectedDate}
+              handleDate={handleDate}
+              label='Select a Date'
+            />
+            <div className='pie-legend'>
+              <button
+                style={{
+                  backgroundColor: 'rgba(255, 89, 94, 0.3)',
+                  width: '3em',
+                  borderRadius: '30px',
+                  border: 0,
+                  fontSize: '1.5em',
+                  margin: '0.3em',
+                  outline: 'none',
+                }}
+              >
+                😢
+              </button>
+              <button
+                style={{
+                  backgroundColor: 'rgba(106, 76, 147, 0.3)',
+                  width: '3em',
+                  borderRadius: '30px',
+                  border: 0,
+                  fontSize: '1.5em',
+                  margin: '0.3em',
+                  outline: 'none',
+                }}
+              >
+                😒
+              </button>
+              <button
+                style={{
+                  backgroundColor: 'rgba(25, 130, 196, 0.3)',
+                  width: '3em',
+                  borderRadius: '30px',
+                  border: 0,
+                  fontSize: '1.5em',
+                  margin: '0.3em',
+                  outline: 'none',
+                }}
+              >
+                😬
+              </button>
+              <button
+                style={{
+                  backgroundColor: 'rgba(255, 202, 58, 0.3)',
+                  width: '3em',
+                  borderRadius: '30px',
+                  border: 0,
+                  fontSize: '1.5em',
+                  margin: '0.3em',
+                  outline: 'none',
+                }}
+              >
+                😀
+              </button>
+              <button
+                style={{
+                  backgroundColor: 'rgba(138, 201, 38, 0.3)',
+                  width: '3em',
+                  borderRadius: '30px',
+                  border: 0,
+                  fontSize: '1.5em',
+                  margin: '0.3em',
+                  outline: 'none',
+                }}
+              >
+                😍
+              </button>
+            </div>
+          </div>
           <br></br>
           <canvas
             ref={chartContainer}
