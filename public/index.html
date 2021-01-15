@@ -48,10 +48,11 @@
       });
 
       // Displays the notification
-      function reminderNotification() {
+      export function reminderNotification() {
         if (Notification.permission == 'granted') {
           navigator.serviceWorker.getRegistration().then(function (reg) {
             // Adding notification options - images, text etc
+            console.log("free pints for jem")
             var options = {
               body: `Don't forget to pop a note in your School of Code Journal!`,
               icon:
@@ -249,6 +250,6 @@
         }
       }
     </script>
-    <!-- <script src="../src/firebase.js"></script> -->
+    
   </body>
 </html>
