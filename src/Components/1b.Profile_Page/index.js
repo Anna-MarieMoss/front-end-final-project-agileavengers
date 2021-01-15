@@ -112,11 +112,11 @@ function Profile() {
           />
           {user?.given_name ? (
             <H2
-              text={`Hi ${user?.given_name}, welcome to your Profile Page. Please add your name and bootcamp start date`}
+              text={`Hi ${user?.given_name}, welcome to your Profile Page. Please add your bootcamp start date`}
             />
           ) : (
             <H2
-              text={`Hi Bootcamper, welcome to your Profile Page. Please add your name and bootcamp start date`}
+              text={`Hi Bootcamper, welcome to your Profile Page. Please add your bootcamp start date`}
             />
           )}
           <form /*className={classes.root}*/ noValidate autoComplete='off'>

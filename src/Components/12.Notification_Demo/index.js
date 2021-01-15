@@ -34,6 +34,13 @@ function PushNotifications() {
     displayNotification();
   };
 
+  //set Mui Dark Theme
+  function muiTheme(theme) {
+    if (theme === 'lightTheme') {
+      return 'primary';
+    } else return 'secondary';
+  }
+
   return (
     isAuthenticated && (
       <div className={'notifications'}>

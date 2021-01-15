@@ -7,6 +7,7 @@ import DatePicker from '../Input/DateInput/index.js';
 import NavBar from '../NavBar/NavBar';
 import NavTop from '../NavTop/index.js';
 import { useHistory } from 'react-router';
+import { Typography } from '@material-ui/core';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -139,22 +140,27 @@ function UsersMood() {
   function headingText() {
     if (selectedDate === null) {
       return 'General Bootcampers Moods';
-    } else return `Bootcampers Moods On ${date}`;
+    } else return `Bootcampers Moods For ${date}`;
   }
 
   return (
     isAuthenticated && (
       <div className={'users-mood'} style={{paddingBottom: '50px'}}>
         <NavTop />
-        <div className='container'>
+        <div>
           <H1 text={headingText()} />
-
-          <DatePicker
-            values={selectedDate}
-            handleDate={handleDate}
-            label='Select a Date'
-          />
-          <div className='pie-legend'>
+         
+          <div className='container'>
+            <Typography variant='h6'>
+              See how your fellow bootcampers rated their moods for a selected
+              day. Did you have a similar day to others?
+            </Typography>
+            <DatePicker
+              values={selectedDate}
+              handleDate={handleDate}
+              label='Select a Date'
+            />
+             <div className='pie-legend'>
           <button
             style={{
               backgroundColor: '#F7797D',
@@ -221,6 +227,7 @@ function UsersMood() {
             😍
           </button>
         </div>
+          </div>
           <br></br>
           <canvas
             ref={chartContainer}
