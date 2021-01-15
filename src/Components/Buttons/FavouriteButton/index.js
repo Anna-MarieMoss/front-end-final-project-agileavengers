@@ -2,10 +2,6 @@ import React from 'react';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
 function FavoriteButton({ handleFavorite, journalEntryId, favorite }) {
-  // function changeColor(journalEntryId, favorite) {
-  //     handleFavorite(journalEntryId, !favorite);
-  //   }
-  // }
   if (favorite === true) {
     return (
       <FavoriteIcon
