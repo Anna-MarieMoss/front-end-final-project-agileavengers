@@ -7,16 +7,23 @@ import DatePicker from '../Input/DateInput/index.js';
 import NavBar from '../NavBar/NavBar';
 import NavTop from '../NavTop/index.js';
 import { useHistory } from 'react-router';
+import { Typography } from '@material-ui/core';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function UsersMood() {
-  const { isAuthenticated, accessToken } = useAppContext();
+  const {
+    isAuthenticated,
+    accessToken,
+    userData,
+    emotionsArray,
+  } = useAppContext();
   const [selectedDate, setSelectedDate] = useState(null);
   const [usersMoodResponse, setUsersMoodResponse] = useState([]);
   const [chartInstance, setChartInstance] = useState(null);
   const [graphData, setGraphData] = useState([]);
+  const [yourMood, setyourMood] = useState(null);
   const chartContainer = useRef(null);
   const history = useHistory();
 
@@ -99,6 +106,35 @@ function UsersMood() {
     }
   }, [selectedDate, usersMoodResponse]);
 
+  // to get the users mood on a specific date
+
+  useEffect(() => {
+    if (usersMoodResponse) {
+      function getUsersMoodById() {
+        let res1 = usersMoodResponse.filter(
+          (data) => data?.user_id === userData?.id
+        );
+        let res = res1.reduce((acc, cur) => {
+          if (cur.date.slice(0, 10) === selectedDate) {
+            return [...acc, cur.mood];
+          }
+          return acc;
+        }, []);
+        let res2 = res.map((x) => {
+          if (x !== null) {
+            return emotionsArray[x - 1].emotion;
+          }
+        });
+        if (res2.length === 0) {
+          setyourMood(null);
+        } else {
+          setyourMood(res2[0]);
+        }
+      }
+      getUsersMoodById();
+    }
+  }, [selectedDate, usersMoodResponse]);
+
   useEffect(() => {
     if (chartContainer && chartContainer.current) {
       const newChartInstance = new Chartjs(chartContainer.current, chartConfig);
@@ -116,11 +152,7 @@ function UsersMood() {
           },
         });
         const data = await res.json();
-        // console.log( `data is  ${JSON.stringify(data)}`);
-        console.log(`data payload is `, data.payload);
-        // console.log(`data is ${JSON.stringify(data.payload[0].mood)}`)
         setUsersMoodResponse(data.payload);
-        //chartConfig.data.datasets[0].data = graphData.map((x) => x.mood);
       }
 
       getUsersMood();
@@ -144,7 +176,7 @@ function UsersMood() {
 
   return (
     isAuthenticated && (
-      <div className={'users-mood'} style={{paddingBottom: '50px'}}>
+      <div className={'users-mood'} style={{ paddingBottom: '50px' }}>
         <NavTop />
         <div className='container'>
           <H1 text={headingText()} />
@@ -155,72 +187,79 @@ function UsersMood() {
             label='Select a Date'
           />
           <div className='pie-legend'>
-          <button
-            style={{
-              backgroundColor: '#F7797D',
-              width: '3em',
-              borderRadius: '30px',
-              border: 0,
-              fontSize: '1.5em',
-              margin: '0.3em',
-              outline: 'none',
-            }}
-          >
-            😢
-          </button>
-          <button
-            style={{
-              backgroundColor: '#7C77B9',
-              width: '3em',
-              borderRadius: '30px',
-              border: 0,
-              fontSize: '1.5em',
-              margin: '0.3em',
-              outline: 'none',
-            }}
-          >
-            😒
-          </button>
-          <button
-            style={{
-              backgroundColor: '#89DAFF',
-              width: '3em',
-              borderRadius: '30px',
-              border: 0,
-              fontSize: '1.5em',
-              margin: '0.3em',
-              outline: 'none',
-            }}
-          >
-            😬
-          </button>
-          <button
-            style={{
-              backgroundColor: '#FBD786',
-              width: '3em',
-              borderRadius: '30px',
-              border: 0,
-              fontSize: '1.5em',
-              margin: '0.3em',
-              outline: 'none',
-            }}
-          >
-            😀
-          </button>
-          <button
-            style={{
-              backgroundColor: '#C6FFDD',
-              width: '3em',
-              borderRadius: '30px',
-              border: 0,
-              fontSize: '1.5em',
-              margin: '0.3em',
-              outline: 'none',
-            }}
-          >
-            😍
-          </button>
-        </div>
+            <button
+              style={{
+                backgroundColor: '#F7797D',
+                width: '3em',
+                borderRadius: '30px',
+                border: 0,
+                fontSize: '1.5em',
+                margin: '0.3em',
+                outline: 'none',
+              }}
+            >
+              😢
+            </button>
+            <button
+              style={{
+                backgroundColor: '#7C77B9',
+                width: '3em',
+                borderRadius: '30px',
+                border: 0,
+                fontSize: '1.5em',
+                margin: '0.3em',
+                outline: 'none',
+              }}
+            >
+              😒
+            </button>
+            <button
+              style={{
+                backgroundColor: '#89DAFF',
+                width: '3em',
+                borderRadius: '30px',
+                border: 0,
+                fontSize: '1.5em',
+                margin: '0.3em',
+                outline: 'none',
+              }}
+            >
+              😬
+            </button>
+            <button
+              style={{
+                backgroundColor: '#FBD786',
+                width: '3em',
+                borderRadius: '30px',
+                border: 0,
+                fontSize: '1.5em',
+                margin: '0.3em',
+                outline: 'none',
+              }}
+            >
+              😀
+            </button>
+            <button
+              style={{
+                backgroundColor: '#C6FFDD',
+                width: '3em',
+                borderRadius: '30px',
+                border: 0,
+                fontSize: '1.5em',
+                margin: '0.3em',
+                outline: 'none',
+              }}
+            >
+              😍
+            </button>
+          </div>
+          {selectedDate && (
+            <Typography variant='h6'>
+              {yourMood
+                ? `Your mood on this date: ${yourMood}`
+                : `You didn't enter a mood for this date`}
+            </Typography>
+          )}
           <br></br>
           <canvas
             ref={chartContainer}
