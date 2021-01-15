@@ -13,11 +13,17 @@ import { Typography } from '@material-ui/core';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function UsersMood() {
-  const { isAuthenticated, accessToken } = useAppContext();
+  const {
+    isAuthenticated,
+    accessToken,
+    userData,
+    emotionsArray,
+  } = useAppContext();
   const [selectedDate, setSelectedDate] = useState(null);
   const [usersMoodResponse, setUsersMoodResponse] = useState([]);
   const [chartInstance, setChartInstance] = useState(null);
   const [graphData, setGraphData] = useState([]);
+  const [yourMood, setyourMood] = useState(null);
   const chartContainer = useRef(null);
   const history = useHistory();
 
@@ -100,6 +106,35 @@ function UsersMood() {
     }
   }, [selectedDate, usersMoodResponse]);
 
+  // to get the users mood on a specific date
+
+  useEffect(() => {
+    if (usersMoodResponse) {
+      function getUsersMoodById() {
+        let res1 = usersMoodResponse.filter(
+          (data) => data?.user_id === userData?.id
+        );
+        let res = res1.reduce((acc, cur) => {
+          if (cur.date.slice(0, 10) === selectedDate) {
+            return [...acc, cur.mood];
+          }
+          return acc;
+        }, []);
+        let res2 = res.map((x) => {
+          if (x !== null) {
+            return emotionsArray[x - 1].emotion;
+          }
+        });
+        if (res2.length === 0) {
+          setyourMood(null);
+        } else {
+          setyourMood(res2[0]);
+        }
+      }
+      getUsersMoodById();
+    }
+  }, [selectedDate, usersMoodResponse]);
+
   useEffect(() => {
     if (chartContainer && chartContainer.current) {
       const newChartInstance = new Chartjs(chartContainer.current, chartConfig);
@@ -117,11 +152,7 @@ function UsersMood() {
           },
         });
         const data = await res.json();
-        // console.log( `data is  ${JSON.stringify(data)}`);
-        console.log(`data payload is `, data.payload);
-        // console.log(`data is ${JSON.stringify(data.payload[0].mood)}`)
         setUsersMoodResponse(data.payload);
-        //chartConfig.data.datasets[0].data = graphData.map((x) => x.mood);
       }
 
       getUsersMood();
@@ -145,7 +176,7 @@ function UsersMood() {
 
   return (
     isAuthenticated && (
-      <div className={'users-mood'} style={{paddingBottom: '50px'}}>
+      <div className={'users-mood'} style={{ paddingBottom: '50px' }}>
         <NavTop />
         <div>
           <H1 text={headingText()} />
@@ -228,6 +259,13 @@ function UsersMood() {
           </button>
         </div>
           </div>
+              {selectedDate && (
+            <Typography variant='h6'>
+              {yourMood
+                ? `Your mood on this date: ${yourMood}`
+                : `You didn't enter a mood for this date`}
+            </Typography>
+          )}
           <br></br>
           <canvas
             ref={chartContainer}
