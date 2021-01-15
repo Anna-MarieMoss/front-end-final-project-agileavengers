@@ -6,6 +6,7 @@ import './Stats.css';
 import NavBar from '../NavBar/NavBar';
 import NavTop from '../NavTop/index.js';
 import { useHistory } from 'react-router';
+import { Typography } from '@material-ui/core';
 
 function Stats() {
   const { isAuthenticated } = useAppContext();
@@ -29,7 +30,6 @@ function Stats() {
             <br></br>
             <Graph />
           </div>
-
         </div>
         <NavBar />
       </div>
