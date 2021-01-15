@@ -24,3 +24,4 @@ ReactDOM.render(
 );
 
 //redirectUri={'https://reflectjournal.netlify.app/profile'}
+//redirectUri={'http://localhost:3000/profile'}

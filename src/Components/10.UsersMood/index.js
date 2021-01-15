@@ -46,11 +46,11 @@ function UsersMood() {
         {
           data: graphData,
           backgroundColor: [
-            'rgba(255, 89, 94, 0.3)',
-            'rgba(106, 76, 147, 0.3)',
-            'rgba(25, 130, 196, 0.3)',
-            'rgba(255, 202, 58, 0.3)',
-            'rgba(138, 201, 38, 0.3)',
+            '#F7797D',
+            '#7C77B9',
+            '#89DAFF',
+            '#FBD786',
+            '#C6FFDD',
           ],
         },
       ],
@@ -79,8 +79,6 @@ function UsersMood() {
   };
 
   function handleDate(date) {
-    console.log('date is', date);
-    console.log('im working');
     var year = date.getFullYear().toString();
     var month = (date.getMonth() + 101).toString().substring(1);
     var day = (date.getDate() + 100).toString().substring(1);
@@ -98,7 +96,8 @@ function UsersMood() {
           }
           return acc;
         }, []);
-        let graphRes = res.reduce(
+        let res2 = res.filter((x) => x !== null);
+        let graphRes = res2.reduce(
           (acc, cur) => {
             if (acc[cur]) {
               return { ...acc, [cur]: acc[cur] + 1 };
@@ -135,7 +134,6 @@ function UsersMood() {
         console.log(`data payload is `, data.payload);
         // console.log(`data is ${JSON.stringify(data.payload[0].mood)}`)
         setUsersMoodResponse(data.payload);
-        console.log(`graphData state is`, usersMoodResponse);
         //chartConfig.data.datasets[0].data = graphData.map((x) => x.mood);
       }
 
@@ -160,7 +158,7 @@ function UsersMood() {
 
   return (
     isAuthenticated && (
-      <div className={'users-mood'}>
+      <div className={'users-mood'} style={{paddingBottom: '50px'}}>
         <NavTop />
         <div className='container'>
           <H1 text={headingText()} />
@@ -176,7 +174,7 @@ function UsersMood() {
           <div className='pie-legend'>
           <button
             style={{
-              backgroundColor: 'rgba(255, 89, 94, 0.3)',
+              backgroundColor: '#F7797D',
               width: '3em',
               borderRadius: '30px',
               border: 0,
@@ -189,7 +187,7 @@ function UsersMood() {
           </button>
           <button
             style={{
-              backgroundColor: 'rgba(106, 76, 147, 0.3)',
+              backgroundColor: '#7C77B9',
               width: '3em',
               borderRadius: '30px',
               border: 0,
@@ -202,7 +200,7 @@ function UsersMood() {
           </button>
           <button
             style={{
-              backgroundColor: 'rgba(25, 130, 196, 0.3)',
+              backgroundColor: '#89DAFF',
               width: '3em',
               borderRadius: '30px',
               border: 0,
@@ -215,7 +213,7 @@ function UsersMood() {
           </button>
           <button
             style={{
-              backgroundColor: 'rgba(255, 202, 58, 0.3)',
+              backgroundColor: '#FBD786',
               width: '3em',
               borderRadius: '30px',
               border: 0,
@@ -228,7 +226,7 @@ function UsersMood() {
           </button>
           <button
             style={{
-              backgroundColor: 'rgba(138, 201, 38, 0.3)',
+              backgroundColor: '#C6FFDD',
               width: '3em',
               borderRadius: '30px',
               border: 0,

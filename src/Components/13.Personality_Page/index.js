@@ -10,7 +10,7 @@ import { Typography } from '@material-ui/core';
 
 export default function Personalities() {
     
-const { isAuthenticated, userData } = useAppContext();
+const { isAuthenticated } = useAppContext();
 const history = useHistory();
 
   if (!isAuthenticated) {
