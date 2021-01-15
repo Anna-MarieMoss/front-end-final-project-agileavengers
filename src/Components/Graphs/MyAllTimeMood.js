@@ -45,11 +45,11 @@ function MyAllTimeMood({ pieGraphData }) {
         {
           data: graphData,
           backgroundColor: [
-            'rgba(106, 76, 147, 1)',
-            'rgba(25, 130, 196, 1)',
-            'rgba(138, 201, 38, 1)',
-            'rgba(255, 202, 58, 1)',
-            'rgba(255, 89, 94, 1)',
+            'rgba(255, 89, 94, 0.3)',
+            'rgba(106, 76, 147, 0.3)',
+            'rgba(25, 130, 196, 0.3)',
+            'rgba(255, 202, 58, 0.3)',
+            'rgba(138, 201, 38, 0.3)',
           ],
         },
       ],
@@ -119,7 +119,7 @@ function MyAllTimeMood({ pieGraphData }) {
         <div className='pie-legend'>
           <button
             style={{
-              backgroundColor: 'rgba(106, 76, 147, 1)',
+              backgroundColor: 'rgba(255, 89, 94, 0.3)',
               width: '3em',
               borderRadius: '30px',
               border: 0,
@@ -132,7 +132,7 @@ function MyAllTimeMood({ pieGraphData }) {
           </button>
           <button
             style={{
-              backgroundColor: 'rgba(25, 130, 196, 1)',
+              backgroundColor: 'rgba(106, 76, 147, 0.3)',
               width: '3em',
               borderRadius: '30px',
               border: 0,
@@ -145,7 +145,7 @@ function MyAllTimeMood({ pieGraphData }) {
           </button>
           <button
             style={{
-              backgroundColor: 'rgba(138, 201, 38, 1)',
+              backgroundColor: 'rgba(25, 130, 196, 0.3)',
               width: '3em',
               borderRadius: '30px',
               border: 0,
@@ -158,7 +158,7 @@ function MyAllTimeMood({ pieGraphData }) {
           </button>
           <button
             style={{
-              backgroundColor: 'rgba(255, 202, 58, 1)',
+              backgroundColor: 'rgba(255, 202, 58, 0.3)',
               width: '3em',
               borderRadius: '30px',
               border: 0,
@@ -171,7 +171,7 @@ function MyAllTimeMood({ pieGraphData }) {
           </button>
           <button
             style={{
-              backgroundColor: 'rgba(255, 89, 94, 1)',
+              backgroundColor: 'rgba(138, 201, 38, 0.3)',
               width: '3em',
               borderRadius: '30px',
               border: 0,

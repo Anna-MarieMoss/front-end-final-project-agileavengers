@@ -34,21 +34,13 @@ const Graph = () => {
   let userId = userData?.id;
 
   const theme = useContext(ThemeContext);
+
   //set Mui Dark Theme
   function muiTheme(theme) {
     if (theme === 'lightTheme') {
       return 'primary';
     } else return 'secondary';
   }
-
-  const randomInt = () => Math.floor(Math.random() * (5 - 1 + 1)) + 1;
-
-  // function toggleGeneralMood() {
-  //   setShowGeneralMood(!showGeneralMood);
-  //   console.log('showGeneralMood is:', !showGeneralMood);
-  //   setShowUserAllTimeMood(!showUserAllTime);
-  //   console.log('showUserAllTime is:', !showUserAllTime);
-  // }
 
   function toggleAllTime() {
     setShowAllTime(!showAllTime);
@@ -62,10 +54,10 @@ const Graph = () => {
     }
   }, [chartContainer, graphData, userData, showAllTime]);
 
-  const updateDataset = (datasetIndex, newData) => {
-    chartInstance.data.datasets[datasetIndex].data = newData;
-    chartInstance.update();
-  };
+  // const updateDataset = (datasetIndex, newData) => {
+  //   chartInstance.data.datasets[datasetIndex].data = newData;
+  //   chartInstance.update();
+  // };
 
   useEffect(() => {
     async function getMood() {
@@ -138,7 +130,6 @@ const Graph = () => {
           {
             scaleLabel: {
               display: true,
-              labelString: 'Date',
             },
             ticks: {
               fontSize: 10,
@@ -149,8 +140,7 @@ const Graph = () => {
           {
             fontSize: 20,
             scaleLabel: {
-              display: true,
-              labelString: 'Moods',
+              display: true
             },
             ticks: {
               min: 0,
@@ -191,8 +181,11 @@ const Graph = () => {
         variant='outlined'
         color={muiTheme(theme)}
       >
-        {showAllTime ? 'Show Last Ten Moods' : 'Show All Time'}
+        {showAllTime ? 'Last Ten' : 'All Time'}
       </Button>
+      <br></br>
+      <br></br>
+      <div>
       {!showAllTime && (
         <div>
           <h1>Your Last Ten Moods</h1>
@@ -203,6 +196,7 @@ const Graph = () => {
         </div>
       )}
       {showAllTime && <MyAllTimeMood pieGraphData={pieGraphData} />}
+    </div>
     </div>
   );
 };

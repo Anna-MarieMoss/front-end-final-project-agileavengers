@@ -46,11 +46,11 @@ function UsersMood() {
         {
           data: graphData,
           backgroundColor: [
-            'rgba(106, 76, 147, 1)',
-            'rgba(25, 130, 196, 1)',
-            'rgba(138, 201, 38, 1)',
-            'rgba(255, 202, 58, 1)',
-            'rgba(255, 89, 94, 1)',
+            'rgba(255, 89, 94, 0.3)',
+            'rgba(106, 76, 147, 0.3)',
+            'rgba(25, 130, 196, 0.3)',
+            'rgba(255, 202, 58, 0.3)',
+            'rgba(138, 201, 38, 0.3)',
           ],
         },
       ],
@@ -174,72 +174,72 @@ function UsersMood() {
             label='Select a Date'
           />
           <div className='pie-legend'>
-            <button
-              style={{
-                backgroundColor: 'rgba(106, 76, 147, 1)',
-                width: '3em',
-                borderRadius: '30px',
-                border: 0,
-                fontSize: '1.5em',
-                margin: '0.3em',
-                outline: 'none',
-              }}
-            >
-              😢
-            </button>
-            <button
-              style={{
-                backgroundColor: 'rgba(25, 130, 196, 1)',
-                width: '3em',
-                borderRadius: '30px',
-                border: 0,
-                fontSize: '1.5em',
-                margin: '0.3em',
-                outline: 'none',
-              }}
-            >
-              😒
-            </button>
-            <button
-              style={{
-                backgroundColor: 'rgba(138, 201, 38, 1)',
-                width: '3em',
-                borderRadius: '30px',
-                border: 0,
-                fontSize: '1.5em',
-                margin: '0.3em',
-                outline: 'none',
-              }}
-            >
-              😬
-            </button>
-            <button
-              style={{
-                backgroundColor: 'rgba(255, 202, 58, 1)',
-                width: '3em',
-                borderRadius: '30px',
-                border: 0,
-                fontSize: '1.5em',
-                margin: '0.3em',
-                outline: 'none',
-              }}
-            >
-              😀
-            </button>
-            <button
-              style={{
-                backgroundColor: 'rgba(255, 89, 94, 1)',
-                width: '3em',
-                borderRadius: '30px',
-                border: 0,
-                fontSize: '1.5em',
-                margin: '0.3em',
-                outline: 'none',
-              }}
-            >
-              😍
-            </button>
-          </div>
+          <button
+            style={{
+              backgroundColor: 'rgba(255, 89, 94, 0.3)',
+              width: '3em',
+              borderRadius: '30px',
+              border: 0,
+              fontSize: '1.5em',
+              margin: '0.3em',
+              outline: 'none',
+            }}
+          >
+            😢
+          </button>
+          <button
+            style={{
+              backgroundColor: 'rgba(106, 76, 147, 0.3)',
+              width: '3em',
+              borderRadius: '30px',
+              border: 0,
+              fontSize: '1.5em',
+              margin: '0.3em',
+              outline: 'none',
+            }}
+          >
+            😒
+          </button>
+          <button
+            style={{
+              backgroundColor: 'rgba(25, 130, 196, 0.3)',
+              width: '3em',
+              borderRadius: '30px',
+              border: 0,
+              fontSize: '1.5em',
+              margin: '0.3em',
+              outline: 'none',
+            }}
+          >
+            😬
+          </button>
+          <button
+            style={{
+              backgroundColor: 'rgba(255, 202, 58, 0.3)',
+              width: '3em',
+              borderRadius: '30px',
+              border: 0,
+              fontSize: '1.5em',
+              margin: '0.3em',
+              outline: 'none',
+            }}
+          >
+            😀
+          </button>
+          <button
+            style={{
+              backgroundColor: 'rgba(138, 201, 38, 0.3)',
+              width: '3em',
+              borderRadius: '30px',
+              border: 0,
+              fontSize: '1.5em',
+              margin: '0.3em',
+              outline: 'none',
+            }}
+          >
+            😍
+          </button>
+        </div>
           <br></br>
           <canvas
             ref={chartContainer}

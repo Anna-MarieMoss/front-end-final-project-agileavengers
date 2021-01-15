@@ -109,7 +109,11 @@ function Profile() {
         <NavTop />
         <div id={theme} className={('container', 'profile')}>
           <H1 text={'Profile'} />
-          <img className='profile-pic' src={user?.picture} alt={user?.name} />
+          <img
+            className='profile-pic-css'
+            src={user?.picture}
+            alt={user?.name}
+          />
           {user?.given_name ? (
             <H2
               text={`Hi ${user?.given_name}, welcome to your Profile Page. Please add your name and bootcamp start date`}

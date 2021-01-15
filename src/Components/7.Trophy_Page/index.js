@@ -53,7 +53,7 @@ function Trophy() {
   }
   return (
     isAuthenticated && (
-      <div id={theme}>
+      <div id={theme} className='trophyPadding'>
         <NavTop />
         <ToastContainer
           transition={Slide} // changes the transition to a slide rather than a bounce.
