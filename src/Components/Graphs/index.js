@@ -9,9 +9,6 @@ import MyAllTimeMood from './MyAllTimeMood';
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
-//Temp userId
-//const userId = 1;
-
 const Graph = () => {
   const { isAuthenticated, isLoading, accessToken, userData } = useAppContext();
   const chartContainer = useRef(null);
@@ -140,7 +137,7 @@ const Graph = () => {
           {
             fontSize: 20,
             scaleLabel: {
-              display: true
+              display: true,
             },
             ticks: {
               min: 0,
@@ -186,98 +183,19 @@ const Graph = () => {
       <br></br>
       <br></br>
       <div>
-      {!showAllTime && (
-        <div>
-          <h1>Your Last Ten Moods</h1>
-          <canvas
-            ref={chartContainer}
-            style={{ width: '100em', height: '100em' }}
-          />
-        </div>
-      )}
-      {showAllTime && <MyAllTimeMood pieGraphData={pieGraphData} />}
-    </div>
+        {!showAllTime && (
+          <div>
+            <h1>Your Last Ten Moods</h1>
+            <canvas
+              ref={chartContainer}
+              style={{ width: '100em', height: '100em' }}
+            />
+          </div>
+        )}
+        {showAllTime && <MyAllTimeMood pieGraphData={pieGraphData} />}
+      </div>
     </div>
   );
 };
 
 export default Graph;
-
-// import React, from 'react';
-// import Paper from '@material-ui/core/Paper';
-// import {
-//   Chart,
-//   BarSeries,
-//   Title,
-//   ArgumentAxis,
-//   ValueAxis,
-// } from '@devexpress/dx-react-chart-material-ui';
-
-// import { Animation} from '@devexpress/dx-react-chart';
-
-// // const [mood, setMood] = useState([]);
-// function Graph () {
-// const data = [
-//   { day: 'monday', mood: 5 },
-//   { day: 'tuesday', mood: 2 },
-//   { day: 'wednesday', mood: 3 },
-//   { day: 'thursday', mood: 1 },
-//   { day: 'friday', mood: 3 }
-
-// ];
-
-// const wweklyData = [
-//     { week: 'one', mood: 5 },
-//     { day: 'two', mood: 2 },
-//     { day: 'three', mood: 3 },
-//     { day: 'four', mood: 1 },
-//     { day: 'five', mood: 3 }
-
-//   ];
-// //
-
-// async function moodChart(
-//   userId,
-//   mood,
-//   date
-// ) {
-//   try {
-//     const res = await fetch(`${BACKEND_URL}/moods`, {
-//       method: 'get',
-//       body: JSON.stringify({
-//         user_id: userId,
-//         mood: mood,
-//         date: date
-//       }),
-//       headers: { 'content-type': 'application/JSON' },
-//     });
-//     console.log(res);
-//     const data = await res.json();
-//     console.log(data);
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-
-// //
-
-//     return (
-//       <Paper>
-//         <Chart
-
-//         >
-//           <ArgumentAxis />
-//           <ValueAxis max={7} />
-
-//           <BarSeries
-//             valueField="mood"
-//             argumentField="day"
-//           />
-//           <Title text="Mood chart" />
-//           <Animation />
-//         </Chart>
-//       </Paper>
-//     );
-//   }
-
-// export default Graph

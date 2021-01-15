@@ -1,40 +1,20 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useAppContext } from '../../AppContext';
 import Chartjs from 'chart.js';
-import H1 from '../DisplayText/H1Text/index';
 import 'date-fns';
-import { ThemeContext } from '../../ThemeContext';
-import DatePicker from '../Input/DateInput/index.js';
-import NavBar from '../NavBar/NavBar';
-import NavTop from '../NavTop/index.js';
 import { useHistory } from 'react-router';
-import { parseWithOptions } from 'date-fns/fp';
 
 //Backend URL
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function MyAllTimeMood({ pieGraphData }) {
-  const {
-    isAuthenticated,
-    isLoading,
-    accessToken,
-    userData,
-    user,
-  } = useAppContext();
-  //const [selectedDate, setSelectedDate] = useState(null);
+  const { isAuthenticated } = useAppContext();
+  const history = useHistory();
   const [chartInstance, setChartInstance] = useState(null);
   const [graphData, setGraphData] = useState([]);
   const chartContainer = useRef(null);
-  // if (!isAuthenticated) {
-  //   history.push('/');
-  // }
 
-  //set Mui Dark Theme
-  const theme = useContext(ThemeContext);
-  function muiTheme(theme) {
-    if (theme === 'lightTheme') {
-      return 'primary';
-    } else return 'secondary';
+  if (!isAuthenticated) {
+    history.push('/');
   }
 
   let chartConfig = {

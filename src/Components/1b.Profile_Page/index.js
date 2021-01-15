@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
-//import { makeStyles } from '@material-ui/core/styles';
 import DatePicker from '../Input/DateInput/index.js';
 import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
@@ -11,7 +10,6 @@ import './Profile.css';
 import { ThemeContext } from '../../ThemeContext';
 import CircularProgressWithLabel from '@material-ui/core/CircularProgress';
 import NavTop from '../NavTop/index.js';
-import { Typography } from '@material-ui/core';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -29,7 +27,6 @@ function Profile() {
   //const classes = useStyles();
   // Our States
   const [name, setName] = useState(null);
-  const [myersBriggs, setMyersBriggs] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
 
   if (!isAuthenticated) {
@@ -84,7 +81,6 @@ function Profile() {
           name: name,
           email: user.email,
           password: 'password',
-          personality: myersBriggs,
           start_date: selectedDate,
           points: 0,
         }),

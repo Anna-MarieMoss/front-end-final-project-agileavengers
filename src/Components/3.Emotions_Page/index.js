@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import EmotionsButton from '../Buttons/EmotionsButtons';
 import quoteData from './quotesData.js';
 import './EmotionsPage.css';
@@ -19,9 +19,6 @@ const useStyles = makeStyles({
     padding: '1.5em',
   },
 });
-
-//Backend URL
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function Emotions() {
   const theme = useContext(ThemeContext);
@@ -56,7 +53,7 @@ function Emotions() {
       <div>
         <div className={theme}>
           <NavTop />
-          <div >
+          <div>
             {!chosenEmotion && (
               <div>
                 <H1 text={`Hi ${userData?.name}`} />

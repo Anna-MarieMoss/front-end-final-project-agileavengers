@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAppContext } from '../../AppContext';
 import Chartjs from 'chart.js';
 import H1 from '../DisplayText/H1Text/index';
 import 'date-fns';
-import { ThemeContext } from '../../ThemeContext';
 import DatePicker from '../Input/DateInput/index.js';
 import NavBar from '../NavBar/NavBar';
 import NavTop from '../NavTop/index.js';
@@ -13,29 +12,16 @@ import { useHistory } from 'react-router';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function UsersMood() {
-  const {
-    isAuthenticated,
-    isLoading,
-    accessToken,
-    userData,
-    user,
-  } = useAppContext();
+  const { isAuthenticated, accessToken } = useAppContext();
   const [selectedDate, setSelectedDate] = useState(null);
   const [usersMoodResponse, setUsersMoodResponse] = useState([]);
   const [chartInstance, setChartInstance] = useState(null);
   const [graphData, setGraphData] = useState([]);
   const chartContainer = useRef(null);
+  const history = useHistory();
 
-  // if (!isAuthenticated) {
-  //   history.push('/');
-  // }
-
-  //set Mui Dark Theme
-  const theme = useContext(ThemeContext);
-  function muiTheme(theme) {
-    if (theme === 'lightTheme') {
-      return 'primary';
-    } else return 'secondary';
+  if (!isAuthenticated) {
+    history.push('/');
   }
 
   let chartConfig = {
@@ -162,9 +148,6 @@ function UsersMood() {
         <NavTop />
         <div className='container'>
           <H1 text={headingText()} />
-          {/* <Typography variant='h6'>
-        {`Bootcampers mood on the: ${selectedDate}`}
-      </Typography> */}
 
           <DatePicker
             values={selectedDate}

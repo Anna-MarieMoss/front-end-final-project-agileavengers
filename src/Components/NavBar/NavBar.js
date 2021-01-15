@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import React, { useContext } from 'react';
+import React from 'react';
 import './NavBar.css';
 // Material UI Imports
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,7 +15,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { ToggleButton } from '@material-ui/lab';
 import BrightnessIcon4 from '@material-ui/icons/Brightness4';
 import { useAppContext } from '../../AppContext';
-import { ThemeContext } from '../../ThemeContext';
 
 const useStyles = makeStyles({
   root: {
@@ -30,14 +29,6 @@ function NavBar() {
   const [value, setValue] = React.useState(0);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const { handleThemeChange, darkState } = useAppContext();
-  //Dark / Light Theme
-  const theme = useContext(ThemeContext);
-  //set Mui Dark Theme
-  function muiTheme(theme) {
-    if (theme === 'lightTheme') {
-      return 'primary';
-    } else return 'secondary';
-  }
 
   //Handles the Expanded Navigation
   const navClick = (event) => {

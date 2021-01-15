@@ -12,7 +12,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 function Logout() {
   const theme = useContext(ThemeContext);
-  const { userData, isAuthenticated, isLoading } = useAppContext();
+  const { userData, isAuthenticated } = useAppContext();
   const { logout } = useAuth0();
   const history = useHistory();
 
