@@ -73,7 +73,7 @@ function JournalView() {
         // if Access Token Middleware is added to moods and posts BE -need to add header with AT
         const data = await res.json();
         const { payload } = data;
-        if (payload === 20) {
+        if (payload.length === 20) {
           levelUp();
         }
         for (let post of payload) {
