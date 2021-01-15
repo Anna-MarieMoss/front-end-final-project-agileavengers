@@ -123,7 +123,7 @@ function NavBar() {
           onClick={navClose}
           icon={<EmojiEventsRoundedIcon />}
         >
-          Your Mood
+          Post Mood
         </MenuItem>
         {/* <MenuItem
           className='menu-item'
@@ -148,6 +148,14 @@ function NavBar() {
           onClick={navClose}
         >
           General Mood
+        </MenuItem>
+        <MenuItem
+          className='menu-item'
+          component={Link}
+          to='/personality'
+          onClick={navClose}
+        >
+          Personality
         </MenuItem>
         <MenuItem
           className='menu-item'

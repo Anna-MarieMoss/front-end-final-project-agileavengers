@@ -22,3 +22,5 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+//redirectUri={'https://reflectjournal.netlify.app/profile'}
