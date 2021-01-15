@@ -9,3 +9,15 @@
   color: #303030;
   padding-bottom: 200px;
 }
+
+.container {
+  padding: 10%;
+  width: 85%;
+  padding: 0 20px;
+  /* border-radius: 20px; */
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin: 0 10%;
+  /* font-size: 1em; */
+}

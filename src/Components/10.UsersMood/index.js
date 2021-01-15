@@ -171,89 +171,95 @@ function UsersMood() {
   function headingText() {
     if (selectedDate === null) {
       return 'General Bootcampers Moods';
-    } else return `Bootcampers Moods On ${date}`;
+    } else return `Bootcampers Moods For ${date}`;
   }
 
   return (
     isAuthenticated && (
       <div className={'users-mood'} style={{ paddingBottom: '50px' }}>
         <NavTop />
-        <div className='container'>
+        <div>
           <H1 text={headingText()} />
-
-          <DatePicker
-            values={selectedDate}
-            handleDate={handleDate}
-            label='Select a Date'
-          />
-          <div className='pie-legend'>
-            <button
-              style={{
-                backgroundColor: '#F7797D',
-                width: '3em',
-                borderRadius: '30px',
-                border: 0,
-                fontSize: '1.5em',
-                margin: '0.3em',
-                outline: 'none',
-              }}
-            >
-              😢
-            </button>
-            <button
-              style={{
-                backgroundColor: '#7C77B9',
-                width: '3em',
-                borderRadius: '30px',
-                border: 0,
-                fontSize: '1.5em',
-                margin: '0.3em',
-                outline: 'none',
-              }}
-            >
-              😒
-            </button>
-            <button
-              style={{
-                backgroundColor: '#89DAFF',
-                width: '3em',
-                borderRadius: '30px',
-                border: 0,
-                fontSize: '1.5em',
-                margin: '0.3em',
-                outline: 'none',
-              }}
-            >
-              😬
-            </button>
-            <button
-              style={{
-                backgroundColor: '#FBD786',
-                width: '3em',
-                borderRadius: '30px',
-                border: 0,
-                fontSize: '1.5em',
-                margin: '0.3em',
-                outline: 'none',
-              }}
-            >
-              😀
-            </button>
-            <button
-              style={{
-                backgroundColor: '#C6FFDD',
-                width: '3em',
-                borderRadius: '30px',
-                border: 0,
-                fontSize: '1.5em',
-                margin: '0.3em',
-                outline: 'none',
-              }}
-            >
-              😍
-            </button>
+         
+          <div className='container'>
+            <Typography variant='h6'>
+              See how your fellow bootcampers rated their moods for a selected
+              day. Did you have a similar day to others?
+            </Typography>
+            <DatePicker
+              values={selectedDate}
+              handleDate={handleDate}
+              label='Select a Date'
+            />
+             <div className='pie-legend'>
+          <button
+            style={{
+              backgroundColor: '#F7797D',
+              width: '3em',
+              borderRadius: '30px',
+              border: 0,
+              fontSize: '1.5em',
+              margin: '0.3em',
+              outline: 'none',
+            }}
+          >
+            😢
+          </button>
+          <button
+            style={{
+              backgroundColor: '#7C77B9',
+              width: '3em',
+              borderRadius: '30px',
+              border: 0,
+              fontSize: '1.5em',
+              margin: '0.3em',
+              outline: 'none',
+            }}
+          >
+            😒
+          </button>
+          <button
+            style={{
+              backgroundColor: '#89DAFF',
+              width: '3em',
+              borderRadius: '30px',
+              border: 0,
+              fontSize: '1.5em',
+              margin: '0.3em',
+              outline: 'none',
+            }}
+          >
+            😬
+          </button>
+          <button
+            style={{
+              backgroundColor: '#FBD786',
+              width: '3em',
+              borderRadius: '30px',
+              border: 0,
+              fontSize: '1.5em',
+              margin: '0.3em',
+              outline: 'none',
+            }}
+          >
+            😀
+          </button>
+          <button
+            style={{
+              backgroundColor: '#C6FFDD',
+              width: '3em',
+              borderRadius: '30px',
+              border: 0,
+              fontSize: '1.5em',
+              margin: '0.3em',
+              outline: 'none',
+            }}
+          >
+            😍
+          </button>
+        </div>
           </div>
-          {selectedDate && (
+              {selectedDate && (
             <Typography variant='h6'>
               {yourMood
                 ? `Your mood on this date: ${yourMood}`
