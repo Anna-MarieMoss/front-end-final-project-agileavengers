@@ -9,8 +9,10 @@ import H1 from '../DisplayText/H1Text/index';
 import { Typography } from '@material-ui/core';
 
 export default function Personalities() {
+
   const { isAuthenticated } = useAppContext();
   const history = useHistory();
+
 
   if (!isAuthenticated) {
     history.push('/');

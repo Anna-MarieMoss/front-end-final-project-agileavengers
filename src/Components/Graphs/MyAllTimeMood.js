@@ -25,11 +25,11 @@ function MyAllTimeMood({ pieGraphData }) {
         {
           data: graphData,
           backgroundColor: [
-            'rgba(255, 89, 94, 0.3)',
-            'rgba(106, 76, 147, 0.3)',
-            'rgba(25, 130, 196, 0.3)',
-            'rgba(255, 202, 58, 0.3)',
-            'rgba(138, 201, 38, 0.3)',
+            '#F7797D',
+            '#7C77B9',
+            '#89DAFF',
+            '#FBD786',
+            '#C6FFDD',
           ],
         },
       ],
@@ -61,11 +61,7 @@ function MyAllTimeMood({ pieGraphData }) {
         let res = pieGraphData
           .filter((x) => x.mood !== null)
           .map((x) => x.mood);
-        console.log(
-          '🚀 ~ file: MyAllTimeMood.js ~ line 83 ~ getUsersMoodByDate ~ res',
-          res
-        );
-
+    
         let graphRes = res.reduce(
           (acc, cur) => {
             if (acc[cur]) {
@@ -99,7 +95,7 @@ function MyAllTimeMood({ pieGraphData }) {
         <div className='pie-legend'>
           <button
             style={{
-              backgroundColor: 'rgba(255, 89, 94, 0.3)',
+              backgroundColor: '#F7797D',
               width: '3em',
               borderRadius: '30px',
               border: 0,
@@ -112,7 +108,7 @@ function MyAllTimeMood({ pieGraphData }) {
           </button>
           <button
             style={{
-              backgroundColor: 'rgba(106, 76, 147, 0.3)',
+              backgroundColor: '#7C77B9',
               width: '3em',
               borderRadius: '30px',
               border: 0,
@@ -125,7 +121,7 @@ function MyAllTimeMood({ pieGraphData }) {
           </button>
           <button
             style={{
-              backgroundColor: 'rgba(25, 130, 196, 0.3)',
+              backgroundColor: '#89DAFF',
               width: '3em',
               borderRadius: '30px',
               border: 0,
@@ -138,7 +134,7 @@ function MyAllTimeMood({ pieGraphData }) {
           </button>
           <button
             style={{
-              backgroundColor: 'rgba(255, 202, 58, 0.3)',
+              backgroundColor: '#FBD786',
               width: '3em',
               borderRadius: '30px',
               border: 0,
@@ -151,7 +147,7 @@ function MyAllTimeMood({ pieGraphData }) {
           </button>
           <button
             style={{
-              backgroundColor: 'rgba(138, 201, 38, 0.3)',
+              backgroundColor: '#C6FFDD',
               width: '3em',
               borderRadius: '30px',
               border: 0,

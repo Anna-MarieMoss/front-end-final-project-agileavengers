@@ -23,4 +23,3 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-//redirectUri={'https://reflectjournal.netlify.app/profile'}
