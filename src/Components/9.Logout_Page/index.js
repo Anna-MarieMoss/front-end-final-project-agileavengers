@@ -13,7 +13,7 @@ import { Typography } from '@material-ui/core';
 
 function Logout() {
   const theme = useContext(ThemeContext);
-  const { userData, isAuthenticated, isLoading } = useAppContext();
+  const { userData, isAuthenticated } = useAppContext();
   const { logout } = useAuth0();
   const history = useHistory();
 

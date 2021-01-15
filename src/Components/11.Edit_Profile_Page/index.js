@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 //import { makeStyles } from '@material-ui/core/styles';
 import DatePicker from '../Input/DateInput/index.js';
 import H1 from '../DisplayText/H1Text';
-import H2 from '../DisplayText/H2Text';
 import { ToastContainer, toast, Slide } from 'react-toastify';
-import SubmitButton from '../Buttons/SubmitButton/index';
 import { useAppContext } from '../../AppContext';
 import { useHistory } from 'react-router';
 import { ThemeContext } from '../../ThemeContext';
@@ -25,7 +23,6 @@ function EditProfile() {
     userData,
     user,
     isAuthenticated,
-    isLoading,
     accessToken,
     setSubmit,
   } = useAppContext();

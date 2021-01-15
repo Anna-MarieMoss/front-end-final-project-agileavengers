@@ -20,9 +20,6 @@ const useStyles = makeStyles({
   },
 });
 
-//Backend URL
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-
 function Emotions() {
   const theme = useContext(ThemeContext);
   const history = useHistory();

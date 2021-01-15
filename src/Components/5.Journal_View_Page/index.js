@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useAppContext } from '../../AppContext';
-import JournalAccordion from '../Acordian';
 import JournalCard from '../journalCard';
 import H1 from '../DisplayText/H1Text/index';
-import { progressPosition } from '../../progressFunction';
 import { ThemeContext } from '../../ThemeContext';
 import NavBar from '../NavBar/NavBar';
 import NavTop from '../NavTop/index.js';
@@ -11,7 +9,7 @@ import { useHistory } from 'react-router';
 
 // Material UI
 import { makeStyles } from '@material-ui/core/styles';
-import { Accordion, Button, Typography } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -148,7 +146,7 @@ function JournalView() {
 
   return (
     isAuthenticated && (
-      <div style={{paddingBottom: '100px'}}>
+      <div style={{ paddingBottom: '100px' }}>
         <NavTop />
         <H1 text={`Your Timeline`} />
         <Button
