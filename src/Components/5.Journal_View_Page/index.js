@@ -37,7 +37,14 @@ const useStyles = makeStyles((theme) => ({
 
 // get all post
 function JournalView() {
-  const { isAuthenticated, isLoading, accessToken, userData } = useAppContext();
+  const {
+    isAuthenticated,
+    isLoading,
+    accessToken,
+    userData,
+    submitPost,
+    setSubmitPost,
+  } = useAppContext();
   const [journalDisplay, setJournalDisplay] = useState([]);
   const [journalDelete, setJournalDelete] = useState(false);
   const [journalDeleteId, setJournalDeleteId] = useState(null);
@@ -56,20 +63,23 @@ function JournalView() {
     history.push('/');
   }
 
-  function levelUp() {}
-
   function calculateStreak(payload) {
     let currentDate = new Date();
     let oneDay = 1000 * 60 * 60 * 24;
     let streak = 0;
     for (let i = 0; i < payload.length; i++) {
       let postDate = new Date(payload[payload.length - 1 - i].date);
-      console.log('currentDate: ', currentDate + '-1', 'postDate:', postDate);
-      var daysBetweenPosts =
-        Math.round(
-          (currentDate.getTime() - postDate.getTime() - oneDay * streak) /
-            oneDay
-        ) * -1; // take a look
+      let postDay = postDate.toDateString().substring(0, 3);
+      console.log('day is: ', postDay);
+      console.log(
+        'currentDate: ',
+        currentDate + `${-1 * streak}`,
+        'postDate:',
+        postDate
+      );
+      var daysBetweenPosts = Math.round(
+        (currentDate.getTime() - postDate.getTime() - oneDay * streak) / oneDay
+      ); // take a look
       console.log(
         'current date day, last post day: ',
         currentDate.getTime() / oneDay - 18641,
@@ -79,13 +89,21 @@ function JournalView() {
       if (Math.abs(daysBetweenPosts) === 1) {
         streak++;
         console.log('streak:', streak);
-      } else if (Math.abs(daysBetweenPosts) >= 2) {
+      } else if (
+        Math.abs(daysBetweenPosts) >= 2 &&
+        postDay !== 'Sat' &&
+        postDay !== 'Sun'
+      ) {
         break;
       }
     }
-    toast(`You just hit a ${streak} day posting streak`, {
-      position: toast.POSITION.TOP_RIGHT,
-    });
+    console.log('submitPost is: ', submitPost);
+    if (submitPost) {
+      toast(`You're on a ${streak} day posting streak! Keep it up! 🎉`, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      setSubmitPost(false);
+    }
   }
 
   useEffect(() => {
@@ -100,8 +118,18 @@ function JournalView() {
         // if Access Token Middleware is added to moods and posts BE -need to add header with AT
         const data = await res.json();
         const { payload } = data;
-        console.log(payload.sort((a, b) => a.date - b.date));
-        calculateStreak(payload.sort((a, b) => a.date - b.date));
+        console.log(
+          payload.sort((a, b) => new Date(a.date) - new Date(b.date))
+        );
+        // calculates streak if first post of the day
+        if (
+          payload[payload.length - 1].date !== payload[payload.length - 2].date
+        ) {
+          calculateStreak(
+            payload.sort((a, b) => new Date(a.date) - new Date(b.date))
+          );
+        }
+
         for (let post of payload) {
           post.date = post.date.slice(0, 10);
         }

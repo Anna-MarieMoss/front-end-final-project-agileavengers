@@ -36,6 +36,7 @@ export default function JournalEntry({ emotion }) {
     accessToken,
     userData,
     emotionsArray,
+    setSubmitPost,
   } = useAppContext();
 
   const userId = userData?.id;
@@ -116,6 +117,7 @@ export default function JournalEntry({ emotion }) {
       previewVidSource,
       previewAudioSource
     );
+    setSubmitPost(true);
   };
 
   async function postJournalEntry(
@@ -328,26 +330,26 @@ export default function JournalEntry({ emotion }) {
             />
           )}
           <div width='50%' margin='2em'>
-          <Button
-            className='btn'
-            onClick={handleSubmitFile}
-            variant='outlined'
-            color={muiTheme(theme)}
-          >
-            Submit
-          </Button>
-          <br></br>
-          <br></br>
-          {emotion && (
             <Button
-              onClick={() => handleClick(chosenEmotion)}
-              variant='outlined'
               className='btn'
+              onClick={handleSubmitFile}
+              variant='outlined'
               color={muiTheme(theme)}
             >
-              Skip
+              Submit
             </Button>
-          )}
+            <br></br>
+            <br></br>
+            {emotion && (
+              <Button
+                onClick={() => handleClick(chosenEmotion)}
+                variant='outlined'
+                className='btn'
+                color={muiTheme(theme)}
+              >
+                Skip
+              </Button>
+            )}
           </div>
         </div>
         {!emotion && <NavBar />}

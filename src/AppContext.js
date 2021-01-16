@@ -12,6 +12,7 @@ export function AppProvider({ children }) {
   const [currentWeek, setCurrentWeek] = useState('week1');
   const [userData, setuserData] = useState({});
   const [submit, setSubmit] = useState(false);
+  const [submitPost, setSubmitPost] = useState(false);
 
   // Auth0 - data
   const {
@@ -124,6 +125,8 @@ export function AppProvider({ children }) {
         userData: userData,
         setSubmit: setSubmit,
         submit: submit,
+        submitPost: submitPost,
+        setSubmitPost: setSubmitPost,
         handleThemeChange: handleThemeChange,
         darkState: darkState,
         checkDarkState: checkDarkState,
