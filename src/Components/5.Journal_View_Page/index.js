@@ -51,6 +51,7 @@ function JournalView() {
   const [sortConstraint, setSortConstraint] = useState('Newest to oldest');
   const [showFavorites, setShowFavorites] = useState(false);
   const [reloadJournal, setreloadJournal] = useState(false);
+  const [trophyAwarded, setTrophyAwarded] = useState('');
   const theme = useContext(ThemeContext);
   const history = useHistory();
 
@@ -65,8 +66,12 @@ function JournalView() {
 
   function calculateStreak(payload) {
     let currentDate = new Date();
+    let currentDay = currentDate.toDateString().substring(0, 3);
+    let latestPostDate = new Date(payload[payload.length - 1].date);
+    let latestPostDay = latestPostDate.toDateString().substring(0, 3);
     let oneDay = 1000 * 60 * 60 * 24;
     let streak = 0;
+    let satCount = 0;
     for (let i = 0; i < payload.length; i++) {
       let postDate = new Date(payload[payload.length - 1 - i].date);
       let postDay = postDate.toDateString().substring(0, 3);
@@ -78,7 +83,10 @@ function JournalView() {
         postDate
       );
       var daysBetweenPosts = Math.round(
-        (currentDate.getTime() - postDate.getTime() - oneDay * streak) / oneDay
+        (currentDate.getTime() -
+          postDate.getTime() -
+          oneDay * (streak + satCount)) /
+          oneDay
       ); // take a look
       console.log(
         'current date day, last post day: ',
@@ -86,9 +94,19 @@ function JournalView() {
         postDate.getTime() / oneDay - 18641
       );
       console.log('days between posts:', Math.abs(daysBetweenPosts));
-      if (Math.abs(daysBetweenPosts) === 1) {
+      if (
+        Math.abs(daysBetweenPosts) === 1 ||
+        postDay === 'Sun' ||
+        postDay === 'Fri'
+      ) {
         streak++;
         console.log('streak:', streak);
+        console.log('days and day: ', daysBetweenPosts, postDay);
+      } else if (Math.abs(daysBetweenPosts) === 2 && postDay === 'Sat') {
+        streak++;
+        satCount++;
+        console.log('streak:', streak);
+        console.log('satCount:', satCount);
       } else if (
         Math.abs(daysBetweenPosts) >= 2 &&
         postDay !== 'Sat' &&
@@ -99,12 +117,48 @@ function JournalView() {
     }
     console.log('submitPost is: ', submitPost);
     if (submitPost) {
-      toast(`You're on a ${streak} day posting streak! Keep it up! 🎉`, {
-        position: toast.POSITION.TOP_RIGHT,
-      });
+      let streaks = [5, 20, 80];
+      if (streak === 1 && payload.length === 1) {
+        setTrophyAwarded('1 Day Streak');
+        toast(
+          `Well done on your first post! You've been awarded a trophy! 🎉`,
+          {
+            position: toast.POSITION.TOP_RIGHT,
+          }
+        );
+      } else if (streaks.includes(streak)) {
+        setTrophyAwarded(`${streak} Day Streak`);
+        toast(`You've been awarded the ${streak} Day Streak trophy! 🎉`, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      } else {
+        toast(`You're on a ${streak} day posting streak! Keep it up! 🎉`, {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
       setSubmitPost(false);
     }
   }
+
+  useEffect(() => {
+    if (trophyAwarded !== '') {
+      async function patchTrophyByUserIdAndName() {
+        const res = await fetch(
+          `${BACKEND_URL}/trophies/${userId}/${trophyAwarded}`,
+          {
+            method: 'PATCH',
+            headers: {
+              'content-type': 'application/JSON',
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+        const data = await res.json();
+        console.log('patch data is: ', data);
+      }
+      patchTrophyByUserIdAndName();
+    }
+  }, [trophyAwarded]);
 
   useEffect(() => {
     if (userId) {
@@ -123,7 +177,8 @@ function JournalView() {
         );
         // calculates streak if first post of the day
         if (
-          payload[payload.length - 1].date !== payload[payload.length - 2].date
+          payload[payload.length - 1]?.date !==
+          payload[payload.length - 2]?.date
         ) {
           calculateStreak(
             payload.sort((a, b) => new Date(a.date) - new Date(b.date))
