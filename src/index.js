@@ -10,7 +10,7 @@ ReactDOM.render(
     <Auth0Provider
       domain='dev-ip1x4wr7.eu.auth0.com'
       clientId='uimBAQwNVmsnUWbQ0LAR8sC2ynf4YOSE'
-      redirectUri={'http://localhost:3000/profile'}
+      redirectUri={'https://reflectjournal.netlify.app/profile'}
       audience='https://dev-ip1x4wr7.eu.auth0.com/api/v2/'
       scope='read:current_user update:current_user_metadata create:current_user_metadata'
       useRefreshTokens={true}
@@ -23,4 +23,5 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
+//redirectUri={'http://localhost:3000/profile'}
 //redirectUri={'https://reflectjournal.netlify.app/profile'}
