@@ -194,7 +194,7 @@ const Graph = () => {
       <br></br>
       <div>
         {!showAllTime && (
-          <div>
+          <div style={{padding:'1em'}}>
             <h1>Your Last Ten Moods</h1>
             <canvas
               ref={chartContainer}
@@ -202,7 +202,9 @@ const Graph = () => {
             />
           </div>
         )}
+        <div style={{padding: '1em'}}>
         {showAllTime && <MyAllTimeMood pieGraphData={pieGraphData} />}
+        </div>
       </div>
     </div>
   );

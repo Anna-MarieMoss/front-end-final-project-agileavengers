@@ -267,10 +267,12 @@ function UsersMood() {
             </Typography>
           )}
           <br></br>
+          <div>
           <canvas
             ref={chartContainer}
             style={{ width: '100em', height: '100em' }}
           />
+          </div>
         </div>
         <NavBar />
       </div>
