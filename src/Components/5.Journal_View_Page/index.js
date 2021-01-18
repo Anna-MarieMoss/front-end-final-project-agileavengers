@@ -71,23 +71,38 @@ function JournalView() {
     let latestPostDay = latestPostDate.toDateString().substring(0, 3);
     let oneDay = 1000 * 60 * 60 * 24;
     let streak = 0;
-    let satCount = 0;
+    let delay = 0;
     for (let i = 0; i < payload.length; i++) {
       let postDate = new Date(payload[payload.length - 1 - i].date);
       let postDay = postDate.toDateString().substring(0, 3);
+
       console.log('day is: ', postDay);
       console.log(
         'currentDate: ',
-        currentDate + `${-1 * streak}`,
+        currentDate + `${-1 * (streak + delay)}`,
         'postDate:',
         postDate
       );
+
+      if (
+        i === 0 &&
+        Math.round(
+          (currentDate.getTime() -
+            postDate.getTime() -
+            oneDay * (streak + delay)) /
+            oneDay
+        ) === 0
+      ) {
+        delay--;
+      }
+
       var daysBetweenPosts = Math.round(
         (currentDate.getTime() -
           postDate.getTime() -
-          oneDay * (streak + satCount)) /
+          oneDay * (streak + delay)) /
           oneDay
       ); // take a look
+
       console.log(
         'current date day, last post day: ',
         currentDate.getTime() / oneDay - 18641,
@@ -104,9 +119,9 @@ function JournalView() {
         console.log('days and day: ', daysBetweenPosts, postDay);
       } else if (Math.abs(daysBetweenPosts) === 2 && postDay === 'Sat') {
         streak++;
-        satCount++;
+        delay++;
         console.log('streak:', streak);
-        console.log('satCount:', satCount);
+        console.log('delay:', delay);
       } else if (
         Math.abs(daysBetweenPosts) >= 2 &&
         postDay !== 'Sat' &&
