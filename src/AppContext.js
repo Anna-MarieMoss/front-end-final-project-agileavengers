@@ -103,6 +103,10 @@ export function AppProvider({ children }) {
         dark: '#d1ffe3',
         // contrastText: '#000',
       },
+      error: {
+        main: '#96C5F7',
+        // contrastText: '#000',
+      },
       neutral: {
         main: '#303030',
       },

@@ -15,7 +15,8 @@ import Stats from './Components/8.Stats_Page';
 import Profile from './Components/1b.Profile_Page';
 import Logout from './Components/9.Logout_Page/index';
 import UsersMood from './Components/10.UsersMood/index.js';
-import EditProfile from './Components/11.Edit_Profile_Page/index.js'
+import EditProfile from './Components/11.Edit_Profile_Page/index.js';
+import Personalities from './Components/13.Personality_Page/index.js';
 // Importing firebase for push noitifications
 // import firebase from './firebase';
 
@@ -81,6 +82,9 @@ function App() {
                 </Route>
                 <Route path='/editprofile'>
                   <EditProfile />
+                </Route>
+                <Route path='/personality'>
+                  <Personalities />
                 </Route>
                 <Route path='/'>
                   <Welcome />

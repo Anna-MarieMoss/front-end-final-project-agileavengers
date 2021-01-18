@@ -1,40 +1,20 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useAppContext } from '../../AppContext';
 import Chartjs from 'chart.js';
-import H1 from '../DisplayText/H1Text/index';
 import 'date-fns';
-import { ThemeContext } from '../../ThemeContext';
-import DatePicker from '../Input/DateInput/index.js';
-import NavBar from '../NavBar/NavBar';
-import NavTop from '../NavTop/index.js';
 import { useHistory } from 'react-router';
-import { parseWithOptions } from 'date-fns/fp';
 
 //Backend URL
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 function MyAllTimeMood({ pieGraphData }) {
-  const {
-    isAuthenticated,
-    isLoading,
-    accessToken,
-    userData,
-    user,
-  } = useAppContext();
-  //const [selectedDate, setSelectedDate] = useState(null);
+  const { isAuthenticated } = useAppContext();
+  const history = useHistory();
   const [chartInstance, setChartInstance] = useState(null);
   const [graphData, setGraphData] = useState([]);
   const chartContainer = useRef(null);
-  // if (!isAuthenticated) {
-  //   history.push('/');
-  // }
 
-  //set Mui Dark Theme
-  const theme = useContext(ThemeContext);
-  function muiTheme(theme) {
-    if (theme === 'lightTheme') {
-      return 'primary';
-    } else return 'secondary';
+  if (!isAuthenticated) {
+    history.push('/');
   }
 
   let chartConfig = {
@@ -45,11 +25,11 @@ function MyAllTimeMood({ pieGraphData }) {
         {
           data: graphData,
           backgroundColor: [
-            'rgba(255, 89, 94, 0.3)',
-            'rgba(106, 76, 147, 0.3)',
-            'rgba(25, 130, 196, 0.3)',
-            'rgba(255, 202, 58, 0.3)',
-            'rgba(138, 201, 38, 0.3)',
+            '#F7797D',
+            '#7C77B9',
+            '#89DAFF',
+            '#FBD786',
+            '#C6FFDD',
           ],
         },
       ],
@@ -81,11 +61,7 @@ function MyAllTimeMood({ pieGraphData }) {
         let res = pieGraphData
           .filter((x) => x.mood !== null)
           .map((x) => x.mood);
-        console.log(
-          '🚀 ~ file: MyAllTimeMood.js ~ line 83 ~ getUsersMoodByDate ~ res',
-          res
-        );
-
+    
         let graphRes = res.reduce(
           (acc, cur) => {
             if (acc[cur]) {
@@ -119,7 +95,7 @@ function MyAllTimeMood({ pieGraphData }) {
         <div className='pie-legend'>
           <button
             style={{
-              backgroundColor: 'rgba(255, 89, 94, 0.3)',
+              backgroundColor: '#F7797D',
               width: '3em',
               borderRadius: '30px',
               border: 0,
@@ -132,7 +108,7 @@ function MyAllTimeMood({ pieGraphData }) {
           </button>
           <button
             style={{
-              backgroundColor: 'rgba(106, 76, 147, 0.3)',
+              backgroundColor: '#7C77B9',
               width: '3em',
               borderRadius: '30px',
               border: 0,
@@ -145,7 +121,7 @@ function MyAllTimeMood({ pieGraphData }) {
           </button>
           <button
             style={{
-              backgroundColor: 'rgba(25, 130, 196, 0.3)',
+              backgroundColor: '#89DAFF',
               width: '3em',
               borderRadius: '30px',
               border: 0,
@@ -158,7 +134,7 @@ function MyAllTimeMood({ pieGraphData }) {
           </button>
           <button
             style={{
-              backgroundColor: 'rgba(255, 202, 58, 0.3)',
+              backgroundColor: '#FBD786',
               width: '3em',
               borderRadius: '30px',
               border: 0,
@@ -171,7 +147,7 @@ function MyAllTimeMood({ pieGraphData }) {
           </button>
           <button
             style={{
-              backgroundColor: 'rgba(138, 201, 38, 0.3)',
+              backgroundColor: '#C6FFDD',
               width: '3em',
               borderRadius: '30px',
               border: 0,
