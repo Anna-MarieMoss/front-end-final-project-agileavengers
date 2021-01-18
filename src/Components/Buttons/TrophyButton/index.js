@@ -18,9 +18,9 @@ function TrophyButton({ name, path, id, color, awarded }) {
 
   async function patchTrophy() {
     let streakTrophies = [
-      'The Journey Begins',
-      '5 Day Streak',
-      '20 Day Streak',
+      '1 Day Streak',
+      '10 Day Streak',
+      '30 Day Streak',
       '80 Day Streak',
     ];
     if (!streakTrophies.includes(name)) {
@@ -45,7 +45,6 @@ function TrophyButton({ name, path, id, color, awarded }) {
       // console.log(`award state is`, award);
       //chartConfig.data.datasets[0].data = graphData.map((x) => x.mood);
     }
-
   }
 
   function limitClicks() {
