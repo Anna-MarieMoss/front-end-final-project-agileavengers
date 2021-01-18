@@ -9,11 +9,20 @@ import { ThemeContext } from '../../ThemeContext';
 import Nav from '../NavBar/NavBar';
 import NavTop from '../NavTop/index.js';
 import { useHistory } from 'react-router';
+import { Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  h6: {
+    padding: '1em',
+  },
+});
 
 function Timeline() {
   const { currentWeek, isAuthenticated, isLoading } = useAppContext();
   const [congratsMessage, setcongratsMessage] = useState(null);
   const history = useHistory();
+  const classes = useStyles();
 
   if (!isAuthenticated) {
     history.push('/');
@@ -44,7 +53,9 @@ function Timeline() {
         <NavTop />
         <div className='timeline-container'>
           <H1 text={'Your Journey'} />
-          <H2 text={congratsMessage} />
+          <Typography variant='h6' className={classes.h6}>
+            {congratsMessage}
+          </Typography>
           <ThemeProvider>
             <ProgressBar week={currentWeek} />
           </ThemeProvider>

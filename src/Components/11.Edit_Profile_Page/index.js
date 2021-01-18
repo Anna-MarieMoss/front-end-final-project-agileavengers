@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 //import { makeStyles } from '@material-ui/core/styles';
 import DatePicker from '../Input/DateInput/index.js';
 import H1 from '../DisplayText/H1Text';
-import H2 from '../DisplayText/H2Text';
 import { ToastContainer, toast, Slide } from 'react-toastify';
-import SubmitButton from '../Buttons/SubmitButton/index';
 import { useAppContext } from '../../AppContext';
 import { useHistory } from 'react-router';
 import { ThemeContext } from '../../ThemeContext';
@@ -25,7 +23,6 @@ function EditProfile() {
     userData,
     user,
     isAuthenticated,
-    isLoading,
     accessToken,
     setSubmit,
   } = useAppContext();
@@ -96,55 +93,61 @@ function EditProfile() {
           draggable
           pauseOnHover
         />
-        <div id={theme} className={'container'}>
+        <div id={theme}>
           <H1 text={'Edit Profile'} />
-          <div className='profile-div'>
-            <img className='profile-pic' src={user?.picture} alt={user?.name} />
-          </div>
-          <form /*className={classes.root}*/ noValidate autoComplete='off'>
-            <div id={theme} className={'profile'}>
-              <TextField
-                id='outlined-search'
-                label={`Name: ${name}`}
-                type='text'
-                variant='outlined'
-                color={muiTheme(theme)}
-                onChange={(event) => {
-                  const { value } = event.target;
-                  setName(value);
-                }}
+          <div className={'container'}>
+            <div className='profile-div'>
+              <img
+                className='profile-pic'
+                src={user?.picture}
+                alt={user?.name}
               />
-              <br></br>
-              <br></br>
-              <TextField
-                id='outlined-search'
-                label={`Myers-Briggs: ${myersBriggs}`}
-                type='text'
-                variant='outlined'
-                color={muiTheme(theme)}
-                onChange={(event) => {
-                  const { value } = event.target;
-                  setMyersBriggs(value);
-                }}
-              />
-              <br></br>
-              <br></br>
-              <DatePicker
-                values={selectedDate}
-                handleDate={setSelectedDate}
-                label='Bootcamp Start Date'
-              />
-              <br></br>
-              <Button
-                className='btn'
-                onClick={() => handleSubmit()}
-                variant='outlined'
-                color={muiTheme(theme)}
-              >
-                Submit
-              </Button>
             </div>
-          </form>
+            <form /*className={classes.root}*/ noValidate autoComplete='off'>
+              <div id={theme} className={'profile'}>
+                <TextField
+                  id='outlined-search'
+                  label={`Name: ${name}`}
+                  type='text'
+                  variant='outlined'
+                  color={muiTheme(theme)}
+                  onChange={(event) => {
+                    const { value } = event.target;
+                    setName(value);
+                  }}
+                />
+                <br></br>
+                <br></br>
+                <TextField
+                  id='outlined-search'
+                  label={`Myers-Briggs: ${myersBriggs}`}
+                  type='text'
+                  variant='outlined'
+                  color={muiTheme(theme)}
+                  onChange={(event) => {
+                    const { value } = event.target;
+                    setMyersBriggs(value);
+                  }}
+                />
+                <br></br>
+                <br></br>
+                <DatePicker
+                  values={selectedDate}
+                  handleDate={setSelectedDate}
+                  label='Bootcamp Start Date'
+                />
+                <br></br>
+                <Button
+                  className='btn'
+                  onClick={() => handleSubmit()}
+                  variant='outlined'
+                  color={muiTheme(theme)}
+                >
+                  Update
+                </Button>
+              </div>
+            </form>
+          </div>
         </div>
         <NavBar />
       </div>

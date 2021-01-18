@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAppContext } from '../../AppContext';
 import Chartjs from 'chart.js';
 import H1 from '../DisplayText/H1Text/index';
 import 'date-fns';
-import { ThemeContext } from '../../ThemeContext';
 import DatePicker from '../Input/DateInput/index.js';
 import NavBar from '../NavBar/NavBar';
 import NavTop from '../NavTop/index.js';
 import { useHistory } from 'react-router';
+import { Typography } from '@material-ui/core';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -15,27 +15,20 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 function UsersMood() {
   const {
     isAuthenticated,
-    isLoading,
     accessToken,
     userData,
-    user,
+    emotionsArray,
   } = useAppContext();
   const [selectedDate, setSelectedDate] = useState(null);
   const [usersMoodResponse, setUsersMoodResponse] = useState([]);
   const [chartInstance, setChartInstance] = useState(null);
   const [graphData, setGraphData] = useState([]);
+  const [yourMood, setyourMood] = useState(null);
   const chartContainer = useRef(null);
+  const history = useHistory();
 
-  // if (!isAuthenticated) {
-  //   history.push('/');
-  // }
-
-  //set Mui Dark Theme
-  const theme = useContext(ThemeContext);
-  function muiTheme(theme) {
-    if (theme === 'lightTheme') {
-      return 'primary';
-    } else return 'secondary';
+  if (!isAuthenticated) {
+    history.push('/');
   }
 
   let chartConfig = {
@@ -46,11 +39,11 @@ function UsersMood() {
         {
           data: graphData,
           backgroundColor: [
-            'rgba(255, 89, 94, 0.3)',
-            'rgba(106, 76, 147, 0.3)',
-            'rgba(25, 130, 196, 0.3)',
-            'rgba(255, 202, 58, 0.3)',
-            'rgba(138, 201, 38, 0.3)',
+            '#F7797D',
+            '#7C77B9',
+            '#89DAFF',
+            '#FBD786',
+            '#C6FFDD',
           ],
         },
       ],
@@ -79,8 +72,6 @@ function UsersMood() {
   };
 
   function handleDate(date) {
-    console.log('date is', date);
-    console.log('im working');
     var year = date.getFullYear().toString();
     var month = (date.getMonth() + 101).toString().substring(1);
     var day = (date.getDate() + 100).toString().substring(1);
@@ -98,7 +89,8 @@ function UsersMood() {
           }
           return acc;
         }, []);
-        let graphRes = res.reduce(
+        let res2 = res.filter((x) => x !== null);
+        let graphRes = res2.reduce(
           (acc, cur) => {
             if (acc[cur]) {
               return { ...acc, [cur]: acc[cur] + 1 };
@@ -111,6 +103,35 @@ function UsersMood() {
         setGraphData(Object.values(graphRes));
       }
       getUsersMoodByDate();
+    }
+  }, [selectedDate, usersMoodResponse]);
+
+  // to get the users mood on a specific date
+
+  useEffect(() => {
+    if (usersMoodResponse) {
+      function getUsersMoodById() {
+        let res1 = usersMoodResponse.filter(
+          (data) => data?.user_id === userData?.id
+        );
+        let res = res1.reduce((acc, cur) => {
+          if (cur.date.slice(0, 10) === selectedDate) {
+            return [...acc, cur.mood];
+          }
+          return acc;
+        }, []);
+        let res2 = res.map((x) => {
+          if (x !== null) {
+            return emotionsArray[x - 1].emotion;
+          }
+        });
+        if (res2.length === 0) {
+          setyourMood(null);
+        } else {
+          setyourMood(res2[0]);
+        }
+      }
+      getUsersMoodById();
     }
   }, [selectedDate, usersMoodResponse]);
 
@@ -131,12 +152,7 @@ function UsersMood() {
           },
         });
         const data = await res.json();
-        // console.log( `data is  ${JSON.stringify(data)}`);
-        console.log(`data payload is `, data.payload);
-        // console.log(`data is ${JSON.stringify(data.payload[0].mood)}`)
         setUsersMoodResponse(data.payload);
-        console.log(`graphData state is`, usersMoodResponse);
-        //chartConfig.data.datasets[0].data = graphData.map((x) => x.mood);
       }
 
       getUsersMood();
@@ -155,28 +171,30 @@ function UsersMood() {
   function headingText() {
     if (selectedDate === null) {
       return 'General Bootcampers Moods';
-    } else return `Bootcampers Moods On ${date}`;
+    } else return `Bootcampers Moods For ${date}`;
   }
 
   return (
     isAuthenticated && (
-      <div className={'users-mood'}>
+      <div className={'users-mood'} style={{ paddingBottom: '50px' }}>
         <NavTop />
-        <div className='container'>
+        <div>
           <H1 text={headingText()} />
-          {/* <Typography variant='h6'>
-        {`Bootcampers mood on the: ${selectedDate}`}
-      </Typography> */}
-
-          <DatePicker
-            values={selectedDate}
-            handleDate={handleDate}
-            label='Select a Date'
-          />
-          <div className='pie-legend'>
+         
+          <div className='container'>
+            <Typography variant='h6'>
+              See how your fellow bootcampers rated their moods for a selected
+              day. Did you have a similar day to others?
+            </Typography>
+            <DatePicker
+              values={selectedDate}
+              handleDate={handleDate}
+              label='Select a Date'
+            />
+             <div className='pie-legend'>
           <button
             style={{
-              backgroundColor: 'rgba(255, 89, 94, 0.3)',
+              backgroundColor: '#F7797D',
               width: '3em',
               borderRadius: '30px',
               border: 0,
@@ -189,7 +207,7 @@ function UsersMood() {
           </button>
           <button
             style={{
-              backgroundColor: 'rgba(106, 76, 147, 0.3)',
+              backgroundColor: '#7C77B9',
               width: '3em',
               borderRadius: '30px',
               border: 0,
@@ -202,7 +220,7 @@ function UsersMood() {
           </button>
           <button
             style={{
-              backgroundColor: 'rgba(25, 130, 196, 0.3)',
+              backgroundColor: '#89DAFF',
               width: '3em',
               borderRadius: '30px',
               border: 0,
@@ -215,7 +233,7 @@ function UsersMood() {
           </button>
           <button
             style={{
-              backgroundColor: 'rgba(255, 202, 58, 0.3)',
+              backgroundColor: '#FBD786',
               width: '3em',
               borderRadius: '30px',
               border: 0,
@@ -228,7 +246,7 @@ function UsersMood() {
           </button>
           <button
             style={{
-              backgroundColor: 'rgba(138, 201, 38, 0.3)',
+              backgroundColor: '#C6FFDD',
               width: '3em',
               borderRadius: '30px',
               border: 0,
@@ -240,11 +258,21 @@ function UsersMood() {
             😍
           </button>
         </div>
+          </div>
+              {selectedDate && (
+            <Typography variant='h6'>
+              {yourMood
+                ? `Your mood on this date: ${yourMood}`
+                : `You didn't enter a mood for this date`}
+            </Typography>
+          )}
           <br></br>
+          <div>
           <canvas
             ref={chartContainer}
             style={{ width: '100em', height: '100em' }}
           />
+          </div>
         </div>
         <NavBar />
       </div>
