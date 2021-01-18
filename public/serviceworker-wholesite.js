@@ -42,65 +42,65 @@ self.addEventListener('fetch', (event) => {
   );
 });
 
-// // Getting the service worker to listen for events relating to the push notifications
+// Getting the service worker to listen for events relating to the push notifications
 
-// // Close notification event listener
-// self.addEventListener('notificationclose', function (e) {
-//   var notification = e.notification;
-//   var primaryKey = notification.data.primaryKey;
+// Close notification event listener
+self.addEventListener('notificationclose', function (e) {
+  var notification = e.notification;
+  var primaryKey = notification.data.primaryKey;
 
-//   console.log('Closed notification: ' + primaryKey);
-// });
+  console.log('Closed notification: ' + primaryKey);
+});
 
-// // Notification click event
-// self.addEventListener('notificationclick', function (e) {
-//   var notification = e.notification;
-//   var primaryKey = notification.data.primaryKey;
-//   var action = e.action;
+// Notification click event
+self.addEventListener('notificationclick', function (e) {
+  var notification = e.notification;
+  var primaryKey = notification.data.primaryKey;
+  var action = e.action;
 
-//   if (action === 'close') {
-//     notification.close();
-//   } else {
-//     // Open a new window and take them to the journal website so that they can make an entry -
-//     clientsClaim.openWindow('https://reflectjournal.netlify.app'); // need to programme this with the proper url when the site is deployed.
-//     notification.close();
-//   }
-// });
+  if (action === 'close') {
+    notification.close();
+  } else {
+    // Open a new window and take them to the journal website so that they can make an entry -
+    clientsClaim.openWindow('https://reflectjournal.netlify.app'); // need to programme this with the proper url when the site is deployed.
+    notification.close();
+  }
+});
 
-// // Handling the push event in the service worker
-// // Push event listener in the service worker to respond to a push event
+// Handling the push event in the service worker
+// Push event listener in the service worker to respond to a push event
 
-// self.addEventListener('push', function (e) {
-//   var body;
+self.addEventListener('push', function (e) {
+  var body;
 
-//   if (e.data) {
-//     body = e.data.text();
-//   } else {
-//     body = 'Push message no payload';
-//   }
+  if (e.data) {
+    body = e.data.text();
+  } else {
+    body = 'Push message no payload';
+  }
 
-//   var options = {
-//     body: body,
-//     icon:
-//       'https://d33wubrfki0l68.cloudfront.net/e6fddcbea146f91d2f3c160f7d56a9391a4740b0/4e758/static/logo-51c754388b198e5bbb0d08a971ebbfa2.png',
-//     vibrate: [100, 50, 100],
-//     data: {
-//       dateOfArrival: Date.now(),
-//       primaryKey: '2',
-//     },
-//     actions: [
-//       {
-//         action: 'explore',
-//         title: 'Explore this new world',
-//         icon: 'https://webstockreview.net/images/check-mark-icon-png-3.png',
-//       },
-//       {
-//         action: 'close',
-//         title: 'Close',
-//         icon:
-//           'https://uxwing.com/wp-content/themes/uxwing/download/01-user_interface/red-x.png',
-//       },
-//     ],
-//   };
-//   e.waitUntil(self.registration.showNotification('SoC Journal', options)); // this method extends the lifetime of the push event until the showNotification promise resolves.
-// });
+  var options = {
+    body: body,
+    icon:
+      'https://d33wubrfki0l68.cloudfront.net/e6fddcbea146f91d2f3c160f7d56a9391a4740b0/4e758/static/logo-51c754388b198e5bbb0d08a971ebbfa2.png',
+    vibrate: [100, 50, 100],
+    data: {
+      dateOfArrival: Date.now(),
+      primaryKey: '2',
+    },
+    actions: [
+      {
+        action: 'explore',
+        title: 'Explore this new world',
+        icon: 'https://webstockreview.net/images/check-mark-icon-png-3.png',
+      },
+      {
+        action: 'close',
+        title: 'Close',
+        icon:
+          'https://uxwing.com/wp-content/themes/uxwing/download/01-user_interface/red-x.png',
+      },
+    ],
+  };
+  e.waitUntil(self.registration.showNotification('SoC Journal', options)); // this method extends the lifetime of the push event until the showNotification promise resolves.
+});
