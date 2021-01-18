@@ -130,7 +130,7 @@ function JournalView() {
     }
     console.log('submitPost is: ', submitPost);
     if (submitPost) {
-      let streaks = [5, 20, 80];
+      let streaks = [10, 30];
       if (streak === 1 && payload.length === 1) {
         setTrophyAwarded('1 Day Streak');
         toast(
