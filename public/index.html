@@ -48,7 +48,7 @@
       });
 
       // Displays the notification
-      export function reminderNotification() {
+      function reminderNotification() {
         if (Notification.permission == 'granted') {
           navigator.serviceWorker.getRegistration().then(function (reg) {
             // Adding notification options - images, text etc
