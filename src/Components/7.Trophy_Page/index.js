@@ -43,7 +43,7 @@ function Trophy() {
       }
       getAllTrophies();
     }
-  }, [setAward]);
+  }, [setAward, userData]);
 
   if (isLoading) {
     return <div>Loading ...</div>;

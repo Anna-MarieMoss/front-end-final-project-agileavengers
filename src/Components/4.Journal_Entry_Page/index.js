@@ -37,6 +37,7 @@ export default function JournalEntry({ emotion }) {
     accessToken,
     userData,
     emotionsArray,
+    setSubmitPost,
   } = useAppContext();
 
   const userId = userData?.id;
@@ -117,6 +118,7 @@ export default function JournalEntry({ emotion }) {
       previewVidSource,
       previewAudioSource
     );
+    setSubmitPost(true);
   };
 
   async function postJournalEntry(

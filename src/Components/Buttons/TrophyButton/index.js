@@ -17,17 +17,35 @@ function TrophyButton({ name, path, id, color, awarded }) {
   const { accessToken } = useAppContext();
 
   async function patchTrophy() {
-    const res = await fetch(`${BACKEND_URL}/trophies/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'content-type': 'application/JSON',
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    const data = await res.json();
-    console.log(data);
-    limitClicks();
-    setTrophyAwarded(!trophyAwarded);
+    let streakTrophies = [
+      'The Journey Begins',
+      '5 Day Streak',
+      '20 Day Streak',
+      '80 Day Streak',
+    ];
+    if (!streakTrophies.includes(name)) {
+      const res = await fetch(`${BACKEND_URL}/trophies/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'content-type': 'application/JSON',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      const data = await res.json();
+      console.log(data);
+      console.log('Patch Done');
+      console.log(name);
+      limitClicks();
+      setTrophyAwarded(!trophyAwarded);
+      // const data = await res.json();
+      // // console.log( `data is  ${JSON.stringify(data)}`);
+      // console.log(`data payload is `, data.payload);
+      // // console.log(`data is ${JSON.stringify(data.payload[0].mood)}`)
+      // setAward(data.payload);
+      // console.log(`award state is`, award);
+      //chartConfig.data.datasets[0].data = graphData.map((x) => x.mood);
+    }
+
   }
 
   function limitClicks() {
