@@ -3,13 +3,13 @@ import TextField from '@material-ui/core/TextField';
 import DatePicker from '../Input/DateInput/index.js';
 import H1 from '../DisplayText/H1Text';
 import H2 from '../DisplayText/H2Text';
-import SubmitButton from '../Buttons/SubmitButton/index';
 import { useAppContext } from '../../AppContext';
 import { useHistory } from 'react-router';
 import './Profile.css';
 import { ThemeContext } from '../../ThemeContext';
 import CircularProgressWithLabel from '@material-ui/core/CircularProgress';
 import NavTop from '../NavTop/index.js';
+import {Button} from '@material-ui/core';
 
 //Backend URL
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -104,7 +104,7 @@ function Profile() {
       <div>
         <NavTop />
         <div id={theme} className={('container', 'profile')}>
-          <H1 text={'Profile'} />
+          <H1 text={'New User Profile Page'} />
           <img
             className='profile-pic-css'
             src={user?.picture}
@@ -143,10 +143,13 @@ function Profile() {
               />
               <br></br>
               {selectedDate && (
-                <SubmitButton
+                <Button
                   className='btn'
                   handleClick={() => handleSubmit()}
-                />
+                  style={{ textTransform: 'capitalize' }}
+                  color={muiTheme(theme)}
+                  variant='outlined'
+                >Submit</Button>
               )}
             </div>
           </form>

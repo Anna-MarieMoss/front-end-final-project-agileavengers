@@ -267,7 +267,7 @@ function UsersMood() {
             </Typography>
           )}
           <br></br>
-          <div>
+          <div style={{padding: '1em'}}>
           <canvas
             ref={chartContainer}
             style={{ width: '100em', height: '100em' }}
