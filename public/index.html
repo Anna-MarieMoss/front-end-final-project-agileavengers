@@ -52,7 +52,7 @@
         if (Notification.permission == 'granted') {
           navigator.serviceWorker.getRegistration().then(function (reg) {
             // Adding notification options - images, text etc
-            console.log("free pints for jem")
+            console.log('free pints for jem');
             var options = {
               body: `Don't forget to pop a note in your School of Code Journal!`,
               icon:
@@ -87,169 +87,168 @@
       }
       reminderNotification();
 
-      function hackerthonNotification() {
-        if (Notification.permission == 'granted') {
-          navigator.serviceWorker.getRegistration().then(function (reg) {
-            // Adding notification options - images, text etc
-            var options = {
-              body: `Don't forget to take a photo with your partner and record how it went in your journal`,
-              icon:
-                'https://d33wubrfki0l68.cloudfront.net/e6fddcbea146f91d2f3c160f7d56a9391a4740b0/4e758/static/logo-51c754388b198e5bbb0d08a971ebbfa2.png',
-              // vibrate: [100, 50, 100],
-              silent: true,
-              image:
-                'https://www.founderpassion.org/wp-content/uploads/2017/09/hackathon-founderpassion-foundation.png',
-              data: {
-                dateOfArrival: Date.now(),
-                primaryKey: 1,
-              },
-              // Optional - Add actions to the notification.  One to go to journal and the other to close notification.
-              actions: [
-                {
-                  action: 'explore',
-                  title: 'Login to journal',
-                  icon:
-                    'https://webstockreview.net/images/check-mark-icon-png-3.png',
-                },
-                {
-                  action: 'close',
-                  title: 'Close notification',
-                  icon:
-                    'https://uxwing.com/wp-content/themes/uxwing/download/01-user_interface/red-x.png',
-                },
-              ],
-            };
-            reg.showNotification(
-              `Yeh baby yeh! It's Hackerthon Friday!!`,
-              options
-            );
-          });
-        }
-      }
-      // hackerthonNotification();
+      // function hackerthonNotification() {
+      //   if (Notification.permission == 'granted') {
+      //     navigator.serviceWorker.getRegistration().then(function (reg) {
+      //       // Adding notification options - images, text etc
+      //       var options = {
+      //         body: `Don't forget to take a photo with your partner and record how it went in your journal`,
+      //         icon:
+      //           'https://d33wubrfki0l68.cloudfront.net/e6fddcbea146f91d2f3c160f7d56a9391a4740b0/4e758/static/logo-51c754388b198e5bbb0d08a971ebbfa2.png',
+      //         // vibrate: [100, 50, 100],
+      //         silent: true,
+      //         image:
+      //           'https://www.founderpassion.org/wp-content/uploads/2017/09/hackathon-founderpassion-foundation.png',
+      //         data: {
+      //           dateOfArrival: Date.now(),
+      //           primaryKey: 1,
+      //         },
+      //         // Optional - Add actions to the notification.  One to go to journal and the other to close notification.
+      //         actions: [
+      //           {
+      //             action: 'explore',
+      //             title: 'Login to journal',
+      //             icon:
+      //               'https://webstockreview.net/images/check-mark-icon-png-3.png',
+      //           },
+      //           {
+      //             action: 'close',
+      //             title: 'Close notification',
+      //             icon:
+      //               'https://uxwing.com/wp-content/themes/uxwing/download/01-user_interface/red-x.png',
+      //           },
+      //         ],
+      //       };
+      //       reg.showNotification(
+      //         `Yeh baby yeh! It's Hackerthon Friday!!`,
+      //         options
+      //       );
+      //     });
+      //   }
+      // }
+      // // hackerthonNotification();
 
-      function youOkNotification() {
-        if (Notification.permission == 'granted') {
-          navigator.serviceWorker.getRegistration().then(function (reg) {
-            // Adding notification options - images, text etc
-            var options = {
-              body: `Hi there, it looks like you have had a few tough days.  We hope you're ok.  Let's get you booked in for a chat with one of the coaches.`,
-              icon:
-                'https://d33wubrfki0l68.cloudfront.net/e6fddcbea146f91d2f3c160f7d56a9391a4740b0/4e758/static/logo-51c754388b198e5bbb0d08a971ebbfa2.png',
-              // vibrate: [100, 50, 100],
-              silent: true,
-              image:
-                'https://cdn-tehran.wisgoon.com/dlir-s3/500x268_1376338656068847.jpg',
-              data: {
-                dateOfArrival: Date.now(),
-                primaryKey: 1,
-              },
-              // Optional - Add actions to the notification.  One to go to journal and the other to close notification.
-              actions: [
-                {
-                  action: 'email',
-                  title: 'Message Coach',
-                  icon:
-                    'https://webstockreview.net/images/check-mark-icon-png-3.png',
-                },
-                {
-                  action: 'close',
-                  title: 'Close notification',
-                  icon:
-                    'https://uxwing.com/wp-content/themes/uxwing/download/01-user_interface/red-x.png',
-                },
-              ],
-            };
-            reg.showNotification('Is everything ok?', options);
-          });
-        }
-      }
-      // youOkNotification();
+      // function youOkNotification() {
+      //   if (Notification.permission == 'granted') {
+      //     navigator.serviceWorker.getRegistration().then(function (reg) {
+      //       // Adding notification options - images, text etc
+      //       var options = {
+      //         body: `Hi there, it looks like you have had a few tough days.  We hope you're ok.  Let's get you booked in for a chat with one of the coaches.`,
+      //         icon:
+      //           'https://d33wubrfki0l68.cloudfront.net/e6fddcbea146f91d2f3c160f7d56a9391a4740b0/4e758/static/logo-51c754388b198e5bbb0d08a971ebbfa2.png',
+      //         // vibrate: [100, 50, 100],
+      //         silent: true,
+      //         image:
+      //           'https://cdn-tehran.wisgoon.com/dlir-s3/500x268_1376338656068847.jpg',
+      //         data: {
+      //           dateOfArrival: Date.now(),
+      //           primaryKey: 1,
+      //         },
+      //         // Optional - Add actions to the notification.  One to go to journal and the other to close notification.
+      //         actions: [
+      //           {
+      //             action: 'email',
+      //             title: 'Message Coach',
+      //             icon:
+      //               'https://webstockreview.net/images/check-mark-icon-png-3.png',
+      //           },
+      //           {
+      //             action: 'close',
+      //             title: 'Close notification',
+      //             icon:
+      //               'https://uxwing.com/wp-content/themes/uxwing/download/01-user_interface/red-x.png',
+      //           },
+      //         ],
+      //       };
+      //       reg.showNotification('Is everything ok?', options);
+      //     });
+      //   }
+      // }
+      // // youOkNotification();
 
-      function goodLuckNotification() {
-        if (Notification.permission == 'granted') {
-          navigator.serviceWorker.getRegistration().then(function (reg) {
-            // Adding notification options - images, text etc
-            var options = {
-              body: `OMG where has the time gone?  Good luck with you final project, you're going to kill it.`,
-              icon:
-                'https://d33wubrfki0l68.cloudfront.net/e6fddcbea146f91d2f3c160f7d56a9391a4740b0/4e758/static/logo-51c754388b198e5bbb0d08a971ebbfa2.png',
-              // vibrate: [100, 50, 100],
-              silent: true,
-              image:
-                'https://thumbs.dreamstime.com/t/image-ecstatic-people-men-women-basic-clothing-screaming-surprise-delight-raising-arms-isolated-over-yellow-124181475.jpg',
-              data: {
-                dateOfArrival: Date.now(),
-                primaryKey: 1,
-              },
-              // Optional - Add actions to the notification.  One to go to journal and the other to close notification.
-              actions: [
-                {
-                  action: 'Login to journal',
-                  title: 'Message Coach',
-                  icon:
-                    'https://webstockreview.net/images/check-mark-icon-png-3.png',
-                },
-                {
-                  action: 'close',
-                  title: 'Close notification',
-                  icon:
-                    'https://uxwing.com/wp-content/themes/uxwing/download/01-user_interface/red-x.png',
-                },
-              ],
-            };
-            reg.showNotification(`It's Project Time!!!  `, options);
-          });
-        }
-      }
-      // goodLuckNotification();
+      // function goodLuckNotification() {
+      //   if (Notification.permission == 'granted') {
+      //     navigator.serviceWorker.getRegistration().then(function (reg) {
+      //       // Adding notification options - images, text etc
+      //       var options = {
+      //         body: `OMG where has the time gone?  Good luck with you final project, you're going to kill it.`,
+      //         icon:
+      //           'https://d33wubrfki0l68.cloudfront.net/e6fddcbea146f91d2f3c160f7d56a9391a4740b0/4e758/static/logo-51c754388b198e5bbb0d08a971ebbfa2.png',
+      //         // vibrate: [100, 50, 100],
+      //         silent: true,
+      //         image:
+      //           'https://thumbs.dreamstime.com/t/image-ecstatic-people-men-women-basic-clothing-screaming-surprise-delight-raising-arms-isolated-over-yellow-124181475.jpg',
+      //         data: {
+      //           dateOfArrival: Date.now(),
+      //           primaryKey: 1,
+      //         },
+      //         // Optional - Add actions to the notification.  One to go to journal and the other to close notification.
+      //         actions: [
+      //           {
+      //             action: 'Login to journal',
+      //             title: 'Message Coach',
+      //             icon:
+      //               'https://webstockreview.net/images/check-mark-icon-png-3.png',
+      //           },
+      //           {
+      //             action: 'close',
+      //             title: 'Close notification',
+      //             icon:
+      //               'https://uxwing.com/wp-content/themes/uxwing/download/01-user_interface/red-x.png',
+      //           },
+      //         ],
+      //       };
+      //       reg.showNotification(`It's Project Time!!!  `, options);
+      //     });
+      //   }
+      // }
+      // // goodLuckNotification();
 
-      // Subscribing to Push Notifications
-      // check if we already have a subscription object and update the UI accordingly
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker
-          .register('./serviceworker-wholesite.js')
-          .then(function (reg) {
-            console.log('Service Worker Registered!', reg);
+      // // Subscribing to Push Notifications
+      // // check if we already have a subscription object and update the UI accordingly
+      // if ('serviceWorker' in navigator) {
+      //   navigator.serviceWorker
+      //     .register('./serviceworker-wholesite.js')
+      //     .then(function (reg) {
+      //       console.log('Service Worker Registered!', reg);
 
-            reg.pushManager.getSubscription().then(function (sub) {
-              if (sub === null) {
-                // Update UI to ask user to register for Push - need to finish this bit!!!!!
-                console.log('Not subscribed to push service!');
-              } else {
-                // We have a subscription, update the database - need to finish this bit!!!!!
-                console.log('Subscription object: ', sub);
-              }
-            });
-          })
-          .catch(function (err) {
-            console.log('Service Worker registration failed: ', err);
-          });
-      }
+      //       reg.pushManager.getSubscription().then(function (sub) {
+      //         if (sub === null) {
+      //           // Update UI to ask user to register for Push - need to finish this bit!!!!!
+      //           console.log('Not subscribed to push service!');
+      //         } else {
+      //           // We have a subscription, update the database - need to finish this bit!!!!!
+      //           console.log('Subscription object: ', sub);
+      //         }
+      //       });
+      //     })
+      //     .catch(function (err) {
+      //       console.log('Service Worker registration failed: ', err);
+      //     });
+      // }
 
-      // Subscribe user to the push service...
-      // It's best practice to call the subscribeUser() function in response to a user action signalling they would like to subscribe to push messages from our app.  Don't forget to add in this step once everything is set up.
-      function subscribeUser() {
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.ready.then(function (reg) {
-            reg.pushManager
-              .subscribe({
-                userVisibleOnly: true,
-              })
-              .then(function (sub) {
-                console.log('Endpoint URL: ', sub.endpoint);
-              })
-              .catch(function (e) {
-                if (Notification.permission === 'denied') {
-                  console.warn('Permission for notifications was denied');
-                } else {
-                  console.error('Unable to subscribe to push', e);
-                }
-              });
-          });
-        }
-      }
+      // // Subscribe user to the push service...
+      // // It's best practice to call the subscribeUser() function in response to a user action signalling they would like to subscribe to push messages from our app.  Don't forget to add in this step once everything is set up.
+      // function subscribeUser() {
+      //   if ('serviceWorker' in navigator) {
+      //     navigator.serviceWorker.ready.then(function (reg) {
+      //       reg.pushManager
+      //         .subscribe({
+      //           userVisibleOnly: true,
+      //         })
+      //         .then(function (sub) {
+      //           console.log('Endpoint URL: ', sub.endpoint);
+      //         })
+      //         .catch(function (e) {
+      //           if (Notification.permission === 'denied') {
+      //             console.warn('Permission for notifications was denied');
+      //           } else {
+      //             console.error('Unable to subscribe to push', e);
+      //           }
+      //         });
+      //     });
+      //   }
+      // }
     </script>
-    
   </body>
 </html>
