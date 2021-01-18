@@ -37,12 +37,9 @@ function Trophy() {
           },
         });
         const data = await res.json();
-        // console.log( `data is  ${JSON.stringify(data)}`);
         console.log(`data payload is `, data.payload);
-        // console.log(`data is ${JSON.stringify(data.payload[0].mood)}`)
         setAward(data.payload);
         console.log(`award state is`, award);
-        //chartConfig.data.datasets[0].data = graphData.map((x) => x.mood);
       }
       getAllTrophies();
     }

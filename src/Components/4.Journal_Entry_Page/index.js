@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import ReactAudioPlayer from 'react-audio-player';
 import { useAppContext } from '../../AppContext';
+import H2 from '../DisplayText/H2Text';
 import H1 from '../DisplayText/H1Text';
 import './journal.css';
 import { useHistory } from 'react-router';
@@ -210,7 +211,7 @@ export default function JournalEntry({ emotion }) {
     isAuthenticated && (
       <div id={theme}>
         <NavTop />
-        <div className='container' id={theme}>
+        <div id={theme}>
           <ToastContainer
             transition={Slide} // changes the transition to a slide rather than a bounce.  Alerts are rendering multiple times at the moment due to the page re redering all of the buttons.  Look into how you can stop this happening but keeep the cool styling tomorrow.
             autoClose={5000}
@@ -222,12 +223,13 @@ export default function JournalEntry({ emotion }) {
             draggable
             pauseOnHover
           />
-          <H1 text={`Hi ${userData?.name}! What have you been up to today?`} />
+          <H1 text={`Hi ${userData?.name}!`} />
+          <H2 text={`What have you been up to today?`} />
           {emotion && (
-            <h1 style={{ fontSize: '5em' }}>{chosenEmotion[0].emotion}</h1>
+            <h2 style={{ fontSize: '5em' }}>{chosenEmotion[0].emotion}</h2>
           )}
           <br></br>
-          <div id='journal-entry'>
+          <div className='container' id='journal-entry'>
             <TextField
               id='outlined-multiline-static'
               label='Journal Entry'

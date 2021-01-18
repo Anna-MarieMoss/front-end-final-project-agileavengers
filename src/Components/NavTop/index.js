@@ -11,16 +11,14 @@ import pic from './reflect.png';
 import './NavTop.css';
 
 const useStyles = makeStyles((theme) => ({
-  // root: {
-  //   flexGrow: 1,
-  //   width: '100%',
-  //   margin: '0px',
-  //   background: 'linear-gradient(90deg, #f7797d, #FBD786, #C6FFDD)',
-  // },
+
   title: {
     flexGrow: 1,
     alignContent: 'center',
   },
+  logo: {
+    margin: 0,
+  }
 }));
 
 export default function NavTop() {
@@ -31,11 +29,13 @@ export default function NavTop() {
     <div className={classes.root}>
       <AppBar position='fixed'>
         <Toolbar>
+        <IconButton className={classes.logo} component={Link}
+            to='/journalview'>
           <img
             src={pic}
             alt={'reflect log'}
-            style={{ position: 'relative', width: '3rem', padding: 0 }}
-          />
+            style={{ position: 'relative', width: '2rem', padding: 0 }}
+          /></IconButton>
           <Typography variant='h6' className={classes.title} id='reflect'>
             reflect
           </Typography>
