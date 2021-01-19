@@ -21,6 +21,7 @@ export default function PersonalityDisplay({ personality }) {
     ) {
       document.getElementById(personality.code).style.backgroundColor =
         '#FBD786';
+      document.getElementById(personality.code).style.color = '#303030';
     }
   }, [personality, userData?.personality]);
 
