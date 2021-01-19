@@ -72,7 +72,7 @@ export default function ProgressBar({ pic, week }) {
       <TimelineItem>
         <TimelineOppositeContent>
           <Typography variant='body2' color='textSecondary'>
-            Coding Newbie
+            Congratulations on starting your journey
           </Typography>
         </TimelineOppositeContent>
         <TimelineSeparator>
@@ -90,16 +90,12 @@ export default function ProgressBar({ pic, week }) {
             <Typography variant='h6' component='h1'>
               Week 1
             </Typography>
-            <Typography>You learnt GitHub & Javascript</Typography>
+            <Typography>You learnt GitHub & JavaScript</Typography>
           </Paper>
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
-        <TimelineOppositeContent>
-          <Typography variant='body2' color='textSecondary'>
-            Coding SOMETHING
-          </Typography>
-        </TimelineOppositeContent>
+        <TimelineOppositeContent></TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week2 ? 'dark' : 'light']}>
             <FunctionsIcon />
@@ -115,7 +111,7 @@ export default function ProgressBar({ pic, week }) {
             <Typography variant='h6' component='h1'>
               Week 2
             </Typography>
-            <Typography>You mastered advance Javascript</Typography>
+            <Typography>You mastered advance JavaScript</Typography>
           </Paper>
         </TimelineContent>
       </TimelineItem>
@@ -200,11 +196,7 @@ export default function ProgressBar({ pic, week }) {
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
-        <TimelineOppositeContent>
-          <Typography variant='body2' color='textSecondary'>
-            Coding SOMETHING
-          </Typography>
-        </TimelineOppositeContent>
+        <TimelineOppositeContent></TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week7 ? 'dark' : 'light']}>
             <FunctionsIcon />
@@ -320,16 +312,12 @@ export default function ProgressBar({ pic, week }) {
             <Typography variant='h6' component='h1'>
               Week 12
             </Typography>
-            <Typography>You're a coding SOMETHING</Typography>
+            <Typography>You've built your first WebSocket</Typography>
           </Paper>
         </TimelineContent>
       </TimelineItem>
       <TimelineItem>
-        <TimelineOppositeContent>
-          <Typography variant='body2' color='textSecondary'>
-            Coding SOMETHING
-          </Typography>
-        </TimelineOppositeContent>
+        <TimelineOppositeContent></TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot style={dotSwitch[week13 ? 'dark' : 'light']}>
             <CreateIcon />
@@ -345,7 +333,7 @@ export default function ProgressBar({ pic, week }) {
             <Typography variant='h6' component='h1'>
               Week 13
             </Typography>
-            <Typography>Planning your final project</Typography>
+            <Typography>You've started planning your final project</Typography>
           </Paper>
         </TimelineContent>
       </TimelineItem>
@@ -365,7 +353,9 @@ export default function ProgressBar({ pic, week }) {
             <Typography variant='h6' component='h1'>
               Week 14
             </Typography>
-            <Typography>Started work on your final project MVP</Typography>
+            <Typography>
+              You've started work on your final project MVP
+            </Typography>
           </Paper>
         </TimelineContent>
       </TimelineItem>
