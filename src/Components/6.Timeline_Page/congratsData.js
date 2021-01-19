@@ -53,7 +53,7 @@ const congratsData = [
   },
   {
     week: 'week11',
-    message: `"Remember a problem shared is a problem halved, a joy shared is a joy doubled."`,
+    message: `"You're nearly at the three month mark. Well done you've come so far, not long left!"`,
   },
   {
     week: 'week12',
