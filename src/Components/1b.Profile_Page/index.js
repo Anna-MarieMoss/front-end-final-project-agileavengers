@@ -145,7 +145,7 @@ function Profile() {
               {selectedDate && (
                 <Button
                   className='btn'
-                  handleClick={() => handleSubmit()}
+                  onClick={() => handleSubmit()}
                   style={{ textTransform: 'capitalize' }}
                   color={muiTheme(theme)}
                   variant='outlined'
